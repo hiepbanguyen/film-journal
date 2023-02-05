@@ -1,15 +1,8 @@
-# Prepare
 
 # Installation
 
 ```
 yarn install
-```
-
-## Update ENV
-
-```
-cp .env.example .env
 ```
 
 
