@@ -1,2 +1,20 @@
-# film-rating
-A free social media platform for film enthusiasts of all kinds
+# Prepare
+
+# Installation
+
+```
+yarn install
+```
+
+## Update ENV
+
+```
+cp .env.example .env
+```
+
+
+## Running the app local
+
+```bash
+yarn dev
+```
