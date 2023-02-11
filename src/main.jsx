@@ -4,16 +4,15 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
-import "./index.css";
-import Root from "./pages/root.jsx";
 import ErrorPage from "./pages/error-page";
 import SignUpPage from "./pages/sign-up.jsx";
 import HomePage from "./pages/homepage.jsx";
+import SignInPage from "./pages/sign-in";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Root />,
+    element: <HomePage />,
     errorElement: <ErrorPage />,
   },
   {
@@ -21,8 +20,8 @@ const router = createBrowserRouter([
     element: <SignUpPage />,
   },
   {
-    path: "/homepage",
-    element: <HomePage />,
+    path: "/sign-in",
+    element: <SignInPage />,
   },
 ]);
 
