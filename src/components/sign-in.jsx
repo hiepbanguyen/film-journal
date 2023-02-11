@@ -12,6 +12,10 @@ import Grid from '@mui/material/Grid';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import ConstantURL from '../script/resources/ConstantURL.js';
+import { useNavigate } from "react-router-dom";
+
+import axios from 'axios';
 
 function Copyright(props) {
   return (
@@ -29,13 +33,32 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function SignInSide() {
+  const navigate = useNavigate();
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     console.log({
-      email: data.get('email'),
+      email: data.get('username'),
       password: data.get('password'),
     });
+
+    axios
+    .get(`${ConstantURL.BaseDomain}Users/login`, {
+      params: {
+        userName: data.get('username'),
+        password: data.get('password')
+      }
+    })
+    .then(res => {
+        if(res) {
+          // Chuyển đến trang homepage
+          navigate("/homepage");
+        }
+    })
+    .catch(err => {
+        console.error(err); 
+    })
   };
 
   return (
@@ -77,10 +100,10 @@ export default function SignInSide() {
                 margin="normal"
                 required
                 fullWidth
-                id="email"
-                label="Email Address"
-                name="email"
-                autoComplete="email"
+                id="username"
+                label="UserName"
+                name="username"
+                autoComplete="username"
                 autoFocus
               />
               <TextField
