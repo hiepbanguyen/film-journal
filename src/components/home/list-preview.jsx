@@ -15,17 +15,18 @@ export const PopularLists = () => {
         </Typography>
       </Box>
       <Divider variant="fullWidth" color={"#fff"} />
-      <Box>
-        {Array.from({ length: 3 }).map((i, idx) => (
-          <ListPreview
-            key={idx}
-            title={"Lorem Ipsum is simply dummy text"}
-            username={"Bá Hiệp Nguyễn"}
-            favoriteCount={4}
-            commentCount={50}
-          />
+      <Grid container spacing={1}>
+        {Array.from({ length: 4 }).map((i, idx) => (
+          <Grid key={idx} item xs={12} sm={6} md={12}>
+            <ListPreview
+              title={"Lorem Ipsum is simply dummy text"}
+              username={"Bá Hiệp Nguyễn"}
+              favoriteCount={4}
+              commentCount={50}
+            />
+          </Grid>
         ))}
-      </Box>
+      </Grid>
     </>
   );
 };
@@ -34,7 +35,7 @@ const FilmCardsStacked = () => {
   return (
     <Box position={"relative"} height={160}>
       {Array.from({ length: 5 }).map((i, idx) => (
-        <Box key={idx} position={"absolute"} zIndex={10 - idx} left={idx * 34}>
+        <Box key={idx} position={"absolute"} zIndex={10 - idx} left={`${idx * 15}%`}>
           <FilmCard elevation={3} />
         </Box>
       ))}
@@ -45,7 +46,7 @@ const FilmCardsStacked = () => {
 export default function ListPreview(props) {
   const { title, username, favoriteCount, commentCount } = props;
   return (
-    <Box mt={2} mb={4}>
+    <Box mt={2} mb={2} ml={{ md: 0, xs: "5%" }}>
       <FilmCardsStacked />
       <Typography variant={"body2"}>{title}</Typography>
       <Box display={"flex"} alignItems={"center"} my={1}>
