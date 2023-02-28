@@ -1,4 +1,4 @@
-import SignInSide from "../components/auth/sign-in";
+import SignInSide from "../components/sign-in";
 
 export default function SignInPage() {
   return (

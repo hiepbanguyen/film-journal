@@ -53,7 +53,7 @@ export default function SignInSide() {
     .then(res => {
         if(res) {
           // Chuyển đến trang homepage
-          navigate("/homepage");
+          navigate("/");
         }
     })
     .catch(err => {
