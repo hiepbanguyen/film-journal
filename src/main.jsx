@@ -6,6 +6,7 @@ import SignUpPage from "./pages/sign-up.jsx";
 import HomePage from "./pages/home-page.jsx";
 import SignInPage from "./pages/sign-in.jsx";
 import "./index.css";
+import ProfilePage from "./pages/profile";
 
 const router = createBrowserRouter([
   {
@@ -48,6 +49,10 @@ const router = createBrowserRouter([
   {
     path: "/member/:userName",
     element: <SignInPage />,
+  },
+  {
+    path: "/profile",
+    element: <ProfilePage />,
   },
 ]);
 
