@@ -15,6 +15,7 @@ import { makeStyles } from "@mui/styles";
 const Root = styled("div")({
   flexGrow: 1,
   padding: 2,
+  height: '100vh'
 });
 
 const useStyles = makeStyles({
