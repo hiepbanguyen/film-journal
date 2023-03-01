@@ -24,8 +24,9 @@ export default function Footer() {
       sx={{
         mt: 5,
         width: "100%",
-        display: "flex",
-        flexDirection: "column",
+        position: "fixed",
+        bottom: "0",
+        zIndex: "999"
       }}
     >
       <CssBaseline />
