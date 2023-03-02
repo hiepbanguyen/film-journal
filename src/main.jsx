@@ -6,7 +6,7 @@ import SignUpPage from "./pages/sign-up.jsx";
 import HomePage from "./pages/home-page.jsx";
 import SignInPage from "./pages/sign-in.jsx";
 import "./index.css";
-import ProfilePage from "./pages/profile";
+import Settings from "./pages/profile";
 
 const router = createBrowserRouter([
   {
@@ -51,8 +51,8 @@ const router = createBrowserRouter([
     element: <SignInPage />,
   },
   {
-    path: "/profile",
-    element: <ProfilePage />,
+    path: "/settings",
+    element: <Settings />,
   },
 ]);
 
