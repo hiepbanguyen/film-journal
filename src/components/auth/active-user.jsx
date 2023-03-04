@@ -21,5 +21,4 @@ export default function ActiveUser(props) {
         console.error(err);
       });
   },[]);
-  searchParams.get("__firebase_request_key")
 }
