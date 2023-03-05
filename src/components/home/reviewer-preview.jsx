@@ -15,17 +15,18 @@ export const PopularReviewers = () => {
         </Typography>
       </Box>
       <Divider variant="fullWidth" color={"#fff"} />
-      <Box>
+      <Grid container spacing={1}>
         {Array.from({ length: 5 }).map((i, idx) => (
-          <ListPreview
-            key={idx}
-            title={"Lorem Ipsum is simply dummy text"}
-            username={"Bá Hiệp Nguyễn"}
-            filmCount={400}
-            reviewCount={50}
-          />
+          <Grid key={idx} item xs={12} sm={6} md={12}>
+            <ListPreview
+              title={"Lorem Ipsum is simply dummy text"}
+              username={"Bá Hiệp Nguyễn"}
+              filmCount={400}
+              reviewCount={50}
+            />
+          </Grid>
         ))}
-      </Box>
+      </Grid>
     </>
   );
 };
