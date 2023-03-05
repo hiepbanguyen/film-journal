@@ -5,9 +5,9 @@ import ErrorPage from "./pages/error-page";
 import SignUpPage from "./pages/sign-up.jsx";
 import HomePage from "./pages/home-page.jsx";
 import SignInPage from "./pages/sign-in.jsx";
+import ReviewDetailPage from "./pages/review-detail.jsx";
 import ActiveUser from "./components/auth/active-user.jsx";
 import "./index.css";
-import ProfilePage from "./pages/profile";
 
 const router = createBrowserRouter([
   {
@@ -56,8 +56,9 @@ const router = createBrowserRouter([
     element: <SignInPage />,
   },
   {
-    path: "/profile",
-    element: <ProfilePage />,
+    path: "/review-detail",
+    element: <ReviewDetailPage />,
+    errorElement: <ErrorPage />,
   },
 ]);
 
