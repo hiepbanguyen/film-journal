@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Popular = () => {
+const RecentlyLike = () => {
   const classes = useStyles();
 
   return (
@@ -46,4 +46,4 @@ const Popular = () => {
     </Root >
   );
 };
-export default Popular;
+export default RecentlyLike;
