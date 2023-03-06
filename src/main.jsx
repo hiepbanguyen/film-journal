@@ -5,6 +5,7 @@ import ErrorPage from "./pages/error-page";
 import SignUpPage from "./pages/sign-up.jsx";
 import HomePage from "./pages/home-page.jsx";
 import SignInPage from "./pages/sign-in.jsx";
+import ActiveUser from "./components/auth/active-user.jsx";
 import "./index.css";
 import Settings from "./pages/profile";
 
@@ -21,6 +22,10 @@ const router = createBrowserRouter([
   {
     path: "/sign-in",
     element: <SignInPage />,
+  },
+  {
+    path: "/active-user",
+    element: <ActiveUser />,
   },
   {
     path: "/lists",
