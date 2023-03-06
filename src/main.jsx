@@ -8,6 +8,7 @@ import SignInPage from "./pages/sign-in.jsx";
 import ActiveUser from "./components/auth/active-user.jsx";
 import "./index.css";
 import Settings from "./pages/profile";
+import ListPage from "./pages/list";
 
 const router = createBrowserRouter([
   {
@@ -29,7 +30,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/lists",
-    element: <SignInPage />,
+    element: <ListPage />,
   },
   {
     path: "/films",
