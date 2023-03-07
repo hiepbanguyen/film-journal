@@ -30,7 +30,7 @@ const Popular = () => {
           POPULAR THIS WEEK
         </Typography>
         <Divider className={classes.divider} color={"#fff"} />
-        <Grid container spacing={2}>
+        <Grid container spacing={2} color={"#fff"}>
           {Array.from({ length: 3 }).map((i, idx) => (
             <Grid key={idx} item xs={4}>
               <ListPreview

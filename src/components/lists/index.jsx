@@ -7,6 +7,7 @@ import {
 import Container from "@mui/material/Container";
 import { makeStyles } from "@mui/styles";
 import Popular from "./popular.jsx";
+import RecentlyLike from "./recently-liked.jsx";
 
 const Root = styled("div")({
   flexGrow: 1,
@@ -35,6 +36,7 @@ const Lists = () => {
         </div>
       </Container>
       <Popular />
+      <RecentlyLike />
     </Root >
   );
 };
