@@ -1,4 +1,4 @@
-import { Avatar, Box, Divider, Grid, Typography } from "@mui/material";
+import { Avatar, Box, Divider, Grid, Stack, Typography } from "@mui/material";
 import FilmCard from "./film-card";
 import CommentIcon from "@mui/icons-material/Comment";
 import FavoriteIcon from "@mui/icons-material/Favorite.js";
@@ -39,6 +39,35 @@ const FilmCardsStacked = () => {
           <FilmCard elevation={3} />
         </Box>
       ))}
+    </Box>
+  );
+};
+
+export const ListPreviewHorizontal = (props) => {
+  const { title, username, favoriteCount, commentCount } = props;
+
+  return (
+    <Box display={"flex"} my={2}>
+      <Box width={"50%"}>
+        <FilmCardsStacked />
+      </Box>
+      <Box width={"50%"}>
+        <Typography variant={"body2"}>{title}</Typography>
+        <Box display={"flex"} alignItems={"center"} my={1}>
+          <Avatar sx={{ width: 25, height: 25 }}>H</Avatar>
+          <Typography variant={"body2"} ml={0.5} mr={1}>
+            {username}
+          </Typography>
+          <FavoriteIcon fontSize={"small"} />
+          <Typography variant={"body2"} ml={0.5} mr={1}>
+            {favoriteCount}
+          </Typography>
+          <CommentIcon fontSize={"small"} />
+          <Typography variant={"body2"} ml={0.5}>
+            {commentCount}
+          </Typography>
+        </Box>
+      </Box>
     </Box>
   );
 };
