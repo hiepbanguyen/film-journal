@@ -1,6 +1,7 @@
 import React from "react";
 import { styled } from "@mui/material/styles";
 import {
+  Box,
   Divider,
   Grid,
   Typography,
@@ -16,7 +17,7 @@ const Root = styled("div")({
 
 const useStyles = makeStyles((theme) => ({
   divider: {
-    width: '96%',
+    width: '100%',
   },
 }));
 
@@ -26,9 +27,14 @@ const Popular = () => {
   return (
     <Root>
       <Container maxWidth="lg">
-        <Typography variant="h11" color="#abc">
-          POPULAR THIS WEEK
+      <Box display={"flex"} justifyContent={"space-between"} alignItems={"baseline"} color={"#fff"}>
+        <Typography variant={"body1"} textTransform={"uppercase"} mt={5}>
+          popular this week
         </Typography>
+        <Typography variant={"caption"} mt={5}>
+          MORE
+        </Typography>
+      </Box>
         <Divider className={classes.divider} color={"#fff"} />
         <Grid container spacing={2} color={"#fff"}>
           {Array.from({ length: 3 }).map((i, idx) => (

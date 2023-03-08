@@ -44,7 +44,7 @@ const FilmCardsStacked = () => {
 };
 
 export const ListPreviewHorizontal = (props) => {
-  const { title, username, favoriteCount, commentCount } = props;
+  const { title, username, favoriteCount, commentCount, films, description } = props;
 
   return (
     <Box display={"flex"} my={2}>
@@ -58,6 +58,9 @@ export const ListPreviewHorizontal = (props) => {
           <Typography variant={"body2"} ml={0.5} mr={1}>
             {username}
           </Typography>
+          <Typography variant={"body2"} ml={0.5} mr={0.8}>
+          {`${films}`} films
+          </Typography>
           <FavoriteIcon fontSize={"small"} />
           <Typography variant={"body2"} ml={0.5} mr={1}>
             {favoriteCount}
@@ -65,6 +68,31 @@ export const ListPreviewHorizontal = (props) => {
           <CommentIcon fontSize={"small"} />
           <Typography variant={"body2"} ml={0.5}>
             {commentCount}
+          </Typography>
+        </Box>
+        <Typography variant={"body2"}>{description}</Typography>
+      </Box>
+    </Box>
+  );
+};
+
+export const ListPreviewVertical = (props) => {
+  const { title, username, films } = props;
+
+  return (
+    <Box my={2}>
+      <Box width={"100%"}>
+        <FilmCardsStacked />
+      </Box>
+      <Box width={"100%"}>
+        <Typography variant={"body2"}>{title}</Typography>
+        <Box display={"flex"} alignItems={"center"} my={1}>
+          <Avatar sx={{ width: 25, height: 25 }}>H</Avatar>
+          <Typography variant={"body2"} ml={0.5} mr={1}>
+            {username}
+          </Typography>
+          <Typography variant={"body2"} ml={0.5} mr={0.8}>
+          {`${films}`} films
           </Typography>
         </Box>
       </Box>
