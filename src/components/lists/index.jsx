@@ -40,7 +40,7 @@ const Lists = () => {
       </Container>
       <Popular />
       <RecentlyLike />
-      <ShowdownLists />
+      {/* <ShowdownLists /> */}
       <ListCrew />
       <ListAllTime />
     </Root >

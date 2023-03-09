@@ -1,10 +1,9 @@
 import React from "react";
 import { styled } from "@mui/material/styles";
-import { Box, Chip, Divider, Grid, Stack, Typography } from "@mui/material";
+import { Box, Divider, Grid, Typography } from "@mui/material";
 import Container from "@mui/material/Container";
-import { makeStyles } from "@mui/styles";
-import ListPreview, { ListPreviewHorizontal, ListPreviewVertical } from "../home/list-preview";
-import ReviewPreview from "../home/review-preview";
+import  { ListPreviewHorizontal, ListPreviewVertical } from "../home/list-preview";
+import Tags from "./tags";
 
 const Root = styled("div")({
   flexGrow: 1,
@@ -63,7 +62,8 @@ const RecentlyLike = () => {
               </Typography>
             </Box>
             <Divider variant="fullWidth" color={"#fff"} />
-            <Box>
+            <Box mt={2}>
+              <Tags />
             </Box>
           </Grid>
         </Grid>
