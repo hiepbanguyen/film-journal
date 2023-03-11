@@ -67,10 +67,10 @@ export default function Home() {
           <Features />
           <JustReviewed />
           <Grid container spacing={2}>
-            <Grid item xs={12} sm={9}>
+            <Grid item xs={12} md={9}>
               <PopularReviews />
             </Grid>
-            <Grid item xs={12} sm={3}>
+            <Grid item xs={12} md={3}>
               <PopularLists />
               <PopularReviewers />
             </Grid>
