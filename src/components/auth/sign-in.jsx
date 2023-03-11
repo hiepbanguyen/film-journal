@@ -14,6 +14,7 @@ import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import ConstantURL from "../../script/resources/ConstantURL.js";
 import { useNavigate } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 
 import axios from "axios";
 
@@ -34,15 +35,12 @@ const theme = createTheme();
 
 export default function SignInSide() {
   const navigate = useNavigate();
-
+  const [searchParams, setSearchParams] = useSearchParams();
+  const queryParams = new URLSearchParams(window.location.search)
+  let username = queryParams.get("username")
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("username"),
-      password: data.get("password"),
-    });
-
     axios
       .get(`${ConstantURL.BaseDomain}Users/login`, {
         params: {
@@ -60,7 +58,7 @@ export default function SignInSide() {
         console.error(err);
       });
   };
-
+  
   return (
     <ThemeProvider theme={theme}>
       <Grid container component="main" sx={{ height: "100vh" }}>
@@ -96,6 +94,7 @@ export default function SignInSide() {
             </Typography>
             <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
               <TextField
+                defaultValue={username}
                 margin="normal"
                 required
                 fullWidth
@@ -104,7 +103,7 @@ export default function SignInSide() {
                 name="username"
                 autoComplete="username"
                 autoFocus
-              />
+                />
               <TextField
                 margin="normal"
                 required
