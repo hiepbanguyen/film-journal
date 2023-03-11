@@ -8,6 +8,7 @@ import SignInPage from "./pages/sign-in.jsx";
 import ReviewDetailPage from "./pages/review-detail.jsx";
 import ActiveUser from "./components/auth/active-user.jsx";
 import "./index.css";
+import MembersPage from "./pages/members-page";
 
 const router = createBrowserRouter([
   {
@@ -37,7 +38,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/members",
-    element: <SignInPage />,
+    element: <MembersPage />
   },
   {
     path: "/journal",

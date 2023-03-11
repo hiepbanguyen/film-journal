@@ -1,0 +1,45 @@
+import Container from "@mui/system/Container";
+import { Box, Button, Grid, CardMedia } from "@mui/material";
+import PopularReviewers from "./popular-reviewers";
+import ListReviewers from "./list-reviewers";
+
+export default function Members() {
+  return (
+    <Container
+      sx={{
+        marginTop: { xs: "24px", md: "40px" },
+      }}
+    >
+      <Box
+        className="members-title"
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          marginBottom: { xs: "12px", md: "16px" },
+        }}
+      >
+        <Box
+          component="h1"
+          sx={{
+            fontSize: { xs: "20px", md: "26px" },
+            color: "#9ab",
+            fontWeight: "400",
+          }}
+        >
+          Film lovers, critics and friends — find popular members.
+        </Box>
+      </Box>
+      <PopularReviewers></PopularReviewers>
+
+      <Box>
+        <Grid container spacing={0} columns={12}>
+          <Grid item xs={12} md={8}>
+            <ListReviewers></ListReviewers>
+          </Grid>
+          <Grid item xs={12} md={4}></Grid>
+        </Grid>
+      </Box>
+    </Container>
+  );
+}
