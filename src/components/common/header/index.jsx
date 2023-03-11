@@ -32,7 +32,7 @@ function Header() {
 
   return (
     <>
-      <AppBar position="fixed" sx={{ background: "rgba(240, 240, 240, 0.2)" }}>
+      <AppBar position="fixed" sx={{ background: "rgba(240, 240, 240, 0.1)" }}>
         <Container maxWidth="lg">
           <Toolbar disableGutters>
             <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
@@ -132,7 +132,7 @@ function Header() {
                 <UserMenu />
               ) : (
                 <>
-                  <Button variant={"contained"} color={"warning"} href={"/sign-in"}>
+                  <Button variant={"contained"} color={"warning"} href={"/sign-in"} sx={{ boxShadow: "none" }}>
                     Sign In
                   </Button>{" "}
                 </>
