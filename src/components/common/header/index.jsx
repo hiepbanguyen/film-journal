@@ -18,7 +18,7 @@ import { Link } from "@mui/material";
 import MobileDrawer from "../mobile-drawer.jsx";
 import LoginIcon from "@mui/icons-material/Login";
 import { Logo } from "../logo.jsx";
-import { AnimatedLink } from "../animated-link.jsx";
+import { AnimatedUnderlineBox } from "../animated-underline-box.jsx";
 
 const pages = [
   { href: "/films", label: "films" },
@@ -51,12 +51,10 @@ function Header() {
             <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
               {pages.map((i, idx) => (
                 <Button key={idx} sx={{ my: 2, color: "white", display: "block" }} href={i.href}>
-                  <AnimatedLink>{i.label}</AnimatedLink>
+                  <AnimatedUnderlineBox>{i.label}</AnimatedUnderlineBox>
                 </Button>
               ))}
-              <AnimatedLink>{"csdscd"}</AnimatedLink>
             </Box>
-
             <Box sx={{ display: "flex", flexGrow: 0 }}>
               <SearchBox />
               <Box width={10}></Box>

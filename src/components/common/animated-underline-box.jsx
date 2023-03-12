@@ -1,21 +1,23 @@
-import { styled } from "@mui/styles";
-import { Box, Link } from "@mui/material";
+import { Link } from "@mui/material";
+import { Box, styled } from "@mui/system";
 
-export const AnimatedLink = styled(Link)(({ theme }) => ({
+export const AnimatedUnderlineBox = styled(Box, {
+  shouldForwardProp: (props) => true,
+})(({ theme }) => ({
   color: "inherit",
   position: "relative",
   textDecoration: "none",
-
+  textAlign: "center",
   "&:after": {
     // background: "none repeat scroll 0 0 transparent",
     content: `""`,
     position: "absolute",
     display: "block",
-    height: 1,
     left: "50%",
-    bottom: 0,
+    bottom: -6,
     width: "0%",
-    borderBottom: "2px solid #504C67",
+    borderBottom: `2px solid`,
+    borderBottomColor: "inherit",
     transition: "width 0.3s ease 0s, left 0.3s ease 0s",
   },
   "&:hover": {

@@ -1,8 +1,9 @@
 import * as React from "react";
 import Drawer from "@mui/material/Drawer";
-import { Box, Button, IconButton, Link, Stack, SwipeableDrawer, Typography } from "@mui/material";
+import { Box, Button, Divider, IconButton, Link, Stack, SwipeableDrawer, Typography } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import { Logo } from "./logo.jsx";
+import { AnimatedUnderlineBox } from "./animated-underline-box.jsx";
 
 export default function MobileDrawer(props) {
   const { pages } = props;
@@ -31,15 +32,18 @@ export default function MobileDrawer(props) {
         onOpen={() => setOpenDrawer(true)}
         onClose={() => setOpenDrawer(false)}
       >
-        <Stack mt={2} gap={1} sx={{ width: 300, color: "#fff" }}>
+        <Stack mt={2} gap={1} sx={{ width: 250, color: "#fff" }}>
           <Logo />
-          {pages.map((i, idx) => (
-            <Button key={idx} sx={{ color: "inherit" }}>
-              <Typography>
-                <Link href={i.href}>{i.label}</Link>
-              </Typography>
-            </Button>
-          ))}
+          <Box mt={1}>
+            {pages.map((i, idx) => (
+              <Box key={idx} display={"flex"} flexDirection={"column"} justifyContent={"center"}>
+                <Button sx={{ color: "inherit", mt: 1 }} href={i.href}>
+                  <AnimatedUnderlineBox>{i.label}</AnimatedUnderlineBox>
+                </Button>
+                {idx !== pages.length - 1 ? <Divider variant={"middle"} /> : <></>}
+              </Box>
+            ))}
+          </Box>
         </Stack>
       </SwipeableDrawer>
     </div>
