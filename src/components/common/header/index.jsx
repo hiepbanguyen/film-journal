@@ -15,114 +15,46 @@ import AdbIcon from "@mui/icons-material/Adb";
 import SearchBox from "./search-box.jsx";
 import UserMenu from "./user-menu.jsx";
 import { Link } from "@mui/material";
+import MobileDrawer from "../mobile-drawer.jsx";
+import LoginIcon from "@mui/icons-material/Login";
+import { Logo } from "../logo.jsx";
+import { AnimatedLink } from "../animated-link.jsx";
 
-const pages = ["FILMS", "LISTS", "MEMBERS", "JOURNAL"];
+const pages = [
+  { href: "/films", label: "films" },
+  { href: "/lists", label: "lists" },
+  { href: "/members", label: "members" },
+  { href: "/journals", label: "journals" },
+];
 
 function Header() {
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
-
-  const handleOpenNavMenu = (event) => {
-    setAnchorElNav(event.currentTarget);
-  };
-
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
-  };
   const signed_in = false;
 
   return (
     <>
       <AppBar position="fixed" sx={{ background: "rgba(240, 240, 240, 0.1)" }}>
         <Container maxWidth="lg">
-          <Toolbar disableGutters>
-            <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
-            <Typography
-              variant="h6"
-              noWrap
-              component="a"
-              href="/"
-              sx={{
-                mr: 2,
-                display: { xs: "none", md: "flex" },
-                fontFamily: "monospace",
-                fontWeight: 700,
-                letterSpacing: ".3rem",
-                color: "inherit",
-                textDecoration: "none",
-              }}
-            >
-              FilmLogger
-            </Typography>
-            {/*mobile menu start*/}
-            <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
-              <IconButton
-                size="large"
-                aria-label="account of current user"
-                aria-controls="menu-appbar"
-                aria-haspopup="true"
-                onClick={handleOpenNavMenu}
-                color="inherit"
-              >
-                <MenuIcon />
-              </IconButton>
-              <Menu
-                id="menu-appbar"
-                anchorEl={anchorElNav}
-                anchorOrigin={{
-                  vertical: "bottom",
-                  horizontal: "left",
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: "top",
-                  horizontal: "left",
-                }}
-                open={Boolean(anchorElNav)}
-                onClose={handleCloseNavMenu}
-                sx={{
-                  display: { xs: "block", md: "none" },
-                }}
-              >
-                {pages.map((page) => (
-                  <MenuItem key={page} onClick={handleCloseNavMenu}>
-                    <Link href={`/${page.toLowerCase()}`}>
-                      <Typography textAlign="center">{page}</Typography>
-                    </Link>
-                  </MenuItem>
-                ))}
-              </Menu>
+          <Toolbar
+            disableGutters
+            sx={(theme) => ({
+              [theme.breakpoints.down("sm")]: {
+                justifyContent: "space-between",
+              },
+            })}
+          >
+            <Box sx={{ display: { xs: "flex", md: "none" } }} mr={1}>
+              <MobileDrawer pages={pages} />
             </Box>
-            <AdbIcon sx={{ display: { xs: "none", sm: "flex", md: "none" }, mr: 1 }} />
-            <Typography
-              variant="h5"
-              noWrap
-              component="a"
-              href=""
-              sx={{
-                mr: 2,
-                display: { xs: "none", sm: "flex", md: "none" },
-                flexGrow: 1,
-                fontFamily: "monospace",
-                fontWeight: 700,
-                letterSpacing: ".3rem",
-                color: "inherit",
-                textDecoration: "none",
-              }}
-            >
-              FilmLogger
-            </Typography>
-            {/*mobile menu end*/}
+            <Box sx={{ display: { xs: "none", sm: "flex" }, flexGrow: 1 }}>
+              <Logo />
+            </Box>
             <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-              {pages.map((page) => (
-                <Button
-                  key={page}
-                  onClick={handleCloseNavMenu}
-                  sx={{ my: 2, color: "white", display: "block" }}
-                  href={`/${page.toLowerCase()}`}
-                >
-                  {page}
+              {pages.map((i, idx) => (
+                <Button key={idx} sx={{ my: 2, color: "white", display: "block" }} href={i.href}>
+                  <AnimatedLink>{i.label}</AnimatedLink>
                 </Button>
               ))}
+              <AnimatedLink>{"csdscd"}</AnimatedLink>
             </Box>
 
             <Box sx={{ display: "flex", flexGrow: 0 }}>
@@ -133,8 +65,25 @@ function Header() {
               ) : (
                 <>
                   <Button variant={"contained"} color={"warning"} href={"/sign-in"} sx={{ boxShadow: "none" }}>
-                    Sign In
-                  </Button>{" "}
+                    <Typography
+                      variant={"body2"}
+                      sx={(theme) => ({
+                        [theme.breakpoints.down("sm")]: {
+                          display: "none",
+                        },
+                      })}
+                    >
+                      Sign In
+                    </Typography>
+                    <LoginIcon
+                      href={"/sign-in"}
+                      sx={(theme) => ({
+                        [theme.breakpoints.up("sm")]: {
+                          display: "none",
+                        },
+                      })}
+                    />
+                  </Button>
                 </>
               )}
             </Box>

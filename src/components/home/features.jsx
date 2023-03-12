@@ -13,7 +13,6 @@ const FeatureCard = (props) => {
     <Box
       component={Card}
       sx={{
-        background: "#445566",
         width: "100%",
         height: 100,
         ":hover": { background: "#00c030" },
