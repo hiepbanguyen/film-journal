@@ -9,6 +9,7 @@ import ActiveUser from "./components/auth/active-user.jsx";
 import "./index.css";
 import Settings from "./pages/profile";
 import ListPage from "./pages/list";
+import UserProfile from "./pages/user-profile";
 
 const router = createBrowserRouter([
   {
@@ -59,6 +60,10 @@ const router = createBrowserRouter([
   {
     path: "/settings",
     element: <Settings />,
+  },
+  {
+    path: "/profile",
+    element: <UserProfile />,
   },
 ]);
 
