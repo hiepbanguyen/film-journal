@@ -2,6 +2,7 @@ import Container from "@mui/system/Container";
 import { Box, Button, Grid, CardMedia } from "@mui/material";
 import PopularReviewers from "./popular-reviewers";
 import ListReviewers from "./list-reviewers";
+import MembersAside from "./aside";
 
 export default function Members() {
   return (
@@ -33,11 +34,13 @@ export default function Members() {
       <PopularReviewers></PopularReviewers>
 
       <Box>
-        <Grid container spacing={0} columns={12}>
-          <Grid item xs={12} md={8}>
+        <Grid container spacing={8} columns={13}>
+          <Grid item xs={13} md={9}>
             <ListReviewers></ListReviewers>
           </Grid>
-          <Grid item xs={12} md={4}></Grid>
+          <Grid item xs={13} md={4}>
+            <MembersAside></MembersAside>
+          </Grid>
         </Grid>
       </Box>
     </Container>

@@ -74,7 +74,7 @@ function FeaturedPerson(props) {
         component="img"
         sx={{
           height: "100%",
-          width: '90%',
+          width: "90%",
           transition: "0.2s",
           borderRadius: "4px",
           ":hover": {
@@ -193,7 +193,11 @@ function FeaturedPerson(props) {
 export default function PopularReviewers() {
   const listReviewers = listPopularReviewers.map((user) => <FeaturedPerson user={user}></FeaturedPerson>);
   return (
-    <Box>
+    <Box
+      sx={{
+        marginBottom: { xs: "24px", md: "32px" }
+      }}
+    >
       <Box
         className="popular-reviewers-title"
         sx={{
