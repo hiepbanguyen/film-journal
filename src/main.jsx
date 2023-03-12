@@ -9,6 +9,8 @@ import ReviewDetailPage from "./pages/review-detail.jsx";
 import ActiveUser from "./components/auth/active-user.jsx";
 import "./index.css";
 import MembersPage from "./pages/members-page";
+import Settings from "./pages/profile";
+import ListPage from "./pages/list";
 
 const router = createBrowserRouter([
   {
@@ -30,7 +32,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/lists",
-    element: <SignInPage />,
+    element: <ListPage />,
   },
   {
     path: "/films",
@@ -59,7 +61,10 @@ const router = createBrowserRouter([
   {
     path: "/review-detail",
     element: <ReviewDetailPage />,
-    errorElement: <ErrorPage />,
+   },
+  {
+    path: "/settings",
+    element: <Settings />,
   },
 ]);
 
