@@ -61,8 +61,9 @@ const listPopularReviewers = [
 ];
 
 function FeaturedPerson(props) {
-  const listFilm = props.user.listTopFilmReview.map((film) => (
+  const listFilm = props.user.listTopFilmReview.map((film, idx) => (
     <Grid
+      key={idx}
       item
       xs={4}
       sx={{
@@ -87,6 +88,7 @@ function FeaturedPerson(props) {
   ));
   return (
     <Grid
+      item
       xs={15}
       sm={10}
       md={6}
@@ -195,7 +197,7 @@ export default function PopularReviewers() {
   return (
     <Box
       sx={{
-        marginBottom: { xs: "24px", md: "32px" }
+        marginBottom: { xs: "24px", md: "32px" },
       }}
     >
       <Box
