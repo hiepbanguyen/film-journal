@@ -7,6 +7,8 @@ import TimelineDot from '@mui/lab/TimelineDot';
 import { Box, Divider, Grid } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import FilmCard from "../home/film-card";
+import StarIcon from "@mui/icons-material/Star";
+import ListIcon from '@mui/icons-material/List';
 
 export const TabProfile = () => {
     return (
@@ -71,6 +73,10 @@ export const TabProfile = () => {
                         {Array.from({ length: 4 }).map((i, idx) => (
                             <Grid item key={idx}>
                                 <FilmCard size={"medium"} />
+                                {Array.from({ length: 5 }).map((i, idx) => (
+                                    <StarIcon sx={{ color: "#8ea3c9" }} fontSize={"small"} key={idx} />
+                                ))}
+                                <ListIcon sx={{ color: "#8ea3c9", marginLeft: 1 }} fontSize={"small"} />
                             </Grid>
                         ))}
                     </Grid>
