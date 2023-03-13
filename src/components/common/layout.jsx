@@ -1,4 +1,4 @@
-import Header from "./header/header.jsx";
+import Header from "./header/index.jsx";
 import Footer from "./footer.jsx";
 import { Box } from "@mui/material";
 
