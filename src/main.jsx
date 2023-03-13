@@ -13,6 +13,7 @@ import Settings from "./pages/profile";
 import ListPage from "./pages/list";
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "./theme/index.js";
+import UserProfile from "./pages/user-profile";
 
 const router = createBrowserRouter([
   {
@@ -67,6 +68,10 @@ const router = createBrowserRouter([
   {
     path: "/settings",
     element: <Settings />,
+  },
+  {
+    path: "/profile",
+    element: <UserProfile />,
   },
 ]);
 
