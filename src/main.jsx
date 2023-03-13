@@ -11,9 +11,12 @@ import "./index.css";
 import MembersPage from "./pages/members-page";
 import Settings from "./pages/profile";
 import ListPage from "./pages/list";
-import UserProfile from "./pages/user-profile";
+<<<<<<<<< Temporary merge branch 1
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "./theme/index.js";
+=========
+import UserProfile from "./pages/user-profile";
+>>>>>>>>> Temporary merge branch 2
 
 const router = createBrowserRouter([
   {
