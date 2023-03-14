@@ -31,7 +31,7 @@ export const PopularLists = () => {
   );
 };
 
-const FilmCardsStacked = () => {
+export const FilmCardsStacked = () => {
   return (
     <Box position={"relative"} height={160}>
       {Array.from({ length: 5 }).map((i, idx) => (

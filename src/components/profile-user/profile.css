@@ -45,5 +45,52 @@ nav {
     display: block;
 }
 
+.section {
+    margin-top: 2.30769231rem;
+    padding: 0;
+    position: relative;
+    color: #9ab;
+}
+
+.section-heading {
+    border-bottom: 1px solid #456;
+    font-family: Graphik-Regular-Web,sans-serif;
+    font-size: 1rem;
+    font-weight: 400;
+    letter-spacing: .075em;
+    margin-bottom: .76923077rem;
+    margin-top: 0;
+    padding-bottom: 5px;
+    text-transform: uppercase;
+}
+
+h2 {
+    font-size: 18px;
+    margin: 18px 0 12px;
+}
+
+.logged-summary {
+    border: 0;
+    font-family: inherit;
+    font-size: 100%;
+    font-style: inherit;
+    font-weight: inherit;
+    margin: 0;
+    outline: 0;
+    padding: 0;
+    vertical-align: baseline;
+}
+
+.all-link {
+    color: #678;
+    font-size: 11px;
+    letter-spacing: .075em;
+    position: absolute;
+    right: 0;
+    text-transform: uppercase;
+    top: 3px;
+    white-space: nowrap;
+}
+
 
 

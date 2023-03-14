@@ -9,6 +9,8 @@ import Typography from "@mui/material/Typography";
 import FilmCard from "../home/film-card";
 import StarIcon from "@mui/icons-material/Star";
 import ListIcon from '@mui/icons-material/List';
+import { WatchList } from './watchlist';
+import { Diary } from './diary';
 
 export const TabProfile = () => {
     return (
@@ -28,9 +30,30 @@ export const TabProfile = () => {
                             </Grid>
                         ))}
                     </Grid>
+
+                    <Box display={"flex"} justifyContent={"space-between"} alignItems={"baseline"}>
+                        <Typography variant={"body1"} textTransform={"uppercase"} mt={5} color="#fff">
+                            recent likes
+                        </Typography>
+                    </Box>
+                    <Divider variant="fullWidth" color={"#fff"} />
+                    <Grid container mt={1} spacing={2.9}>
+                        {Array.from({ length: 4 }).map((i, idx) => (
+                            <Grid item key={idx}>
+                                <FilmCard size={"medium"} />
+                                {Array.from({ length: 5 }).map((i, idx) => (
+                                    <StarIcon sx={{ color: "#8ea3c9" }} fontSize={"small"} key={idx} />
+                                ))}
+                                <ListIcon sx={{ color: "#8ea3c9", marginLeft: 1 }} fontSize={"small"} />
+                            </Grid>
+                        ))}
+                    </Grid>
                 </Grid>
                 <Grid item xs={1}></Grid>
                 <Grid item xs={4}>
+                   
+                    <WatchList />
+                    <Diary />
                     <Box display={"flex"} justifyContent={"space-between"} alignItems={"baseline"}>
                         <Typography variant={"body1"} textTransform={"uppercase"} mt={5} color="#fff">
                             activity
@@ -61,7 +84,7 @@ export const TabProfile = () => {
                     </Timeline>
                 </Grid>
             </Grid>
-            <Grid container>
+            {/* <Grid container>
                 <Grid item xs={7}>
                     <Box display={"flex"} justifyContent={"space-between"} alignItems={"baseline"}>
                         <Typography variant={"body1"} textTransform={"uppercase"} mt={5} color="#fff">
@@ -81,7 +104,7 @@ export const TabProfile = () => {
                         ))}
                     </Grid>
                 </Grid>
-            </Grid>
+            </Grid> */}
         </>
     );
 };
