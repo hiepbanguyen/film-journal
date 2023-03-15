@@ -5,9 +5,14 @@ import ErrorPage from "./pages/error-page";
 import SignUpPage from "./pages/sign-up.jsx";
 import HomePage from "./pages/home-page.jsx";
 import SignInPage from "./pages/sign-in.jsx";
+import ReviewDetailPage from "./pages/review-detail.jsx";
 import ActiveUser from "./components/auth/active-user.jsx";
 import "./index.css";
-import ProfilePage from "./pages/profile";
+import MembersPage from "./pages/members-page";
+import Settings from "./pages/profile";
+import ListPage from "./pages/list";
+import { ThemeProvider } from "@mui/material/styles";
+import theme from "./theme/index.js";
 
 const router = createBrowserRouter([
   {
@@ -29,7 +34,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/lists",
-    element: <SignInPage />,
+    element: <ListPage />,
   },
   {
     path: "/films",
@@ -37,7 +42,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/members",
-    element: <SignInPage />,
+    element: <MembersPage />
   },
   {
     path: "/journal",
@@ -56,13 +61,19 @@ const router = createBrowserRouter([
     element: <SignInPage />,
   },
   {
-    path: "/profile",
-    element: <ProfilePage />,
+    path: "/review-detail",
+    element: <ReviewDetailPage />,
+   },
+  {
+    path: "/settings",
+    element: <Settings />,
   },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <ThemeProvider theme={theme}>
+      <RouterProvider router={router} />
+    </ThemeProvider>
   </React.StrictMode>,
 );
