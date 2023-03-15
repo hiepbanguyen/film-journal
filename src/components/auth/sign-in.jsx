@@ -37,14 +37,14 @@ export default function SignInSide() {
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
   const queryParams = new URLSearchParams(window.location.search)
-  let username = queryParams.get("username")
+  let email = queryParams.get("email")
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     axios
       .get(`${ConstantURL.BaseDomain}Users/login`, {
         params: {
-          userName: data.get("username"),
+          email: data.get("email"),
           password: data.get("password"),
         },
       })
@@ -94,14 +94,14 @@ export default function SignInSide() {
             </Typography>
             <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
               <TextField
-                defaultValue={username}
+                defaultValue={email}
                 margin="normal"
                 required
                 fullWidth
-                id="username"
-                label="UserName"
-                name="username"
-                autoComplete="username"
+                id="email"
+                label="Email"
+                name="email"
+                autoComplete="email"
                 autoFocus
                 />
               <TextField
@@ -125,7 +125,7 @@ export default function SignInSide() {
                   </Link>
                 </Grid>
                 <Grid item>
-                  <Link href="/src/pages/sign-up" variant="body2">
+                  <Link href="/sign-up" variant="body2">
                     {"Don't have an account? Sign Up"}
                   </Link>
                 </Grid>
