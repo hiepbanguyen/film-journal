@@ -12,6 +12,9 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import axios from "axios";
+import ConstantURL from "../../script/resources/ConstantURL.js";
+import { useNavigate } from "react-router-dom";
 
 function Copyright(props) {
   return (
@@ -29,13 +32,60 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function SignUp() {
+  const navigate = useNavigate();
+  const [errorUserName, setErrorUserName] = React.useState(false);
+  const [errorEmail, setErrorEmail] = React.useState(false);
+  const [errorPassword, setErrorPassword] = React.useState(false);
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+
+    if (!validate(data)) {
+      return;
+    }
+
+    axios
+      .post(`${ConstantURL.BaseDomain}Users/signup`, {
+          UserName: data.get("userName"),
+          Email: data.get("email"),
+          Password: data.get("password")
+      })
+      .then((res) => {
+        if (res) {
+          // Chuyển đến trang login
+          navigate("/sign-in");
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
+
+  const validate = (data) => {
+    if (!validateEmail(data.get("email"))) {
+      setErrorEmail(true);
+    } else {
+      setErrorEmail(false);
+    }
+
+    if (data.get("userName")) {
+      setErrorUserName(false);
+    } else {
+      setErrorUserName(true);
+    }
+
+    if (data.get("password")) {
+      setErrorPassword(false);
+    } else {
+      setErrorPassword(true);
+    }
+  }
+
+  const validateEmail = (email) => {
+    return email.match(
+      /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    );
   };
 
   return (
@@ -59,29 +109,30 @@ export default function SignUp() {
           </Typography>
           <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
             <Grid container spacing={2}>
-              <Grid item xs={12} sm={6}>
+              <Grid item xs={12} sm={12}>
                 <TextField
                   autoComplete="given-name"
-                  name="firstName"
+                  name="userName"
                   required
                   fullWidth
-                  id="firstName"
-                  label="First Name"
+                  id="userName"
+                  label="UserName"
                   autoFocus
-                />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  required
-                  fullWidth
-                  id="lastName"
-                  label="Last Name"
-                  name="lastName"
-                  autoComplete="family-name"
+                  error={errorUserName} 
+                  helperText={errorUserName ? "UserName is required." : ""}
                 />
               </Grid>
               <Grid item xs={12}>
-                <TextField required fullWidth id="email" label="Email Address" name="email" autoComplete="email" />
+                <TextField 
+                  required
+                  error={errorEmail} 
+                  fullWidth 
+                  id="email" 
+                  label="Email" 
+                  name="email" 
+                  autoComplete="email"
+                  helperText={errorEmail ? "Email is invalid." : ""}
+                />
               </Grid>
               <Grid item xs={12}>
                 <TextField
@@ -92,12 +143,8 @@ export default function SignUp() {
                   type="password"
                   id="password"
                   autoComplete="new-password"
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <FormControlLabel
-                  control={<Checkbox value="allowExtraEmails" color="primary" />}
-                  label="I want to receive inspiration, marketing promotions and updates via email."
+                  error={errorPassword} 
+                  helperText={errorPassword ? "Password is required." : ""}
                 />
               </Grid>
             </Grid>
@@ -106,7 +153,7 @@ export default function SignUp() {
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link href="/src/pages" variant="body2">
+                <Link href="/sign-in" variant="body2">
                   Already have an account? Sign in
                 </Link>
               </Grid>

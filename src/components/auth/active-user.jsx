@@ -6,15 +6,15 @@ import { useNavigate } from "react-router-dom";
 export default function ActiveUser(props) {
   const [searchParams, setSearchParams] = useSearchParams();
   const queryParams = new URLSearchParams(window.location.search)
-  const username = queryParams.get("username")
+  const email = queryParams.get("email")
   const navigate = useNavigate();
   useEffect(()=>{
     axios
-      .post(`${ConstantURL.BaseDomain}Users/Active?userName=${username}`)
+      .post(`${ConstantURL.BaseDomain}Users/Active?email=${email}`)
       .then((res) => {
         if (res) {
           // Chuyển đến trang login
-          navigate(`/sign-in?username=${username}`);
+          navigate(`/sign-in?email=${email}`);
         }
       })
       .catch((err) => {
