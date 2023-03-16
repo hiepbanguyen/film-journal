@@ -8,8 +8,8 @@ const SearchTags = ({ options, onSelect }) => {
 
   return (
     <Grid container spacing={1}>
-      {options.map((tag) => (
-        <Grid item key={tag}>
+      {options.map((tag, idx) => (
+        <Grid item key={idx}>
           <Chip label={tag} color={"primary"} onClick={() => handleSelectTag(tag)} />
         </Grid>
       ))}

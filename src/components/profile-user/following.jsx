@@ -46,8 +46,8 @@ function Follow(props) {
         </Box>
       </Box>
       <Box>
-        {props.data.list.map((user) => (
-          <Box sx={{ aspectRatio: "1/1", width: "16.6666666%", display: "inline-block" }}>
+        {props.data.list.map((user, idx) => (
+          <Box sx={{ aspectRatio: "1/1", width: "16.6666666%", display: "inline-block" }} key={idx}>
             <Box component="a" href={"/" + user.userName} sx={{ width: "100%", height: "100%" }}>
               <Box
                 component="img"

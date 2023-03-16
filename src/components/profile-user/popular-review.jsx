@@ -19,6 +19,7 @@ export const PopularReview = () => {
             <Grid container mt={0} color={"#fff"} paddingTop={3}>
             {Array.from({ length: 2 }).map((i, idx) => (
                  <RecentReviewFilm
+                 key={idx}
                 title={"Lorem Ipsum is simply dummy text"}
                 year={"2020"}
                 ratings={4}
