@@ -27,12 +27,14 @@ const pages = [
   { href: "/journals", label: "journals" },
 ];
 
+export const HeaderHeight = 64;
+
 function Header() {
   const signed_in = false;
 
   return (
     <>
-      <AppBar position="fixed" sx={{ background: "rgba(240, 240, 240, 0.1)" }}>
+      <AppBar position="fixed" sx={{ background: "rgba(240, 240, 240, 0.1)", height: HeaderHeight, boxShadow: "none" }}>
         <Container maxWidth="lg">
           <Toolbar
             disableGutters
@@ -88,7 +90,7 @@ function Header() {
           </Toolbar>
         </Container>
       </AppBar>
-      <Box height={64}></Box>
+      <Box height={HeaderHeight}></Box>
     </>
   );
 }

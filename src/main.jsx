@@ -13,6 +13,9 @@ import Settings from "./pages/profile";
 import ListPage from "./pages/list";
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "./theme/index.js";
+import UserProfile from "./pages/user-profile";
+import Journal from "./components/journal/index.jsx";
+import JournalPage from "./pages/journal.jsx";
 
 const router = createBrowserRouter([
   {
@@ -42,11 +45,11 @@ const router = createBrowserRouter([
   },
   {
     path: "/members",
-    element: <MembersPage />
+    element: <MembersPage />,
   },
   {
-    path: "/journal",
-    element: <SignInPage />,
+    path: "/journals",
+    element: <JournalPage />,
   },
   {
     path: "/review/:reviewId",
@@ -63,7 +66,7 @@ const router = createBrowserRouter([
   {
     path: "/review-detail",
     element: <ReviewDetailPage />,
-   },
+  },
   {
     path: "/settings",
     element: <Settings />,

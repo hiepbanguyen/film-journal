@@ -14,7 +14,7 @@ export const PopularLists = () => {
           MORE
         </Typography>
       </Box>
-      <Divider variant="fullWidth" color={"#fff"} />
+      <Divider variant="fullWidth" />
       <Grid container spacing={1}>
         {Array.from({ length: 4 }).map((i, idx) => (
           <Grid key={idx} item xs={12} sm={6} md={12}>
@@ -36,7 +36,7 @@ const FilmCardsStacked = () => {
     <Box position={"relative"} height={160}>
       {Array.from({ length: 5 }).map((i, idx) => (
         <Box key={idx} position={"absolute"} zIndex={10 - idx} left={`${idx * 15}%`}>
-          <FilmCard elevation={3} />
+          <FilmCard elevation={10} />
         </Box>
       ))}
     </Box>
@@ -48,7 +48,7 @@ const FilmCardsStacked2 = () => {
     <Box position={"relative"} height={160}>
       {Array.from({ length: 10 }).map((i, idx) => (
         <Box key={idx} position={"absolute"} zIndex={10 - idx} left={`${idx * 9}%`}>
-          <FilmCard elevation={3} />
+          <FilmCard elevation={10} />
         </Box>
       ))}
     </Box>
@@ -71,7 +71,7 @@ export const ListPreviewHorizontal = (props) => {
             {username}
           </Typography>
           <Typography variant={"body2"} ml={0.5} mr={0.8}>
-          {`${films}`} films
+            {`${films}`} films
           </Typography>
           <FavoriteIcon fontSize={"small"} />
           <Typography variant={"body2"} ml={0.5} mr={1}>
@@ -104,7 +104,7 @@ export const ListPreviewVertical = (props) => {
             {username}
           </Typography>
           <Typography variant={"body2"} ml={0.5} mr={0.8}>
-          {`${films}`} films
+            {`${films}`} films
           </Typography>
         </Box>
       </Box>
@@ -117,12 +117,12 @@ export const ListShowdown = (props) => {
   return (
     <Box mt={2} mb={2} ml={{ md: 0, xs: "5%" }}>
       <Grid container mt={5} spacing={1}>
-      {Array.from({ length: 1 }).map((i, idx) => (
-        <Grid item key={idx} xs={12}>
-          <FilmCard size={"medium"} />
-        </Grid>
-      ))}
-    </Grid>
+        {Array.from({ length: 1 }).map((i, idx) => (
+          <Grid item key={idx} xs={12}>
+            <FilmCard size={"medium"} />
+          </Grid>
+        ))}
+      </Grid>
       <Typography variant={"body2"}>{title}</Typography>
       <Box display={"flex"} alignItems={"center"} my={1}>
         <Typography variant={"body2"} ml={0.5}>
@@ -152,10 +152,10 @@ export const AllTimeList = (props) => {
       <Box display={"flex"} alignItems={"center"} my={1}>
         <Avatar sx={{ width: 25, height: 25 }}>H</Avatar>
         <Typography variant={"body2"} ml={0.5} mr={1}>
-        Created by {`${username}`}
+          Created by {`${username}`}
         </Typography>
         <Typography variant={"body2"} ml={0.5} mr={1}>
-        {`${year}`} years
+          {`${year}`} years
         </Typography>
       </Box>
     </Box>
