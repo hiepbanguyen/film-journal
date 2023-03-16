@@ -13,7 +13,7 @@ export const JustReviewed = () => {
           1,249,135,774 films watched
         </Typography>
       </Box>
-      <Divider variant="fullWidth" color={"#fff"} />
+      <Divider variant="fullWidth" />
       <Grid container mt={1} spacing={1}>
         {Array.from({ length: 12 }).map((i, idx) => (
           <Grid item key={idx} lg={1} sm={2} xs={3}>

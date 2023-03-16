@@ -222,6 +222,23 @@ export const COMPONENT_THEME = {
       },
     },
   },
+
+  MuiDivider: {
+    styleOverrides: {
+      root: {
+        color: "rgba(255,255,255,0.5)",
+        borderColor: "rgba(255,255,255,0.5)",
+      },
+    },
+  },
+
+  MuiTypography: {
+    styleOverrides: {
+      root: {
+        fontFamily: "inherit",
+      },
+    },
+  },
   //
   // MuiStep: {
   //   styleOverrides: {

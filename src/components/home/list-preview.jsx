@@ -16,7 +16,7 @@ export const PopularLists = () => {
           MORE
         </Typography>
       </Box>
-      <Divider variant="fullWidth" color={"#fff"} />
+      <Divider variant="fullWidth" />
       <Grid container spacing={1}>
         {Array.from({ length: 4 }).map((i, idx) => (
           <Grid key={idx} item xs={12} sm={6} md={12}>
@@ -38,7 +38,7 @@ export const FilmCardsStacked = () => {
     <Box position={"relative"} height={160}>
       {Array.from({ length: 5 }).map((i, idx) => (
         <Box key={idx} position={"absolute"} zIndex={10 - idx} left={`${idx * 15}%`}>
-          <FilmCard elevation={3} />
+          <FilmCard elevation={10} />
         </Box>
       ))}
     </Box>
@@ -50,7 +50,7 @@ const FilmCardsStacked2 = () => {
     <Box position={"relative"} height={160}>
       {Array.from({ length: 10 }).map((i, idx) => (
         <Box key={idx} position={"absolute"} zIndex={10 - idx} left={`${idx * 9}%`}>
-          <FilmCard elevation={3} />
+          <FilmCard elevation={10} />
         </Box>
       ))}
     </Box>
