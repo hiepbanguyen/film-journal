@@ -17,7 +17,7 @@ const SearchTags = ({ options, onSelect }) => {
   );
 };
 
-const options = ["Reacttttttttttt", "Angularrrrrrrrrrrrrrrrr", "Vue", "Angular", "Vue", "Angular", "Vue", "Angular", "a", "Vue", "Angular", "Vue", "Angular", "Vue", "Angular", "Vue", "Angular", "Vue", "Angular", "a", "Vue", "Angular", "Vue", "Angular", "Vue", "Angular", "Vue", "Angular", "Vue", "Angular", "a", "Vue", "Angular", "Vue", "Angular", "Vue", "Angular", "Vue", "Angular", "Vue", "Angular", "a", "Vue", "Angular", "Vue", "Angular", "Vue"];
+const options = ["Reacttttttttttt", "Angularrrrrrrrrrrrrrrrr", "Vue", "Angular", "a", "Vue", "Angular", "Vue", "Angular", "Vue", "Angular", "Vue", "Angular", "Vue", "Angular", "a", "Vue", "Angular", "Vue", "Angular", "Vue", "Angular", "Vue", "Angular", "Vue", "Angular", "a", "Vue", "Angular", "Vue", "Angular", "Vue"];
 
 const Tags = () => {
   const handleSearch = (tag) => {

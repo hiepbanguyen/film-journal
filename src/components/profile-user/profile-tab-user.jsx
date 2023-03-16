@@ -14,6 +14,10 @@ import { Diary } from './diary';
 import { RecentReview } from './recent-review';
 import { PopularReview } from './popular-review';
 import { RecentList } from './recent-list';
+import MembersAside from "../members/aside.jsx";
+import ListFollow from './following';
+import Tags from '../lists/tags';
+import ProfileTags from './profile-tags';
 
 export const TabProfile = () => {
     return (
@@ -53,11 +57,17 @@ export const TabProfile = () => {
                     </Grid>
                     <RecentReview />
                     <PopularReview />
+                    <Grid container spacing={3}>
+                        <Grid item xs={6}>
+                       <ProfileTags />
+                        </Grid>
+                        <Grid item xs={6}><ListFollow /></Grid>
+                    </Grid>
                 </Grid>
                 <Grid item xs={1}></Grid>
                 <Grid item xs={4}>
                     <WatchList />
-                   <RecentList title={"haon1231asdzxcasdasdasdasdasdas"} films={12} />
+                    <RecentList title={"haon1231asdzxcasdasdasdasdasdas"} films={12} />
                     {/* <Diary /> */}
                     <Box display={"flex"} justifyContent={"space-between"} alignItems={"baseline"}>
                         <Typography variant={"body1"} textTransform={"uppercase"} mt={5} color="#fff">

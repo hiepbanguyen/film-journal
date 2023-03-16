@@ -9,7 +9,7 @@ export const PopularReview = () => {
         <Box>
             <Box display={"flex"} justifyContent={"space-between"} alignItems={"baseline"} color={"#fff"}>
                 <Typography variant={"body1"} textTransform={"uppercase"} mt={5}>
-                    recent review
+                    popular review
                 </Typography>
                 <Typography variant={"caption"} mt={5} textTransform={"uppercase"}>
                     more
