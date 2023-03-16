@@ -172,6 +172,7 @@ export const RecentReviewFilm = (props) => {
           </Typography>
           <Box display={"flex"} mt={1}>
             <FavoriteIcon fontSize={"small"} />
+            <Typography variant={"body2"} marginLeft={1} color={"#e4d5d5"}> Like review</Typography>
             <Typography variant={"body2"} marginLeft={1} color={"#fff"}> {`${favoriteCount}`} likes</Typography>
           </Box>
         </Box>
