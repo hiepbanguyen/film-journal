@@ -13,8 +13,6 @@ import Settings from "./pages/profile";
 import ListPage from "./pages/list";
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "./theme/index.js";
-import UserProfile from "./pages/user-profile";
-import Journal from "./components/journal/index.jsx";
 import JournalPage from "./pages/journal.jsx";
 
 const router = createBrowserRouter([
