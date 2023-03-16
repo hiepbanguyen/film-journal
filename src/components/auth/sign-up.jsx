@@ -40,7 +40,6 @@ export default function SignUp() {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-
     if (!validate(data)) {
       return;
     }
@@ -80,6 +79,11 @@ export default function SignUp() {
     } else {
       setErrorPassword(true);
     }
+
+    if(!errorUserName && !errorEmail && !errorPassword) {
+      return true;
+    }
+    return false;
   }
 
   const validateEmail = (email) => {

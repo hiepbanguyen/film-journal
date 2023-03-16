@@ -2,6 +2,8 @@ import { Avatar, Box, Container, Divider, Grid, Stack, Typography } from "@mui/m
 import FilmCard from "./film-card";
 import CommentIcon from "@mui/icons-material/Comment";
 import FavoriteIcon from "@mui/icons-material/Favorite.js";
+import StarIcon from "@mui/icons-material/Star";
+
 
 export const PopularLists = () => {
   return (
@@ -31,7 +33,7 @@ export const PopularLists = () => {
   );
 };
 
-const FilmCardsStacked = () => {
+export const FilmCardsStacked = () => {
   return (
     <Box position={"relative"} height={160}>
       {Array.from({ length: 5 }).map((i, idx) => (
@@ -139,6 +141,42 @@ export const CrewList = (props) => {
     <Box mt={2} mb={2} ml={{ md: 0, xs: "5%" }}>
       <FilmCardsStacked />
       <Typography variant={"body2"}>{title}</Typography>
+    </Box>
+  );
+};
+
+export const RecentReviewFilm = (props) => {
+  const { title, year, ratings, watchedAt, description, favoriteCount } = props;
+
+  return (
+    <Box display={"flex"} marginTop={3}>
+      <Box width={"20%"}>
+        <FilmCard />
+      </Box>
+      <Box width={"80%"}>
+        <Box display={"flex"}>
+          <Typography variant={"body1"} marginLeft={3}>{title}</Typography>
+          <Typography variant={"body1"} marginLeft={2} color={"#9dbad7"}>{year}</Typography>
+        </Box>
+        <Box alignItems={"center"} marginLeft={3}>
+          <Box display={"flex"} mt={0.5}>
+            <Typography variant={"body2"}>
+              {Array.from({ length: ratings }).map((i, idx) => (
+                <StarIcon sx={{ color: "#00c030" }} fontSize={"small"} key={idx} />
+              ))}
+            </Typography>
+            <Typography variant={"body1"} marginLeft={2} color={"#fff"}>{watchedAt}</Typography>
+          </Box>
+          <Typography variant={"body2"} mr={1} mt={0.5}>
+            {description}
+          </Typography>
+          <Box display={"flex"} mt={1}>
+            <FavoriteIcon fontSize={"small"} />
+            <Typography variant={"body2"} marginLeft={1} color={"#e4d5d5"}> Like review</Typography>
+            <Typography variant={"body2"} marginLeft={1} color={"#fff"}> {`${favoriteCount}`} likes</Typography>
+          </Box>
+        </Box>
+      </Box>
     </Box>
   );
 };
