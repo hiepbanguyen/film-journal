@@ -30,62 +30,34 @@ function Copyright(props) {
 
 const theme = createTheme();
 
-export default function SignUp() {
+export default function ForgotPassword() {
   const navigate = useNavigate();
-  const [errorUserName, setErrorUserName] = React.useState(false);
-  const [errorEmail, setErrorEmail] = React.useState(false);
-  const [errorPassword, setErrorPassword] = React.useState(false);
   const [errorMsg, setErrorMsg] = React.useState("");
-
 
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    if (!validate(data)) {
-      return;
-    }
-
-    baseAPI
-      .postAsync(`Users/signup`, {
-          UserName: data.get("userName"),
-          Email: data.get("email"),
-          Password: data.get("password")
-      })
-      .then((res) => {
-        if (res) {
-          // Chuyển đến trang login
-          navigate("/sign-in");
-        }
-      })
-      .catch((err) => {
-        setErrorMsg(err.response.data.devMsg)
-      });
-  };
-
-  const validate = (data) => {
     if (!validateEmail(data.get("email"))) {
-      setErrorEmail(true);
+        setErrorMsg("Email is invalid.")
+        return;
     } else {
-      setErrorEmail(false);
+        setErrorMsg("")
     }
-
-    if (data.get("userName")) {
-      setErrorUserName(false);
-    } else {
-      setErrorUserName(true);
-    }
-
-    if (data.get("password")) {
-      setErrorPassword(false);
-    } else {
-      setErrorPassword(true);
-    }
-
-    if(!errorUserName && !errorEmail && !errorPassword) {
-      return true;
-    }
-    return false;
-  }
+    baseAPI
+        .getAsync(`Users/ForgotPassword`, {
+        params: {
+            email: data.get("email"),
+        },
+        })
+        .then((res) => {
+            if (res) {
+                navigate("/sign-in");
+            }
+        })
+        .catch((err) => {
+            setErrorMsg(err.response.data.devMsg)
+        });
+  };
 
   const validateEmail = (email) => {
     return email.match(
@@ -110,59 +82,27 @@ export default function SignUp() {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign up
+            Reset my password
           </Typography>
           <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
             <Grid container spacing={2}>
-              <Grid item xs={12} sm={12}>
-                <TextField
-                  autoComplete="given-name"
-                  name="userName"
-                  required
-                  fullWidth
-                  id="userName"
-                  label="UserName"
-                  autoFocus
-                  error={errorUserName} 
-                  helperText={errorUserName ? "UserName is required." : ""}
-                />
-              </Grid>
               <Grid item xs={12}>
                 <TextField 
+                  error={errorMsg} 
                   required
-                  error={errorEmail || errorMsg} 
                   fullWidth 
                   id="email" 
                   label="Email" 
                   name="email" 
+                  type="email"
                   autoComplete="email"
-                  helperText={errorEmail ? "Email is invalid." : errorMsg }
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  name="password"
-                  label="Password"
-                  type="password"
-                  id="password"
-                  autoComplete="new-password"
-                  error={errorPassword} 
-                  helperText={errorPassword ? "Password is required." : ""}
+                  helperText={errorMsg}
                 />
               </Grid>
             </Grid>
             <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
-              Sign Up
+                Reset password
             </Button>
-            <Grid container justifyContent="flex-end">
-              <Grid item>
-                <Link href="/sign-in" variant="body2">
-                  Already have an account? Sign in
-                </Link>
-              </Grid>
-            </Grid>
           </Box>
         </Box>
         <Copyright sx={{ mt: -3 }} />

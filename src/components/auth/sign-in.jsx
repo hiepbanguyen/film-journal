@@ -36,9 +36,18 @@ export default function SignInSide() {
   const [searchParams, setSearchParams] = useSearchParams();
   const queryParams = new URLSearchParams(window.location.search)
   let email = queryParams.get("email")
+  const [errorEmail, setErrorEmail] = React.useState(false);
+  const [errorPassword, setErrorPassword] = React.useState(false);
+  const [errorMsg, setErrorMsg] = React.useState("");
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
+
+    if (!validate(data)) {
+      return;
+    }
+
     baseAPI
       .getAsync(`Users/login`, {
         params: {
@@ -56,8 +65,33 @@ export default function SignInSide() {
         }
       })
       .catch((err) => {
-        console.error(err);
+        setErrorMsg(err.response.data.devMsg)
       });
+  };
+
+  const validate = (data) => {
+    if (!validateEmail(data.get("email"))) {
+      setErrorEmail(true);
+    } else {
+      setErrorEmail(false);
+    }
+
+    if (data.get("password")) {
+      setErrorPassword(false);
+    } else {
+      setErrorPassword(true);
+    }
+
+    if(!errorEmail && !errorPassword) {
+      return true;
+    }
+    return false;
+  }
+
+  const validateEmail = (email) => {
+    return email.match(
+      /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    );
   };
   
   return (
@@ -96,6 +130,7 @@ export default function SignInSide() {
             <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
               <TextField
                 defaultValue={email}
+                error={errorEmail || errorMsg} 
                 margin="normal"
                 required
                 fullWidth
@@ -104,8 +139,10 @@ export default function SignInSide() {
                 name="email"
                 autoComplete="email"
                 autoFocus
+                helperText={errorEmail ? "Email is invalid." : "" }
                 />
               <TextField
+                error={errorPassword || errorMsg}
                 margin="normal"
                 required
                 fullWidth
@@ -114,6 +151,7 @@ export default function SignInSide() {
                 type="password"
                 id="password"
                 autoComplete="current-password"
+                helperText={errorPassword ? "Password is required." : errorMsg }
               />
               <FormControlLabel control={<Checkbox value="remember" color="primary" />} label="Remember me" />
               <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
@@ -121,7 +159,7 @@ export default function SignInSide() {
               </Button>
               <Grid container>
                 <Grid item xs>
-                  <Link href="src/components/auth/sign-in.jsx#" variant="body2">
+                  <Link href="/forgot-password" variant="body2">
                     Forgot password?
                   </Link>
                 </Grid>
