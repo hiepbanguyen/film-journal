@@ -38,7 +38,13 @@ export default function MobileDrawer(props) {
           <Box mt={1}>
             {pages.map((i, idx) => (
               <React.Fragment key={idx}>
-                <Box component={Link} to={i.href} display={"flex"} justifyContent={"center"}>
+                <Box
+                  component={Link}
+                  to={i.href}
+                  display={"flex"}
+                  justifyContent={"center"}
+                  sx={{ textDecoration: "none", color: "inherit" }}
+                >
                   <Button sx={{ color: "inherit", mt: 1 }}>
                     <AnimatedUnderlineBox>{i.label}</AnimatedUnderlineBox>
                   </Button>

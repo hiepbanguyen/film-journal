@@ -114,7 +114,7 @@ function Articles() {
 
 const JournalArticle = () => {
   return (
-    <div id="root">
+    <div id="article-root">
       <header>
         <div id="nav">
           <a href>

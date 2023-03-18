@@ -3,7 +3,7 @@
     padding: 0;
     box-sizing: border-box;
 }
-#root {
+#article-root {
     padding-top: 13px;
 }
 #main {
@@ -11,9 +11,9 @@
     padding-bottom: 60px;
 }
 
-a {
-    color: inherit;
-}
+/*a {*/
+/*    color: inherit;*/
+/*}*/
 
 #menu {
     height: 60px;

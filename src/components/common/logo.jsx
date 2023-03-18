@@ -4,7 +4,14 @@ import { Box } from "@mui/material";
 import { Link } from "react-router-dom";
 
 export const Logo = () => (
-  <Box component={Link} to={"/"} display={"flex"} alignItems={"center"} justifyContent={"center"}>
+  <Box
+    component={Link}
+    to={"/"}
+    display={"flex"}
+    alignItems={"center"}
+    justifyContent={"center"}
+    sx={{ textDecoration: "none", color: "inherit" }}
+  >
     <AdbIcon sx={{ mr: 1 }} />
     <Typography
       variant="h5"
