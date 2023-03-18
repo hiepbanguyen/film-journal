@@ -2,23 +2,16 @@ import * as React from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
-import Menu from "@mui/material/Menu";
-import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
-import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
-import Tooltip from "@mui/material/Tooltip";
-import MenuItem from "@mui/material/MenuItem";
-import AdbIcon from "@mui/icons-material/Adb";
 import SearchBox from "./search-box.jsx";
 import UserMenu from "./user-menu.jsx";
-import { Link } from "@mui/material";
 import MobileDrawer from "../mobile-drawer.jsx";
 import LoginIcon from "@mui/icons-material/Login";
 import { Logo } from "../logo.jsx";
 import { AnimatedUnderlineBox } from "../animated-underline-box.jsx";
+import { Link } from "react-router-dom";
 
 const pages = [
   { href: "/films", label: "films" },
@@ -27,12 +20,14 @@ const pages = [
   { href: "/journals", label: "journals" },
 ];
 
+export const HeaderHeight = 64;
+
 function Header() {
   const signed_in = false;
 
   return (
     <>
-      <AppBar position="fixed" sx={{ background: "rgba(240, 240, 240, 0.1)" }}>
+      <AppBar position="fixed" sx={{ background: "rgba(240, 240, 240, 0.1)", height: HeaderHeight, boxShadow: "none" }}>
         <Container maxWidth="lg">
           <Toolbar
             disableGutters
@@ -50,9 +45,11 @@ function Header() {
             </Box>
             <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
               {pages.map((i, idx) => (
-                <Button key={idx} sx={{ my: 2, color: "white", display: "block" }} href={i.href}>
-                  <AnimatedUnderlineBox>{i.label}</AnimatedUnderlineBox>
-                </Button>
+                <Link to={i.href} key={idx}>
+                  <Button sx={{ my: 2, color: "white", display: "block" }}>
+                    <AnimatedUnderlineBox>{i.label}</AnimatedUnderlineBox>
+                  </Button>
+                </Link>
               ))}
             </Box>
             <Box sx={{ display: "flex", flexGrow: 0 }}>
@@ -88,8 +85,9 @@ function Header() {
           </Toolbar>
         </Container>
       </AppBar>
-      <Box height={64}></Box>
+      <Box height={HeaderHeight}></Box>
     </>
   );
 }
+
 export default Header;

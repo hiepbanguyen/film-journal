@@ -8,8 +8,8 @@ const SearchTags = ({ options, onSelect }) => {
 
   return (
     <Grid container spacing={1}>
-      {options.map((tag) => (
-        <Grid item key={tag}>
+      {options.map((tag, idx) => (
+        <Grid item key={idx}>
           <Chip label={tag} color={"primary"} onClick={() => handleSelectTag(tag)} />
         </Grid>
       ))}
@@ -17,7 +17,7 @@ const SearchTags = ({ options, onSelect }) => {
   );
 };
 
-const options = ["Reacttttttttttt", "Angularrrrrrrrrrrrrrrrr", "Vue", "Angular", "Vue", "Angular", "Vue", "Angular", "a", "Vue", "Angular", "Vue", "Angular", "Vue", "Angular", "Vue", "Angular", "Vue", "Angular", "a", "Vue", "Angular", "Vue", "Angular", "Vue", "Angular", "Vue", "Angular", "Vue", "Angular", "a", "Vue", "Angular", "Vue", "Angular", "Vue", "Angular", "Vue", "Angular", "Vue", "Angular", "a", "Vue", "Angular", "Vue", "Angular", "Vue"];
+const options = ["Reacttttttttttt", "Angularrrrrrrrrrrrrrrrr", "Vue", "Angular", "a", "Vue", "Angular", "Vue", "Angular", "Vue", "Angular", "Vue", "Angular", "Vue", "Angular", "a", "Vue", "Angular", "Vue", "Angular", "Vue", "Angular", "Vue", "Angular", "Vue", "Angular", "a", "Vue", "Angular", "Vue", "Angular", "Vue"];
 
 const Tags = () => {
   const handleSearch = (tag) => {

@@ -193,7 +193,9 @@ function FeaturedPerson(props) {
 }
 
 export default function PopularReviewers() {
-  const listReviewers = listPopularReviewers.map((user) => <FeaturedPerson user={user}></FeaturedPerson>);
+  const listReviewers = listPopularReviewers.map((user, idx) => (
+    <FeaturedPerson key={idx} user={user}></FeaturedPerson>
+  ));
   return (
     <Box
       sx={{

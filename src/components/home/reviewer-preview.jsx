@@ -14,7 +14,7 @@ export const PopularReviewers = () => {
           MORE
         </Typography>
       </Box>
-      <Divider variant="fullWidth" color={"#fff"} />
+      <Divider variant="fullWidth" />
       <Grid container spacing={1}>
         {Array.from({ length: 5 }).map((i, idx) => (
           <Grid key={idx} item xs={12} sm={6} md={12}>
@@ -49,7 +49,7 @@ export default function ListPreview(props) {
           </Typography>
         </Box>
       </Box>
-      <Divider variant={"fullWidth"} color={"#fff"} />
+      <Divider variant={"fullWidth"} />
     </>
   );
 }

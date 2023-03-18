@@ -1,0 +1,96 @@
+.profile-stats {
+    align-items: flex-start;
+    display: flex;
+}
+.profile-statistic {
+    font-weight: 400;
+    text-align: center;
+}
+.profile-statistic .value {
+    color: #d8e0e8;
+    display: block;
+    font-family: TiemposTextWeb-Semibold,Georgia,serif;
+    font-size: 1.61538462rem;
+    font-weight: 400;
+}
+.profile-statistic .definition {
+    color: #9ab;
+    color: #678;
+    display: block;
+    font-family: Graphik-Regular-Web,sans-serif;
+    font-size: 1rem;
+    font-size: .76923077rem;
+    font-weight: 400;
+    letter-spacing: .075em;
+    margin-top: 0.75em;
+    text-transform: uppercase;
+}
+/*a {*/
+/*    color: #b2a377;*/
+/*    text-decoration: none;*/
+/*    border: 0;*/
+/*    font-family: inherit;*/
+/*}*/
+/*h4 {*/
+/*    margin-right: 10px;*/
+/*}*/
+
+/*.profile-navigation {*/
+/*    border: 1px solid #4e8493;*/
+/*    border-radius: 3px;*/
+/*    align-items: center;*/
+/*}*/
+
+/*nav {*/
+/*    display: block;*/
+/*}*/
+
+.section {
+    margin-top: 2.30769231rem;
+    padding: 0;
+    position: relative;
+    color: #9ab;
+}
+
+.section-heading {
+    border-bottom: 1px solid #456;
+    font-family: Graphik-Regular-Web,sans-serif;
+    font-size: 1rem;
+    font-weight: 400;
+    letter-spacing: .075em;
+    margin-bottom: .76923077rem;
+    margin-top: 0;
+    padding-bottom: 5px;
+    text-transform: uppercase;
+}
+
+h2 {
+    font-size: 18px;
+    margin: 18px 0 12px;
+}
+
+.logged-summary {
+    border: 0;
+    font-family: inherit;
+    font-size: 100%;
+    font-style: inherit;
+    font-weight: inherit;
+    margin: 0;
+    outline: 0;
+    padding: 0;
+    vertical-align: baseline;
+}
+
+.all-link {
+    color: #678;
+    font-size: 11px;
+    letter-spacing: .075em;
+    position: absolute;
+    right: 0;
+    text-transform: uppercase;
+    top: 3px;
+    white-space: nowrap;
+}
+
+
+

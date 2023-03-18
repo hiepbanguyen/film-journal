@@ -2,7 +2,7 @@ import React from "react";
 import { styled } from "@mui/material/styles";
 import { Box, Divider, Grid, Typography } from "@mui/material";
 import Container from "@mui/material/Container";
-import  { ListPreviewHorizontal, ListPreviewVertical } from "../home/list-preview";
+import { ListPreviewHorizontal, ListPreviewVertical } from "../home/list-preview";
 import Tags from "./tags";
 
 const Root = styled("div")({
@@ -12,7 +12,6 @@ const Root = styled("div")({
 });
 
 const RecentlyLike = () => {
-
   return (
     <Root>
       <Container maxWidth="lg">
@@ -23,7 +22,7 @@ const RecentlyLike = () => {
                 rencently liked
               </Typography>
             </Box>
-            <Divider variant="fullWidth" color={"#fff"} />
+            <Divider variant="fullWidth" />
             {Array.from({ length: 10 }).map((i, idx) => (
               <Grid key={idx} item xs={12}>
                 <ListPreviewHorizontal
@@ -42,11 +41,9 @@ const RecentlyLike = () => {
               <Typography variant={"body1"} textTransform={"uppercase"}>
                 crew picks
               </Typography>
-              <Typography variant={"caption"}>
-                MORE
-              </Typography>
+              <Typography variant={"caption"}>MORE</Typography>
             </Box>
-            <Divider variant="fullWidth" color={"#fff"} />
+            <Divider variant="fullWidth" />
             {Array.from({ length: 5 }).map((i, idx) => (
               <Grid key={idx} item xs={12}>
                 <ListPreviewVertical
@@ -61,7 +58,7 @@ const RecentlyLike = () => {
                 popular tags
               </Typography>
             </Box>
-            <Divider variant="fullWidth" color={"#fff"} />
+            <Divider variant="fullWidth" />
             <Box mt={2}>
               <Tags />
             </Box>
