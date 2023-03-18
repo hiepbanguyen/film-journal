@@ -14,9 +14,7 @@ import { Diary } from "./diary";
 import { RecentReview } from "./recent-review";
 import { PopularReview } from "./popular-review";
 import { RecentList } from "./recent-list";
-import MembersAside from "../members/aside.jsx";
 import ListFollow from "./following";
-import Tags from "../lists/tags";
 import ProfileTags from "./profile-tags";
 
 export const TabProfile = () => {

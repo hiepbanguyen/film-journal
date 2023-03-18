@@ -1,6 +1,5 @@
 import * as React from "react";
 import { Box, Divider, Grid, Typography } from "@mui/material";
-import FilmCard from "../home/film-card.jsx";
 
 export const Diary = () => {
   const [count, setCount] = React.useState("123");
