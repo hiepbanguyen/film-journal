@@ -46,9 +46,9 @@ export default function ListReviewers() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
+          {rows.map((row, idx) => (
             <TableRow
-              key={row.user}
+              key={idx}
               sx={{ "&:last-child td, &:last-child th": { border: 0 }, borderBottom: "2px solid #99aabb73" }}
             >
               <TableCell component="th" scope="row" sx={{ color: "#9ab" }}>

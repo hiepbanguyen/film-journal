@@ -35,11 +35,11 @@ h4 {
     margin-right: 10px;
 }
 
-.profile-navigation {
-    border: 1px solid #4e8493;
-    border-radius: 3px;
-    align-items: center;
-}
+/*.profile-navigation {*/
+/*    border: 1px solid #4e8493;*/
+/*    border-radius: 3px;*/
+/*    align-items: center;*/
+/*}*/
 
 nav {
     display: block;

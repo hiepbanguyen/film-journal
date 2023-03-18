@@ -1,9 +1,10 @@
 import AdbIcon from "@mui/icons-material/Adb.js";
 import Typography from "@mui/material/Typography";
-import { Box, Link } from "@mui/material";
+import { Box } from "@mui/material";
+import { Link } from "react-router-dom";
 
 export const Logo = () => (
-  <Box component={Link} href={"/"} display={"flex"} alignItems={"center"} justifyContent={"center"}>
+  <Box component={Link} to={"/"} display={"flex"} alignItems={"center"} justifyContent={"center"}>
     <AdbIcon sx={{ mr: 1 }} />
     <Typography
       variant="h5"

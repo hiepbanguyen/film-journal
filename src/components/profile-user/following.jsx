@@ -1,5 +1,5 @@
 import Container from "@mui/system/Container";
-import { Box, Button, Grid, CardMedia } from "@mui/material";
+import { Box, Button, Grid, CardMedia, Divider } from "@mui/material";
 import * as React from "react";
 
 const Following = {
@@ -22,12 +22,10 @@ function Follow(props) {
         sx={{
           fontSize: { xs: "12px", md: "14px" },
           textTransform: "uppercase",
-          borderBottom: "1px solid #fff",
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
-          marginBottom: "16px",
-          marginTop: "23px"
+          marginTop: "23px",
         }}
       >
         <Box
@@ -45,7 +43,8 @@ function Follow(props) {
           {props.data.count}
         </Box>
       </Box>
-      <Box>
+      <Divider variant={"fullWidth"} />
+      <Box mt={2}>
         {props.data.list.map((user, idx) => (
           <Box sx={{ aspectRatio: "1/1", width: "16.6666666%", display: "inline-block" }} key={idx}>
             <Box component="a" href={"/" + user.userName} sx={{ width: "100%", height: "100%" }}>

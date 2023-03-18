@@ -59,8 +59,8 @@ function ListUser(props) {
         </Box>
       </Box>
       <Box>
-        {props.data.list.map((user) => (
-          <Box sx={{ aspectRatio: "1/1", width: "16.66666%", display: "inline-block" }}>
+        {props.data.list.map((user, idx) => (
+          <Box key={idx} sx={{ aspectRatio: "1/1", width: "16.66666%", display: "inline-block" }}>
             <Box component="a" href={"/" + user.userName} sx={{ width: "100%", height: "100%" }}>
               <Box
                 component="img"

@@ -14,11 +14,11 @@ import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import SearchBox from "./search-box.jsx";
 import UserMenu from "./user-menu.jsx";
-import { Link } from "@mui/material";
 import MobileDrawer from "../mobile-drawer.jsx";
 import LoginIcon from "@mui/icons-material/Login";
 import { Logo } from "../logo.jsx";
 import { AnimatedUnderlineBox } from "../animated-underline-box.jsx";
+import { Link } from "react-router-dom";
 
 const pages = [
   { href: "/films", label: "films" },
@@ -52,9 +52,11 @@ function Header() {
             </Box>
             <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
               {pages.map((i, idx) => (
-                <Button key={idx} sx={{ my: 2, color: "white", display: "block" }} href={i.href}>
-                  <AnimatedUnderlineBox>{i.label}</AnimatedUnderlineBox>
-                </Button>
+                <Link to={i.href} key={idx}>
+                  <Button sx={{ my: 2, color: "white", display: "block" }}>
+                    <AnimatedUnderlineBox>{i.label}</AnimatedUnderlineBox>
+                  </Button>
+                </Link>
               ))}
             </Box>
             <Box sx={{ display: "flex", flexGrow: 0 }}>
