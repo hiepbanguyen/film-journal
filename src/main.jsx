@@ -9,7 +9,7 @@ import ReviewDetailPage from "./pages/review-detail.jsx";
 import ActiveUser from "./components/auth/active-user.jsx";
 import "./index.css";
 import MembersPage from "./pages/members-page";
-import Settings from "./pages/profile";
+import SettingsPage from "./pages/settings.jsx";
 import ListPage from "./pages/list";
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "./theme/index.js";
@@ -68,7 +68,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/settings",
-    element: <Settings />,
+    element: <SettingsPage />,
   },
   {
     path: "/profile",
