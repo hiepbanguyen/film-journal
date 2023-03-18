@@ -1,6 +1,6 @@
 import { Box, Divider, Tooltip, Typography } from "@mui/material";
 import StarHalfIcon from "@mui/icons-material/StarHalf";
-import { FiveStarIcon } from "./five-star-icon.jsx";
+import StarIcon from "@mui/icons-material/Star.js";
 const ratings = {
   each: {
     1: 10,
@@ -44,7 +44,7 @@ const RatingColumn = (props) => {
           className={"rating-column"}
           width={"100%"}
           height={`${(value / total) * 100}%`}
-          sx={{ background: "#456", borderRadius: "3px 3px 0 0" }}
+          sx={{ background: "#456", borderRadius: "2px 2px 0 0" }}
         ></Box>
       </Box>
     </Tooltip>
@@ -60,12 +60,14 @@ export default function Ratings(props) {
       </Box>
       <Divider variant={"fullWidth"} />
       <Box display={"flex"} alignItems={"flex-end"}>
-        <StarHalfIcon sx={{ fontSize: 12, mr: 0.5 }} />
+        <StarHalfIcon sx={{ fontSize: 12, mr: 0.5, color: "#00c030" }} />
         {Object.entries(ratings.each).map(([rating, numOfRatings], idx) => (
           <RatingColumn key={idx} value={numOfRatings} label={rating} total={ratings.total} />
         ))}
         <Box width={"3px"} />
-        <FiveStarIcon fontSize={12} />
+        {Array.from({ length: 5 }).map((i, idx) => (
+          <StarIcon key={idx} sx={{ fontSize: 12, color: "#00c030" }} />
+        ))}
       </Box>
     </Box>
   );
