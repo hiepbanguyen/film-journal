@@ -64,10 +64,10 @@
     text-transform: uppercase;
 }
 
-/*h2 {*/
-/*    font-size: 18px;*/
-/*    margin: 18px 0 12px;*/
-/*}*/
+h2 {
+    font-size: 18px;
+    margin: 18px 0 12px;
+}
 
 .logged-summary {
     border: 0;
