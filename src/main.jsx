@@ -5,6 +5,8 @@ import ErrorPage from "./components/error-page/error-page.jsx";
 import SignUpPage from "./pages/sign-up.jsx";
 import SignInPage from "./pages/sign-in.jsx";
 import ActiveUser from "./components/auth/active-user.jsx";
+import ResetPassword from "./components/auth/reset-password.jsx";
+import ForgotPassword from "./components/auth/forgot-password"
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "./theme/index.js";
 import Root from "./components/common/root.jsx";
@@ -30,6 +32,14 @@ const router = createBrowserRouter([
   {
     path: "/active-user",
     element: <ActiveUser />,
+  },
+  {
+    path: "/reset-password",
+    element: <ResetPassword />,
+  },
+  {
+    path: "/forgot-password",
+    element: <ForgotPassword />,
   },
   {
     path: "/",
