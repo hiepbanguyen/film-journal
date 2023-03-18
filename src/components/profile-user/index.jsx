@@ -2,7 +2,7 @@ import React from "react";
 import { styled } from "@mui/material/styles";
 import { Avatar, Button, Grid, Typography } from "@mui/material";
 import Container from "@mui/material/Container";
-import "./profile.css";
+import styles from './profile.css?inline';
 import CustomTabs from "../common/tabs.jsx";
 import { TabProfile } from "./profile-tab-user.jsx";
 
@@ -41,35 +41,35 @@ const ProfileUser = () => {
             </Grid>
           </Grid>
           <Grid item xs={4}>
-            <div className="profile-stats js-profile-stats">
+            <div className={styles.profile-stats}>
               <h4 className="profile-statistic statistic">
                 <a href="">
-                  <span className="value">1</span>
-                  <span className="definition">Film</span>
+                  <span className={styles.value}>1</span>
+                  <span className={styles.definition}>Film</span>
                 </a>
               </h4>
-              <h4 className="profile-statistic statistic">
+              <h4 className={styles.profile-statistic}>
                 <a href="">
-                  <span className="value">0</span>
-                  <span className="definition">This year</span>
+                  <span className={styles.value}>0</span>
+                  <span className={styles.definition}>This year</span>
                 </a>
               </h4>
-              <h4 className="profile-statistic statistic">
+              <h4 className={styles.profile-statistic}>
                 <a href="">
-                  <span className="value">0</span>
-                  <span className="definition">Lists</span>
+                  <span className={styles.value}>0</span>
+                  <span className={styles.definition}>Lists</span>
                 </a>
               </h4>
-              <h4 className="profile-statistic statistic">
+              <h4 className={styles.profile-statistic}>
                 <a href="">
-                  <span className="value">0</span>
-                  <span className="definition">Following</span>
+                  <span className={styles.value}>0</span>
+                  <span className={styles.definition}>Following</span>
                 </a>
               </h4>
-              <h4 className="profile-statistic statistic">
+              <h4 className={styles.profile-statistic}>
                 <a href="">
-                  <span className="value">0</span>
-                  <span className="definition">Followers</span>
+                  <span className={styles.value}>0</span>
+                  <span className={styles.definition}>Followers</span>
                 </a>
               </h4>
             </div>

@@ -1,5 +1,4 @@
-import Container from "@mui/system/Container";
-import { Box, Button, Grid, CardMedia, Divider } from "@mui/material";
+import { Box, Divider } from "@mui/material";
 import * as React from "react";
 import Tags from "../lists/tags";
 
