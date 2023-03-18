@@ -47,9 +47,9 @@ function FilmTeaser() {
         </a>
         <p className="directed" style={{ margin: 0 }}>
           Directed by
-            <span>Guillermo del Toro,</span>
-            <br />
-            <span>Mark Gustafson</span>
+          <span>Guillermo del Toro,</span>
+          <br />
+          <span>Mark Gustafson</span>
         </p>
       </div>
     </div>
@@ -61,8 +61,10 @@ function Further() {
     <div className="further">
       <h3>FURTHER READING</h3>
       <ul>
-        {FurtherReadlist.map((futher) => (
-          <li key={futher} style={{ marginTop: 10 }}>{futher}</li>
+        {FurtherReadlist.map((futher, idx) => (
+          <li key={idx} style={{ marginTop: 10 }}>
+            {futher}
+          </li>
         ))}
       </ul>
     </div>
