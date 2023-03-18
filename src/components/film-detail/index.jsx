@@ -11,6 +11,7 @@ import StorageRoundedIcon from "@mui/icons-material/StorageRounded";
 import RemoveRedEyeRoundedIcon from "@mui/icons-material/RemoveRedEyeRounded";
 import GridViewSharpIcon from "@mui/icons-material/GridViewSharp";
 import SmartDisplayIcon from "@mui/icons-material/SmartDisplay";
+import Ratings from "../common/ratings.jsx";
 
 const Cast = [
   "Sam Worthington",
@@ -372,7 +373,7 @@ const FilmDetail = () => {
                 </div>
               </div>
               <div style={{ maxWidth: "100%", marginTop: 8 }}>
-                <img style={{ width: "227px" }} src={ratingImg} alt="" />
+                <Ratings />
               </div>
             </div>
           </div>

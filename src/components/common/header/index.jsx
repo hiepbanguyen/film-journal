@@ -45,7 +45,7 @@ function Header() {
             </Box>
             <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
               {pages.map((i, idx) => (
-                <Link to={i.href} key={idx}>
+                <Link to={i.href} key={idx} style={{ textDecoration: "none" }}>
                   <Button sx={{ my: 2, color: "white", display: "block" }}>
                     <AnimatedUnderlineBox>{i.label}</AnimatedUnderlineBox>
                   </Button>
