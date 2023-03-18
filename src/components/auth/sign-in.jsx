@@ -12,10 +12,9 @@ import Grid from "@mui/material/Grid";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import ConstantURL from "../../script/resources/ConstantURL.js";
+import baseAPI from '../../apis/baseApi';
 import { useNavigate } from "react-router-dom";
-
-import axios from "axios";
+import { useSearchParams } from "react-router-dom";
 
 function Copyright(props) {
   return (
@@ -34,24 +33,24 @@ const theme = createTheme();
 
 export default function SignInSide() {
   const navigate = useNavigate();
-
+  const [searchParams, setSearchParams] = useSearchParams();
+  const queryParams = new URLSearchParams(window.location.search)
+  let email = queryParams.get("email")
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("username"),
-      password: data.get("password"),
-    });
-
-    axios
-      .get(`${ConstantURL.BaseDomain}Users/login`, {
+    baseAPI
+      .getAsync(`Users/login`, {
         params: {
-          userName: data.get("username"),
+          email: data.get("email"),
           password: data.get("password"),
         },
       })
       .then((res) => {
         if (res) {
+          // set the user information in localStorage
+          localStorage.setItem('userInfo', JSON.stringify(res.data.User));
+          localStorage.setItem('token', JSON.stringify(res.data.Token));
           // Chuyển đến trang homepage
           navigate("/");
         }
@@ -60,7 +59,7 @@ export default function SignInSide() {
         console.error(err);
       });
   };
-
+  
   return (
     <ThemeProvider theme={theme}>
       <Grid container component="main" sx={{ height: "100vh" }}>
@@ -96,15 +95,16 @@ export default function SignInSide() {
             </Typography>
             <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
               <TextField
+                defaultValue={email}
                 margin="normal"
                 required
                 fullWidth
-                id="username"
-                label="UserName"
-                name="username"
-                autoComplete="username"
+                id="email"
+                label="Email"
+                name="email"
+                autoComplete="email"
                 autoFocus
-              />
+                />
               <TextField
                 margin="normal"
                 required
@@ -126,7 +126,7 @@ export default function SignInSide() {
                   </Link>
                 </Grid>
                 <Grid item>
-                  <Link href="/src/pages/sign-up" variant="body2">
+                  <Link href="/sign-up" variant="body2">
                     {"Don't have an account? Sign Up"}
                   </Link>
                 </Grid>
