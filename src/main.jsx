@@ -7,6 +7,8 @@ import HomePage from "./pages/home-page.jsx";
 import SignInPage from "./pages/sign-in.jsx";
 import "./index.css";
 import ProfilePage from "./pages/profile";
+import FilmTitlePage from "./pages/film_title";
+import FilmNewsPage from "./pages/film_news";
 
 const router = createBrowserRouter([
   {
@@ -44,7 +46,11 @@ const router = createBrowserRouter([
   },
   {
     path: "/film/:filmTitle/:filmId",
-    element: <SignInPage />,
+    element: <FilmTitlePage />,
+  },
+  {
+    path: "/film/film_news",
+    element: <FilmNewsPage />,
   },
   {
     path: "/member/:userName",
