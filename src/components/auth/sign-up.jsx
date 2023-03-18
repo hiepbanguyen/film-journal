@@ -12,9 +12,8 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import axios from "axios";
-import ConstantURL from "../../script/resources/ConstantURL.js";
 import { useNavigate } from "react-router-dom";
+import baseAPI from '../../apis/baseAPI';
 
 function Copyright(props) {
   return (
@@ -44,8 +43,8 @@ export default function SignUp() {
       return;
     }
 
-    axios
-      .post(`${ConstantURL.BaseDomain}Users/signup`, {
+    baseAPI
+      .postAsync(`Users/signup`, {
           UserName: data.get("userName"),
           Email: data.get("email"),
           Password: data.get("password")
