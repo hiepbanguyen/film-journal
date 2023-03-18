@@ -12,11 +12,9 @@ import Grid from "@mui/material/Grid";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import ConstantURL from "../../script/resources/ConstantURL.js";
+import baseAPI from '../../apis/baseApi';
 import { useNavigate } from "react-router-dom";
 import { useSearchParams } from "react-router-dom";
-
-import axios from "axios";
 
 function Copyright(props) {
   return (
@@ -41,8 +39,8 @@ export default function SignInSide() {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    axios
-      .get(`${ConstantURL.BaseDomain}Users/login`, {
+    baseAPI
+      .getAsync(`Users/login`, {
         params: {
           email: data.get("email"),
           password: data.get("password"),
@@ -50,6 +48,9 @@ export default function SignInSide() {
       })
       .then((res) => {
         if (res) {
+          // set the user information in localStorage
+          localStorage.setItem('userInfo', JSON.stringify(res.data.User));
+          localStorage.setItem('token', JSON.stringify(res.data.Token));
           // Chuyển đến trang homepage
           navigate("/");
         }
