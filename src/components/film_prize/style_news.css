@@ -17,7 +17,7 @@ a {
 
 #menu {
     height: 60px;
-    width: '100%';
+    width: 100%;
     background-color: black;
     /* position: fixed; */
     z-index: 1;
@@ -42,7 +42,7 @@ header {
 }
 
 .border_line {
-    width: '100%';
+    width: 100%;
     background-image: linear-gradient(#678 50%, rgba(102, 119, 136, 0) 0);
     background-repeat: repeat-x;
     background-size: 1px 2px;
@@ -160,7 +160,7 @@ header {
     font-size: 20px;
 }
 
-#content {
+#content_news {
     min-width: 960px;
     width: 93.75%;
     margin-left: auto;

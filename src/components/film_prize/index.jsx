@@ -1,5 +1,5 @@
 import React from "react";
-import './style.css'
+import './style_news.css'
 import TwitterIcon from '@mui/icons-material/Twitter';
 import FacebookOutlinedIcon from '@mui/icons-material/FacebookOutlined';
 import MailOutlineOutlinedIcon from '@mui/icons-material/MailOutlineOutlined';
@@ -19,11 +19,26 @@ function ListIconShare() {
     )
 }
 const FurtherReadlist = [
-    "75th Directors Guild of America Awards—a list by Shawn Stubbs",
-    "34th Producers Guild of America Awards—a list by Shawn Stubbs",
-    "29th Screen Actors Guild Awards—a list by Shawn Stubbs",
-    "Costume Designers Guild 2023 winners and nominees",
-    "Art Directors Guild 2023 winners and nominees",
+    {
+        id: 1,
+        text: "75th Directors Guild of America Awards—a list by Shawn Stubbs"
+    },
+    {
+        id: 2,
+        text: "34th Producers Guild of America Awards—a list by Shawn Stubbs"
+    },
+    {
+        id: 3,
+        text: "29th Screen Actors Guild Awards—a list by Shawn Stubbs"
+    },
+    {
+        id: 4,
+        text: "Costume Designers Guild 2023 winners and nominees"
+    },
+    {
+        id: 5,
+        text: "Art Directors Guild 2023 winners and nominees"
+    },
 ]
 
 function FilmTeaser() {
@@ -33,11 +48,9 @@ function FilmTeaser() {
             <div>
                 <a href=""><b>Guillermo del Toro's Pinocchio</b> <span>2022</span></a>
                 <p className="directed" style={{ margin: 0 }}>Directed by
-                    <div>
                         <span>Guillermo del Toro,</span>
                         <br />
                         <span>Mark Gustafson</span>
-                    </div>
                 </p>
             </div>
         </div>
@@ -51,7 +64,7 @@ function Further() {
             <ul>
                 {
                     FurtherReadlist.map(futher => (
-                        <li style={{ marginTop: 10 }}>{futher}</li>
+                        <li key={futher.id} style={{ marginTop: 10 }}>{futher.text}</li>
                     ))
                 }
             </ul>
@@ -84,7 +97,7 @@ function Articles() {
         <div className="articles">
             {
                 related_articles.map(article => (
-                    <div className="article_item">
+                    <div key={article.id} className="article_item">
                         <img src={article.image} alt="" />
                         <p style={{ fontSize: 12 }}><b style={{ fontWeight: 800 }}>{article.category}</b> . {article.time}</p>
                         <p style={{ fontSize: 18 }}><span style={{ fontSize: 22, fontWeight: 800 }}>{article.title}</span> {article.description}</p>
@@ -101,7 +114,7 @@ const FilmNews = () => {
         <div id="root">
             <header>
                 <div id="nav">
-                    <a href><span className="label">Journal</span></a>
+                    <a href=""><span className="label">Journal</span></a>
                     <div className="nav_list">
                         <ul>
                             <li>Archive</li>
@@ -113,7 +126,7 @@ const FilmNews = () => {
                 <div className="border_line" />
                 <div className="label_header">
                     <div className="meta">
-                        <a href>Podcast</a>
+                        <a href="">Podcast</a>
                     </div>
                     <div className="article-title">
                         <h1>Best in Show: Guilds and Guillermo</h1>
@@ -122,7 +135,7 @@ const FilmNews = () => {
                         <div className="meta_timestamp">
                             <div className="meta_timestamp_user">
                                 <img src="https://secure.gravatar.com/avatar/d31a4b9508ddd892eb3f904c6ce6bd2d?rating=PG&size=48&border=&default=https%3A%2F%2Fs.ltrbxd.com%2Fstatic%2Fimg%2Favatar48.7a758b1e.png" alt="" />
-                                <a href className="name">MIA VICINO</a>
+                                <a href="" className="name">MIA VICINO</a>
                             </div>
                             <div className="meta_timestamp_date">
                                 <time dateTime="2023-03-02T21:58:29.995Z" className="localtime-d-mmm-yyyy">3 Mar 2023</time>
@@ -142,7 +155,7 @@ const FilmNews = () => {
                         </figcaption>
                     </div>
                 </div>
-                <div id="content">
+                <div id="content_news">
                     <div className="body">
                         <div className="subhead">
                             <p>As the very nearly! last of the guild awards land, we recap the BAFTAs and Césars, and chat with Pinocchio stop motion maestros Guillermo del Toro and Mark Gustafson.&nbsp;</p>
@@ -162,7 +175,7 @@ const FilmNews = () => {
                                     </figcaption>
                                     <FilmTeaser></FilmTeaser>
                                 </div>
-                                <p>Our dear, also-Oscar-nominated Marcel the Shell with Shoes On has also won several trophies of late, with special notice for Jenny Slate's voice work as the eponymous shell from both the Annies and the HCA. Marcel is also a stop-motion marvel, and on that note it was a delight to ask del Toro and Gustafson which stop-motion and claymation films and filmmakers they would throw themselves in front of a bus to save. They answer that question and many more, including why it's good to be weird, Jungian theories, how Lydia Tár bled into Spazzatura, and the first awards they ever won (Gustafson's is a goodie).<strong /></p>
+                                <p>Our dear, also-Oscar-nominated Marcel the Shell with Shoes On has also won several trophies of late, with special notice for Jenny Slate's voice work as the eponymous shell from both the Annies and the HCA. Marcel is also a stop-motion marvel, and on that note it was a delight to ask del Toro and Gustafson which stop-motion and claymation films and filmmakers they would throw themselves in front of a bus to save. They answer that question and many more, including why it's good to be weird, Jungian theories, how Lydia Tár bled into Spazzatura, and the first awards they ever won (Gustafson's is a goodie).</p>
                                 <div style={{ position: "relative" }}>
                                     <img src="https://a.ltrbxd.com/resized/sm/upload/qx/vt/p9/6m/guillermo-0-960-0-0.jpg?k=d36bbce2c0" alt="" />
                                     <figcaption className="figure-caption caption">
@@ -238,38 +251,38 @@ const FilmNews = () => {
             </div>
             <footer>
                 <div className="content_footer">
-                <div className="topics" style={{ width: '41.677%' }}>
-                    <h4 style={{marginBottom: 15}}>TOPICS</h4>
-                    <ul class="topicslist">
-                        <li class="listitem">Big Picture</li>
-                        <li class="listitem">Cinemascope</li>
-                        <li class="listitem">Community</li>
-                        <li class="listitem">Deep Impact</li>
-                        <li class="listitem">Festival Circuit</li>
-                        <li class="listitem">Interview</li>
-                        <li class="listitem">Life in Film</li>
-                        <li class="listitem">Platform</li>
-                        <li class="listitem">Podcast</li>
-                        <li class="listitem">Shelf Life</li>
-                        <li class="listitem">Year in Review</li>
-                    </ul>
-                    <div className="topic_search">
-                        <input type="search" placeholder="Search..." />
-                        <div style={{position: 'absolute', zIndex: 1, top: 10, right: 0}}><SearchOutlinedIcon></SearchOutlinedIcon></div>
+                    <div className="topics" style={{ width: '41.677%' }}>
+                        <h4 style={{ marginBottom: 15 }}>TOPICS</h4>
+                        <ul className="topicslist">
+                            <li className="listitem">Big Picture</li>
+                            <li className="listitem">Cinemascope</li>
+                            <li className="listitem">Community</li>
+                            <li className="listitem">Deep Impact</li>
+                            <li className="listitem">Festival Circuit</li>
+                            <li className="listitem">Interview</li>
+                            <li className="listitem">Life in Film</li>
+                            <li className="listitem">Platform</li>
+                            <li className="listitem">Podcast</li>
+                            <li className="listitem">Shelf Life</li>
+                            <li className="listitem">Year in Review</li>
+                        </ul>
+                        <div className="topic_search">
+                            <input type="search" placeholder="Search..." />
+                            <div style={{ position: 'absolute', zIndex: 1, top: 10, right: 0 }}><SearchOutlinedIcon></SearchOutlinedIcon></div>
+                        </div>
                     </div>
-                </div>
-                <div className="masthead" style={{ width: '41.677%' }}>
-                    <h4>MASTHEAD</h4>
-                    <p style={{margin: '10px 0 15px 0'}}>Journal is Letterboxd’s online magazine. Our mission is to get more films, big and small, onto your watchlists, spotlight the best writing from our community, and bring you news from our crew behind the scenes. Along the way, we dig deeper into the movies we’re obsessed with, meet the people who make them, and explore the culture that surrounds them. We welcome pitches.</p>
-                    <ul class="mastheadlist">
-                        <li class="listitem"><a href="https://apple.co/3TfzHVG">Podcast</a></li>
-                        <li class="listitem"><a href="https://twitter.com/letterboxd" target="_blank" rel="noopener noreferrer">Twitter</a></li>
-                        <li class="listitem"><a href="https://www.facebook.com/letterboxd" target="_blank" rel="noopener noreferrer">Facebook</a></li>
-                        <li class="listitem"><a href="https://www.instagram.com/letterboxd" target="_blank" rel="noopener noreferrer">Instagram</a></li>
-                        <li class="listitem"><a href="https://www.youtube.com/letterboxdhq" target="_blank" rel="noopener noreferrer">YouTube</a></li>
-                        <li class="listitem"><a href="/journal/rss/" target="_blank" rel="noopener noreferrer">RSS</a></li>
-                    </ul>
-                </div>
+                    <div className="masthead" style={{ width: '41.677%' }}>
+                        <h4>MASTHEAD</h4>
+                        <p style={{ margin: '10px 0 15px 0' }}>Journal is Letterboxd’s online magazine. Our mission is to get more films, big and small, onto your watchlists, spotlight the best writing from our community, and bring you news from our crew behind the scenes. Along the way, we dig deeper into the movies we’re obsessed with, meet the people who make them, and explore the culture that surrounds them. We welcome pitches.</p>
+                        <ul className="mastheadlist">
+                            <li className="listitem"><a href="https://apple.co/3TfzHVG">Podcast</a></li>
+                            <li className="listitem"><a href="https://twitter.com/letterboxd" target="_blank" rel="noopener noreferrer">Twitter</a></li>
+                            <li className="listitem"><a href="https://www.facebook.com/letterboxd" target="_blank" rel="noopener noreferrer">Facebook</a></li>
+                            <li className="listitem"><a href="https://www.instagram.com/letterboxd" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+                            <li className="listitem"><a href="https://www.youtube.com/letterboxdhq" target="_blank" rel="noopener noreferrer">YouTube</a></li>
+                            <li className="listitem"><a href="" target="_blank" rel="noopener noreferrer">RSS</a></li>
+                        </ul>
+                    </div>
                 </div>
             </footer>
         </div>
