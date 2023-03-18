@@ -316,7 +316,7 @@ const FilmDetail = () => {
           </p>
           <div className="watch_panel">
             <div className="watch_header">
-              <h3 class="watch_header_title">Where to watch</h3>
+              <h3 className="watch_header_title">Where to watch</h3>
               <a href="">
                 <SmartDisplayIcon style={{ marginRight: 3 }}></SmartDisplayIcon>Trailer
               </a>
@@ -387,7 +387,7 @@ const FilmDetail = () => {
               </ul>
               <div className="cast_list">
                 {Cast.map((cast_item) => (
-                  <a href="">{cast_item}</a>
+                  <a key={cast_item} href="">{cast_item}</a>
                 ))}
               </div>
             </div>
@@ -421,7 +421,7 @@ const FilmDetail = () => {
               <p>MORE</p>
             </div>
             {Populer_reviews.map((review_item, i) => (
-              <div className={calculate_last_item(review_item.id, "review_item")}>
+              <div key={review_item.id} className={calculate_last_item(review_item.id, "review_item")}>
                 <div className="div_img">
                   <img src={review_item.image} alt="" />
                 </div>
@@ -447,7 +447,7 @@ const FilmDetail = () => {
               <p>MORE</p>
             </div>
             {recent_reviews.map((review_item, i) => (
-              <div className={calculate_last_item(review_item.id, "review_item")}>
+              <div key={review_item.id} className={calculate_last_item(review_item.id, "review_item")}>
                 <div className="div_img">
                   <img src={review_item.image} alt="" />
                 </div>
@@ -468,7 +468,7 @@ const FilmDetail = () => {
             </div>
             <div className="related_film_list film_list">
               {related_films.map((related_film_item) => (
-                <a href={related_film_item.url} target="_blank">
+                <a key={related_film_item.id} href={related_film_item.url} target="_blank">
                   <img className="image_form" src={related_film_item.image}></img>
                 </a>
               ))}
@@ -481,7 +481,7 @@ const FilmDetail = () => {
             </div>
             <div className="similar_film_list film_list">
               {similar_films.map((similar_film_item) => (
-                <a href={similar_film_item.url} target="_blank">
+                <a key={similar_film_item.id} href={similar_film_item.url} target="_blank">
                   <img className="image_form" src={similar_film_item.image}></img>
                 </a>
               ))}
@@ -494,7 +494,7 @@ const FilmDetail = () => {
             </div>
             <div className="story">
               {mentioned_by.map((mentioned_item) => (
-                <div className="story_item">
+                <div key={mentioned_item.id} className="story_item">
                   <a href={mentioned_item.url} target="_blank">
                     <img className="image_story" src={mentioned_item.image}></img>
                   </a>
@@ -520,7 +520,7 @@ const FilmDetail = () => {
             </div>
             <div>
               {Populer_list.map((populer_list_item) => (
-                <div className={calculate_last_item(populer_list_item.id, "populer_list_item")}>
+                <div key={populer_list_item.id} className={calculate_last_item(populer_list_item.id, "populer_list_item")}>
                   <div className="populer_list_img">
                     <a href={populer_list_item.url}>
                       <img src={populer_list_item.image} alt="" />

@@ -160,7 +160,7 @@
     font-size: 20px;
 }
 
-#content {
+#content_journal {
     min-width: 960px;
     width: 93.75%;
     margin-left: auto;
@@ -351,6 +351,7 @@ footer {
 
 .listitem a {
     text-decoration: none;
+    color: white;
 }
 
 .topic_search {

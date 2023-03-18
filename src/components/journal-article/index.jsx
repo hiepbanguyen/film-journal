@@ -47,11 +47,9 @@ function FilmTeaser() {
         </a>
         <p className="directed" style={{ margin: 0 }}>
           Directed by
-          <div>
             <span>Guillermo del Toro,</span>
             <br />
             <span>Mark Gustafson</span>
-          </div>
         </p>
       </div>
     </div>
@@ -64,7 +62,7 @@ function Further() {
       <h3>FURTHER READING</h3>
       <ul>
         {FurtherReadlist.map((futher) => (
-          <li style={{ marginTop: 10 }}>{futher}</li>
+          <li key={futher} style={{ marginTop: 10 }}>{futher}</li>
         ))}
       </ul>
     </div>
@@ -97,7 +95,7 @@ function Articles() {
   return (
     <div className="articles">
       {related_articles.map((article) => (
-        <div className="article_item">
+        <div key={article.id} className="article_item">
           <img src={article.image} alt="" />
           <p style={{ fontSize: 12 }}>
             <b style={{ fontWeight: 800 }}>{article.category}</b> . {article.time}
@@ -117,7 +115,7 @@ const JournalArticle = () => {
     <div id="article-root">
       <header>
         <div id="nav">
-          <a href>
+          <a href="">
             <span className="label">Journal</span>
           </a>
           <div className="nav_list">
@@ -131,7 +129,7 @@ const JournalArticle = () => {
         <div className="border_line" />
         <div className="label_header">
           <div className="meta">
-            <a href>Podcast</a>
+            <a href="">Podcast</a>
           </div>
           <div className="article-title">
             <h1>Best in Show: Guilds and Guillermo</h1>
@@ -143,7 +141,7 @@ const JournalArticle = () => {
                   src="https://secure.gravatar.com/avatar/d31a4b9508ddd892eb3f904c6ce6bd2d?rating=PG&size=48&border=&default=https%3A%2F%2Fs.ltrbxd.com%2Fstatic%2Fimg%2Favatar48.7a758b1e.png"
                   alt=""
                 />
-                <a href className="name">
+                <a href="" className="name">
                   MIA VICINO
                 </a>
               </div>
@@ -167,7 +165,7 @@ const JournalArticle = () => {
             </figcaption>
           </div>
         </div>
-        <div id="content">
+        <div id="content_journal">
           <div className="body">
             <div className="subhead">
               <p>
@@ -370,18 +368,18 @@ const JournalArticle = () => {
         <div className="content_footer">
           <div className="topics" style={{ width: "41.677%" }}>
             <h4 style={{ marginBottom: 15 }}>TOPICS</h4>
-            <ul class="topicslist">
-              <li class="listitem">Big Picture</li>
-              <li class="listitem">Cinemascope</li>
-              <li class="listitem">Community</li>
-              <li class="listitem">Deep Impact</li>
-              <li class="listitem">Festival Circuit</li>
-              <li class="listitem">Interview</li>
-              <li class="listitem">Life in Film</li>
-              <li class="listitem">Platform</li>
-              <li class="listitem">Podcast</li>
-              <li class="listitem">Shelf Life</li>
-              <li class="listitem">Year in Review</li>
+            <ul className="topicslist">
+              <li className="listitem">Big Picture</li>
+              <li className="listitem">Cinemascope</li>
+              <li className="listitem">Community</li>
+              <li className="listitem">Deep Impact</li>
+              <li className="listitem">Festival Circuit</li>
+              <li className="listitem">Interview</li>
+              <li className="listitem">Life in Film</li>
+              <li className="listitem">Platform</li>
+              <li className="listitem">Podcast</li>
+              <li className="listitem">Shelf Life</li>
+              <li className="listitem">Year in Review</li>
             </ul>
             <div className="topic_search">
               <input type="search" placeholder="Search..." />
@@ -398,31 +396,31 @@ const JournalArticle = () => {
               scenes. Along the way, we dig deeper into the movies we’re obsessed with, meet the people who make them,
               and explore the culture that surrounds them. We welcome pitches.
             </p>
-            <ul class="mastheadlist">
-              <li class="listitem">
+            <ul className="mastheadlist">
+              <li className="listitem">
                 <a href="https://apple.co/3TfzHVG">Podcast</a>
               </li>
-              <li class="listitem">
+              <li className="listitem">
                 <a href="https://twitter.com/letterboxd" target="_blank" rel="noopener noreferrer">
                   Twitter
                 </a>
               </li>
-              <li class="listitem">
+              <li className="listitem">
                 <a href="https://www.facebook.com/letterboxd" target="_blank" rel="noopener noreferrer">
                   Facebook
                 </a>
               </li>
-              <li class="listitem">
+              <li className="listitem">
                 <a href="https://www.instagram.com/letterboxd" target="_blank" rel="noopener noreferrer">
                   Instagram
                 </a>
               </li>
-              <li class="listitem">
+              <li className="listitem">
                 <a href="https://www.youtube.com/letterboxdhq" target="_blank" rel="noopener noreferrer">
                   YouTube
                 </a>
               </li>
-              <li class="listitem">
+              <li className="listitem">
                 <a href="/journal/rss/" target="_blank" rel="noopener noreferrer">
                   RSS
                 </a>
