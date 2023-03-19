@@ -4,7 +4,7 @@ import AvatarGirl from "./avatar_girl.jpg";
 import Populer_List_Image1 from "./populer_list1.png";
 import Populer_List_Image2 from "./populer_list2.png";
 import Populer_List_Image3 from "./populer_list3.png";
-import "./style.css";
+import "./style.scss";
 import ChatBubbleIcon from "@mui/icons-material/ChatBubble";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import StorageRoundedIcon from "@mui/icons-material/StorageRounded";
@@ -253,19 +253,20 @@ const Populer_list = [
   },
 ];
 
+const film_detail = {
+  name: "avatar2",
+  title: "Avatar: The Way of Water",
+  director: "2022 Directed by James Cameron",
+  description:
+    "Set more than a decade after the events of the first film, learn the story of the Sully family (Jake, Neytiri, and their kids), the trouble that follows them, the lengths they go to keep each other safe, the battles they fight to stay alive, and the tragedies they endure",
+  subtitle: "RETURN TO PANDORA.",
+  image: AvatarGirl,
+  likes: 256000,
+  appear: 139000,
+  views: 749000,
+};
+
 const FilmDetail = () => {
-  const film_detail = {
-    name: "avatar2",
-    title: "Avatar: The Way of Water",
-    director: "2022 Directed by James Cameron",
-    description:
-      "Set more than a decade after the events of the first film, learn the story of the Sully family (Jake, Neytiri, and their kids), the trouble that follows them, the lengths they go to keep each other safe, the battles they fight to stay alive, and the tragedies they endure",
-    subtitle: "RETURN TO PANDORA.",
-    image: AvatarGirl,
-    likes: 256000,
-    appear: 139000,
-    views: 749000,
-  };
   const calculate_rating = (number) => {
     var star = "";
     var int_number = parseInt(number);
@@ -290,7 +291,7 @@ const FilmDetail = () => {
     return class_name;
   };
   return (
-    <div className="root" style={{ backgroundColor: "#14181c" }}>
+    <div className="film_detail_page" style={{ backgroundColor: "#14181c" }}>
       <div className="banner">
         <div className="before_banner"></div>
       </div>

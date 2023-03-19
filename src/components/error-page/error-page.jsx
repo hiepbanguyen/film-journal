@@ -1,5 +1,6 @@
 import { useRouteError } from "react-router-dom";
 import Layout from "../common/layout.jsx";
+import { Box, Typography } from "@mui/material";
 
 export default function ErrorPage() {
   const error = useRouteError();
@@ -7,13 +8,21 @@ export default function ErrorPage() {
 
   return (
     <Layout>
-      <div>
-        <h1>Oops!</h1>
-        <p>Sorry, an unexpected error has occurred.</p>
-        <p>
+      <Box
+        pt={10}
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          color: "#fff",
+        }}
+      >
+        <Typography variant={"h2"}>Oops!</Typography>
+        <Typography>Sorry, an unexpected error has occurred.</Typography>
+        <Typography>
           <i>{error.statusText || error.message}</i>
-        </p>
-      </div>
+        </Typography>
+      </Box>
     </Layout>
   );
 }

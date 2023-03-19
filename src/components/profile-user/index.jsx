@@ -2,7 +2,7 @@ import React from "react";
 import { styled } from "@mui/material/styles";
 import { Avatar, Button, Grid, Typography } from "@mui/material";
 import Container from "@mui/material/Container";
-import styles from './profile.css?inline';
+import styles from "./profile.scss?inline";
 import CustomTabs from "../common/tabs.jsx";
 import { TabProfile } from "./profile-tab-user.jsx";
 
@@ -17,7 +17,7 @@ const ProfileUser = () => {
   const [username, setUsername] = React.useState("viethoan2k1");
 
   return (
-    <Root>
+    <Root className={styles.profilePage}>
       <Container>
         <Grid container spacing={2} marginTop>
           <Grid item xs={8} container>
@@ -41,32 +41,32 @@ const ProfileUser = () => {
             </Grid>
           </Grid>
           <Grid item xs={4}>
-            <div className={styles.profile-stats}>
-              <h4 className="profile-statistic statistic">
+            <div className={styles.profileStats}>
+              <h4 className={styles.profileStatistic}>
                 <a href="">
                   <span className={styles.value}>1</span>
                   <span className={styles.definition}>Film</span>
                 </a>
               </h4>
-              <h4 className={styles.profile-statistic}>
+              <h4 className={styles.profileStatistic}>
                 <a href="">
                   <span className={styles.value}>0</span>
                   <span className={styles.definition}>This year</span>
                 </a>
               </h4>
-              <h4 className={styles.profile-statistic}>
+              <h4 className={styles.profileStatistic}>
                 <a href="">
                   <span className={styles.value}>0</span>
                   <span className={styles.definition}>Lists</span>
                 </a>
               </h4>
-              <h4 className={styles.profile-statistic}>
+              <h4 className={styles.profileStatistic}>
                 <a href="">
                   <span className={styles.value}>0</span>
                   <span className={styles.definition}>Following</span>
                 </a>
               </h4>
-              <h4 className={styles.profile-statistic}>
+              <h4 className={styles.profileStatistic}>
                 <a href="">
                   <span className={styles.value}>0</span>
                   <span className={styles.definition}>Followers</span>
