@@ -3,78 +3,73 @@ import SmartDisplayIcon from "@mui/icons-material/SmartDisplay";
 import amazonImg from "../../assets/img/amazon-us.png";
 import userAvaTest from "../../assets/img/ava_user_test.jpg";
 import StarIcon from "@mui/icons-material/Star";
-import StarHalfIcon from "@mui/icons-material/StarHalf";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import NotesIcon from "@mui/icons-material/Notes";
 
-const data = {
-  userFirstName: "Pepe",
-  userName: "Pepe Luizbola",
-  filmName: "Ant-Man and the Wash: Quantumania",
-  yearRelease: "2023",
-  watchedTime: "Watched Feb 14, 2023",
-  reviewContent: "It took me 31 films but I finally started to empathize with Scorsese.",
-  rate: 4,
-  likesCount: 16532,
-  poster:
-    "https://a.ltrbxd.com/resized/film-poster/5/6/6/2/3/7/566237-ant-man-and-the-wasp-quantumania-0-300-0-450-crop.jpg?v=27ced3fac4",
-};
-
-function Comment() {
+function LikedReview(props) {
   return (
     <Box
+      component="a"
+      href={props.likedReview.reviewLink}
       sx={{
-        flexGrow: 1,
-        color: "#9ab",
-        marginBottom: "16px",
-        borderBottom: "1px solid #9ab",
-        paddingBottom: "16px",
+        display: "inline-flex",
+        flexDirection: "column",
+        alignItems: "center",
+        marginRight: "12px",
+        ":hover img": {
+          border: "1px solid #fff",
+        },
       }}
     >
-      <Grid container spacing={4} columns={13}>
-        {/* User-time */}
-        <Grid item xs={13} md={4}>
-          <Box
+      <Box sx={{ position: "relative", display: "inline-block" }}>
+        <Box
+          component="img"
+          src={props.likedReview.userAvatar}
+          sx={{
+            height: "40px",
+            width: "40px",
+            borderRadius: "50%",
+            marginBottom: "0",
+          }}
+        ></Box>
+        <Box
+          sx={{
+            position: "absolute",
+            top: "-2px",
+            right: "-2px",
+          }}
+        >
+          <NotesIcon
             sx={{
-              display: "flex",
-              flexDirection: { xs: "row", md: "column" },
-              justifyContent: { xs: "space-between", md: "flex-start" },
+              fontSize: "16px",
+              color: "#9ab",
+              bgcolor: "#14181c",
+              borderRadius: "50%",
+              border: "1px solid #9ab",
             }}
-          >
-            <Box
-              sx={{
-                display: "flex",
-                alignItems: "center",
-              }}
-            >
-              <Box
-                component="img"
-                sx={{
-                  height: 24,
-                  width: 24,
-                  borderRadius: "50%",
-                  marginRight: "8px",
-                  border: "1px solid #9ab",
-                }}
-                alt="User Avatar test"
-                src={userAvaTest}
-              />
-              <Box component="span">Cristiano</Box>
-            </Box>
-            <Box>1d</Box>
-          </Box>
-        </Grid>
-        {/* Comment-content */}
-        <Grid item xs={13} md={9}>
-          Yeu hay khong yeu, thuong em anh hay noi. Trao nhau doi moi roi se tro thanh doi. Em dang choi voi lieu anh co
-          buoc toi
-        </Grid>
-      </Grid>
+          ></NotesIcon>
+        </Box>
+      </Box>
+      <Box
+        sx={{
+          lineHeight: "1px",
+        }}
+      >
+        {Array.from({ length: props.likedReview.reviewRate }).map((star, index) => (
+          <StarIcon
+            sx={{
+              fontSize: "12px",
+              color: "#9ab",
+            }}
+            key={index}
+          ></StarIcon>
+        ))}
+      </Box>
     </Box>
   );
 }
 
-function ReviewDetailThumnailLink() {
+function ReviewDetailThumnailLink(props) {
   return (
     <Grid
       item
@@ -82,13 +77,14 @@ function ReviewDetailThumnailLink() {
       md={4}
       className="thumail-link"
       sx={{
-        display: { xs: "none", md: "block" },
+        display: { xs: "block", md: "block" },
+        order: { xs: "2", md: "1" },
       }}
     >
-      <Box sx={{ mb: "20px" }}>
+      <Box sx={{ mb: "20px", display: { xs: "none", md: "block" } }}>
         <Box
           component="img"
-          src={data.poster}
+          src={props.reviewDetail.poster}
           sx={{
             width: { xs: "100%" },
             height: { xs: "auto" },
@@ -193,15 +189,15 @@ function ReviewDetailThumnailLink() {
   );
 }
 
-export default function ReviewDetailMainSection() {
+export default function ReviewDetailMainSection(props) {
   return (
     <>
       <Box sx={{ flexGrow: 1, marginBottom: "32px" }}>
         {/* Review */}
         <Grid container spacing={4} columns={13}>
           {/* Thumbail - link */}
-          <ReviewDetailThumnailLink></ReviewDetailThumnailLink>
-          <Grid item xs={13} md={9}>
+          <ReviewDetailThumnailLink reviewDetail={props.reviewDetail}></ReviewDetailThumnailLink>
+          <Grid item xs={13} md={9} sx={{ order: { xs: "1", md: "2" } }}>
             {/* Info Review */}
             <Grid container spacing={2} columns={13}>
               <Grid item xs={8} md={13}>
@@ -244,7 +240,7 @@ export default function ReviewDetailMainSection() {
                       fontSize: "12px",
                     }}
                   >
-                    {data.userName}
+                    {props.reviewDetail.userName}
                   </Box>
                 </Box>
                 {/* Info Post */}
@@ -259,7 +255,7 @@ export default function ReviewDetailMainSection() {
                       margin: { xs: "8px 0 !important" },
                     }}
                   >
-                    {data.filmName}
+                    {props.reviewDetail.filmName}
                   </Box>
                   {/* Release Year - Star Rate */}
                   <Box
@@ -279,14 +275,12 @@ export default function ReviewDetailMainSection() {
                         margin: { xs: "4px 8px 4px 0" },
                       }}
                     >
-                      {data.yearRelease}
+                      {props.reviewDetail.yearRelease}
                     </Box>
                     <Box>
-                      <StarIcon sx={{ color: "#00c030" }}></StarIcon>
-                      <StarIcon sx={{ color: "#00c030" }}></StarIcon>
-                      <StarIcon sx={{ color: "#00c030" }}></StarIcon>
-                      <StarIcon sx={{ color: "#00c030" }}></StarIcon>
-                      <StarHalfIcon sx={{ color: "#00c030" }}></StarHalfIcon>
+                      {Array.from({ length: props.reviewDetail.rate }).map((i, idx) => (
+                        <StarIcon key={idx} sx={{ color: "#00c030" }}></StarIcon>
+                      ))}
                     </Box>
                   </Box>
                   {/* Watched Time */}
@@ -296,10 +290,10 @@ export default function ReviewDetailMainSection() {
                       fontSize: { xs: "12px" },
                       fontWeight: "400",
                       color: "#adbfd2",
-                      margin: { xs: "0 0 8px 0", md: "0 0 8px 0" },
+                      margin: { xs: "0 0 24px 0", md: "0 0 24px 0" },
                     }}
                   >
-                    {data.watchedTime}
+                    {props.reviewDetail.watchedTime}
                   </Box>
                 </Box>
               </Grid>
@@ -316,7 +310,7 @@ export default function ReviewDetailMainSection() {
               >
                 <Box
                   component="img"
-                  src={data.poster}
+                  src={props.reviewDetail.poster}
                   sx={{
                     width: "100%",
                     height: "auto",
@@ -330,15 +324,17 @@ export default function ReviewDetailMainSection() {
               sx={{
                 color: "#9ab",
                 fontSize: "18px",
+                marginBottom: "24px",
+                display: "",
               }}
             >
-              {data.reviewContent}
+              {props.reviewDetail.reviewContent}
             </Box>
             {/* Likes */}
             <Box
-              component="p"
+              component="span"
               sx={{
-                display: "flex",
+                display: "inline-flex",
                 alignItems: "center",
                 fontWeight: "600",
                 color: "#9ab",
@@ -347,10 +343,10 @@ export default function ReviewDetailMainSection() {
                 ":hover": {
                   color: "#75d4ff",
                 },
-                marginBottom: "24px",
+                marginBottom: "40px",
               }}
             >
-              <FavoriteIcon sx={{ marginRight: "4px" }}></FavoriteIcon> {data.likesCount} likes
+              <FavoriteIcon sx={{ marginRight: "4px" }}></FavoriteIcon> {props.reviewDetail.likesCount} likes
             </Box>
             {/* User like related review */}
             <Box>
@@ -363,330 +359,18 @@ export default function ReviewDetailMainSection() {
                   marginBottom: "16px",
                 }}
               >
-                {data.userFirstName} liked these review
+                {props.reviewDetail.userFirstName} liked these review
               </Box>
               <Box>
-                <Box
-                  sx={{
-                    position: "relative",
-                    display: "inline-block",
-                    marginRight: "12px",
-                  }}
-                >
-                  <Box
-                    component="img"
-                    src={userAvaTest}
-                    sx={{
-                      height: "40px",
-                      width: "40px",
-                      borderRadius: "50%",
-                      marginBottom: "0",
-                    }}
-                  ></Box>
-                  <Box
-                    sx={{
-                      position: "absolute",
-                      top: 0,
-                      right: 0,
-                    }}
-                  >
-                    <NotesIcon
-                      sx={{
-                        fontSize: "16px",
-                        color: "#9ab",
-                        bgcolor: "#14181c",
-                        borderRadius: "50%",
-                        border: "1px solid #9ab",
-                      }}
-                    ></NotesIcon>
-                  </Box>
-                  <Box sx={{
-                    lineHeight: '1px'
-                  }}>
-                    <StarIcon
-                      sx={{
-                        fontSize: "12px",
-                        color: '#9ab'
-                      }}
-                    ></StarIcon>
-                    <StarIcon
-                      sx={{
-                        fontSize: "12px",
-                        color: '#9ab'
-                      }}
-                    ></StarIcon>
-                    <StarIcon
-                      sx={{
-                        fontSize: "12px",
-                        color: '#9ab'
-                      }}
-                    ></StarIcon>
-                  </Box>
-                </Box>
-                <Box
-                  sx={{
-                    position: "relative",
-                    display: "inline-block",
-                    marginRight: "12px",
-                  }}
-                >
-                  <Box
-                    component="img"
-                    src={userAvaTest}
-                    sx={{
-                      height: "40px",
-                      width: "40px",
-                      borderRadius: "50%",
-                      marginBottom: "0",
-                    }}
-                  ></Box>
-                  <Box
-                    sx={{
-                      position: "absolute",
-                      top: 0,
-                      right: 0,
-                    }}
-                  >
-                    <NotesIcon
-                      sx={{
-                        fontSize: "16px",
-                        color: "#9ab",
-                        bgcolor: "#14181c",
-                        borderRadius: "50%",
-                        border: "1px solid #9ab",
-                      }}
-                    ></NotesIcon>
-                  </Box>
-                  <Box sx={{
-                    lineHeight: '1px'
-                  }}>
-                    <StarIcon
-                      sx={{
-                        fontSize: "12px",
-                        color: '#9ab'
-                      }}
-                    ></StarIcon>
-                    <StarIcon
-                      sx={{
-                        fontSize: "12px",
-                        color: '#9ab'
-                      }}
-                    ></StarIcon>
-                    <StarIcon
-                      sx={{
-                        fontSize: "12px",
-                        color: '#9ab'
-                      }}
-                    ></StarIcon>
-                  </Box>
-                </Box>
-                <Box
-                  sx={{
-                    position: "relative",
-                    display: "inline-block",
-                    marginRight: "12px",
-                  }}
-                >
-                  <Box
-                    component="img"
-                    src={userAvaTest}
-                    sx={{
-                      height: "40px",
-                      width: "40px",
-                      borderRadius: "50%",
-                      marginBottom: "0",
-                    }}
-                  ></Box>
-                  <Box
-                    sx={{
-                      position: "absolute",
-                      top: 0,
-                      right: 0,
-                    }}
-                  >
-                    <NotesIcon
-                      sx={{
-                        fontSize: "16px",
-                        color: "#9ab",
-                        bgcolor: "#14181c",
-                        borderRadius: "50%",
-                        border: "1px solid #9ab",
-                      }}
-                    ></NotesIcon>
-                  </Box>
-                  <Box sx={{
-                    lineHeight: '1px'
-                  }}>
-                    <StarIcon
-                      sx={{
-                        fontSize: "12px",
-                        color: '#9ab'
-                      }}
-                    ></StarIcon>
-                    <StarIcon
-                      sx={{
-                        fontSize: "12px",
-                        color: '#9ab'
-                      }}
-                    ></StarIcon>
-                    <StarIcon
-                      sx={{
-                        fontSize: "12px",
-                        color: '#9ab'
-                      }}
-                    ></StarIcon>
-                  </Box>
-                </Box>
-                <Box
-                  sx={{
-                    position: "relative",
-                    display: "inline-block",
-                    marginRight: "12px",
-                  }}
-                >
-                  <Box
-                    component="img"
-                    src={userAvaTest}
-                    sx={{
-                      height: "40px",
-                      width: "40px",
-                      borderRadius: "50%",
-                      marginBottom: "0",
-                    }}
-                  ></Box>
-                  <Box
-                    sx={{
-                      position: "absolute",
-                      top: 0,
-                      right: 0,
-                    }}
-                  >
-                    <NotesIcon
-                      sx={{
-                        fontSize: "16px",
-                        color: "#9ab",
-                        bgcolor: "#14181c",
-                        borderRadius: "50%",
-                        border: "1px solid #9ab",
-                      }}
-                    ></NotesIcon>
-                  </Box>
-                  <Box sx={{
-                    lineHeight: '1px'
-                  }}>
-                    <StarIcon
-                      sx={{
-                        fontSize: "12px",
-                        color: '#9ab'
-                      }}
-                    ></StarIcon>
-                    <StarIcon
-                      sx={{
-                        fontSize: "12px",
-                        color: '#9ab'
-                      }}
-                    ></StarIcon>
-                    <StarIcon
-                      sx={{
-                        fontSize: "12px",
-                        color: '#9ab'
-                      }}
-                    ></StarIcon>
-                  </Box>
-                </Box>
-                <Box
-                  sx={{
-                    position: "relative",
-                    display: "inline-block",
-                    marginRight: "12px",
-                  }}
-                >
-                  <Box
-                    component="img"
-                    src={userAvaTest}
-                    sx={{
-                      height: "40px",
-                      width: "40px",
-                      borderRadius: "50%",
-                      marginBottom: "0",
-                    }}
-                  ></Box>
-                  <Box
-                    sx={{
-                      position: "absolute",
-                      top: 0,
-                      right: 0,
-                    }}
-                  >
-                    <NotesIcon
-                      sx={{
-                        fontSize: "16px",
-                        color: "#9ab",
-                        bgcolor: "#14181c",
-                        borderRadius: "50%",
-                        border: "1px solid #9ab",
-                      }}
-                    ></NotesIcon>
-                  </Box>
-                  <Box sx={{
-                    lineHeight: '1px'
-                  }}>
-                    <StarIcon
-                      sx={{
-                        fontSize: "12px",
-                        color: '#9ab'
-                      }}
-                    ></StarIcon>
-                    <StarIcon
-                      sx={{
-                        fontSize: "12px",
-                        color: '#9ab'
-                      }}
-                    ></StarIcon>
-                    <StarIcon
-                      sx={{
-                        fontSize: "12px",
-                        color: '#9ab'
-                      }}
-                    ></StarIcon>
-                  </Box>
-                </Box>
+                {props.listLikedReview.map((likedReview, index) => (
+                  <LikedReview likedReview={likedReview} key={index}></LikedReview>
+                ))}
               </Box>
             </Box>
           </Grid>
         </Grid>
       </Box>
-
-      {/* List Comments */}
-      <Box sx={{ flexGrow: 1 }}>
-        <Box
-          sx={{
-            color: "#9ab",
-            borderBottom: "1px solid #9ab",
-            marginBottom: "24px",
-          }}
-        >
-          <Grid container spacing={4} columns={13}>
-            <Grid item xs={5} md={4}>
-              156 Comments
-            </Grid>
-            <Grid item xs={8} md={9}>
-              Newest 20 - Show preious
-            </Grid>
-          </Grid>
-        </Box>
-        <Box>
-          <Comment></Comment>
-          <Comment></Comment>
-          <Comment></Comment>
-          <Comment></Comment>
-          <Comment></Comment>
-          <Comment></Comment>
-          <Comment></Comment>
-          <Comment></Comment>
-          <Comment></Comment>
-        </Box>
-      </Box>
     </>
   );
 }
+
