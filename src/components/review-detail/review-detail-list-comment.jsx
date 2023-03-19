@@ -1,6 +1,7 @@
 import { Box, Button, Grid } from "@mui/material";
 
 export default function ReviewDetailListComment(props) {
+  let listComment = props.listComment;
   return (
     <Box sx={{ flexGrow: 1 }}>
       <Box
@@ -12,7 +13,7 @@ export default function ReviewDetailListComment(props) {
       >
         <Grid container spacing={4} columns={13}>
           <Grid item xs={5} md={4}>
-            {props.listComment.total} Comments
+            {listComment.total} Comments
           </Grid>
           <Grid item xs={8} md={9}>
             Newest 20 - Show preious
@@ -20,9 +21,31 @@ export default function ReviewDetailListComment(props) {
         </Grid>
       </Box>
       <Box>
-        {props.listComment.list.map((comment, idx) => (
+        {listComment.list.map((comment, idx) => (
           <Comment comment={comment} key={comment.id}></Comment>
         ))}
+      </Box>
+      <Box>
+        <Grid container spacing={4} columns={13}>
+          <Grid item xs={13} md={4}></Grid>
+          <Grid item xs={13} md={9}>
+            <Box
+              component="textarea"
+              placeholder={'Reply as ' + props.reviewDetail.userName + '...'}
+              sx={{
+                height: "100px",
+                maxHeight: "100px",
+                width: "100%",
+                backgroundColor: "#2c3440",
+                border: "none",
+                padding: '5px',
+                ":focus": {
+                  backgroundColor: "#fff",
+                },
+              }}
+            ></Box>
+          </Grid>
+        </Grid>
       </Box>
     </Box>
   );
@@ -99,16 +122,16 @@ function Comment(props) {
 
 // Format Date to string (from date to now)
 function FormatDateToNow(date = new Date()) {
-    let dateNow = new Date();
-    if (date > dateNow) date = dateNow;
-  
-    let years = Math.floor((dateNow - date) / (365 * 24 * 60 * 60 * 1000));
-    if (years > 0) return years + "y";
-    let days = Math.floor((dateNow - date) / (24 * 60 * 60 * 1000));
-    if (days > 0) return days + "d";
-    let hours = Math.floor((dateNow - date) / (60 * 60 * 1000));
-    if (hours > 0) return hours + "h";
-    let minutes = Math.floor((dateNow - date) / (60 * 1000));
-    if (minutes > 0) return minutes + "m";
-    else return "just now";
-  }
+  let dateNow = new Date();
+  if (date > dateNow) date = dateNow;
+
+  let years = Math.floor((dateNow - date) / (365 * 24 * 60 * 60 * 1000));
+  if (years > 0) return years + "y";
+  let days = Math.floor((dateNow - date) / (24 * 60 * 60 * 1000));
+  if (days > 0) return days + "d";
+  let hours = Math.floor((dateNow - date) / (60 * 60 * 1000));
+  if (hours > 0) return hours + "h";
+  let minutes = Math.floor((dateNow - date) / (60 * 1000));
+  if (minutes > 0) return minutes + "m";
+  else return "just now";
+}

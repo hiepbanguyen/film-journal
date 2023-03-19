@@ -1,5 +1,5 @@
 import Container from "@mui/system/Container";
-import { Box, Button, Grid, CardMedia } from "@mui/material";
+import { Box, Grid } from "@mui/material";
 import ReviewDetailMainSection from "./review-detail-main-section";
 import ReviewDetailAside from "./review-detail-aside";
 
@@ -191,7 +191,7 @@ export default function ReviewDetail() {
             {/* Main-top */}
             <ReviewDetailMainSection reviewDetail={reviewDetail} listLikedReview={listLikedReview}></ReviewDetailMainSection>
             {/* List Cmt */}
-            <ReviewDetailListComment listComment={listComment}></ReviewDetailListComment>
+            <ReviewDetailListComment listComment={listComment} reviewDetail={reviewDetail}></ReviewDetailListComment>
           </Grid>
           {/* Aside */}
           <Grid item xs={12} md={3}>
