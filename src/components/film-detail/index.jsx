@@ -4,7 +4,7 @@ import AvatarGirl from "./avatar_girl.jpg";
 import Populer_List_Image1 from "./populer_list1.png";
 import Populer_List_Image2 from "./populer_list2.png";
 import Populer_List_Image3 from "./populer_list3.png";
-import "./style.scss";
+import "./film-detail.scss";
 import ChatBubbleIcon from "@mui/icons-material/ChatBubble";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import StorageRoundedIcon from "@mui/icons-material/StorageRounded";
@@ -268,18 +268,18 @@ const film_detail = {
 
 const FilmDetail = () => {
   const calculate_rating = (number) => {
-    var star = "";
-    var int_number = parseInt(number);
-    var redundancy = number - int_number;
-    for (var n = 0; n < int_number; n++) {
+    let star = "";
+    let int_number = parseInt(number);
+    let redundancy = number - int_number;
+    for (let n = 0; n < int_number; n++) {
       star += "★";
     }
     redundancy > 0 ? (star += "½") : (star += "");
     return star;
   };
   const calculate_last_item = (id, class_default) => {
-    var class_name = class_default;
-    var id_last = 0;
+    let class_name = class_default;
+    let id_last = 0;
     Populer_reviews.map((review_item, index) => {
       if (index === Populer_reviews.length - 1) {
         id_last = index;
@@ -317,7 +317,7 @@ const FilmDetail = () => {
           </p>
           <div className="watch_panel">
             <div className="watch_header">
-              <h3 class="watch_header_title">Where to watch</h3>
+              <h3 className="watch_header_title">Where to watch</h3>
               <a href="">
                 <SmartDisplayIcon style={{ marginRight: 3 }}></SmartDisplayIcon>Trailer
               </a>

@@ -1,5 +1,5 @@
 import React from "react";
-import "./style.scss";
+import "./journal-article.scss";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import FacebookOutlinedIcon from "@mui/icons-material/FacebookOutlined";
 import MailOutlineOutlinedIcon from "@mui/icons-material/MailOutlineOutlined";
