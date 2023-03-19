@@ -2,9 +2,9 @@ import { Link } from "@mui/material";
 import { Box, styled } from "@mui/system";
 
 export const AnimatedUnderlineBox = styled(Box, {
-  shouldForwardProp: (props) => true,
-})(({ theme }) => ({
-  color: "inherit",
+  shouldForwardProp: (props) => props !== "open",
+})(({ theme, open }) => ({
+  color: "rgba(255,255,255,0.5)",
   position: "relative",
   textDecoration: "none",
   textAlign: "center",
@@ -22,10 +22,15 @@ export const AnimatedUnderlineBox = styled(Box, {
   },
   "&:hover": {
     // textDecoration: "none",
+    color: "inherit",
     "&:after": {
       width: "100%",
       left: 0,
       // transition: (theme.transitions as any).create(["width"]),
     },
   },
+  ...(open && {
+    //@ts-ignore
+    color: "#fff",
+  }),
 }));

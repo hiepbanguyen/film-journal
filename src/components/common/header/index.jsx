@@ -11,7 +11,7 @@ import MobileDrawer from "../mobile-drawer.jsx";
 import LoginIcon from "@mui/icons-material/Login";
 import { Logo } from "../logo.jsx";
 import { AnimatedUnderlineBox } from "../animated-underline-box.jsx";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const pages = [
   { href: "/films", label: "films" },
@@ -24,6 +24,7 @@ export const HeaderHeight = 64;
 
 function Header() {
   const signed_in = false;
+  const { pathname } = useLocation();
 
   return (
     <>
@@ -38,7 +39,7 @@ function Header() {
             })}
           >
             <Box sx={{ display: { xs: "flex", md: "none" } }} mr={1}>
-              <MobileDrawer pages={pages} />
+              <MobileDrawer pages={pages} currPath={pathname} />
             </Box>
             <Box sx={{ display: { xs: "none", sm: "flex" }, flexGrow: 1 }}>
               <Logo />
@@ -47,7 +48,7 @@ function Header() {
               {pages.map((i, idx) => (
                 <Link to={i.href} key={idx} style={{ textDecoration: "none" }}>
                   <Button sx={{ my: 2, color: "white", display: "block" }}>
-                    <AnimatedUnderlineBox>{i.label}</AnimatedUnderlineBox>
+                    <AnimatedUnderlineBox open={pathname === i.href}>{i.label}</AnimatedUnderlineBox>
                   </Button>
                 </Link>
               ))}
