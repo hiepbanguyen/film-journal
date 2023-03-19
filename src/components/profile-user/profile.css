@@ -1,19 +1,19 @@
-.profile-stats {
+.profileStats {
     align-items: flex-start;
     display: flex;
 }
-.profile-statistic {
+.profileStatistic {
     font-weight: 400;
     text-align: center;
 }
-.profile-statistic .value {
+.value {
     color: #d8e0e8;
     display: block;
     font-family: TiemposTextWeb-Semibold,Georgia,serif;
     font-size: 1.61538462rem;
     font-weight: 400;
 }
-.profile-statistic .definition {
+.definition {
     color: #9ab;
     color: #678;
     display: block;
@@ -25,25 +25,25 @@
     margin-top: 0.75em;
     text-transform: uppercase;
 }
-/*a {*/
-/*    color: #b2a377;*/
-/*    text-decoration: none;*/
-/*    border: 0;*/
-/*    font-family: inherit;*/
-/*}*/
-/*h4 {*/
-/*    margin-right: 10px;*/
-/*}*/
+a {
+   color: #b2a377;
+   text-decoration: none;
+   border: 0;
+   font-family: inherit;
+}
+h4 {
+    margin-right: 10px;
+}
 
-/*.profile-navigation {*/
-/*    border: 1px solid #4e8493;*/
-/*    border-radius: 3px;*/
-/*    align-items: center;*/
-/*}*/
+.profileNavigation {
+    border: 1px solid #4e8493;
+   border-radius: 3px;
+    align-items: center;
+}
 
-/*nav {*/
-/*    display: block;*/
-/*}*/
+nav {
+   display: block;
+} 
 
 .section {
     margin-top: 2.30769231rem;
@@ -52,7 +52,7 @@
     color: #9ab;
 }
 
-.section-heading {
+.sectionHeading {
     border-bottom: 1px solid #456;
     font-family: Graphik-Regular-Web,sans-serif;
     font-size: 1rem;
@@ -69,7 +69,7 @@ h2 {
     margin: 18px 0 12px;
 }
 
-.logged-summary {
+.loggedSummary {
     border: 0;
     font-family: inherit;
     font-size: 100%;
@@ -81,7 +81,7 @@ h2 {
     vertical-align: baseline;
 }
 
-.all-link {
+.allLink {
     color: #678;
     font-size: 11px;
     letter-spacing: .075em;
