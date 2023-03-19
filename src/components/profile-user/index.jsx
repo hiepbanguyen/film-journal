@@ -2,7 +2,7 @@ import React from "react";
 import { styled } from "@mui/material/styles";
 import { Avatar, Button, Grid, Typography } from "@mui/material";
 import Container from "@mui/material/Container";
-import styles from './profile.css?inline';
+import styles from "./profile.scss?inline";
 import CustomTabs from "../common/tabs.jsx";
 import { TabProfile } from "./profile-tab-user.jsx";
 
@@ -17,7 +17,7 @@ const ProfileUser = () => {
   const [username, setUsername] = React.useState("viethoan2k1");
 
   return (
-    <Root>
+    <Root className={styles.profilePage}>
       <Container>
         <Grid container spacing={2} marginTop>
           <Grid item xs={8} container>

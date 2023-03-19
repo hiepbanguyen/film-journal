@@ -1,5 +1,5 @@
 import React from "react";
-import "./style.css";
+import "./style.scss";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import FacebookOutlinedIcon from "@mui/icons-material/FacebookOutlined";
 import MailOutlineOutlinedIcon from "@mui/icons-material/MailOutlineOutlined";
@@ -114,7 +114,7 @@ function Articles() {
 
 const JournalArticle = () => {
   return (
-    <div id="article-root">
+    <div id="journal-article-page">
       <header>
         <div id="nav">
           <a href>
