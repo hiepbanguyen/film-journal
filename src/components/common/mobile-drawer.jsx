@@ -1,9 +1,10 @@
 import * as React from "react";
 import Drawer from "@mui/material/Drawer";
-import { Box, Button, Divider, IconButton, Link, Stack, SwipeableDrawer, Typography } from "@mui/material";
+import { Box, Button, Divider, IconButton, Stack, SwipeableDrawer, Typography } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import { Logo } from "./logo.jsx";
 import { AnimatedUnderlineBox } from "./animated-underline-box.jsx";
+import { Link } from "react-router-dom";
 
 export default function MobileDrawer(props) {
   const { pages } = props;
@@ -36,12 +37,20 @@ export default function MobileDrawer(props) {
           <Logo />
           <Box mt={1}>
             {pages.map((i, idx) => (
-              <Box key={idx} display={"flex"} flexDirection={"column"} justifyContent={"center"}>
-                <Button sx={{ color: "inherit", mt: 1 }} href={i.href}>
-                  <AnimatedUnderlineBox>{i.label}</AnimatedUnderlineBox>
-                </Button>
+              <React.Fragment key={idx}>
+                <Box
+                  component={Link}
+                  to={i.href}
+                  display={"flex"}
+                  justifyContent={"center"}
+                  sx={{ textDecoration: "none", color: "inherit" }}
+                >
+                  <Button sx={{ color: "inherit", mt: 1 }}>
+                    <AnimatedUnderlineBox>{i.label}</AnimatedUnderlineBox>
+                  </Button>
+                </Box>
                 {idx !== pages.length - 1 ? <Divider variant={"middle"} /> : <></>}
-              </Box>
+              </React.Fragment>
             ))}
           </Box>
         </Stack>

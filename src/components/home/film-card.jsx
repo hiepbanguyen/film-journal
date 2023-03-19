@@ -4,7 +4,7 @@ export default function FilmCard(props) {
   const { size, elevation } = props;
   return (
     <Box display={"flex"} justifyContent={"center"}>
-      <Card elevation={elevation ?? 0} sx={{ width: size === "medium" ? 150 : 100 }}>
+      <Card elevation={elevation ?? 10} sx={{ width: size === "medium" ? 150 : 100 }}>
         <CardMedia
           component="img"
           height="100%"

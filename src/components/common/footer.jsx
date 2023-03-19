@@ -22,7 +22,6 @@ export default function Footer() {
   return (
     <Box
       sx={{
-        mt: 5,
         width: "100%",
         display: "flex",
         flexDirection: "column",

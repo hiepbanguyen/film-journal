@@ -16,7 +16,7 @@ export const PopularReviews = () => {
           MORE
         </Typography>
       </Box>
-      <Divider variant="fullWidth" color={"#fff"} />
+      <Divider variant="fullWidth" />
       <Box>
         {Array.from({ length: 6 }).map((i, idx) => (
           <ReviewPreview
@@ -43,8 +43,7 @@ export default function ReviewPreview(props) {
   const { title, releasedYear, content, username, ratings, likeCount, dislikeCount, commentCount } = props;
   return (
     <>
-      {" "}
-      <Grid container spacing={1} mt={1} mb={2}>
+      <Grid container spacing={1} my={5}>
         <Grid item xs={2}>
           <FilmCard />
         </Grid>
@@ -80,7 +79,7 @@ export default function ReviewPreview(props) {
           </Box>
         </Grid>
       </Grid>
-      <Divider variant={"fullWidth"} color={"#fff"} />
+      <Divider variant={"middle"} sx={{ mx: 5 }} />
     </>
   );
 }

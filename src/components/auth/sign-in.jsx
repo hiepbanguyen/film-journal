@@ -12,11 +12,9 @@ import Grid from "@mui/material/Grid";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import ConstantURL from "../../script/resources/ConstantURL.js";
+import baseAPI from '../../apis/baseApi';
 import { useNavigate } from "react-router-dom";
 import { useSearchParams } from "react-router-dom";
-
-import axios from "axios";
 
 function Copyright(props) {
   return (
@@ -37,26 +35,63 @@ export default function SignInSide() {
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
   const queryParams = new URLSearchParams(window.location.search)
-  let username = queryParams.get("username")
+  let email = queryParams.get("email")
+  const [errorEmail, setErrorEmail] = React.useState(false);
+  const [errorPassword, setErrorPassword] = React.useState(false);
+  const [errorMsg, setErrorMsg] = React.useState("");
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    axios
-      .get(`${ConstantURL.BaseDomain}Users/login`, {
+
+    if (!validate(data)) {
+      return;
+    }
+
+    baseAPI
+      .getAsync(`Users/login`, {
         params: {
-          userName: data.get("username"),
+          email: data.get("email"),
           password: data.get("password"),
         },
       })
       .then((res) => {
         if (res) {
+          // set the user information in localStorage
+          localStorage.setItem('userInfo', JSON.stringify(res.data.User));
+          localStorage.setItem('token', JSON.stringify(res.data.Token));
           // Chuyển đến trang homepage
           navigate("/");
         }
       })
       .catch((err) => {
-        console.error(err);
+        setErrorMsg(err.response.data.devMsg)
       });
+  };
+
+  const validate = (data) => {
+    if (!validateEmail(data.get("email"))) {
+      setErrorEmail(true);
+    } else {
+      setErrorEmail(false);
+    }
+
+    if (data.get("password")) {
+      setErrorPassword(false);
+    } else {
+      setErrorPassword(true);
+    }
+
+    if(!errorEmail && !errorPassword) {
+      return true;
+    }
+    return false;
+  }
+
+  const validateEmail = (email) => {
+    return email.match(
+      /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    );
   };
   
   return (
@@ -94,17 +129,20 @@ export default function SignInSide() {
             </Typography>
             <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
               <TextField
-                defaultValue={username}
+                defaultValue={email}
+                error={errorEmail || errorMsg} 
                 margin="normal"
                 required
                 fullWidth
-                id="username"
-                label="UserName"
-                name="username"
-                autoComplete="username"
+                id="email"
+                label="Email"
+                name="email"
+                autoComplete="email"
                 autoFocus
+                helperText={errorEmail ? "Email is invalid." : "" }
                 />
               <TextField
+                error={errorPassword || errorMsg}
                 margin="normal"
                 required
                 fullWidth
@@ -113,6 +151,7 @@ export default function SignInSide() {
                 type="password"
                 id="password"
                 autoComplete="current-password"
+                helperText={errorPassword ? "Password is required." : errorMsg }
               />
               <FormControlLabel control={<Checkbox value="remember" color="primary" />} label="Remember me" />
               <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
@@ -120,12 +159,12 @@ export default function SignInSide() {
               </Button>
               <Grid container>
                 <Grid item xs>
-                  <Link href="src/components/auth/sign-in.jsx#" variant="body2">
+                  <Link href="/forgot-password" variant="body2">
                     Forgot password?
                   </Link>
                 </Grid>
                 <Grid item>
-                  <Link href="/src/pages/sign-up" variant="body2">
+                  <Link href="/sign-up" variant="body2">
                     {"Don't have an account? Sign Up"}
                   </Link>
                 </Grid>
