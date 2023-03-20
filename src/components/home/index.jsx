@@ -49,17 +49,6 @@ export default function Home() {
   return (
     <>
       <Box
-        sx={{
-          position: "fixed",
-          top: 0,
-          width: "100%",
-          zIndex: -4,
-          background: "rgb(20, 24, 28)",
-          backgroundSize: "cover",
-          height: "100vh",
-        }}
-      />
-      <Box
         width={{ sm: "80vw", xs: "100vw" }}
         component="img"
         sx={{

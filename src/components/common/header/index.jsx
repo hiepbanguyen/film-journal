@@ -28,7 +28,14 @@ function Header() {
 
   return (
     <>
-      <AppBar position="fixed" sx={{ background: "rgba(255,255,255,0.1)", height: HeaderHeight, boxShadow: "none" }}>
+      <AppBar
+        position="fixed"
+        sx={{
+          background: "linear-gradient(180deg, rgba(0,0,0,0.5) 0%, rgba(255,255,255,0) 100%)",
+          height: HeaderHeight,
+          boxShadow: "none",
+        }}
+      >
         <Container maxWidth="lg">
           <Toolbar
             disableGutters

@@ -15,6 +15,7 @@ const ratings = {
     10: 11,
   },
   total: 1000,
+  avg: 3.9,
 };
 
 const RatingColumnMaxHeight = 80;
@@ -56,18 +57,27 @@ export default function Ratings(props) {
     <Box>
       <Box display={"flex"} justifyContent={"space-between"} alignItems={"baseline"}>
         <Typography>RATINGS</Typography>
-        <Typography>{ratings.total}</Typography>
+        <Typography variant={"body2"}>{ratings.total}</Typography>
       </Box>
       <Divider variant={"fullWidth"} />
       <Box display={"flex"} alignItems={"flex-end"}>
-        <StarHalfIcon sx={{ fontSize: 12, mr: 0.5, color: "#00c030" }} />
+        <Box display={"flex"} alignItems={"baseline"}>
+          <StarHalfIcon sx={{ fontSize: 12, mr: 0.5, color: "#00c030" }} />
+        </Box>
         {Object.entries(ratings.each).map(([rating, numOfRatings], idx) => (
           <RatingColumn key={idx} value={numOfRatings} label={rating} total={ratings.total} />
         ))}
         <Box width={"3px"} />
-        {Array.from({ length: 5 }).map((i, idx) => (
-          <StarIcon key={idx} sx={{ fontSize: 12, color: "#00c030" }} />
-        ))}
+        <Box display={"flex"} flexDirection={"column"} justifyContent={"flex-end"} gap={1}>
+          <Typography variant={"h5"} textAlign={"center"}>
+            {ratings.avg}
+          </Typography>
+          <Box display={"flex"} alignItems={"baseline"}>
+            {Array.from({ length: 5 }).map((i, idx) => (
+              <StarIcon key={idx} sx={{ fontSize: 12, color: "#00c030" }} />
+            ))}
+          </Box>
+        </Box>
       </Box>
     </Box>
   );
