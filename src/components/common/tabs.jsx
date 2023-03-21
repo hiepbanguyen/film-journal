@@ -3,6 +3,7 @@ import { styled } from "@mui/material/styles";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
+import { Divider } from "@mui/material";
 
 const StyledTabs = styled((props) => (
   <Tabs
@@ -25,8 +26,7 @@ const StyledTabs = styled((props) => (
 
 const StyledTab = styled((props) => <Tab disableRipple {...props} />)(({ theme }) => ({
   textTransform: "none",
-  fontWeight: 400,
-  fontSize: 16,
+  fontSize: 15,
   marginRight: theme.spacing(2),
   color: "#ccc",
   minWidth: 1,
@@ -75,7 +75,7 @@ function a11yProps(index) {
  * }
  */
 export default function CustomTabs(props) {
-  const { children, labels } = props;
+  const { children, labels, bottom_border_only } = props;
   // open tab
   const [openTab, setOpenTab] = React.useState(0);
 
@@ -84,9 +84,14 @@ export default function CustomTabs(props) {
   };
 
   return (
-    <Box sx={{ width: "100%" }} my={{ xs: 5 }}>
+    <Box sx={{ width: "100%" }}>
       <Box
-        sx={{ border: "1px solid rgba(255,255,255,0.2)", borderRadius: 1, display: "flex", justifyContent: "center" }}
+        sx={{
+          border: bottom_border_only ? "none" : "1px solid rgba(255,255,255,0.1)",
+          borderRadius: bottom_border_only ? 0 : 1,
+          display: "flex",
+          justifyContent: "center",
+        }}
       >
         <StyledTabs value={openTab} onChange={handleChange} aria-label="styled tabs example">
           {labels.map((i, idx) => (
@@ -94,6 +99,7 @@ export default function CustomTabs(props) {
           ))}
         </StyledTabs>
       </Box>
+      {bottom_border_only ? <Divider variant={"fullWidth"} /> : <></>}
       {React.Children.map(children, (child, index) => (
         <TabPanel key={index} index={index} value={openTab}>
           {child}

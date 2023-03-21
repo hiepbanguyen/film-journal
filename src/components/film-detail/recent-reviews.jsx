@@ -1,6 +1,8 @@
-import { Avatar, Box } from "@mui/material";
+import { Avatar, Box, Divider } from "@mui/material";
 import ChatBubbleIcon from "@mui/icons-material/ChatBubble.js";
 import FavoriteIcon from "@mui/icons-material/Favorite.js";
+import React from "react";
+import ReviewInFilm from "./review-in-film.jsx";
 
 const Populer_reviews = [
   {
@@ -35,53 +37,17 @@ const Populer_reviews = [
 ];
 
 export default function RecentReviews() {
-  const calculate_rating = (number) => {
-    let star = "";
-    let int_number = parseInt(number);
-    let redundancy = number - int_number;
-    for (let n = 0; n < int_number; n++) {
-      star += "★";
-    }
-    redundancy > 0 ? (star += "½") : (star += "");
-    return star;
-  };
-  const calculate_last_item = (id, class_default) => {
-    let class_name = class_default;
-    let id_last = 0;
-    Populer_reviews.map((review_item, index) => {
-      if (index === Populer_reviews.length - 1) {
-        id_last = index;
-      }
-    });
-    if (id == id_last + 1) {
-      class_name += " last_item";
-    }
-    return class_name;
-  };
-
   return (
     <Box className="populer_reviews">
       <Box className="tag_reviews">
         <p>RECENT REVIEWS</p>
         <p>MORE</p>
       </Box>
-      {Populer_reviews.map((review_item, i) => (
-        <Box key={i} className={"review_item"}>
-          <Avatar src={review_item.image} />
-          <Box className="title_review">
-            <p className="attribution">
-              Review by <b>{review_item.name}</b>{" "}
-              <span className="rating_green rated-7"> {calculate_rating(review_item.rating)}</span>{" "}
-              <ChatBubbleIcon fontSize="13px" style={{ lineHeight: "19.5px" }}></ChatBubbleIcon>{" "}
-              {review_item.number_comment_reply}
-            </p>
-            <p className="comment">{review_item.comment}</p>
-            <p className="like_link">
-              <FavoriteIcon fontSize="19px"></FavoriteIcon>
-              {review_item.likes} likes
-            </p>
-          </Box>
-        </Box>
+      {Populer_reviews.map((review_item, idx) => (
+        <React.Fragment key={idx}>
+          <ReviewInFilm {...review_item} />
+          {idx !== Populer_reviews.length - 1 && <Divider variant={"fullWidth"} sx={{ my: 1, borderColor: "#456" }} />}
+        </React.Fragment>
       ))}
     </Box>
   );

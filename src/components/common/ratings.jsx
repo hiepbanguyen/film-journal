@@ -10,7 +10,7 @@ const ratings = {
     5: 100,
     6: 203,
     7: 121,
-    8: 540,
+    8: 500,
     9: 22,
     10: 11,
   },
@@ -55,12 +55,12 @@ const RatingColumn = (props) => {
 export default function Ratings(props) {
   return (
     <Box>
-      <Box display={"flex"} justifyContent={"space-between"} alignItems={"baseline"}>
-        <Typography>RATINGS</Typography>
+      <Box display={"flex"} justifyContent={"space-between"} alignItems={"baseline"} mb={1.2}>
+        <Typography fontSize={15}>RATINGS</Typography>
         <Typography variant={"body2"}>{ratings.total}</Typography>
       </Box>
       <Divider variant={"fullWidth"} />
-      <Box display={"flex"} alignItems={"flex-end"}>
+      <Box display={"flex"} alignItems={"flex-end"} mt={1}>
         <Box display={"flex"} alignItems={"baseline"}>
           <StarHalfIcon sx={{ fontSize: 12, mr: 0.5, color: "#00c030" }} />
         </Box>

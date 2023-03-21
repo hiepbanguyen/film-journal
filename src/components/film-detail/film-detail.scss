@@ -10,28 +10,7 @@
         font-size: 14px;
     }
 
-    .cast_list_title {
-        display: flex;
-        list-style: none;
-        color: #00e054;
-        border-bottom: 1px #abc solid;
-        font-size: 14px;
-    }
 
-    .cast_list_title li {
-        margin-right: 20px;
-        padding: 0 0 5px;
-        font-family: inherit;
-    }
-
-    .cast_list_title li:hover {
-        border-bottom: 1px #00e054 solid;
-    }
-
-    .cast_chose {
-        color: white;
-        border-bottom: 1px #fff solid;
-    }
 
     .cast_list {
         display: flex;
@@ -59,27 +38,9 @@
     }
 
     .cast_list a:hover {
-    color: #fff;
-}
-
-
-    .text-link {
-        color: #89a;
-        font-size: 12px;
+        color: #fff;
     }
 
-    .micro_button {
-        border: 2px solid #303840;
-        border-radius: 2px;
-        color: #9ab;
-        font-size: .76923077rem;
-        letter-spacing: .075em;
-        padding: 4px 5px 3px;
-        text-transform: uppercase;
-        cursor: pointer;
-        text-decoration: none;
-        margin-left: 4px;
-    }
 
     .cart_summary {
         width: 100%;
@@ -116,7 +77,7 @@
         border-bottom: #456 1px solid;
         color: #9ab;
         font-size: 14px;
-        margin-bottom: 30px;
+        margin-bottom: 20px;
         margin-top: 30px;
     }
 
@@ -124,11 +85,6 @@
         display: flex;
         padding: 10px;
         color: #9ab;
-        border-bottom: #456 1px solid;
-    }
-
-    .review_item .div_img {
-        flex: 1;
     }
 
     .rating_green {
@@ -146,9 +102,6 @@
         flex: 9;
     }
 
-    .attribution {
-        font-size: 13px;
-    }
 
     .comment {
         margin: 12px 0;
@@ -156,7 +109,7 @@
 
     .like_link {
         display: flex;
-        align-items: center;
+        align-items: stretch;
         font-size: 14px;
         font-weight: 600;
     }

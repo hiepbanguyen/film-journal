@@ -5,7 +5,7 @@ import FavoriteIcon from "@mui/icons-material/Favorite.js";
 import FormatAlignLeftIcon from "@mui/icons-material/FormatAlignLeft.js";
 import StarRateIcon from "@mui/icons-material/StarRate.js";
 import EventNoteIcon from "@mui/icons-material/EventNote.js";
-import ViewListIcon from "@mui/icons-material/ViewList.js";
+import GridViewSharpIcon from "@mui/icons-material/GridViewSharp.js";
 
 const FeatureCard = (props) => {
   const { children, content } = props;
@@ -66,7 +66,7 @@ export const Features = () => {
         </Grid>
         <Grid item xs={12} md={6} lg={4}>
           <FeatureCard content={"Compile and share lists of films on any topic and keep a watchlist of films to see"}>
-            <ViewListIcon sx={{ fontSize: 50 }} />
+            <GridViewSharpIcon sx={{ fontSize: 50 }} />
           </FeatureCard>
         </Grid>
       </Grid>

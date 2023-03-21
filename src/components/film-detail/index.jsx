@@ -36,6 +36,7 @@ const film_detail = {
 };
 
 const FilmDetail = () => {
+  // console.log("filmdetail render");
   return (
     <>
       <Box

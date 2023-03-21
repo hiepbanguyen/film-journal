@@ -1,4 +1,5 @@
 import { Box } from "@mui/material";
+import CustomTabs from "../common/tabs.jsx";
 
 const Cast = [
   "Sam Worthington",
@@ -22,16 +23,12 @@ const Cast = [
   "Johnny Alexander",
 ];
 
+const labels = ["CAST", "CREW", "DETAILS", "GENRES"];
+
 export default function TabDetail() {
   return (
-    <Box className="tabbed-content">
-      <Box>
-        <ul className="cast_list_title">
-          <li className="cast_chose">CAST</li>
-          <li>CREW</li>
-          <li>DETAILS</li>
-          <li>GENRES</li>
-        </ul>
+    <Box>
+      <CustomTabs labels={labels} bottom_border_only={true}>
         <Box className="cast_list">
           {Cast.map((cast_item, idx) => (
             <a key={idx}>
@@ -41,7 +38,7 @@ export default function TabDetail() {
           ))}
           <a>Show All...</a>
         </Box>
-      </Box>
+      </CustomTabs>
     </Box>
   );
 }
