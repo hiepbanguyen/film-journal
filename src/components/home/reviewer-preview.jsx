@@ -6,7 +6,7 @@ import FavoriteIcon from "@mui/icons-material/Favorite.js";
 export const PopularReviewers = () => {
   return (
     <>
-      <Box display={"flex"} justifyContent={"space-between"} alignItems={"baseline"}>
+      <Box display={"flex"} justifyContent={"space-between"} alignItems={"baseline"} color={"#fff"}>
         <Typography variant={"body1"} textTransform={"uppercase"} mt={5}>
           popular reviewers
         </Typography>

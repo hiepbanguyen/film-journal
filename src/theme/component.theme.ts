@@ -43,8 +43,7 @@ export const COMPONENT_THEME = {
   MuiDivider: {
     styleOverrides: {
       root: {
-        color: "rgba(255,255,255,0.3)",
-        borderColor: "rgba(255,255,255,0.3)",
+        borderColor: "#456",
       },
     },
   },

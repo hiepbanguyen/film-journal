@@ -5,7 +5,7 @@ export const ShowdownLists = () => {
   return (
     <>
       <Container maxWidth="lg">
-        <Box display={"flex"} justifyContent={"space-between"} alignItems={"baseline"}>
+        <Box display={"flex"} justifyContent={"space-between"} alignItems={"baseline"} color={"#fff"}>
           <Typography variant={"body1"} textTransform={"uppercase"} mt={5}>
             popular lists
           </Typography>

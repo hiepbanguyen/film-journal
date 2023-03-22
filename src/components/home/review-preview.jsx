@@ -8,7 +8,7 @@ import ChatBubbleIcon from "@mui/icons-material/ChatBubble.js";
 export const PopularReviews = () => {
   return (
     <>
-      <Box display={"flex"} justifyContent={"space-between"} alignItems={"baseline"}>
+      <Box display={"flex"} justifyContent={"space-between"} alignItems={"baseline"} color={"#fff"}>
         <Typography variant={"body1"} textTransform={"uppercase"} mt={5}>
           popular reviews this week
         </Typography>
