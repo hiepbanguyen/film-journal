@@ -23,7 +23,12 @@ const WelcomeSection = () => {
         <br /> Tell your friends what’s good.
       </Typography>
       <Box mt={5} sx={{ display: "flex", justifyContent: "center" }}>
-        <Button variant={"contained"} sx={{ background: "#00c030" }} href={"/sign-up/"} size={"large"}>
+        <Button
+          variant={"contained"}
+          sx={{ background: "#00c030", textTransform: "uppercase" }}
+          href={"/sign-up/"}
+          size={"large"}
+        >
           Get started - It's free!
         </Button>
       </Box>

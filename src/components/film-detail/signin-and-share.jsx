@@ -5,6 +5,7 @@ export default function SigninAndShare() {
   return (
     <Box mt={5}>
       <Box
+        href={"/sign-in"}
         component={Button}
         className="box_share"
         sx={{
