@@ -3,6 +3,7 @@ import ViewsLikesLists from "./views-likes-lists.jsx";
 import RemoveRedEyeRoundedIcon from "@mui/icons-material/RemoveRedEyeRounded.js";
 import GridViewSharpIcon from "@mui/icons-material/GridViewSharp.js";
 import FavoriteIcon from "@mui/icons-material/Favorite.js";
+import React from "react";
 
 export default function PosterAndDescription(props) {
   return (
@@ -26,7 +27,8 @@ export default function PosterAndDescription(props) {
         </Box>
         <Box color={"rgba(255,255,255,0.8)"}>
           <Typography
-            fontSize={{ xs: 25, md: 40 }}
+            fontSize={{ xs: 25, sm: 30, md: 40 }}
+            lineHeight={1}
             fontWeight={700}
             fontFamily="TiemposTextWeb,Georgia,serif,ColorEmoji"
             color={"#fff"}
@@ -34,21 +36,26 @@ export default function PosterAndDescription(props) {
             {props.title}
           </Typography>
           <Typography variant={"h6"}>{props.releasedYear}</Typography>
-          <Typography>
+          <Typography fontSize={15}>
             {"Directed by "}
             {props.director}
           </Typography>
-          <Typography>
+          <Typography fontSize={15} pb={1}>
             {props.runtime} {" minutes"}
           </Typography>
+          <Box className={"crew_people"} display={"flex"} flexWrap={"wrap"} mb={0.5}>
+            {props.genres.map((i, idx) => (
+              <a key={idx}>{i}</a>
+            ))}
+          </Box>
           <Box sx={(theme) => ({ color: "#fff", mt: 3, [theme.breakpoints.only("xs")]: { display: "none" } })}>
-            <h3>{props.subtitle}</h3>
+            <h3>{props.tagline}</h3>
             <Typography>{props.description}</Typography>
           </Box>
         </Box>
       </Box>
       <Box sx={(theme) => ({ mt: 1, [theme.breakpoints.not("xs")]: { display: "none" } })}>
-        <h3>{props.subtitle}</h3>
+        <h3>{props.tagline}</h3>
         <Typography>{props.description}</Typography>
       </Box>
       <Box

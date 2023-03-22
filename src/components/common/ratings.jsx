@@ -45,7 +45,7 @@ const RatingColumn = (props) => {
           className={"rating-column"}
           width={"100%"}
           height={`${(value / total) * 100}%`}
-          sx={{ background: "#456", borderRadius: "2px 2px 0 0" }}
+          sx={{ background: "#456", borderRadius: "3px 3px 0 0" }}
         ></Box>
       </Box>
     </Tooltip>
@@ -69,7 +69,13 @@ export default function Ratings(props) {
         ))}
         <Box width={"3px"} />
         <Box display={"flex"} flexDirection={"column"} justifyContent={"flex-end"} gap={1}>
-          <Typography variant={"h5"} textAlign={"center"}>
+          <Typography
+            variant={"h5"}
+            textAlign={"center"}
+            color={"#dbecff"}
+            fontWeight={600}
+            sx={{ textShadow: "0px 0px 20px #fff,0px 0px 20px #614ad3" }}
+          >
             {ratings.avg}
           </Typography>
           <Box display={"flex"} alignItems={"baseline"}>

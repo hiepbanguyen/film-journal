@@ -3,42 +3,29 @@
         margin: 0;
     }
     .box_share {
-        background-color: #456;
+        width: 100%;
+        background-color: rgb(68, 85, 102);
         color: #bcd;
         padding: 8px;
         text-align: center;
         font-size: 14px;
     }
 
-
-
-    .cast_list {
-        display: flex;
-        flex-wrap: wrap;
-        font-size: 14px;
-        margin-top: 10px;
-    }
-
-    .cast_list a {
+    .crew_people a {
         text-decoration: none;
-        box-sizing: border-box;
         margin-bottom: 5px;
         margin-right: 5px;
         max-width: 100%;
-        overflow: hidden;
-        text-overflow: ellipsis;
         background: rgb(40, 48, 56);
         border-radius: 3px;
-        box-shadow: inset 0 1px 0 hsla(0,0%,100%,.05);
         color: #9ab;
-        display: inline-block;
-        line-height: 1.5;
         padding: 3px 6px;
-        white-space: nowrap;
+        font-size: 13px;
     }
 
-    .cast_list a:hover {
+    .crew_people a:hover {
         color: #fff;
+        cursor: pointer;
     }
 
 

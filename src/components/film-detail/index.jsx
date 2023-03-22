@@ -25,7 +25,8 @@ const film_detail = {
   director: "James Cameron",
   description:
     "Set more than a decade after the events of the first film, learn the story of the Sully family (Jake, Neytiri, and their kids), the trouble that follows them, the lengths they go to keep each other safe, the battles they fight to stay alive, and the tragedies they endure",
-  subtitle: "RETURN TO PANDORA.",
+  tagline: "Return to Pandora.",
+  genres: ["Drama", "Action", "Fantasy"],
   image:
     "https://a.ltrbxd.com/resized/film-poster/6/3/0/5/8/63058-avatar-the-way-of-water-0-230-0-345-crop.jpg?v=37a1014065",
   banner:

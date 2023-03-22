@@ -22,7 +22,7 @@ export const Logo = () => (
         letterSpacing: ".3rem",
       }}
     >
-      FilmLogger
+      FilmJournal
     </Typography>
   </Box>
 );
