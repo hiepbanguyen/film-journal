@@ -1,9 +1,9 @@
 import { Avatar, Box, Container, Divider, Grid, Stack, Typography } from "@mui/material";
 import FilmCard from "./film-card";
-import CommentIcon from "@mui/icons-material/Comment";
+import ChatBubbleIcon from "@mui/icons-material/ChatBubble.js";
 import FavoriteIcon from "@mui/icons-material/Favorite.js";
 import StarIcon from "@mui/icons-material/Star";
-
+import { Link } from "react-router-dom";
 
 export const PopularLists = () => {
   return (
@@ -33,27 +33,51 @@ export const PopularLists = () => {
   );
 };
 
-export const FilmCardsStacked = () => {
+export const FilmCardsStackedFive = () => {
   return (
-    <Box position={"relative"} height={160}>
-      {Array.from({ length: 5 }).map((i, idx) => (
-        <Box key={idx} position={"absolute"} zIndex={10 - idx} left={`${idx * 15}%`}>
-          <FilmCard elevation={10} />
-        </Box>
-      ))}
-    </Box>
+    <Link to={"/"}>
+      <Box
+        display={"flex"}
+        width={289}
+        sx={{
+          mb: 2,
+          "&:hover": {
+            border: "2px solid rgba(255,255,255,0.7)",
+            borderRadius: 1.5,
+          },
+        }}
+      >
+        {Array.from({ length: 5 }).map((i, idx) => (
+          <Box key={idx} position={"relative"} zIndex={10 - idx} left={`-${idx * (50 / 5)}%`}>
+            <FilmCard list={true} shadow={idx !== 4} />
+          </Box>
+        ))}
+      </Box>
+    </Link>
   );
 };
 
-const FilmCardsStacked2 = () => {
+const FilmCardsStackedTen = () => {
   return (
-    <Box position={"relative"} height={160}>
-      {Array.from({ length: 10 }).map((i, idx) => (
-        <Box key={idx} position={"absolute"} zIndex={10 - idx} left={`${idx * 9}%`}>
-          <FilmCard elevation={10} />
-        </Box>
-      ))}
-    </Box>
+    <Link to={"/"}>
+      <Box
+        display={"flex"}
+        width={555}
+        sx={{
+          mb: 2,
+          "&:hover": {
+            border: "2px solid rgba(255,255,255,0.7)",
+            borderRadius: 1.5,
+          },
+        }}
+      >
+        {Array.from({ length: 10 }).map((i, idx) => (
+          <Box key={idx} position={"relative"} zIndex={10 - idx} left={`-${idx * 5}%`}>
+            <FilmCard list={true} shadow={idx !== 9} />
+          </Box>
+        ))}
+      </Box>
+    </Link>
   );
 };
 
@@ -61,11 +85,11 @@ export const ListPreviewHorizontal = (props) => {
   const { title, username, favoriteCount, commentCount, films, description } = props;
 
   return (
-    <Box display={"flex"} my={2}>
-      <Box width={"50%"}>
-        <FilmCardsStacked />
+    <Box display={"flex"} flexDirection={{ xs: "column", sm: "row" }} mt={3} mb={5}>
+      <Box>
+        <FilmCardsStackedFive />
       </Box>
-      <Box width={"50%"}>
+      <Box ml={{ sm: 3 }}>
         <Typography variant={"body2"}>{title}</Typography>
         <Box display={"flex"} alignItems={"center"} my={1}>
           <Avatar sx={{ width: 25, height: 25 }}>H</Avatar>
@@ -79,7 +103,7 @@ export const ListPreviewHorizontal = (props) => {
           <Typography variant={"body2"} ml={0.5} mr={1}>
             {favoriteCount}
           </Typography>
-          <CommentIcon fontSize={"small"} />
+          <ChatBubbleIcon fontSize={"small"} />
           <Typography variant={"body2"} ml={0.5}>
             {commentCount}
           </Typography>
@@ -96,7 +120,7 @@ export const ListPreviewVertical = (props) => {
   return (
     <Box my={2}>
       <Box width={"100%"}>
-        <FilmCardsStacked />
+        <FilmCardsStackedFive />
       </Box>
       <Box width={"100%"}>
         <Typography variant={"body2"}>{title}</Typography>
@@ -138,8 +162,8 @@ export const ListShowdown = (props) => {
 export const CrewList = (props) => {
   const { title } = props;
   return (
-    <Box mt={2} mb={2} ml={{ md: 0, xs: "5%" }}>
-      <FilmCardsStacked />
+    <Box mt={2} mb={2}>
+      <FilmCardsStackedFive />
       <Typography variant={"body2"}>{title}</Typography>
     </Box>
   );
@@ -155,8 +179,12 @@ export const RecentReviewFilm = (props) => {
       </Box>
       <Box width={"80%"}>
         <Box display={"flex"}>
-          <Typography variant={"body1"} marginLeft={3}>{title}</Typography>
-          <Typography variant={"body1"} marginLeft={2} color={"#9dbad7"}>{year}</Typography>
+          <Typography variant={"body1"} marginLeft={3}>
+            {title}
+          </Typography>
+          <Typography variant={"body1"} marginLeft={2} color={"#9dbad7"}>
+            {year}
+          </Typography>
         </Box>
         <Box alignItems={"center"} marginLeft={3}>
           <Box display={"flex"} mt={0.5}>
@@ -165,15 +193,23 @@ export const RecentReviewFilm = (props) => {
                 <StarIcon sx={{ color: "#00c030" }} fontSize={"small"} key={idx} />
               ))}
             </Typography>
-            <Typography variant={"body1"} marginLeft={2} color={"#fff"}>{watchedAt}</Typography>
+            <Typography variant={"body1"} marginLeft={2} color={"#fff"}>
+              {watchedAt}
+            </Typography>
           </Box>
           <Typography variant={"body2"} mr={1} mt={0.5}>
             {description}
           </Typography>
           <Box display={"flex"} mt={1}>
             <FavoriteIcon fontSize={"small"} />
-            <Typography variant={"body2"} marginLeft={1} color={"#e4d5d5"}> Like review</Typography>
-            <Typography variant={"body2"} marginLeft={1} color={"#fff"}> {`${favoriteCount}`} likes</Typography>
+            <Typography variant={"body2"} marginLeft={1} color={"#e4d5d5"}>
+              {" "}
+              Like review
+            </Typography>
+            <Typography variant={"body2"} marginLeft={1} color={"#fff"}>
+              {" "}
+              {`${favoriteCount}`} likes
+            </Typography>
           </Box>
         </Box>
       </Box>
@@ -184,8 +220,25 @@ export const RecentReviewFilm = (props) => {
 export const AllTimeList = (props) => {
   const { title, username, year } = props;
   return (
-    <Box mt={2} mb={2} ml={{ md: 0, xs: "5%" }}>
-      <FilmCardsStacked2 />
+    <Box mt={2} mb={2}>
+      <Box
+        sx={(theme) => ({
+          [theme.breakpoints.not("xs")]: {
+            display: "none",
+          },
+        })}
+      >
+        <FilmCardsStackedFive />
+      </Box>
+      <Box
+        sx={(theme) => ({
+          [theme.breakpoints.only("xs")]: {
+            display: "none",
+          },
+        })}
+      >
+        <FilmCardsStackedTen />
+      </Box>
       <Typography variant={"body2"}>{title}</Typography>
       <Box display={"flex"} alignItems={"center"} my={1}>
         <Avatar sx={{ width: 25, height: 25 }}>H</Avatar>
@@ -204,7 +257,7 @@ export default function ListPreview(props) {
   const { title, username, favoriteCount, commentCount } = props;
   return (
     <Box mt={2} mb={2} ml={{ md: 0, xs: "5%" }}>
-      <FilmCardsStacked />
+      <FilmCardsStackedFive />
       <Typography variant={"body2"}>{title}</Typography>
       <Box display={"flex"} alignItems={"center"} my={1}>
         <Avatar sx={{ width: 25, height: 25 }}>H</Avatar>
@@ -215,7 +268,7 @@ export default function ListPreview(props) {
         <Typography variant={"body2"} ml={0.5} mr={1}>
           {favoriteCount}
         </Typography>
-        <CommentIcon fontSize={"small"} />
+        <ChatBubbleIcon fontSize={"small"} />
         <Typography variant={"body2"} ml={0.5}>
           {commentCount}
         </Typography>

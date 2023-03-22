@@ -6,7 +6,7 @@ import StorageRoundedIcon from "@mui/icons-material/StorageRounded";
 import RemoveRedEyeRoundedIcon from "@mui/icons-material/RemoveRedEyeRounded";
 import GridViewSharpIcon from "@mui/icons-material/GridViewSharp";
 import SmartDisplayIcon from "@mui/icons-material/SmartDisplay";
-import Ratings from "../common/ratings.jsx";
+import CompiledRatings from "../common/compiled-ratings.jsx";
 import { Box, Container } from "@mui/material";
 import ViewsLikesLists from "./views-likes-lists.jsx";
 import SigninAndShare from "./signin-and-share.jsx";
@@ -80,7 +80,7 @@ const FilmDetail = () => {
               <TabDetail />
             </Box>
             <Box flex={1} pt={2}>
-              <Ratings />
+              <CompiledRatings />
               <SigninAndShare />
             </Box>
           </Box>

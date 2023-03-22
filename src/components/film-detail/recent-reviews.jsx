@@ -18,7 +18,7 @@ const Populer_reviews = [
     id: 2,
     name: "Patrick Willems",
     image: "https://a.ltrbxd.com/resized/avatar/upload/2/6/7/4/1/9/shard/avtr-0-80-0-80-crop.jpg?v=a856408a78",
-    rating: 4.5,
+    rating: 2.5,
     number_comment_reply: 162,
     comment:
       "I don’t want to reduce this movie to just its technical aspects because I think the storytelling is genuinely pretty great but…I don’t know how they did this. Like watching the scenes where a live action human is running around the jungle with big blue aliens and I know the whole world is digital and the aliens are digital but I can’t see a single seam. Is the live action guy shot on a green screen? Is he actually just animated? How is none of this real? How is that water not real? Or is some of it real? I don’t get it. In this time where we’re used to vfx doing anything, nothing has really impressed us in years, but this? This is fucking impressive. Also Sigourney Weaver as her own teen alien daughter is such a wild move and she’s so great. Jim you madman.",

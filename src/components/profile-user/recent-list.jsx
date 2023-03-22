@@ -1,6 +1,7 @@
 import * as React from "react";
 import { Box, Divider, Grid, Typography } from "@mui/material";
 import FilmCard from "../home/film-card.jsx";
+import { FilmCardsStackedFive } from "../home/list-preview.jsx";
 
 export const RecentList = (props) => {
   const [count, setCount] = React.useState("123");
@@ -19,13 +20,7 @@ export const RecentList = (props) => {
       <Grid container mt={0} spacing={2} color={"#fff"}>
         <Grid item xs={12} sm={6} md={12}>
           <Box mt={2} mb={2} ml={{ md: 0, xs: "5%" }}>
-            <Box position={"relative"} height={160}>
-              {Array.from({ length: 5 }).map((i, idx) => (
-                <Box key={idx} position={"absolute"} zIndex={10 - idx} left={`${idx * 18}%`}>
-                  <FilmCard elevation={3} />
-                </Box>
-              ))}
-            </Box>
+            <FilmCardsStackedFive />
           </Box>
         </Grid>
       </Grid>

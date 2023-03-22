@@ -1,7 +1,7 @@
 import { Box, Divider, Tooltip, Typography } from "@mui/material";
 import StarHalfIcon from "@mui/icons-material/StarHalf";
 import StarIcon from "@mui/icons-material/Star.js";
-const ratings = {
+const compiledRatings = {
   each: {
     1: 10,
     2: 0,
@@ -52,20 +52,20 @@ const RatingColumn = (props) => {
   );
 };
 
-export default function Ratings(props) {
+export default function CompiledRatings(props) {
   return (
     <Box>
       <Box display={"flex"} justifyContent={"space-between"} alignItems={"baseline"} mb={1.2}>
         <Typography fontSize={15}>RATINGS</Typography>
-        <Typography variant={"body2"}>{ratings.total}</Typography>
+        <Typography variant={"body2"}>{compiledRatings.total}</Typography>
       </Box>
       <Divider variant={"fullWidth"} />
       <Box display={"flex"} alignItems={"flex-end"} mt={1}>
         <Box display={"flex"} alignItems={"baseline"}>
           <StarHalfIcon sx={{ fontSize: 12, mr: 0.5, color: "#00c030" }} />
         </Box>
-        {Object.entries(ratings.each).map(([rating, numOfRatings], idx) => (
-          <RatingColumn key={idx} value={numOfRatings} label={rating} total={ratings.total} />
+        {Object.entries(compiledRatings.each).map(([rating, numOfRatings], idx) => (
+          <RatingColumn key={idx} value={numOfRatings} label={rating} total={compiledRatings.total} />
         ))}
         <Box width={"3px"} />
         <Box display={"flex"} flexDirection={"column"} justifyContent={"flex-end"} gap={1}>
@@ -76,7 +76,7 @@ export default function Ratings(props) {
             fontWeight={600}
             sx={{ textShadow: "0px 0px 20px #fff,0px 0px 20px #614ad3" }}
           >
-            {ratings.avg}
+            {compiledRatings.avg}
           </Typography>
           <Box display={"flex"} alignItems={"baseline"}>
             {Array.from({ length: 5 }).map((i, idx) => (

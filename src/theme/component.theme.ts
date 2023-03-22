@@ -1,5 +1,4 @@
-import { Components, Theme } from "@mui/material";
-import { SelectIcon } from "../components/icons/select_icon";
+import StarIcon from "@mui/icons-material/Star";
 
 export const COMPONENT_THEME = {
   MuiButton: {
@@ -54,6 +53,26 @@ export const COMPONENT_THEME = {
     styleOverrides: {
       root: {
         fontFamily: "inherit",
+      },
+    },
+  },
+
+  MuiRating: {
+    defaultProps: {
+      precision: 0.5,
+    },
+    styleOverrides: {
+      iconFilled: {
+        color: "#00e054",
+      },
+      iconEmpty: {
+        color: "#98a",
+      },
+      sizeSmall: {
+        fontSize: 16,
+      },
+      sizeMedium: {
+        fontSize: 20,
       },
     },
   },

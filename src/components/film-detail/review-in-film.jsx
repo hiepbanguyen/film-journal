@@ -1,4 +1,4 @@
-import { Avatar, Box, IconButton, Typography } from "@mui/material";
+import { Avatar, Box, IconButton, Rating, Typography } from "@mui/material";
 import ChatBubbleIcon from "@mui/icons-material/ChatBubble.js";
 import FavoriteIcon from "@mui/icons-material/Favorite.js";
 import React from "react";
@@ -7,17 +7,6 @@ import ThumbDownIcon from "@mui/icons-material/ThumbDown";
 import { Link } from "react-router-dom";
 
 export default function ReviewInFilm(props) {
-  const calculate_rating = (number) => {
-    let star = "";
-    let int_number = parseInt(number);
-    let redundancy = number - int_number;
-    for (let n = 0; n < int_number; n++) {
-      star += "★";
-    }
-    redundancy > 0 ? (star += "½") : (star += "");
-    return star;
-  };
-
   return (
     <Box className={"review_item"}>
       <Avatar src={props.image} sx={{ mr: 2 }} />
@@ -26,9 +15,7 @@ export default function ReviewInFilm(props) {
           <Typography fontSize={13}>
             Review by <b>{props.name}</b>
           </Typography>
-          <Typography px={1} fontSize={13} className="rating_green rated-7">
-            {calculate_rating(props.rating)}
-          </Typography>
+          <Rating value={props.rating} size={"small"} readOnly sx={{ mx: 1.5 }} />
           <ChatBubbleIcon sx={{ fontSize: 15 }}></ChatBubbleIcon>
           <Typography fontSize={13} pl={0.5}>
             {props.number_comment_reply}

@@ -15,28 +15,31 @@ const RecentlyLike = () => {
   return (
     <Root>
       <Container maxWidth="lg">
-        <Grid container spacing={1} color={"#fff"}>
-          <Grid item xs={8}>
+        <Grid container spacing={5} color={"#fff"}>
+          <Grid item xs={12} lg={8}>
             <Box display={"flex"} justifyContent={"space-between"} alignItems={"baseline"} color={"#fff"}>
               <Typography variant={"body1"} textTransform={"uppercase"}>
                 rencently liked
               </Typography>
             </Box>
             <Divider variant="fullWidth" />
-            {Array.from({ length: 10 }).map((i, idx) => (
-              <Grid key={idx} item xs={12}>
-                <ListPreviewHorizontal
-                  title={"Lorem Ipsum is simply dummy text"}
-                  username={"Bá Hiệp Nguyễn"}
-                  favoriteCount={400}
-                  commentCount={50}
-                  films={2}
-                  description={"Lorem Ipsum is simply dummy text"}
-                />
-              </Grid>
-            ))}
+            <Box display={"flex"} justifyContent={{ xs: "center", lg: "flex-start" }}>
+              <Box>
+                {Array.from({ length: 10 }).map((i, idx) => (
+                  <ListPreviewHorizontal
+                    key={idx}
+                    title={"Lorem Ipsum is simply dummy text"}
+                    username={"Bá Hiệp Nguyễn"}
+                    favoriteCount={400}
+                    commentCount={50}
+                    films={2}
+                    description={"Lorem Ipsum is simply dummy text"}
+                  />
+                ))}
+              </Box>
+            </Box>
           </Grid>
-          <Grid item xs={4}>
+          <Grid item xs={12} lg={4}>
             <Box display={"flex"} justifyContent={"space-between"} alignItems={"baseline"} color={"#fff"}>
               <Typography variant={"body1"} textTransform={"uppercase"}>
                 crew picks
@@ -44,15 +47,22 @@ const RecentlyLike = () => {
               <Typography variant={"caption"}>MORE</Typography>
             </Box>
             <Divider variant="fullWidth" />
-            {Array.from({ length: 5 }).map((i, idx) => (
-              <Grid key={idx} item xs={12}>
+            <Box
+              display={"flex"}
+              flexWrap={"wrap"}
+              gap={{ xs: 1, sm: 5, lg: 1 }}
+              justifyContent={"center"}
+              color={"#fff"}
+            >
+              {Array.from({ length: 5 }).map((i, idx) => (
                 <ListPreviewVertical
+                  key={idx}
                   title={"Lorem Ipsum is simply dummy text"}
                   username={"Nguyễn Việt Hoàn"}
                   films={100}
                 />
-              </Grid>
-            ))}
+              ))}
+            </Box>
             <Box color={"#fff"} mt={5}>
               <Typography variant={"body1"} textTransform={"uppercase"}>
                 popular tags

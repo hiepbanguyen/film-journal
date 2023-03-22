@@ -14,13 +14,11 @@ export const JustReviewed = () => {
         </Typography>
       </Box>
       <Divider variant="fullWidth" />
-      <Grid container mt={1} spacing={1}>
+      <Box display={"flex"} flexWrap={"wrap"} justifyContent={"center"} gap={1} mt={1.5}>
         {Array.from({ length: 12 }).map((i, idx) => (
-          <Grid item key={idx} lg={1} sm={2} xs={3}>
-            <FilmCard size={"small"} />
-          </Grid>
+          <FilmCard key={idx} size={"small"} />
         ))}
-      </Grid>
+      </Box>
       <Typography variant={"h5"} mt={5} textAlign={"center"}>
         Write and share reviews. Compile your own lists. Share your life in film.
       </Typography>

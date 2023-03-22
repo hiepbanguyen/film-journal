@@ -31,18 +31,17 @@ const Popular = () => {
           </Typography>
         </Box>
         <Divider className={classes.divider} />
-        <Grid container spacing={2} color={"#fff"}>
+        <Box display={"flex"} flexWrap={"wrap"} gap={{ md: 5, lg: 10 }} justifyContent={"center"} color={"#fff"}>
           {Array.from({ length: 3 }).map((i, idx) => (
-            <Grid key={idx} item xs={4}>
-              <ListPreview
-                title={"Lorem Ipsum is simply dummy text"}
-                username={"Nguyễn Việt Hoàn"}
-                favoriteCount={4}
-                commentCount={50}
-              />
-            </Grid>
+            <ListPreview
+              key={idx}
+              title={"Lorem Ipsum is simply dummy text"}
+              username={"Nguyễn Việt Hoàn"}
+              favoriteCount={4}
+              commentCount={50}
+            />
           ))}
-        </Grid>
+        </Box>
       </Container>
     </Root>
   );
