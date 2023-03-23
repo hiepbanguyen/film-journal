@@ -1,7 +1,7 @@
 import { Box, Button, Grid, CardMedia } from "@mui/material";
 import SmartDisplayIcon from "@mui/icons-material/SmartDisplay";
-import amazonImg from "../../../public/img/amazon-us.png";
-import userAvaTest from "../../../public/img/ava_user_test.jpg";
+import amazonImg from "../../assets/img/amazon-us.png";
+import userAvaTest from "../../assets/img/ava_user_test.jpg";
 
 function Comment() {
   return (
