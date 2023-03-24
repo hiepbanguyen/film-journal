@@ -142,7 +142,7 @@ const crews = [
   },
 ];
 
-const initialShowCast = 12;
+const initialShowCast = 8;
 const initialShowCrew = 3;
 
 const Cast = (props) => {

@@ -65,7 +65,7 @@ export const COMPONENT_THEME = {
         color: "#00e054",
       },
       iconEmpty: {
-        color: "#98a",
+        color: "#bcd",
       },
       sizeSmall: {
         fontSize: 16,

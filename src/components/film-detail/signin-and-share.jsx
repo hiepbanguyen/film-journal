@@ -1,35 +1,31 @@
-import { Box, Button } from "@mui/material";
+import { Box, Button, Divider, Stack, Typography } from "@mui/material";
 import { styled } from "@mui/system";
+import React from "react";
+
+const CustomButton2 = styled(Button)({
+  padding: "10px 0 10px 0",
+  color: "#bcd",
+  "&:hover": {
+    color: "#fff",
+  },
+});
 
 export default function SigninAndShare() {
   return (
-    <Box mt={5}>
-      <Box
-        href={"/sign-in"}
-        component={Button}
-        className="box_share"
-        sx={{
-          borderBottom: "1px solid #2c3440",
-          borderRadius: "5px 5px 0 0",
-          "&:hover": {
-            background: "rgba(108,131,155,0.8)",
-          },
-        }}
-      >
-        Sign in to log, rate or review
-      </Box>
-      <Box
-        component={Button}
-        className="box_share"
-        sx={{
-          borderRadius: "0 0 5px 5px",
-          "&:hover": {
-            background: "rgba(108,131,155,0.8)",
-          },
-        }}
-      >
-        Share
-      </Box>
-    </Box>
+    <Stack
+      sx={{ color: "#bcd", background: "#456", borderRadius: 1 }}
+      divider={<Divider variant="fullWidth" sx={{ borderColor: "#2c3440" }} />}
+    >
+      <CustomButton2 href={"/sign-in"}>
+        <Typography fontSize={14} textAlign="center">
+          Sign in to log or review...
+        </Typography>
+      </CustomButton2>
+      <CustomButton2>
+        <Typography fontSize={14} textAlign="center">
+          Share
+        </Typography>
+      </CustomButton2>
+    </Stack>
   );
 }

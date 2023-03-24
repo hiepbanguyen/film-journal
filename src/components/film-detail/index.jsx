@@ -7,7 +7,7 @@ import RemoveRedEyeRoundedIcon from "@mui/icons-material/RemoveRedEyeRounded";
 import GridViewSharpIcon from "@mui/icons-material/GridViewSharp";
 import SmartDisplayIcon from "@mui/icons-material/SmartDisplay";
 import CompiledRatings from "../common/compiled-ratings.jsx";
-import { Box, Container } from "@mui/material";
+import { Box, Container, Stack } from "@mui/material";
 import ViewsLikesLists from "./views-likes-lists.jsx";
 import SigninAndShare from "./signin-and-share.jsx";
 import TabDetail from "./tab-detail.jsx";
@@ -17,6 +17,7 @@ import RelatedFilms from "./related-films.jsx";
 import SimilarFilms from "./similar-films.jsx";
 import RecentReviews from "./recent-reviews";
 import PosterAndDescription from "./poster-and-description.jsx";
+import ActionBox from "./action-box.jsx";
 
 const film_detail = {
   title: "Avatar: The Way of Water",
@@ -38,10 +39,11 @@ const film_detail = {
 
 const FilmDetail = () => {
   // console.log("filmdetail render");
+  const loggedIn = true;
   return (
     <>
       <Box
-        width={"100vw"}
+        width={{ xs: "95vw", md: "80vw" }}
         component="img"
         sx={{
           position: "absolute",
@@ -57,7 +59,7 @@ const FilmDetail = () => {
         src={film_detail.banner}
       />
       <Box
-        width={"100vw"}
+        width={{ xs: "95vw", md: "80vw" }}
         sx={{
           position: "absolute",
           top: -10,
@@ -73,16 +75,16 @@ const FilmDetail = () => {
       />
 
       <Container className="film_detail_page" sx={{ position: "relative", color: "#fff" }}>
-        <Box pt={{ xs: 10, sm: 25, md: 40 }} gap={5} mx={{ md: 10 }}>
+        <Box pt={{ xs: 10, sm: 25, md: 30 }} gap={5} mx={{ md: 10 }}>
           <PosterAndDescription {...film_detail} />
           <Box display={"flex"} flexDirection={{ xs: "column-reverse", sm: "row" }} gap={5}>
             <Box flex={2}>
               <TabDetail />
             </Box>
-            <Box flex={1} pt={2}>
+            <Stack flex={1} pt={2} gap={4}>
               <CompiledRatings />
-              <SigninAndShare />
-            </Box>
+              {loggedIn ? <ActionBox /> : <SigninAndShare />}
+            </Stack>
           </Box>
           <Box pb={5}>
             <PopularReviews />

@@ -1,5 +1,4 @@
 import { createTheme } from "@mui/material/styles";
-import { TYPO_THEME } from "./typo.theme";
 import { COMPONENT_THEME } from "./component.theme";
 
 // Create a theme instance.
@@ -31,7 +30,6 @@ const theme = createTheme({
     },
   },
   components: COMPONENT_THEME,
-  typography: TYPO_THEME,
 });
 
 export default theme;

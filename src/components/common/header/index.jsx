@@ -12,6 +12,8 @@ import LoginIcon from "@mui/icons-material/Login";
 import { Logo } from "../logo.jsx";
 import { AnimatedUnderlineBox } from "../animated-underline-box.jsx";
 import { Link, useLocation } from "react-router-dom";
+import UserStore from "../../../store/user.store.js";
+import { AuthBox } from "./auth-box.jsx";
 
 const pages = [
   { href: "/films", label: "films" },
@@ -23,7 +25,6 @@ const pages = [
 export const HeaderHeight = 64;
 
 function Header() {
-  const signed_in = false;
   const { pathname } = useLocation();
 
   return (
@@ -66,32 +67,7 @@ function Header() {
             <Box sx={{ display: "flex", flexGrow: 0 }}>
               <SearchBox />
               <Box width={10}></Box>
-              {signed_in ? (
-                <UserMenu />
-              ) : (
-                <>
-                  <Button variant={"contained"} color={"warning"} href={"/sign-in"} sx={{ boxShadow: "none" }}>
-                    <Typography
-                      variant={"body2"}
-                      sx={(theme) => ({
-                        [theme.breakpoints.down("sm")]: {
-                          display: "none",
-                        },
-                      })}
-                    >
-                      Sign In
-                    </Typography>
-                    <LoginIcon
-                      href={"/sign-in"}
-                      sx={(theme) => ({
-                        [theme.breakpoints.up("sm")]: {
-                          display: "none",
-                        },
-                      })}
-                    />
-                  </Button>
-                </>
-              )}
+              <AuthBox />
             </Box>
           </Toolbar>
         </Container>

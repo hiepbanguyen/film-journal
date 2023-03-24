@@ -2,20 +2,6 @@ import axios from "axios";
 import ConstantURL from "./resources/ConstantURL";
 
 const BASE_URL = ConstantURL.BaseDomain;
-// Set the token header for every request
-const setAuthToken = (token) => {
-  if (token) {
-    axios.defaults.headers.common["Authorization"] = token;
-  } else {
-    delete axios.defaults.headers.common["Authorization"];
-  }
-};
-
-// Check for token in local storage and set header
-if (localStorage.token) {
-  let token = JSON.parse(JSON.stringify(localStorage.token));
-  setAuthToken(token.slice(1, -1));
-}
 
 // API methods
 const baseAPI = {

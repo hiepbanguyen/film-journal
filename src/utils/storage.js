@@ -1,25 +1,27 @@
-import Storage from "react-secure-storage";
+import axios from "axios";
 export const isClient = typeof window !== "undefined";
 
 export const StorageHelper = {
   clearSession() {
-    Storage.removeItem("token");
+    localStorage.removeItem("token");
+    delete axios.defaults.headers.common["Authorization"];
   },
   getToken: () => {
-    return Storage.getItem("token").toString();
+    return JSON.parse(JSON.stringify(localStorage.getItem("token")));
   },
   setToken: (token) => {
-    Storage.setItem("token", token);
+    localStorage.setItem("token", token);
+    axios.defaults.headers.common["Authorization"] = token;
   },
   setUser: (user) => {
-    Storage.setItem("user", JSON.stringify(user));
+    localStorage.setItem("user", JSON.stringify(user));
   },
   getUser: () => {
     try {
       if (!localStorage) {
         return;
       }
-      const _result = Storage.getItem("user").toString();
+      const _result = JSON.stringify(localStorage.getItem("user"));
       return _result != null && _result !== "" ? JSON.parse(_result) : undefined;
     } catch (err) {
       console.log("error parse user: ");
