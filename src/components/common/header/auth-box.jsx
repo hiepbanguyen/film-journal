@@ -4,14 +4,13 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import LoginIcon from "@mui/icons-material/Login.js";
 import * as React from "react";
-import { Box } from "@mui/material";
 import { observer } from "mobx-react-lite";
 
 export const AuthBox = observer(() => {
   const loading = !UserStore.isLoadedFromLocal;
 
   return (
-    <Box>
+    <>
       {loading ? null : UserStore.isLoggedIn ? (
         <UserMenu />
       ) : (
@@ -38,6 +37,6 @@ export const AuthBox = observer(() => {
           </Button>
         </>
       )}
-    </Box>
+    </>
   );
 });
