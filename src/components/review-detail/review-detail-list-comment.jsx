@@ -1,6 +1,38 @@
+import { PostAdd } from "@mui/icons-material";
 import { Box, Button, Grid } from "@mui/material";
+import React, { useState } from 'react';
 
 export default function ReviewDetailListComment(props) {
+  const [newCommentContent, setNewCommentContent] = useState('');
+
+  const handleNewCommentContentChange = (event) => {
+    setNewCommentContent(event.target.value);
+  };
+
+  const postNewComment = () => {
+    if(newCommentContent.trim() === '') return;
+
+    let newComment = {
+      userName: "Apple",
+      userAvatar: "https://picsum.photos/200/200",
+      content: newCommentContent,
+      time: new Date(),
+      id: Math.random() * 100,
+    }
+    listComment.list.push(newComment)
+
+    setNewCommentContent('')
+    newComment = {}
+    return;
+  };
+
+  const HandleEnterInput = (event) => {
+    if (event.keyCode === 13) {
+      postNewComment()
+    }
+    else return
+  }
+
   let listComment = props.listComment;
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -25,31 +57,49 @@ export default function ReviewDetailListComment(props) {
           <Comment comment={comment} key={comment.id}></Comment>
         ))}
       </Box>
-      <Box>
+      <Box sx={{ marginBottom: "80px" }}>
         <Grid container spacing={4} columns={13}>
           <Grid item xs={13} md={4}></Grid>
           <Grid item xs={13} md={9}>
             <Box
               component="textarea"
-              placeholder={'Reply as ' + props.reviewDetail.userName + '...'}
+              placeholder={"Reply as " + props.reviewDetail.userName + "..."}
               sx={{
                 height: "100px",
                 maxHeight: "100px",
                 width: "100%",
                 backgroundColor: "#2c3440",
                 border: "none",
-                padding: '5px',
+                padding: "5px",
+                color: '#9ab',
                 ":focus": {
                   backgroundColor: "#fff",
+                  color: '#000',
                 },
+                marginBottom: "12px",
               }}
+              value={newCommentContent}
+              onKeyUp={HandleEnterInput}
+              onChange={handleNewCommentContentChange}
             ></Box>
+            <Box sx={{ display: "flex", justifyContent: "end" }}>
+              <Button variant="contained" sx={{
+                backgroundColor: "#00b020 !important",
+                ":hover": { backgroundColor: "#00b020 !important" }
+              }}
+                onClick={postNewComment}
+                disabled={newCommentContent.trim() === ''}
+              >
+                Post
+              </Button>
+            </Box>
           </Grid>
         </Grid>
       </Box>
     </Box>
   );
 }
+
 
 function Comment(props) {
   return (
