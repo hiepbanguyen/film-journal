@@ -192,7 +192,7 @@ function ReviewDetailThumnailLink(props) {
 export default function ReviewDetailMainSection(props) {
   return (
     <>
-      <Box sx={{ flexGrow: 1, marginBottom: "32px" }}>
+      <Box sx={{ flexGrow: 1, marginBottom: "72px" }}>
         {/* Review */}
         <Grid container spacing={4} columns={13}>
           {/* Thumbail - link */}
