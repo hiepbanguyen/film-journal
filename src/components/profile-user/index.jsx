@@ -2,7 +2,7 @@ import React from "react";
 import { styled } from "@mui/material/styles";
 import { Avatar, Button, Grid, Typography } from "@mui/material";
 import Container from "@mui/material/Container";
-import styles from "./profile.scss?inline";
+import styles from "./profile.module.scss";
 import CustomTabs from "../common/tabs.jsx";
 import { TabProfile } from "./profile-tab-user.jsx";
 

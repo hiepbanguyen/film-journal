@@ -1,14 +1,14 @@
-import { Avatar, Box, Divider, Grid, Typography } from "@mui/material";
+import { Avatar, Box, Divider, Grid, Rating, Typography } from "@mui/material";
 import FilmCard from "./film-card";
 import StarIcon from "@mui/icons-material/Star";
-import CommentIcon from "@mui/icons-material/Comment";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import ThumbDownIcon from "@mui/icons-material/ThumbDown";
+import ChatBubbleIcon from "@mui/icons-material/ChatBubble.js";
 
 export const PopularReviews = () => {
   return (
     <>
-      <Box display={"flex"} justifyContent={"space-between"} alignItems={"baseline"}>
+      <Box display={"flex"} justifyContent={"space-between"} alignItems={"baseline"} color={"#fff"}>
         <Typography variant={"body1"} textTransform={"uppercase"} mt={5}>
           popular reviews this week
         </Typography>
@@ -43,43 +43,39 @@ export default function ReviewPreview(props) {
   const { title, releasedYear, content, username, ratings, likeCount, dislikeCount, commentCount } = props;
   return (
     <>
-      <Grid container spacing={1} my={5}>
+      <Grid container spacing={1} my={3}>
         <Grid item xs={2}>
           <FilmCard />
         </Grid>
         <Grid item xs={10}>
-          <Typography variant={"h6"}>
-            <strong>{title}</strong> {releasedYear}
+          <Typography variant={"h5"}>
+            <strong style={{ color: "#fff" }}>{title}</strong> <span style={{ fontSize: 17 }}>{releasedYear}</span>
           </Typography>
           <Box display={"flex"} alignItems={"center"} my={1}>
             <Avatar sx={{ width: 25, height: 25 }}>H</Avatar>
-            <Typography variant={"body2"} ml={0.5}>
+            <Typography variant={"body2"} ml={1} fontWeight={600}>
               {username}
             </Typography>
-            <Box mx={2}>
-              {Array.from({ length: ratings }).map((i, idx) => (
-                <StarIcon sx={{ color: "#00c030" }} fontSize={"small"} key={idx} />
-              ))}
-            </Box>
-            <CommentIcon fontSize={"small"} />
+            <Rating value={3.5} size={"medium"} readOnly sx={{ mx: 2 }} />
+            <ChatBubbleIcon fontSize={"small"} />
             <Typography variant={"body2"} ml={0.5}>
               {commentCount}
             </Typography>
           </Box>
-          <Typography variant={"body1"}>{content}</Typography>
+          <Typography fontSize={15}>{content}</Typography>
           <Box display={"flex"} alignItems={"center"} mt={1}>
-            <ThumbUpIcon />
+            <ThumbUpIcon fontSize={"small"} />
             <Typography variant={"body2"} ml={1} mr={2}>
               {likeCount}
             </Typography>
-            <ThumbDownIcon />
+            <ThumbDownIcon fontSize={"small"} />
             <Typography variant={"body2"} ml={1}>
               {dislikeCount}
             </Typography>
           </Box>
         </Grid>
       </Grid>
-      <Divider variant={"middle"} sx={{ mx: 5 }} />
+      <Divider variant={"fullWidth"} />
     </>
   );
 }

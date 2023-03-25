@@ -23,7 +23,12 @@ const WelcomeSection = () => {
         <br /> Tell your friends what’s good.
       </Typography>
       <Box mt={5} sx={{ display: "flex", justifyContent: "center" }}>
-        <Button variant={"contained"} sx={{ background: "#00c030" }} href={"/sign-up/"} size={"large"}>
+        <Button
+          variant={"contained"}
+          sx={{ background: "#00c030", textTransform: "uppercase" }}
+          href={"/sign-up/"}
+          size={"large"}
+        >
           Get started - It's free!
         </Button>
       </Box>
@@ -36,29 +41,16 @@ const WelcomeSection = () => {
 
 const PopularFilms = () => {
   return (
-    <Grid container mt={5} spacing={1}>
+    <Box display={"flex"} flexWrap={"wrap"} justifyContent={"center"} gap={2} mt={5}>
       {Array.from({ length: 6 }).map((i, idx) => (
-        <Grid item key={idx} md={2} xs={4}>
-          <FilmCard size={"medium"} />
-        </Grid>
+        <FilmCard key={idx} size={"medium"} />
       ))}
-    </Grid>
+    </Box>
   );
 };
 export default function Home() {
   return (
     <>
-      <Box
-        sx={{
-          position: "fixed",
-          top: 0,
-          width: "100%",
-          zIndex: -4,
-          background: "rgb(20, 24, 28)",
-          backgroundSize: "cover",
-          height: "100vh",
-        }}
-      />
       <Box
         width={{ sm: "80vw", xs: "100vw" }}
         component="img"
@@ -91,18 +83,18 @@ export default function Home() {
         }}
       />
       <Container>
-        <Box mx={{ md: 10, xs: 0 }} display={"flex"} flexDirection={"column"} justifyContent={"center"} color={"#fff"}>
+        <Box display={"flex"} flexDirection={"column"} justifyContent={"center"} color={"#fff"}>
           <Box mt={{ md: 30, xs: 10 }}>
             <WelcomeSection />
           </Box>
           <PopularFilms />
           <Features />
           <JustReviewed />
-          <Grid container spacing={2}>
-            <Grid item xs={12} md={9}>
+          <Grid container spacing={5} sx={{ color: "#9ab" }}>
+            <Grid item xs={12} md={7} lg={8.5}>
               <PopularReviews />
             </Grid>
-            <Grid item xs={12} md={3}>
+            <Grid item xs={12} md={5} lg={3.5}>
               <PopularLists />
               <PopularReviewers />
             </Grid>

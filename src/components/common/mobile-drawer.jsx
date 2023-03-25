@@ -7,7 +7,7 @@ import { AnimatedUnderlineBox } from "./animated-underline-box.jsx";
 import { Link } from "react-router-dom";
 
 export default function MobileDrawer(props) {
-  const { pages } = props;
+  const { pages, currPath } = props;
   const [openDrawer, setOpenDrawer] = React.useState(false);
 
   // const toggleDrawer = (event) => {
@@ -45,11 +45,11 @@ export default function MobileDrawer(props) {
                   justifyContent={"center"}
                   sx={{ textDecoration: "none", color: "inherit" }}
                 >
-                  <Button sx={{ color: "inherit", mt: 1 }}>
-                    <AnimatedUnderlineBox>{i.label}</AnimatedUnderlineBox>
+                  <Button sx={{ color: "inherit", mt: 1, textTransform: "uppercase" }}>
+                    <AnimatedUnderlineBox open={currPath === i.href}>{i.label}</AnimatedUnderlineBox>
                   </Button>
                 </Box>
-                {idx !== pages.length - 1 ? <Divider variant={"middle"} /> : <></>}
+                {idx !== pages.length - 1 ? <Divider variant={"middle"} sx={{ borderColor: "#9ab" }} /> : <></>}
               </React.Fragment>
             ))}
           </Box>

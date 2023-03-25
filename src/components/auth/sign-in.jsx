@@ -12,9 +12,10 @@ import Grid from "@mui/material/Grid";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import baseAPI from '../../apis/baseApi';
+import baseAPI from "../../apis/baseApi";
 import { useNavigate } from "react-router-dom";
 import { useSearchParams } from "react-router-dom";
+import UserStore from "../../store/user.store.js";
 
 function Copyright(props) {
   return (
@@ -34,8 +35,8 @@ const theme = createTheme();
 export default function SignInSide() {
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
-  const queryParams = new URLSearchParams(window.location.search)
-  let email = queryParams.get("email")
+  const queryParams = new URLSearchParams(window.location.search);
+  let email = queryParams.get("email");
   const [errorEmail, setErrorEmail] = React.useState(false);
   const [errorPassword, setErrorPassword] = React.useState(false);
   const [errorMsg, setErrorMsg] = React.useState("");
@@ -58,14 +59,15 @@ export default function SignInSide() {
       .then((res) => {
         if (res) {
           // set the user information in localStorage
-          localStorage.setItem('userInfo', JSON.stringify(res.data.User));
-          localStorage.setItem('token', JSON.stringify(res.data.Token));
+          UserStore.saveLoginInfo(res.data.Token, res.data.User);
+          // localStorage.setItem("userInfo", JSON.stringify());
+          // localStorage.setItem("token", JSON.stringify());
           // Chuyển đến trang homepage
           navigate("/");
         }
       })
       .catch((err) => {
-        setErrorMsg(err.response.data.devMsg)
+        setErrorMsg(err.response.data.devMsg);
       });
   };
 
@@ -82,18 +84,18 @@ export default function SignInSide() {
       setErrorPassword(true);
     }
 
-    if(!errorEmail && !errorPassword) {
+    if (!errorEmail && !errorPassword) {
       return true;
     }
     return false;
-  }
+  };
 
   const validateEmail = (email) => {
     return email.match(
-      /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+      /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
     );
   };
-  
+
   return (
     <ThemeProvider theme={theme}>
       <Grid container component="main" sx={{ height: "100vh" }}>
@@ -130,7 +132,7 @@ export default function SignInSide() {
             <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
               <TextField
                 defaultValue={email}
-                error={errorEmail || errorMsg} 
+                error={errorEmail}
                 margin="normal"
                 required
                 fullWidth
@@ -139,10 +141,10 @@ export default function SignInSide() {
                 name="email"
                 autoComplete="email"
                 autoFocus
-                helperText={errorEmail ? "Email is invalid." : "" }
-                />
+                helperText={errorEmail ? "Email is invalid." : ""}
+              />
               <TextField
-                error={errorPassword || errorMsg}
+                error={errorPassword}
                 margin="normal"
                 required
                 fullWidth
@@ -151,7 +153,7 @@ export default function SignInSide() {
                 type="password"
                 id="password"
                 autoComplete="current-password"
-                helperText={errorPassword ? "Password is required." : errorMsg }
+                helperText={errorPassword ? "Password is required." : errorMsg}
               />
               <FormControlLabel control={<Checkbox value="remember" color="primary" />} label="Remember me" />
               <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>

@@ -1,5 +1,4 @@
 import { createTheme } from "@mui/material/styles";
-import { TYPO_THEME } from "./typo.theme";
 import { COMPONENT_THEME } from "./component.theme";
 
 // Create a theme instance.
@@ -21,8 +20,16 @@ const theme = createTheme({
     //   // paper: "#F3F8FF", //F8F8F8
     // },
   },
+  breakpoints: {
+    values: {
+      xs: 0,
+      sm: 630,
+      md: 900,
+      lg: 1200,
+      xl: 1440,
+    },
+  },
   components: COMPONENT_THEME,
-  typography: TYPO_THEME,
 });
 
 export default theme;

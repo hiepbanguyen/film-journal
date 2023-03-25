@@ -1,9 +1,6 @@
 import React from "react";
 import { styled } from "@mui/material/styles";
-import {
-  Button,
-  Typography,
-} from "@mui/material";
+import { Button, Typography } from "@mui/material";
 import Container from "@mui/material/Container";
 import { makeStyles } from "@mui/styles";
 import Popular from "./popular.jsx";
@@ -34,8 +31,15 @@ const Lists = () => {
     <Root>
       <Container maxWidth="lg">
         <div className={classes.container}>
-          <Typography variant="h5" color="#abc" marginTop="30px">{tab}</Typography>
-          <Button style={{ color: "#fff", backgroundColor: "#175f70", fontSize: "13px", marginTop: "15px" }} variant="contained">Start your own list</Button>
+          <Typography variant="h5" color="#abc" marginTop="30px">
+            {tab}
+          </Typography>
+          <Button
+            sx={{ color: "#fff", backgroundColor: "#175f70", fontSize: "13px", marginTop: "15px" }}
+            variant="contained"
+          >
+            Start your own list
+          </Button>
         </div>
       </Container>
       <Popular />
@@ -43,7 +47,7 @@ const Lists = () => {
       {/* <ShowdownLists /> */}
       <ListCrew />
       <ListAllTime />
-    </Root >
+    </Root>
   );
 };
 export default Lists;

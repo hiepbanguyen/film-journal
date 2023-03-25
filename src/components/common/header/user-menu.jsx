@@ -3,10 +3,11 @@ import Tooltip from "@mui/material/Tooltip";
 import IconButton from "@mui/material/IconButton";
 import Avatar from "@mui/material/Avatar";
 import Menu from "@mui/material/Menu";
-import MenuItem from "@mui/material/MenuItem";
-import Typography from "@mui/material/Typography";
-
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
+import { Link } from "react-router-dom";
+import { ListItemIcon, MenuItem } from "@mui/material";
+import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
+import LogoutIcon from "@mui/icons-material/Logout";
+import UserStore from "../../../store/user.store.js";
 
 export default function UserMenu() {
   const [anchorElUser, setAnchorElUser] = React.useState(null);
@@ -23,11 +24,17 @@ export default function UserMenu() {
     <>
       <Tooltip title="Open settings">
         <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-          <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+          <Avatar />
         </IconButton>
       </Tooltip>
       <Menu
-        sx={{ mt: "45px" }}
+        sx={{
+          mt: "45px",
+          "& .MuiPaper-root": {
+            // background: "rgba(0,0,0,0.6)",
+            color: "#bcd",
+          },
+        }}
         id="menu-appbar"
         anchorEl={anchorElUser}
         anchorOrigin={{
@@ -42,11 +49,20 @@ export default function UserMenu() {
         open={Boolean(anchorElUser)}
         onClose={handleCloseUserMenu}
       >
-        {settings.map((setting, idx) => (
-          <MenuItem key={idx} onClick={handleCloseUserMenu}>
-            <Typography textAlign="center">{setting}</Typography>
+        <Link to="/profile" style={{ textDecoration: "none", color: "inherit" }}>
+          <MenuItem sx={{ color: "inherit" }}>
+            <ListItemIcon sx={{ color: "inherit" }}>
+              <PersonOutlineIcon fontSize="small" />
+            </ListItemIcon>
+            Profile
           </MenuItem>
-        ))}
+        </Link>
+        <MenuItem onClick={() => UserStore.logout()} sx={{ color: "inherit" }}>
+          <ListItemIcon sx={{ color: "inherit" }}>
+            <LogoutIcon fontSize="small" sx={{ color: "inherit" }} />
+          </ListItemIcon>
+          Logout
+        </MenuItem>
       </Menu>
     </>
   );

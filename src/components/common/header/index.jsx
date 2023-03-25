@@ -11,7 +11,9 @@ import MobileDrawer from "../mobile-drawer.jsx";
 import LoginIcon from "@mui/icons-material/Login";
 import { Logo } from "../logo.jsx";
 import { AnimatedUnderlineBox } from "../animated-underline-box.jsx";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import UserStore from "../../../store/user.store.js";
+import { AuthBox } from "./auth-box.jsx";
 
 const pages = [
   { href: "/films", label: "films" },
@@ -23,11 +25,21 @@ const pages = [
 export const HeaderHeight = 64;
 
 function Header() {
-  const signed_in = false;
+  const { pathname } = useLocation();
 
   return (
     <>
-      <AppBar position="fixed" sx={{ background: "#2c3440", height: HeaderHeight, boxShadow: "none" }}>
+      <AppBar
+        position="fixed"
+        sx={{
+          background: "linear-gradient(180deg, rgba(0,0,0,0.5) 0%, rgba(255,255,255,0) 100%)",
+          height: HeaderHeight,
+          boxShadow: "none",
+          "&:hover": {
+            background: "linear-gradient(180deg, rgba(0,0,0,0.8) 0%, rgba(255,255,255,0) 100%)",
+          },
+        }}
+      >
         <Container maxWidth="lg">
           <Toolbar
             disableGutters
@@ -38,7 +50,7 @@ function Header() {
             })}
           >
             <Box sx={{ display: { xs: "flex", md: "none" } }} mr={1}>
-              <MobileDrawer pages={pages} />
+              <MobileDrawer pages={pages} currPath={pathname} />
             </Box>
             <Box sx={{ display: { xs: "none", sm: "flex" }, flexGrow: 1 }}>
               <Logo />
@@ -46,8 +58,8 @@ function Header() {
             <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
               {pages.map((i, idx) => (
                 <Link to={i.href} key={idx} style={{ textDecoration: "none" }}>
-                  <Button sx={{ my: 2, color: "white", display: "block" }}>
-                    <AnimatedUnderlineBox>{i.label}</AnimatedUnderlineBox>
+                  <Button sx={{ my: 2, color: "white", display: "block", textTransform: "uppercase" }}>
+                    <AnimatedUnderlineBox open={pathname === i.href}>{i.label}</AnimatedUnderlineBox>
                   </Button>
                 </Link>
               ))}
@@ -55,32 +67,7 @@ function Header() {
             <Box sx={{ display: "flex", flexGrow: 0 }}>
               <SearchBox />
               <Box width={10}></Box>
-              {signed_in ? (
-                <UserMenu />
-              ) : (
-                <>
-                  <Button variant={"contained"} color={"warning"} href={"/sign-in"} sx={{ boxShadow: "none" }}>
-                    <Typography
-                      variant={"body2"}
-                      sx={(theme) => ({
-                        [theme.breakpoints.down("sm")]: {
-                          display: "none",
-                        },
-                      })}
-                    >
-                      Sign In
-                    </Typography>
-                    <LoginIcon
-                      href={"/sign-in"}
-                      sx={(theme) => ({
-                        [theme.breakpoints.up("sm")]: {
-                          display: "none",
-                        },
-                      })}
-                    />
-                  </Button>
-                </>
-              )}
+              <AuthBox />
             </Box>
           </Toolbar>
         </Container>
