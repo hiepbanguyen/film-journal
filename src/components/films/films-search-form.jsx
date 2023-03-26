@@ -100,12 +100,13 @@ export default function FilmsSearchForm() {
   };
 
   return (
-    <Box className="films-search-form">
+    <Box className="films-search-form" sx={{ marginBottom: "80px" }}>
       <form onSubmit={handleSubmitFormSearch}>
         <FormControl
           sx={{
             minWidth: 120,
             marginRight: "16px",
+            marginBottom: "16px",
             " fieldset,svg": {
               borderColor: "#9ab",
               color: "#9ab",
@@ -115,7 +116,7 @@ export default function FilmsSearchForm() {
               color: "#9ab",
             },
           }}
-          color="secondary"
+          size="small"
         >
           <InputLabel sx={{ color: "#9ab", backgroundColor: "#14181c", padding: "0 8px" }} id="films-search-year-label">
             Year
@@ -136,6 +137,7 @@ export default function FilmsSearchForm() {
           sx={{
             minWidth: 120,
             marginRight: "16px",
+            marginBottom: "16px",
             " fieldset,svg": {
               borderColor: "#9ab",
               color: "#9ab",
@@ -145,7 +147,7 @@ export default function FilmsSearchForm() {
               color: "#9ab",
             },
           }}
-          color="secondary"
+          size="small"
         >
           <InputLabel
             sx={{ color: "#9ab", backgroundColor: "#14181c", padding: "0 8px" }}
@@ -163,7 +165,8 @@ export default function FilmsSearchForm() {
             {listRating.map((rating) => (
               <MenuItem value={rating.value} key={rating.value}>
                 <Box sx={{ display: "flex", alignItems: "center" }}>
-                  {rating.label} {rating.value > 0 && <StarIcon sx={{marginLeft: '4px', fontSize: '22px'}}></StarIcon>} 
+                  {rating.label}{" "}
+                  {rating.value > 0 && <StarIcon sx={{ marginLeft: "4px", fontSize: "22px" }}></StarIcon>}
                 </Box>
               </MenuItem>
             ))}
@@ -173,6 +176,7 @@ export default function FilmsSearchForm() {
           sx={{
             minWidth: 180,
             marginRight: "16px",
+            marginBottom: "16px",
             " fieldset,svg": {
               borderColor: "#9ab",
               color: "#9ab",
@@ -182,7 +186,7 @@ export default function FilmsSearchForm() {
               color: "#9ab",
             },
           }}
-          color="secondary"
+          size="small"
         >
           <InputLabel
             sx={{ color: "#9ab", backgroundColor: "#14181c", padding: "0 8px" }}
@@ -208,8 +212,10 @@ export default function FilmsSearchForm() {
           variant="outlined"
           value={filmName}
           onChange={handleFilmNameChange}
+          size="small"
           sx={{
             marginRight: "24px",
+            marginBottom: "16px",
             " input,label,fieldset": {
               borderColor: "#9ab",
               color: "#9ab",
@@ -220,30 +226,32 @@ export default function FilmsSearchForm() {
             },
           }}
         />
-        <Button
-          type="clear"
-          size="large"
-          sx={{
-            marginRight: "16px",
-            border: "1px solid #9ab",
-            ":hover": { border: "1px solid #9ab" },
-          }}
-          onClick={handleClear}
-        >
-          Clear
-        </Button>
-        <Button
-          variant="contained"
-          type="submit"
-          size="large"
-          sx={{
-            backgroundColor: "#9ab !important",
-            color: "#000",
-            ":hover": { backgroundColor: "#9ab !important" },
-          }}
-        >
-          Search
-        </Button>
+        <Box sx={{ display: { xs: "block", md: "inline-block" } }}>
+          <Button
+            type="clear"
+            size="medium"
+            sx={{
+              marginRight: "16px",
+              border: "1px solid #9ab",
+              ":hover": { border: "1px solid #9ab" },
+            }}
+            onClick={handleClear}
+          >
+            Clear
+          </Button>
+          <Button
+            variant="contained"
+            type="submit"
+            size="medium"
+            sx={{
+              backgroundColor: "#9ab !important",
+              color: "#000",
+              ":hover": { backgroundColor: "#9ab !important" },
+            }}
+          >
+            Search
+          </Button>
+        </Box>
       </form>
     </Box>
   );
