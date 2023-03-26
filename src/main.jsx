@@ -19,6 +19,7 @@ import ProfileUser from "./components/profile-user/index.jsx";
 import Settings from "./components/settings/index.jsx";
 import FilmDetail from "./components/film-detail/index.jsx";
 import JournalArticle from "./components/journal-article/index.jsx";
+import Films from "./components/films/index.jsx";
 
 const router = createBrowserRouter([
   {
@@ -56,7 +57,7 @@ const router = createBrowserRouter([
       },
       {
         path: "films",
-        element: <SignInPage />,
+        element: <Films />,
       },
       {
         path: "members",
