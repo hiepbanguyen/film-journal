@@ -100,7 +100,7 @@ export default function FilmsSearchForm() {
   };
 
   return (
-    <Box className="films-search-form" sx={{ marginBottom: "80px" }}>
+    <Box className="films-search-form" sx={{ marginBottom: "48px" }}>
       <form onSubmit={handleSubmitFormSearch}>
         <FormControl
           sx={{
