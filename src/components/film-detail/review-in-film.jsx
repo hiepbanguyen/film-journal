@@ -1,9 +1,7 @@
-import { Avatar, Box, IconButton, Rating, Typography } from "@mui/material";
+import { Avatar, Box, Rating, Typography } from "@mui/material";
 import ChatBubbleIcon from "@mui/icons-material/ChatBubble.js";
 import FavoriteIcon from "@mui/icons-material/Favorite.js";
 import React from "react";
-import ThumbUpIcon from "@mui/icons-material/ThumbUp";
-import ThumbDownIcon from "@mui/icons-material/ThumbDown";
 import { Link } from "react-router-dom";
 
 export default function ReviewInFilm(props) {
@@ -25,19 +23,18 @@ export default function ReviewInFilm(props) {
           <p className="comment">{props.comment}</p>
         </Box>
         <Box className="like_link" gap={0.5}>
-          <ThumbUpIcon
+          {/*<ThumbUpIcon*/}
+          {/*  sx={{*/}
+          {/*    fontSize: 18,*/}
+          {/*    "& :hover": {*/}
+          {/*      cursor: "pointer",*/}
+          {/*      color: "rgb(89,255,236)",*/}
+          {/*    },*/}
+          {/*  }}*/}
+          {/*/>*/}
+          {/*<span>{props.likes}</span>*/}
+          <FavoriteIcon
             sx={{
-              fontSize: 18,
-              "& :hover": {
-                cursor: "pointer",
-                color: "rgb(89,255,236)",
-              },
-            }}
-          />
-          <span>{props.likes}</span>
-          <ThumbDownIcon
-            sx={{
-              ml: 1.5,
               fontSize: 18,
               "& :hover": {
                 cursor: "pointer",

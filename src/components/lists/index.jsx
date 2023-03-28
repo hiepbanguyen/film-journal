@@ -5,13 +5,12 @@ import Container from "@mui/material/Container";
 import { makeStyles } from "@mui/styles";
 import Popular from "./popular.jsx";
 import RecentlyLike from "./recently-liked.jsx";
-import { ShowdownLists } from "./showdown-list.jsx";
 import { ListCrew } from "./list-crew.jsx";
 import { ListAllTime } from "./all-time-list.jsx";
 
 const Root = styled("div")({
   flexGrow: 1,
-  padding: 2,
+  paddingTop: 60,
 });
 
 const useStyles = makeStyles((theme) => ({
@@ -44,7 +43,6 @@ const Lists = () => {
       </Container>
       <Popular />
       <RecentlyLike />
-      {/* <ShowdownLists /> */}
       <ListCrew />
       <ListAllTime />
     </Root>

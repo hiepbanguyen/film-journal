@@ -28,11 +28,12 @@ function Header() {
       <AppBar
         position="fixed"
         sx={{
-          background: "linear-gradient(180deg, rgba(0,0,0,0.5) 0%, rgba(255,255,255,0.1) 100%)",
-          height: HeaderHeight,
+          // background: "linear-gradient(180deg, rgba(0,0,0,0.5) 0%, rgba(255,255,255,0.1) 100%)",
+          background: "rgba(0,0,0,0.5)",
           boxShadow: "none",
+          backdropFilter: "blur(5px)",
           "&:hover": {
-            background: "linear-gradient(180deg, rgba(0,0,0,0.8) 0%, rgba(255,255,255,0.1) 100%)",
+            background: "rgba(0,0,0,0.7)",
           },
         }}
       >
@@ -43,6 +44,7 @@ function Header() {
               [theme.breakpoints.down("sm")]: {
                 justifyContent: "space-between",
               },
+              height: HeaderHeight,
             })}
           >
             <Box sx={{ display: { xs: "flex", md: "none" } }} mr={1}>

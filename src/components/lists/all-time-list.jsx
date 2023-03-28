@@ -4,7 +4,7 @@ import { AllTimeList } from "../home/list-preview";
 export const ListAllTime = (props) => {
   return (
     <Container>
-      <Box mt={2} mb={2}>
+      <Box mb={2}>
         <Box display={"flex"} justifyContent={"space-between"} alignItems={"baseline"} color={"#fff"}>
           <Typography variant={"body1"} textTransform={"uppercase"} mt={5}>
             all-time lists

@@ -1,10 +1,9 @@
-import { Box, Grid } from "@mui/material";
-import React, { useState } from "react";
+import { Box } from "@mui/material";
+import React from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import VisibilityIcon from "@mui/icons-material/Visibility";
-import NotesIcon from '@mui/icons-material/Notes';
+import ViewsLikesLists from "../common/views-likes-lists.jsx";
 
 export default function FilmsListPopularFilms() {
   let listPopularFilms = [
@@ -161,12 +160,6 @@ export default function FilmsListPopularFilms() {
     else old.isLiked = true;
   };
 
-  const formatTotalNumber = (number) => {
-    if(number < 1000) return number;
-    if(number < 10000) return Math.round(number / 1000 * 10) / 10 + 'k';
-    else return Math.round(number / 1000) + 'k';
-  }
-
   const responsive = {
     medium: {
       breakpoint: { max: 3000, min: 900 },
@@ -207,8 +200,8 @@ export default function FilmsListPopularFilms() {
         autoPlaySpeed={5000}
         responsive={responsive}
       >
-        {listPopularFilms.map((film) => (
-          <Box>
+        {listPopularFilms.map((film, idx) => (
+          <Box key={idx}>
             <Box
               key={film.id}
               sx={{
@@ -217,7 +210,7 @@ export default function FilmsListPopularFilms() {
                 overflow: "hidden",
                 aspectRatio: "2/3",
                 position: "relative",
-                marginBottom: '8px',
+                marginBottom: "8px",
                 border: "2px solid #9ab",
                 transition: "0.3s",
                 ":hover": {
@@ -274,17 +267,26 @@ export default function FilmsListPopularFilms() {
             <Box
               sx={{
                 display: "flex",
-                alignItems: "center",
+                flexWrap: "wrap",
                 justifyContent: "center",
-                width: '100%',
-                fontSize: '14px'
               }}
             >
-              <NotesIcon sx={{marginRight:'2px', color: '#40bcf4'}}></NotesIcon>
-              {formatTotalNumber(film.totalLikes)}
-              <FavoriteIcon sx={{margin:'0 2px 0 16px', color: '#ff9010'}}></FavoriteIcon>
-              {formatTotalNumber(film.totalLikes)}
+              <ViewsLikesLists views={film.totalReviews} likes={film.totalLikes} lists={film.totalLikes} />
             </Box>
+            {/*<Box*/}
+            {/*  sx={{*/}
+            {/*    display: "flex",*/}
+            {/*    alignItems: "center",*/}
+            {/*    justifyContent: "center",*/}
+            {/*    width: "100%",*/}
+            {/*    fontSize: "14px",*/}
+            {/*  }}*/}
+            {/*>*/}
+            {/*  <NotesIcon sx={{ marginRight: "2px", color: "#40bcf4" }}></NotesIcon>*/}
+            {/*  {formatCompactNumber(film.totalLikes)}*/}
+            {/*  <FavoriteIcon sx={{ margin: "0 2px 0 16px", color: "#ff9010" }}></FavoriteIcon>*/}
+            {/*  {formatCompactNumber(film.totalLikes)}*/}
+            {/*</Box>*/}
           </Box>
         ))}
       </Carousel>

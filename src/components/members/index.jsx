@@ -1,5 +1,5 @@
 import Container from "@mui/system/Container";
-import { Box, Button, Grid, CardMedia } from "@mui/material";
+import { Box, Grid } from "@mui/material";
 import PopularReviewers from "./popular-reviewers";
 import ListReviewers from "./list-reviewers";
 import MembersAside from "./aside";
@@ -8,7 +8,7 @@ export default function Members() {
   return (
     <Container
       sx={{
-        marginTop: { xs: "24px", md: "40px" },
+        marginTop: 10,
       }}
     >
       <Box

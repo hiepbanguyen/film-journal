@@ -1,11 +1,10 @@
-import { Box, Container, Divider, Grid, Typography } from "@mui/material";
-import ListPreview, { CrewList } from "../home/list-preview";
+import { Box, Container, Divider, Typography } from "@mui/material";
+import { CrewList } from "../home/list-preview";
 
 export const ListCrew = (props) => {
-  const { title } = props;
   return (
     <Container>
-      <Box mt={2} mb={2}>
+      <Box>
         <Box display={"flex"} justifyContent={"space-between"} alignItems={"baseline"} color={"#fff"}>
           <Typography variant={"body1"} textTransform={"uppercase"} mt={5}>
             crew lists

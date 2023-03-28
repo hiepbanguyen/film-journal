@@ -1,7 +1,4 @@
 import { Avatar, Box, Divider, Grid, Typography } from "@mui/material";
-import FilmCard from "./film-card";
-import CommentIcon from "@mui/icons-material/Comment";
-import FavoriteIcon from "@mui/icons-material/Favorite.js";
 
 export const PopularReviewers = () => {
   return (
@@ -15,15 +12,11 @@ export const PopularReviewers = () => {
         </Typography>
       </Box>
       <Divider variant="fullWidth" />
-      <Grid container spacing={1}>
+      <Grid container>
         {Array.from({ length: 5 }).map((i, idx) => (
           <Grid key={idx} item xs={12} sm={6} md={12}>
-            <ListPreview
-              title={"Lorem Ipsum is simply dummy text"}
-              username={"Bá Hiệp Nguyễn"}
-              filmCount={400}
-              reviewCount={50}
-            />
+            <ReviewerPreview username={"Bá Hiệp Nguyễn"} filmCount={400} reviewCount={50} avatar={""} />
+            {idx < 4 && <Divider variant={"fullWidth"} />}
           </Grid>
         ))}
       </Grid>
@@ -31,25 +24,22 @@ export const PopularReviewers = () => {
   );
 };
 
-export default function ListPreview(props) {
-  const { username, filmCount, reviewCount } = props;
+function ReviewerPreview(props) {
+  const { username, filmCount, reviewCount, avatar } = props;
   return (
-    <>
-      <Box display={"flex"} alignItems={"center"} mt={2} mb={1}>
-        <Avatar sx={{ width: 40, height: 40 }}>H</Avatar>
-        <Box>
-          <Typography variant={"body1"} ml={1} fontWeight={"bold"}>
-            {username}
-          </Typography>
-          <Typography variant={"caption"} ml={1}>
-            {filmCount}
-            {" films, "}
-            {reviewCount}
-            {" reviews."}
-          </Typography>
-        </Box>
+    <Box display={"flex"} alignItems={"center"} my={1}>
+      <Avatar src={avatar} sx={{ width: 40, height: 40 }} />
+      <Box>
+        <Typography variant={"body1"} ml={1} fontWeight={"bold"}>
+          {username}
+        </Typography>
+        <Typography variant={"caption"} ml={1}>
+          {filmCount}
+          {" films, "}
+          {reviewCount}
+          {" reviews."}
+        </Typography>
       </Box>
-      <Divider variant={"fullWidth"} />
-    </>
+    </Box>
   );
 }

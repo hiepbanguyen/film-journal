@@ -1,4 +1,4 @@
-import { Box, Card, CardMedia } from "@mui/material";
+import { Card, CardMedia } from "@mui/material";
 import { Link } from "react-router-dom";
 
 export default function FilmCard(props) {
@@ -30,7 +30,7 @@ export default function FilmCard(props) {
               boxShadow: list ? "8px 0 5px -2px #000" : "none",
               border: "1px solid rgba(0,0,0,0.2)",
               "&:hover": {
-                border: "1px solid rgba(255,255,255,0.7)",
+                border: "2px solid rgba(255,255,255,0.7)",
               },
             }}
           >

@@ -183,12 +183,15 @@ export default function ReviewDetail() {
 
   return (
     <Container>
-      <Box sx={{ marginTop: { xs: "32px", ms: "80px" } }}>
+      <Box sx={{ marginTop: 13 }}>
         <Grid container spacing={8} columns={12}>
           {/* Main */}
           <Grid item xs={12} md={9}>
             {/* Main-top */}
-            <ReviewDetailMainSection reviewDetail={reviewDetail} listLikedReview={listLikedReview}></ReviewDetailMainSection>
+            <ReviewDetailMainSection
+              reviewDetail={reviewDetail}
+              listLikedReview={listLikedReview}
+            ></ReviewDetailMainSection>
             {/* List Cmt */}
             <ReviewDetailListComment listComment={listComment} reviewDetail={reviewDetail}></ReviewDetailListComment>
           </Grid>

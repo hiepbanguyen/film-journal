@@ -1,4 +1,4 @@
-import { Avatar, Box, Container, Divider, Grid, Stack, Typography } from "@mui/material";
+import { Avatar, Box, Divider, Grid, Typography } from "@mui/material";
 import FilmCard from "./film-card";
 import ChatBubbleIcon from "@mui/icons-material/ChatBubble.js";
 import FavoriteIcon from "@mui/icons-material/Favorite.js";
@@ -9,12 +9,10 @@ export const PopularLists = () => {
   return (
     <>
       <Box display={"flex"} justifyContent={"space-between"} alignItems={"baseline"} color={"#fff"}>
-        <Typography variant={"body1"} textTransform={"uppercase"} mt={5}>
+        <Typography variant={"body1"} textTransform={"uppercase"}>
           popular lists
         </Typography>
-        <Typography variant={"caption"} mt={5}>
-          MORE
-        </Typography>
+        <Typography variant={"caption"}>MORE</Typography>
       </Box>
       <Divider variant="fullWidth" />
       <Grid container spacing={1}>
@@ -35,7 +33,7 @@ export const PopularLists = () => {
 
 export const FilmCardsStackedFive = () => {
   return (
-    <Link to={"/"}>
+    <Link to={"/list/place-holder-list/id123"}>
       <Box
         display={"flex"}
         width={289}
@@ -256,7 +254,16 @@ export const AllTimeList = (props) => {
 export default function ListPreview(props) {
   const { title, username, favoriteCount, commentCount } = props;
   return (
-    <Box mt={2} mb={2} ml={{ md: 0, xs: "5%" }}>
+    <Box
+      mt={2}
+      sx={(theme) => ({
+        [theme.breakpoints.only("xs")]: {
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        },
+      })}
+    >
       <FilmCardsStackedFive />
       <Typography variant={"body2"}>{title}</Typography>
       <Box display={"flex"} alignItems={"center"} my={1}>

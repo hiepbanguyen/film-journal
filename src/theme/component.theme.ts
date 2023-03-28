@@ -1,5 +1,3 @@
-import StarIcon from "@mui/icons-material/Star";
-
 export const COMPONENT_THEME = {
   MuiButton: {
     styleOverrides: {
@@ -72,6 +70,19 @@ export const COMPONENT_THEME = {
       },
       sizeMedium: {
         fontSize: 20,
+      },
+    },
+  },
+
+  MuiChip: {
+    styleOverrides: {
+      root: {
+        background: "#456",
+        color: "#9ab",
+        "&:hover": {
+          color: "#fff",
+          background: "#678",
+        },
       },
     },
   },

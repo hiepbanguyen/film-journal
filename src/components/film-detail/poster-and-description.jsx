@@ -1,8 +1,5 @@
-import { Box, Button, Divider, Grid, Typography } from "@mui/material";
-import ViewsLikesLists from "./views-likes-lists.jsx";
-import RemoveRedEyeRoundedIcon from "@mui/icons-material/RemoveRedEyeRounded.js";
-import GridViewSharpIcon from "@mui/icons-material/GridViewSharp.js";
-import FavoriteIcon from "@mui/icons-material/Favorite.js";
+import { Box, Typography } from "@mui/material";
+import ViewsLikesLists from "../common/views-likes-lists.jsx";
 import React from "react";
 
 export default function PosterAndDescription(props) {

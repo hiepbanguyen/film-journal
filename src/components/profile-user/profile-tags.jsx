@@ -1,6 +1,6 @@
 import { Box, Divider } from "@mui/material";
 import * as React from "react";
-import Tags from "../lists/tags";
+import Tags from "../common/tags.jsx";
 
 export default function ProfileTags() {
   return (

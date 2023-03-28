@@ -114,7 +114,7 @@ function Articles() {
 
 const JournalArticle = () => {
   return (
-    <div id="journal-article-page">
+    <div id="journal-article-page" style={{ marginTop: 50 }}>
       <header>
         <div id="nav">
           <a href>

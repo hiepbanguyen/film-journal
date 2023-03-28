@@ -1,4 +1,4 @@
-import { Box, Grid, FormControl, InputLabel, MenuItem, Select, TextField, Button } from "@mui/material";
+import { Box, Button, FormControl, InputLabel, MenuItem, Select, TextField } from "@mui/material";
 import React, { useState } from "react";
 import StarIcon from "@mui/icons-material/Star.js";
 
@@ -128,8 +128,10 @@ export default function FilmsSearchForm() {
             onChange={handleYearChange}
             sx={{ color: "#9ab" }}
           >
-            {listYear.map((year) => (
-              <MenuItem value={year.value}>{year.label}</MenuItem>
+            {listYear.map((year, idx) => (
+              <MenuItem key={idx} value={year.value}>
+                {year.label}
+              </MenuItem>
             ))}
           </Select>
         </FormControl>
@@ -162,8 +164,8 @@ export default function FilmsSearchForm() {
             onChange={handleRatingChange}
             sx={{ color: "#9ab" }}
           >
-            {listRating.map((rating) => (
-              <MenuItem value={rating.value} key={rating.value}>
+            {listRating.map((rating, idx) => (
+              <MenuItem key={idx} value={rating.value}>
                 <Box sx={{ display: "flex", alignItems: "center" }}>
                   {rating.label}{" "}
                   {rating.value > 0 && <StarIcon sx={{ marginLeft: "4px", fontSize: "22px" }}></StarIcon>}
@@ -201,8 +203,10 @@ export default function FilmsSearchForm() {
             onChange={handleGenreChange}
             sx={{ color: "#9ab" }}
           >
-            {listGenre.map((genre) => (
-              <MenuItem value={genre.value}>{genre.label}</MenuItem>
+            {listGenre.map((genre, idx) => (
+              <MenuItem key={idx} value={genre.value}>
+                {genre.label}
+              </MenuItem>
             ))}
           </Select>
         </FormControl>
