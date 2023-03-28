@@ -2,17 +2,13 @@ import * as React from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import SearchBox from "./search-box.jsx";
-import UserMenu from "./user-menu.jsx";
 import MobileDrawer from "../mobile-drawer.jsx";
-import LoginIcon from "@mui/icons-material/Login";
 import { Logo } from "../logo.jsx";
 import { AnimatedUnderlineBox } from "../animated-underline-box.jsx";
 import { Link, useLocation } from "react-router-dom";
-import UserStore from "../../../store/user.store.js";
 import { AuthBox } from "./auth-box.jsx";
 
 const pages = [
@@ -32,11 +28,11 @@ function Header() {
       <AppBar
         position="fixed"
         sx={{
-          background: "linear-gradient(180deg, rgba(0,0,0,0.5) 0%, rgba(255,255,255,0) 100%)",
+          background: "linear-gradient(180deg, rgba(0,0,0,0.5) 0%, rgba(255,255,255,0.1) 100%)",
           height: HeaderHeight,
           boxShadow: "none",
           "&:hover": {
-            background: "linear-gradient(180deg, rgba(0,0,0,0.8) 0%, rgba(255,255,255,0) 100%)",
+            background: "linear-gradient(180deg, rgba(0,0,0,0.8) 0%, rgba(255,255,255,0.1) 100%)",
           },
         }}
       >

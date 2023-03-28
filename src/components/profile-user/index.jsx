@@ -11,7 +11,7 @@ const Root = styled("div")({
   padding: 10,
 });
 
-const profileLabels = ["Profile", "Activity"];
+const profileLabels = ["Profile", "Reviews", "Watchlist", "Lists", "Likes", "Tags", "Activity", "Network", "Settings"];
 
 const ProfileUser = () => {
   const [username, setUsername] = React.useState("viethoan2k1");

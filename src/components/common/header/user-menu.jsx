@@ -4,7 +4,7 @@ import IconButton from "@mui/material/IconButton";
 import Avatar from "@mui/material/Avatar";
 import Menu from "@mui/material/Menu";
 import { Link } from "react-router-dom";
-import { ListItemIcon, MenuItem } from "@mui/material";
+import { Divider, ListItemIcon, MenuItem } from "@mui/material";
 import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
 import LogoutIcon from "@mui/icons-material/Logout";
 import UserStore from "../../../store/user.store.js";
@@ -31,8 +31,14 @@ export default function UserMenu() {
         sx={{
           mt: "45px",
           "& .MuiPaper-root": {
-            // background: "rgba(0,0,0,0.6)",
-            color: "#bcd",
+            background: "#9ab",
+            color: "#2c3440",
+          },
+          "& .MuiMenuItem-root": {
+            "&:hover": {
+              background: "#678",
+              color: "#fff",
+            },
           },
         }}
         id="menu-appbar"
@@ -49,17 +55,18 @@ export default function UserMenu() {
         open={Boolean(anchorElUser)}
         onClose={handleCloseUserMenu}
       >
-        <Link to="/profile" style={{ textDecoration: "none", color: "inherit" }}>
-          <MenuItem sx={{ color: "inherit" }}>
+        <Link to="/member/1" style={{ textDecoration: "none", color: "inherit" }}>
+          <MenuItem>
             <ListItemIcon sx={{ color: "inherit" }}>
               <PersonOutlineIcon fontSize="small" />
             </ListItemIcon>
             Profile
           </MenuItem>
         </Link>
-        <MenuItem onClick={() => UserStore.logout()} sx={{ color: "inherit" }}>
+        <Divider variant={"fullWidth"} />
+        <MenuItem onClick={() => UserStore.logout()}>
           <ListItemIcon sx={{ color: "inherit" }}>
-            <LogoutIcon fontSize="small" sx={{ color: "inherit" }} />
+            <LogoutIcon fontSize="small" />
           </ListItemIcon>
           Logout
         </MenuItem>
