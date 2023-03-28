@@ -1,5 +1,5 @@
 import { Avatar, Box, Divider, Rating, Typography } from "@mui/material";
-import FilmCard from "./film-card";
+import FilmCard from "../common/film-card.jsx";
 import FavoriteIcon from "@mui/icons-material/Favorite.js";
 import ChatBubbleIcon from "@mui/icons-material/ChatBubble.js";
 import React from "react";
@@ -62,31 +62,43 @@ function ReviewPreview(props) {
             </Box>
           </Box>
           <Box sx={(theme) => ({ [theme.breakpoints.only("xs")]: { display: "none" } })}>
-            <Typography fontSize={15}>{content}</Typography>
-            <Box display={"flex"} alignItems={"center"} mt={1}>
-              <FavoriteIcon fontSize={"small"} />
-              <Typography variant={"body2"} ml={1} mr={2}>
-                {likeCount}
-              </Typography>
-              {/*<ThumbDownIcon fontSize={"small"} />*/}
-              {/*<Typography variant={"body2"} ml={1}>*/}
-              {/*  {dislikeCount}*/}
-              {/*</Typography>*/}
+            <Typography fontSize={15} mb={1}>
+              {content}
+            </Typography>
+            <Box display={"flex"} alignItems={"stretch"} fontWeight={600} fontSize={14} gap={0.5}>
+              <FavoriteIcon
+                sx={{
+                  fontSize: 18,
+                  "& :hover": {
+                    cursor: "pointer",
+                    color: "rgba(255, 89, 89, 1)",
+                  },
+                }}
+              />
+              <span>
+                {likeCount} {" likes"}
+              </span>
             </Box>
           </Box>
         </Box>
       </Box>
       <Box mt={1} sx={(theme) => ({ [theme.breakpoints.not("xs")]: { display: "none" } })}>
-        <Typography fontSize={15}>{content}</Typography>
-        <Box display={"flex"} alignItems={"center"} mt={1}>
-          <FavoriteIcon fontSize={"small"} />
-          <Typography variant={"body2"} ml={1} mr={2}>
-            {likeCount}
-          </Typography>
-          {/*<ThumbDownIcon fontSize={"small"} />*/}
-          {/*<Typography variant={"body2"} ml={1}>*/}
-          {/*  {dislikeCount}*/}
-          {/*</Typography>*/}
+        <Typography fontSize={15} mb={1}>
+          {content}
+        </Typography>
+        <Box display={"flex"} alignItems={"stretch"} fontWeight={600} fontSize={14} gap={0.5}>
+          <FavoriteIcon
+            sx={{
+              fontSize: 18,
+              "& :hover": {
+                cursor: "pointer",
+                color: "rgba(255, 89, 89, 1)",
+              },
+            }}
+          />
+          <span>
+            {likeCount} {" likes"}
+          </span>
         </Box>
       </Box>
     </Box>

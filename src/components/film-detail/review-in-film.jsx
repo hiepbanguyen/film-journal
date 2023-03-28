@@ -22,17 +22,7 @@ export default function ReviewInFilm(props) {
         <Box component={Link} to={"/"} sx={{ textDecoration: "none", color: "inherit" }}>
           <p className="comment">{props.comment}</p>
         </Box>
-        <Box className="like_link" gap={0.5}>
-          {/*<ThumbUpIcon*/}
-          {/*  sx={{*/}
-          {/*    fontSize: 18,*/}
-          {/*    "& :hover": {*/}
-          {/*      cursor: "pointer",*/}
-          {/*      color: "rgb(89,255,236)",*/}
-          {/*    },*/}
-          {/*  }}*/}
-          {/*/>*/}
-          {/*<span>{props.likes}</span>*/}
+        <Box display={"flex"} alignItems={"stretch"} fontWeight={600} fontSize={14} gap={0.5}>
           <FavoriteIcon
             sx={{
               fontSize: 18,
@@ -42,7 +32,9 @@ export default function ReviewInFilm(props) {
               },
             }}
           />
-          <span>{props.likes}</span>
+          <span>
+            {props.likes} {" likes"}
+          </span>
         </Box>
       </Box>
     </Box>

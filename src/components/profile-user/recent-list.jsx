@@ -1,6 +1,5 @@
 import * as React from "react";
 import { Box, Divider, Grid, Typography } from "@mui/material";
-import FilmCard from "../home/film-card.jsx";
 import { FilmCardsStackedFive } from "../home/list-preview.jsx";
 
 export const RecentList = (props) => {

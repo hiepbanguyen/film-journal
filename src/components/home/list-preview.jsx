@@ -1,5 +1,5 @@
 import { Avatar, Box, Divider, Grid, Typography } from "@mui/material";
-import FilmCard from "./film-card";
+import FilmCard from "../common/film-card.jsx";
 import ChatBubbleIcon from "@mui/icons-material/ChatBubble.js";
 import FavoriteIcon from "@mui/icons-material/Favorite.js";
 import StarIcon from "@mui/icons-material/Star";
@@ -40,7 +40,7 @@ export const FilmCardsStackedFive = () => {
         sx={{
           mb: 2,
           "&:hover": {
-            border: "2px solid rgba(255,255,255,0.7)",
+            border: "2px solid #00e054",
             borderRadius: 1.5,
           },
         }}
@@ -64,7 +64,7 @@ const FilmCardsStackedTen = () => {
         sx={{
           mb: 2,
           "&:hover": {
-            border: "2px solid rgba(255,255,255,0.7)",
+            border: "2px solid #00e054",
             borderRadius: 1.5,
           },
         }}
@@ -143,7 +143,7 @@ export const ListShowdown = (props) => {
       <Grid container mt={5} spacing={1}>
         {Array.from({ length: 1 }).map((i, idx) => (
           <Grid item key={idx} xs={12}>
-            <FilmCard size={"medium"} />
+            <FilmCard size={140} />
           </Grid>
         ))}
       </Grid>

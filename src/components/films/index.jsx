@@ -9,7 +9,9 @@ export default function Films() {
   return (
     <Container>
       <Box sx={{ marginTop: 13, color: "#9ab" }}>
-        <FilmsSearchForm></FilmsSearchForm>
+        <Box mb={2}>
+          <FilmsSearchForm />
+        </Box>
         <FilmsListPopularFilms></FilmsListPopularFilms>
         <Box>
           <Grid container spacing={8} columns={12}>

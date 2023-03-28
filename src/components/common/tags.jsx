@@ -1,5 +1,6 @@
-import { Grid } from "@mui/material";
+import { Box } from "@mui/material";
 import Chip from "@mui/material/Chip";
+import { Link } from "react-router-dom";
 
 const options = [
   "Vue",
@@ -25,13 +26,13 @@ const options = [
 
 const Tags = () => {
   return (
-    <Grid container spacing={1}>
+    <Box display={"flex"} gap={1} flexWrap={"wrap"}>
       {options.map((tag, idx) => (
-        <Grid item key={idx}>
+        <Link key={idx} to={""} style={{ textDecoration: "none" }}>
           <Chip label={tag} sx={{ background: "#456", color: "#9ab" }} clickable />
-        </Grid>
+        </Link>
       ))}
-    </Grid>
+    </Box>
   );
 };
 

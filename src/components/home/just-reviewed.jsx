@@ -1,6 +1,6 @@
-import { Box, Divider, Grid, Link } from "@mui/material";
+import { Box, Divider, Link } from "@mui/material";
 import Typography from "@mui/material/Typography";
-import FilmCard from "./film-card.jsx";
+import FilmCard from "../common/film-card.jsx";
 
 export const JustReviewed = () => {
   return (
@@ -16,7 +16,7 @@ export const JustReviewed = () => {
       <Divider variant="fullWidth" />
       <Box display={"flex"} flexWrap={"wrap"} justifyContent={"center"} gap={1} mt={1.5}>
         {Array.from({ length: 12 }).map((i, idx) => (
-          <FilmCard key={idx} size={"small"} />
+          <FilmCard key={idx} />
         ))}
       </Box>
       <Typography variant={"h5"} mt={5} textAlign={"center"}>

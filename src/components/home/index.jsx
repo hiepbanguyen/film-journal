@@ -1,7 +1,7 @@
 import Container from "@mui/material/Container";
 import { Box, Button, Grid } from "@mui/material";
 import Typography from "@mui/material/Typography";
-import FilmCard from "./film-card.jsx";
+import FilmCard from "../common/film-card.jsx";
 import { Features } from "./features.jsx";
 import { JustReviewed } from "./just-reviewed.jsx";
 import { PopularReviews } from "./review-preview.jsx";
@@ -43,7 +43,7 @@ const PopularFilms = () => {
   return (
     <Box display={"flex"} flexWrap={"wrap"} justifyContent={"center"} gap={2} mt={5}>
       {Array.from({ length: 6 }).map((i, idx) => (
-        <FilmCard key={idx} size={"medium"} />
+        <FilmCard key={idx} size={140} />
       ))}
     </Box>
   );
