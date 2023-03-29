@@ -6,32 +6,36 @@
   .profileStatistic {
     font-weight: 400;
     text-align: center;
+      color: #fff;
+    .value {
+      color: #d8e0e8;
+      display: block;
+      font-family: TiemposTextWeb-Semibold,Georgia,serif;
+      font-size: 1.61538462rem;
+      font-weight: 400;
+    }
+    .definition {
+      color: #9ab;
+      display: block;
+      font-family: Graphik-Regular-Web,sans-serif;
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: .075em;
+      margin-top: 0.75em;
+      text-transform: uppercase;
+    }
   }
-  .value {
-    color: #d8e0e8;
-    display: block;
-    font-family: TiemposTextWeb-Semibold,Georgia,serif;
-    font-size: 1.61538462rem;
-    font-weight: 400;
-  }
-  .definition {
-    color: #9ab;
-    color: #678;
-    display: block;
-    font-family: Graphik-Regular-Web,sans-serif;
-    font-size: 1rem;
-    font-size: .76923077rem;
-    font-weight: 400;
-    letter-spacing: .075em;
-    margin-top: 0.75em;
-    text-transform: uppercase;
+
+  .profileStatistic:hover {
+    cursor: pointer;
+    .definition {
+      color: #fff;
+    }
   }
 
   a {
-    color: #b2a377;
     text-decoration: none;
-    border: 0;
-    font-family: inherit;
+
   }
 
   h4 {

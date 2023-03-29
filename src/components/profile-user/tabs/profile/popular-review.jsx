@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Box, Divider, Grid, Typography } from "@mui/material";
-import { RecentReviewFilm } from "../home/list-preview.jsx";
+import { RecentReviewFilm } from "../../../home/list-preview.jsx";
 
 export const PopularReview = () => {
   return (

@@ -6,17 +6,18 @@ import TimelineContent from "@mui/lab/TimelineContent";
 import TimelineDot from "@mui/lab/TimelineDot";
 import { Box, Divider, Grid } from "@mui/material";
 import Typography from "@mui/material/Typography";
-import FilmCard from "../common/film-card.jsx";
+import FilmCard from "../../../common/film-card.jsx";
 import StarIcon from "@mui/icons-material/Star";
 import ListIcon from "@mui/icons-material/List";
-import { WatchList } from "./watchlist";
-import { RecentReview } from "./recent-review";
-import { PopularReview } from "./popular-review";
-import { RecentList } from "./recent-list";
-import ListFollow from "./following";
-import ProfileTags from "./profile-tags";
+import { WatchList } from "./watchlist.jsx";
+import { RecentReview } from "./recent-review.jsx";
+import { PopularReview } from "./popular-review.jsx";
+import { RecentList } from "./recent-list.jsx";
+import ListFollow from "./following.jsx";
+import ProfileTags from "./profile-tags.jsx";
+import CompiledRatings from "../../../common/compiled-ratings.jsx";
 
-export const TabProfile = () => {
+export const ProfileTab = () => {
   return (
     <>
       <Grid container>
@@ -64,7 +65,8 @@ export const TabProfile = () => {
           </Grid>
         </Grid>
         <Grid item xs={1}></Grid>
-        <Grid item xs={4}>
+        <Grid item xs={4} sx={{ color: "#fff", mt: 4 }}>
+          <CompiledRatings />
           <WatchList />
           <RecentList title={"haon1231asdzxcasdasdasdasdasdas"} films={12} />
           {/* <Diary /> */}
