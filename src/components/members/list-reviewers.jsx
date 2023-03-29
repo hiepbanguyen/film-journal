@@ -133,7 +133,7 @@ export default function ListReviewers() {
                         fontSize: "30px",
                         padding: "4px",
                         borderRadius: "50%",
-                        transition: "0.3s",
+                        transition: "0.2s",
                         "&:hover": {
                           backgroundColor: "#8e99a4",
                         },

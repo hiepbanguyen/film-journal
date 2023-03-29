@@ -154,10 +154,10 @@ export default function FilmsListPopularFilms() {
   ];
 
   const handleLikeFilm = (filmId) => {
-    let old = listPopularFilms.find((film) => film.id === filmId);
+    // let old = listPopularFilms.find((film) => film.id === filmId);
 
-    if (old.isLiked) old.isLiked = false;
-    else old.isLiked = true;
+    // if (old.isLiked) old.isLiked = false;
+    // else old.isLiked = true;
   };
 
   const responsive = {
@@ -212,7 +212,7 @@ export default function FilmsListPopularFilms() {
                 position: "relative",
                 marginBottom: "8px",
                 border: "2px solid #9ab",
-                transition: "0.3s",
+                transition: "0.2s",
                 ":hover": {
                   border: "2px solid #00c030",
                 },
@@ -238,7 +238,7 @@ export default function FilmsListPopularFilms() {
                   display: "flex",
                   justifyContent: "center",
                   width: "100%",
-                  transition: "0.3s",
+                  transition: "0.2s",
                   opacity: "0",
                 }}
                 className="btn-action-card-film"
@@ -258,6 +258,7 @@ export default function FilmsListPopularFilms() {
                       ":hover": {
                         color: film.isLiked ? "#e08012" : "#8592a0",
                       },
+                      fontSize: '18px'
                     }}
                     onClick={() => handleLikeFilm(film.id)}
                   ></FavoriteIcon>
