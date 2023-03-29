@@ -186,7 +186,7 @@ export default function FilmsListPopularFilms() {
           justifyContent: "space-between",
           borderBottom: "1px solid #9ab",
           marginBottom: "16px",
-          fontSize: "14px",
+          fontSize: "16px",
         }}
       >
         <Box sx={{ textTransform: "uppercase" }}>Popular films this week</Box>

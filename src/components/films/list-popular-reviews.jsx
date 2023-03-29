@@ -67,7 +67,7 @@ export default function FilmsListPopularReviews() {
           justifyContent: "space-between",
           borderBottom: "1px solid #9ab",
           marginBottom: "16px",
-          fontSize: "14px",
+          fontSize: "16px",
         }}
       >
         <Box sx={{ textTransform: "uppercase" }}>Popular reviews this week</Box>
@@ -161,7 +161,7 @@ export default function FilmsListPopularReviews() {
                   },
                   textDecoration: "none",
                 }}
-                href={"/films/" + review.film.id}
+                href={"/" + review.user.userName + '/reviews/' + review.id}
               >
                 {review.film.name}
               </Box>
@@ -185,7 +185,7 @@ export default function FilmsListPopularReviews() {
               >
                 <Box
                   component="a"
-                  href={"/profile/" + review.user.userName}
+                  href={"/" + review.user.userName}
                   sx={{
                     width: "24px",
                     aspectRatio: "1/1",
@@ -208,7 +208,7 @@ export default function FilmsListPopularReviews() {
                 </Box>
                 <Box
                   component="a"
-                  href={"/profile/" + review.user.userName}
+                  href={"/" + review.user.userName}
                   sx={{
                     color: "#9ab",
                     textDecoration: "none",
@@ -232,7 +232,7 @@ export default function FilmsListPopularReviews() {
                 </Box>
                 <Box
                   component="a"
-                  href={"/films/" + review.film.id}
+                  href={"/" + review.user.userName + '/reviews/' + review.id}
                   sx={{
                     display: "flex",
                     alignItems: "center",
