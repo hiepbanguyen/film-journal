@@ -144,14 +144,14 @@ function Comment(props) {
                   borderRadius: "50%",
                   marginRight: "8px",
                   border: "1px solid #9ab",
-                  transition: "0.3s",
+                  transition: "0.2s",
                 }}
                 alt="User Avatar test"
                 src={props.comment.userAvatar}
               />
               <Box
                 sx={{
-                  transition: "0.3s",
+                  transition: "0.2s",
                 }}
                 component="span"
               >
