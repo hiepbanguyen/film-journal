@@ -64,7 +64,7 @@ const router = createBrowserRouter([
         element: <Films />,
       },
       {
-        path: "film/:filmTitle/:filmId",
+        path: "films/:filmId",
         element: <FilmDetail />,
       },
       {
@@ -80,15 +80,11 @@ const router = createBrowserRouter([
         element: <JournalArticle />,
       },
       {
-        path: "review/:username/:reviewId",
-        element: <SignInPage />,
-      },
-      {
-        path: "member/:username",
+        path: ":username/",
         element: <ProfileUser />,
       },
       {
-        path: "review-detail",
+        path: ":username/reviews/:reviewId",
         element: <ReviewDetail />,
       },
     ],
