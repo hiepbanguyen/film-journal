@@ -4,7 +4,7 @@ import { Avatar, Box, Button, Grid, Typography } from "@mui/material";
 import Container from "@mui/material/Container";
 import styles from "./profile.module.scss";
 import CustomTabs from "../common/tabs.jsx";
-import { ProfileTab } from "./tabs/profile/profile-tab.jsx";
+import { ProfileTab } from "./tabs/profile/index.jsx";
 import GroupAvatars from "./avatar-group.jsx";
 import { ProfileStats } from "./profile-stats.jsx";
 

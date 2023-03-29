@@ -1,9 +1,3 @@
-import Timeline from "@mui/lab/Timeline";
-import TimelineItem, { timelineItemClasses } from "@mui/lab/TimelineItem";
-import TimelineSeparator from "@mui/lab/TimelineSeparator";
-import TimelineConnector from "@mui/lab/TimelineConnector";
-import TimelineContent from "@mui/lab/TimelineContent";
-import TimelineDot from "@mui/lab/TimelineDot";
 import { Box, Divider, Grid } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import FilmCard from "../../../common/film-card.jsx";
@@ -16,6 +10,7 @@ import { RecentList } from "./recent-list.jsx";
 import ListFollow from "./following.jsx";
 import ProfileTags from "./profile-tags.jsx";
 import CompiledRatings from "../../../common/compiled-ratings.jsx";
+import Activity from "./activity.jsx";
 
 export const ProfileTab = () => {
   return (
@@ -76,28 +71,7 @@ export const ProfileTab = () => {
             </Typography>
           </Box>
           <Divider variant="fullWidth" />
-          <Timeline
-            sx={{
-              [`& .${timelineItemClasses.root}:before`]: {
-                flex: 0,
-                padding: 0,
-              },
-            }}
-          >
-            <TimelineItem>
-              <TimelineSeparator>
-                <TimelineDot />
-                <TimelineConnector />
-              </TimelineSeparator>
-              <TimelineContent>Eat</TimelineContent>
-            </TimelineItem>
-            <TimelineItem>
-              <TimelineSeparator>
-                <TimelineDot />
-              </TimelineSeparator>
-              <TimelineContent>Code</TimelineContent>
-            </TimelineItem>
-          </Timeline>
+          <Activity />
         </Grid>
       </Grid>
     </>
