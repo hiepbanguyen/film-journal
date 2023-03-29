@@ -178,7 +178,7 @@ export default function FilmsListPopularFilms() {
     },
   };
   return (
-    <Box className="films-list-popular-film">
+    <Box className="films-list-popular-film" sx={{marginBottom: "60px"}}>
       <Box
         sx={{
           display: "flex",
