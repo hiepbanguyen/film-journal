@@ -4,17 +4,17 @@ import { RecentReviewFilm } from "../../../home/list-preview.jsx";
 
 export const PopularReview = () => {
   return (
-    <Box>
+    <Box my={5}>
       <Box display={"flex"} justifyContent={"space-between"} alignItems={"baseline"} color={"#fff"}>
-        <Typography variant={"body1"} textTransform={"uppercase"} mt={5}>
+        <Typography variant={"body1"} textTransform={"uppercase"}>
           popular review
         </Typography>
-        <Typography variant={"caption"} mt={5} textTransform={"uppercase"}>
+        <Typography variant={"caption"} textTransform={"uppercase"}>
           more
         </Typography>
       </Box>
       <Divider variant="fullWidth" />
-      <Grid container mt={0} color={"#fff"} paddingTop={3}>
+      <Grid container color={"#fff"} mt={1}>
         {Array.from({ length: 2 }).map((i, idx) => (
           <RecentReviewFilm
             key={idx}
