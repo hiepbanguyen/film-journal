@@ -3,7 +3,6 @@ import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import ErrorPage from "./components/error-page/error-page.jsx";
 import SignUpPage from "./pages/sign-up.jsx";
-import SignInPage from "./pages/sign-in.jsx";
 import ActiveUser from "./components/auth/active-user.jsx";
 import ResetPassword from "./components/auth/reset-password.jsx";
 import ForgotPassword from "./components/auth/forgot-password";
@@ -20,27 +19,21 @@ import FilmDetail from "./components/film-detail/index.jsx";
 import JournalArticle from "./components/journal-article/index.jsx";
 import Films from "./components/films/index.jsx";
 import ListDetail from "./components/list-detail/index.jsx";
+import { configure } from "axios-hooks";
+import LRU from "lru-cache";
+import Axios from "axios";
+import SignInSide from "./components/auth/sign-in.jsx";
+
+const axios = Axios.create({
+  baseURL: "https://localhost:44358/api/",
+});
+const cache = new LRU({ max: 10 });
+configure({ axios, cache });
 
 const router = createBrowserRouter([
   {
-    path: "/sign-up",
-    element: <SignUpPage />,
-  },
-  {
-    path: "/sign-in",
-    element: <SignInPage />,
-  },
-  {
     path: "/active-user",
     element: <ActiveUser />,
-  },
-  {
-    path: "/reset-password",
-    element: <ResetPassword />,
-  },
-  {
-    path: "/forgot-password",
-    element: <ForgotPassword />,
   },
   {
     path: "/",
@@ -52,11 +45,27 @@ const router = createBrowserRouter([
         element: <Home />,
       },
       {
+        path: "sign-up",
+        element: <SignUpPage />,
+      },
+      {
+        path: "sign-in",
+        element: <SignInSide />,
+      },
+      {
+        path: "reset-password",
+        element: <ResetPassword />,
+      },
+      {
+        path: "forgot-password",
+        element: <ForgotPassword />,
+      },
+      {
         path: "lists",
         element: <Lists />,
       },
       {
-        path: "list/:listName/:listId",
+        path: ":username/list/:listId",
         element: <ListDetail />,
       },
       {
@@ -64,7 +73,7 @@ const router = createBrowserRouter([
         element: <Films />,
       },
       {
-        path: "films/:filmId",
+        path: "film/:filmId",
         element: <FilmDetail />,
       },
       {
@@ -76,7 +85,7 @@ const router = createBrowserRouter([
         element: <Journal />,
       },
       {
-        path: "journal/:articleHeadline/:articleId",
+        path: "journal/:journalId",
         element: <JournalArticle />,
       },
       {
@@ -84,7 +93,7 @@ const router = createBrowserRouter([
         element: <ProfileUser />,
       },
       {
-        path: ":username/reviews/:reviewId",
+        path: ":username/review/:reviewId",
         element: <ReviewDetail />,
       },
     ],
