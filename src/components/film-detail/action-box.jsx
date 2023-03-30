@@ -5,6 +5,7 @@ import FavoriteIcon from "@mui/icons-material/Favorite.js";
 import { styled } from "@mui/system";
 import React from "react";
 import ReviewDialog from "./review-dialog.jsx";
+import AddToListsDialog from "./add-to-lists-dialog.jsx";
 
 const CustomButton1 = styled(Button)({
   flexDirection: "column",
@@ -61,11 +62,13 @@ export default function ActionBox() {
           </Typography>
         </CustomButton2>
       </ReviewDialog>
-      <CustomButton2>
-        <Typography fontSize={14} textAlign="center">
-          Add to lists...
-        </Typography>
-      </CustomButton2>
+      <AddToListsDialog>
+        <CustomButton2>
+          <Typography fontSize={14} textAlign="center">
+            Add to lists...
+          </Typography>
+        </CustomButton2>
+      </AddToListsDialog>
       <CustomButton2>
         <Typography fontSize={14} textAlign="center">
           Share
