@@ -2,6 +2,7 @@ import { Box, Grid } from "@mui/material";
 import StarIcon from "@mui/icons-material/Star.js";
 import ChatBubbleIcon from "@mui/icons-material/ChatBubble";
 import FavoriteIcon from "@mui/icons-material/Favorite";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function FilmsListPopularReviews() {
   let listReviews = [
@@ -133,7 +134,7 @@ export default function FilmsListPopularReviews() {
                 <FavoriteIcon
                   sx={{
                     cursor: "pointer",
-                    color: review.film.isLiked ? "#ff9010" : "#9ab",
+                    color: review.film.isLiked ? "#ff9010" : "inherit",
                     margin: "2px 4px",
                     ":hover": {
                       color: review.film.isLiked ? "#e08012" : "#8592a0",
@@ -146,25 +147,29 @@ export default function FilmsListPopularReviews() {
             </Box>
           </Box>
           <Box sx={{ flex: "1" }}>
-            <Box sx={{ marginBottom: "6px" }}>
-              <Box
-                component="a"
-                sx={{
+            <Box
+              sx={{
+                marginBottom: "6px",
+                " a": {
                   fontSize: { xs: "22px", md: "28px" },
+                },
+                " a:hover": {
+                  color: "#40bcf4",
+                },
+              }}
+            >
+              <Link
+                to={"/" + review.user.userName + "/reviews/" + review.id}
+                style={{
                   fontWeight: "700",
                   marginRight: "8px",
                   display: "inline-block",
-                  color: "#9ab",
                   transition: "0.2s",
-                  ":hover": {
-                    color: "#40bcf4",
-                  },
                   textDecoration: "none",
                 }}
-                href={"/" + review.user.userName + '/reviews/' + review.id}
               >
                 {review.film.name}
-              </Box>
+              </Link>
               <Box sx={{ display: "inline-block" }}>{review.film.yearRelease}</Box>
             </Box>
             <Box
@@ -179,22 +184,27 @@ export default function FilmsListPopularReviews() {
               <Box
                 sx={{
                   display: "flex",
-                  alignItems: 'center',
-                  marginBottom: {xs: '8px', sm: '0'}
+                  alignItems: "center",
+                  marginBottom: { xs: "8px", sm: "0" },
+                  "a:nth-child(1):hover": {
+                    border: "1px solid #9ab",
+                  },
+                  "a:nth-child(2)": {
+                    fontSize: { xs: "14px", md: "16px" },
+                  },
+                  "a:nth-child(2):hover": {
+                    color: "#fff",
+                  },
                 }}
               >
-                <Box
-                  component="a"
-                  href={"/" + review.user.userName}
-                  sx={{
+                <Link
+                  to={"/" + review.user.userName}
+                  style={{
                     width: "24px",
                     aspectRatio: "1/1",
                     borderRadius: "50%",
                     overflow: "hidden",
                     marginRight: "6px",
-                    ":hover": {
-                      border: "1px solid #9ab",
-                    },
                   }}
                 >
                   <Box
@@ -205,38 +215,30 @@ export default function FilmsListPopularReviews() {
                     }}
                     src={review.user.avatar}
                   ></Box>
-                </Box>
-                <Box
-                  component="a"
-                  href={"/" + review.user.userName}
-                  sx={{
-                    color: "#9ab",
+                </Link>
+                <Link
+                  to={"/" + review.user.userName}
+                  style={{
                     textDecoration: "none",
-                    fontSize: { xs: "14px", md: "16px" },
                     fontWeight: "600",
                     marginRight: "12px",
                     transition: "0.2s",
-                    ":hover": {
-                      color: "#fff",
-                    },
                   }}
                 >
                   {review.user.userFullname}
-                </Box>
+                </Link>
               </Box>
-              <Box sx={{ display: "flex", alignItems: "center" }}>
+              <Box sx={{ display: "flex", alignItems: "center",  }}>
                 <Box sx={{ lineHeight: "1px", marginRight: "12px" }}>
                   {Array.from({ length: review.rate }).map((i, idx) => (
                     <StarIcon key={idx} sx={{ color: "#00c030", fontSize: { xs: "18px", md: "20px" } }}></StarIcon>
                   ))}
                 </Box>
-                <Box
-                  component="a"
-                  href={"/" + review.user.userName + '/reviews/' + review.id}
-                  sx={{
+                <Link
+                  to={"/" + review.user.userName + "/reviews/" + review.id}
+                  style={{
                     display: "flex",
                     alignItems: "center",
-                    color: "#9ab",
                     transition: "0.2s",
                     textDecoration: "none",
                     ":hover": {
@@ -246,7 +248,7 @@ export default function FilmsListPopularReviews() {
                 >
                   <ChatBubbleIcon sx={{ fontSize: "20px", marginRight: "4px" }}></ChatBubbleIcon>
                   <Box sx={{ fontSize: { xs: "14px", md: "14px" } }}>{formatTotalNumber(review.totalComment)}</Box>
-                </Box>
+                </Link>
               </Box>
             </Box>
 

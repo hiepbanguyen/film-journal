@@ -1,6 +1,7 @@
 import Container from "@mui/system/Container";
 import { Box, Button, Grid, CardMedia } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
+import { Link, useNavigate } from "react-router-dom";
 
 const listPopularReviewers = [
   {
@@ -47,8 +48,8 @@ const listPopularReviewers = [
     reviewCount: 342,
     listTopFilmReview: [
       { name: "La la land", thumbnail: "https://picsum.photos/200/301", id: 10 },
-      { name: "Avenger End Game", thumbnail: "https://picsum.photos/200/302", id:11  },
-      { name: "Titanic", thumbnail: "https://picsum.photos/200/303", id:12  },
+      { name: "Avenger End Game", thumbnail: "https://picsum.photos/200/302", id: 11 },
+      { name: "Titanic", thumbnail: "https://picsum.photos/200/303", id: 12 },
     ],
   },
   {
@@ -59,7 +60,7 @@ const listPopularReviewers = [
     reviewCount: 342,
     listTopFilmReview: [
       { name: "La la land", thumbnail: "https://picsum.photos/200/304", id: 13 },
-      { name: "Avenger End Game", thumbnail: "https://picsum.photos/200/305", id:14 },
+      { name: "Avenger End Game", thumbnail: "https://picsum.photos/200/305", id: 14 },
       { name: "Titanic", thumbnail: "https://picsum.photos/200/306", id: 15 },
     ],
   },
@@ -75,22 +76,22 @@ function FeaturedPerson(props) {
         height: "100%",
         overflow: "hidden",
       }}
-      component="a"
-      href={"/films/" + film.id}
     >
-      <Box
-        component="img"
-        sx={{
-          height: "100%",
-          width: "90%",
-          transition: "0.2s",
-          borderRadius: "4px",
-          ":hover": {
-            border: "1px solid #9ab",
-          },
-        }}
-        src={film.thumbnail}
-      ></Box>
+      <Link to={"/films/" + film.id} style={{ width: "100%", height: "100%" }}>
+        <Box
+          component="img"
+          sx={{
+            height: "100%",
+            width: "90%",
+            transition: "0.2s",
+            borderRadius: "4px",
+            ":hover": {
+              border: "1px solid #9ab",
+            },
+          }}
+          src={film.thumbnail}
+        ></Box>
+      </Link>
     </Grid>
   ));
   return (
@@ -120,10 +121,9 @@ function FeaturedPerson(props) {
             position: "relative",
           }}
         >
-          <Box
-            component="a"
-            href={"/" + props.user.userName}
-            sx={{
+          <Link
+            to={"/" + props.user.userName}
+            style={{
               width: "100%",
               height: "100%",
             }}
@@ -141,8 +141,8 @@ function FeaturedPerson(props) {
               }}
               src={props.user.userAvatar}
             ></Box>
-          </Box>
-          <Box
+          </Link>
+          <Button
             component="span"
             sx={{
               position: "absolute",
@@ -151,6 +151,7 @@ function FeaturedPerson(props) {
               backgroundColor: "#567",
               height: "36px",
               width: "36px",
+              minWidth: "unset",
               borderRadius: "50%",
               color: "#fff",
               display: "flex",
@@ -163,13 +164,12 @@ function FeaturedPerson(props) {
             }}
           >
             <AddIcon></AddIcon>
-          </Box>
+          </Button>
         </Box>
         <Box sx={{ marginBottom: "8px" }}>
-          <Box
-            component="a"
-            href={"/" + props.user.userName}
-            sx={{
+          <Link
+            to={"/" + props.user.userName}
+            style={{
               fontWeight: "600",
               color: "#fff",
               fontSize: "16px",
@@ -179,21 +179,24 @@ function FeaturedPerson(props) {
             }}
           >
             {props.user.fullName}
-          </Box>
+          </Link>
           <Box
             sx={{
               fontSize: "14px",
+              " a:hover": {
+                color: "#fff",
+              },
             }}
           >
-            <Box
-              component="span"
-              sx={{
+            <Link
+              to={"/" + props.user.userName + "/films"}
+              style={{
                 marginRight: "8px",
               }}
             >
               {props.user.filmCount} films
-            </Box>
-            <Box component="span">{props.user.reviewCount} reviews</Box>
+            </Link>
+            <Link to={"/" + props.user.userName + "/reviews"}>{props.user.reviewCount} reviews</Link>
           </Box>
         </Box>
 

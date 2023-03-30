@@ -1,6 +1,7 @@
 import Container from "@mui/system/Container";
 import { Box, Button, Grid, CardMedia } from "@mui/material";
 import * as React from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 const Following = {
   count: 8,
@@ -35,33 +36,31 @@ function ListUser(props) {
         sx={{
           fontSize: { xs: "12px", md: "14px" },
           textTransform: "uppercase",
-
           borderBottom: "1px solid #9ab",
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
-          marginBottom: "16px",
+          marginBottom: "16px", 
+          "a:hover": { color: "#40bcf4" }
         }}
       >
-        <Box
-          sx={{ color: "#9ab", textDecoration: "none", "&:hover": { color: "#40bcf4" } }}
-          component="a"
-          href={props.data.isFollowing ? "/userName/following/" : "/userName/followers/"}
+        <Link
+          style={{ color: "#9ab", textDecoration: "none" }}
+          to={props.data.isFollowing ? "/userName/following/" : "/userName/followers/"}
         >
           {props.data.isFollowing ? "You Follow" : "Following you"}
-        </Box>
-        <Box
-          sx={{ color: "#9ab", textDecoration: "none", "&:hover": { color: "#40bcf4" } }}
-          component="a"
-          href={props.data.isFollowing ? "/userName/following/" : "/userName/followers/"}
+        </Link>
+        <Link
+          style={{ color: "#9ab", textDecoration: "none" }}
+          to={props.data.isFollowing ? "/userName/following/" : "/userName/followers/"}
         >
           {props.data.count}
-        </Box>
+        </Link>
       </Box>
       <Box>
         {props.data.list.map((user, idx) => (
           <Box key={idx} sx={{ aspectRatio: "1/1", width: "16.66666%", display: "inline-block" }}>
-            <Box component="a" href={"/" + user.userName} sx={{ width: "100%", height: "100%" }}>
+            <Link to={"/" + user.userName} style={{ width: "100%", height: "100%" }}>
               <Box
                 component="img"
                 src={user.avatar}
@@ -74,7 +73,7 @@ function ListUser(props) {
                   },
                 }}
               ></Box>
-            </Box>
+            </Link>
           </Box>
         ))}
       </Box>
