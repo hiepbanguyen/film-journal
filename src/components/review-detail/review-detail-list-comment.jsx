@@ -1,16 +1,17 @@
 import { PostAdd } from "@mui/icons-material";
 import { Box, Button, Grid } from "@mui/material";
-import React, { useState } from 'react';
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function ReviewDetailListComment(props) {
-  const [newCommentContent, setNewCommentContent] = useState('');
+  const [newCommentContent, setNewCommentContent] = useState("");
 
   const handleNewCommentContentChange = (event) => {
     setNewCommentContent(event.target.value);
   };
 
   const postNewComment = () => {
-    if(newCommentContent.trim() === '') return;
+    if (newCommentContent.trim() === "") return;
 
     let newComment = {
       userName: "Apple",
@@ -18,20 +19,19 @@ export default function ReviewDetailListComment(props) {
       content: newCommentContent,
       time: new Date(),
       id: Math.random() * 100,
-    }
-    listComment.list.push(newComment)
+    };
+    listComment.list.push(newComment);
 
-    setNewCommentContent('')
-    newComment = {}
+    setNewCommentContent("");
+    newComment = {};
     return;
   };
 
   const HandleEnterInput = (event) => {
     if (event.keyCode === 13) {
-      postNewComment()
-    }
-    else return
-  }
+      postNewComment();
+    } else return;
+  };
 
   let listComment = props.listComment;
   return (
@@ -71,10 +71,10 @@ export default function ReviewDetailListComment(props) {
                 backgroundColor: "#2c3440",
                 border: "none",
                 padding: "5px",
-                color: '#9ab',
+                color: "#9ab",
                 ":focus": {
                   backgroundColor: "#fff",
-                  color: '#000',
+                  color: "#000",
                 },
                 marginBottom: "12px",
               }}
@@ -83,12 +83,14 @@ export default function ReviewDetailListComment(props) {
               onChange={handleNewCommentContentChange}
             ></Box>
             <Box sx={{ display: "flex", justifyContent: "end" }}>
-              <Button variant="contained" sx={{
-                backgroundColor: "#00b020 !important",
-                ":hover": { backgroundColor: "#00b020 !important" }
-              }}
+              <Button
+                variant="contained"
+                sx={{
+                  backgroundColor: "#00b020 !important",
+                  ":hover": { backgroundColor: "#00b020 !important" },
+                }}
                 onClick={postNewComment}
-                disabled={newCommentContent.trim() === ''}
+                disabled={newCommentContent.trim() === ""}
               >
                 Post
               </Button>
@@ -99,7 +101,6 @@ export default function ReviewDetailListComment(props) {
     </Box>
   );
 }
-
 
 function Comment(props) {
   return (
@@ -121,18 +122,17 @@ function Comment(props) {
               display: "flex",
               flexDirection: { xs: "row", md: "column" },
               justifyContent: { xs: "space-between", md: "flex-start" },
+              " a:hover": { " img": { border: "1px solid #fff" },
+            "span": {color: "#fff"} },
             }}
           >
-            <Box
-              component="a"
-              href={"/profile/" + props.comment.userName.toLowerCase()}
+            <Link
+              to={"/profile/" + props.comment.userName.toLowerCase()}
               sx={{
                 display: "flex",
                 alignItems: "center",
                 color: "#9ab",
                 marginBottom: { md: "8px" },
-                ":hover img": { border: "1px solid #fff" },
-                ":hover span": { color: "#fff" },
                 textDecoration: "none",
               }}
             >
@@ -157,7 +157,7 @@ function Comment(props) {
               >
                 {props.comment.userName}
               </Box>
-            </Box>
+            </Link>
             <Box>{FormatDateToNow(props.comment.time)}</Box>
           </Box>
         </Grid>
