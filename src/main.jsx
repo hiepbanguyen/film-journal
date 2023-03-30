@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import ErrorPage from "./components/error-page/error-page.jsx";
+import ErrorPage from "./components/common/error-page.jsx";
 import ActiveUser from "./components/auth/active-user.jsx";
 import ResetPassword from "./components/auth/reset-password.jsx";
 import ForgotPassword from "./components/auth/forgot-password";
@@ -25,6 +25,8 @@ import SignInSide from "./components/auth/sign-in.jsx";
 import SignUp from "./components/auth/sign-up.jsx";
 import { ProfileTab } from "./components/profile-user/tabs/profile";
 import { Box } from "@mui/material";
+import SearchPage from "./components/search";
+import FilmsSearch from "./components/search/films_search.jsx";
 
 const axios = Axios.create({
   baseURL: "https://localhost:44358/api/",
@@ -65,10 +67,6 @@ const router = createBrowserRouter([
       {
         path: "lists",
         element: <Lists />,
-      },
-      {
-        path: ":username/list/:listId",
-        element: <ListDetail />,
       },
       {
         path: "films",
@@ -135,6 +133,40 @@ const router = createBrowserRouter([
       {
         path: ":username/review/:reviewId",
         element: <ReviewDetail />,
+      },
+      {
+        path: ":username/list/:listId",
+        element: <ListDetail />,
+      },
+      {
+        path: "search/",
+        element: <SearchPage />,
+        children: [
+          {
+            path: "films/:searchParams",
+            element: <FilmsSearch />,
+          },
+          {
+            path: "reviews/:searchParams",
+            element: <FilmsSearch />,
+          },
+          {
+            path: "lists/:searchParams",
+            element: <FilmsSearch />,
+          },
+          {
+            path: "cast-and-crew/:searchParams",
+            element: <FilmsSearch />,
+          },
+          {
+            path: "members/:searchParams",
+            element: <FilmsSearch />,
+          },
+          {
+            path: "tags/:searchParams",
+            element: <FilmsSearch />,
+          },
+        ],
       },
     ],
   },

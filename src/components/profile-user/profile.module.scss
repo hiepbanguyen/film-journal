@@ -27,10 +27,6 @@
   }
 
 
-  .tabs:hover {
-    color: #fff !important;
-  }
-
   .profileStatistic:hover {
     cursor: pointer;
     .definition {
@@ -104,4 +100,8 @@
     white-space: nowrap;
   }
 
+}
+
+.tabs:hover {
+  color: #fff !important;
 }

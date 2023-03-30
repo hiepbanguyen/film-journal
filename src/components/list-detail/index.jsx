@@ -2,7 +2,7 @@ import Container from "@mui/system/Container";
 import FilmsSearchForm from "../common/films-search-form.jsx";
 import { Avatar, Box, Divider, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
-import PaginatedList from "../common/paginated_list";
+import PaginatedGrid from "../common/paginated_grid.jsx";
 import FilmCard from "../common/film-card";
 import Tags from "../common/tags.jsx";
 import ReviewDetailListComment from "../review-detail/review-detail-list-comment.jsx";
@@ -82,13 +82,13 @@ export default function ListDetail() {
           sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus
           PageMaker including versions of Lorem Ipsum.
         </Typography>
-        <PaginatedList itemsPerPage={48}>
+        <PaginatedGrid itemsPerPage={48}>
           {/*{Array(45)*/}
           {/*  .map(() => films[(Math.random() * 100) % 3])*/}
           {listFilms.map((i, idx) => (
             <FilmCard size={"100%"} key={idx} link={`/film/${i.title.replace(" ", "-")}/${i.id}`} src={i.poster} />
           ))}
-        </PaginatedList>
+        </PaginatedGrid>
         <Typography>Tags</Typography>
         <Divider variant={"fullWidth"} sx={{ mb: 1.5 }} />
         <Tags />
