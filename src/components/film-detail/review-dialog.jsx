@@ -44,7 +44,7 @@ export default function ReviewDialog(props) {
         })}
       >
         <DialogTitle sx={{ color: "#9ab", fontSize: 30 }}>
-          <strong style={{ color: "#fff" }}>{"Movie Title"}</strong> <span style={{ fontSize: 27 }}>{"2022"}</span>
+          <strong style={{ color: "#678" }}>{"Movie Title"}</strong> <span style={{ fontSize: 27 }}>{"2022"}</span>
         </DialogTitle>
         <DialogContent>
           <Box display={"flex"} flexDirection={{ xs: "column", sm: "row" }} gap={{ sm: 5 }} alignItems={"flex-start"}>
@@ -83,6 +83,7 @@ export default function ReviewDialog(props) {
                 <FavoriteIcon
                   sx={{
                     fontSize: 30,
+                    color: "#bcd",
                     "& :hover": {
                       cursor: "pointer",
                       color: "rgba(255, 89, 89, 1)",
@@ -94,7 +95,9 @@ export default function ReviewDialog(props) {
           </Box>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>Cancel</Button>
+          <Button onClick={handleClose} sx={{ color: "#000", "&:hover": { bgcolor: "rgba(0,0,0,0.1)" } }}>
+            Cancel
+          </Button>
           <Button onClick={handleClose} variant={"contained"}>
             Save
           </Button>

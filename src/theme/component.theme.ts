@@ -3,7 +3,7 @@ export const COMPONENT_THEME = {
     styleOverrides: {
       root: {
         color: "#fff",
-        elevation: 0,
+        boxShadow: 0,
         textTransform: "none",
       },
     },
@@ -82,6 +82,16 @@ export const COMPONENT_THEME = {
         "&:hover": {
           color: "#fff",
           background: "#678",
+        },
+      },
+    },
+  },
+
+  MuiDialog: {
+    styleOverrides: {
+      root: {
+        "& .MuiDialog-paper": {
+          background: "#eee",
         },
       },
     },

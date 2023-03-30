@@ -50,7 +50,7 @@ export default function AddToListsDialog(props) {
           },
         })}
       >
-        <DialogTitle sx={{ color: "#fff", fontSize: 25 }}>
+        <DialogTitle sx={{ color: "#000", fontSize: 25 }}>
           {"Add "}
           <strong>{"Movie Title"}</strong>
           {" to lists"}
@@ -76,12 +76,12 @@ export default function AddToListsDialog(props) {
                     />
                   </FormGroup>
                   {i.private ? (
-                    <Chip label={"Private"} sx={{ height: 25, fontSize: 12, bgcolor: "rgba(0,0,0,0.5)" }} />
-                  ) : (
                     <Chip
-                      label={"Public"}
-                      sx={{ height: 25, fontSize: 12, bgcolor: "rgba(255,255,255,0.1)", color: "#fff" }}
+                      label={"Private"}
+                      sx={{ height: 25, fontSize: 12, bgcolor: "rgba(0,0,0,0.5)", color: "#fff" }}
                     />
+                  ) : (
+                    <Chip label={"Public"} sx={{ height: 25, fontSize: 12, bgcolor: "#ffd8a8", color: "#000" }} />
                   )}
                 </Box>
                 <Typography>
@@ -93,7 +93,9 @@ export default function AddToListsDialog(props) {
           </List>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>Cancel</Button>
+          <Button onClick={handleClose} sx={{ color: "#000", "&:hover": { bgcolor: "rgba(0,0,0,0.1)" } }}>
+            Cancel
+          </Button>
           <Button onClick={handleClose} variant={"contained"} color={"success"}>
             Add
           </Button>
