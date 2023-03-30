@@ -55,7 +55,7 @@ export default function UserMenu() {
         open={Boolean(anchorElUser)}
         onClose={handleCloseUserMenu}
       >
-        <Link to="/member/1" style={{ textDecoration: "none", color: "inherit" }}>
+        <Link to="/hiep">
           <MenuItem>
             <ListItemIcon sx={{ color: "inherit" }}>
               <PersonOutlineIcon fontSize="small" />

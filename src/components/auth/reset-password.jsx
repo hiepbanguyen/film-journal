@@ -3,23 +3,20 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { useNavigate, useSearchParams } from "react-router-dom";
 import baseAPI from "../../apis/baseAPI";
 
 function Copyright(props) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
       {"Copyright © "}
-      <Link to="">
-        Your Website
-      </Link>
+      <Link to="">Your Website</Link>
       {new Date().getFullYear()}
       {"."}
     </Typography>
@@ -28,7 +25,7 @@ function Copyright(props) {
 
 const theme = createTheme();
 
-export default function SignUp() {
+export default function ResetPassword() {
   const [searchParams, setSearchParams] = useSearchParams();
   const queryParams = new URLSearchParams(window.location.search);
   const email = queryParams.get("email");
@@ -78,14 +75,13 @@ export default function SignUp() {
         <CssBaseline />
         <Box
           sx={{
-            paddingTop: 8,
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
             height: "100vh",
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+          <Avatar sx={{ mt: 20, bgcolor: "secondary.main" }}>
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">

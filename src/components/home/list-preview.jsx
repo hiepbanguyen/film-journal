@@ -33,7 +33,7 @@ export const PopularLists = () => {
 
 export const FilmCardsStackedFive = () => {
   return (
-    <Link to={"/list/place-holder-list/id123"}>
+    <Link to={"/hiep/list/id123"}>
       <Box
         display={"flex"}
         width={289}
@@ -131,27 +131,6 @@ export const ListPreviewVertical = (props) => {
             {`${films}`} films
           </Typography>
         </Box>
-      </Box>
-    </Box>
-  );
-};
-
-export const ListShowdown = (props) => {
-  const { title, description } = props;
-  return (
-    <Box mt={2} mb={2} ml={{ md: 0, xs: "5%" }}>
-      <Grid container mt={5} spacing={1}>
-        {Array.from({ length: 1 }).map((i, idx) => (
-          <Grid item key={idx} xs={12}>
-            <FilmCard size={140} />
-          </Grid>
-        ))}
-      </Grid>
-      <Typography variant={"body2"}>{title}</Typography>
-      <Box display={"flex"} alignItems={"center"} my={1}>
-        <Typography variant={"body2"} ml={0.5}>
-          {description}
-        </Typography>
       </Box>
     </Box>
   );

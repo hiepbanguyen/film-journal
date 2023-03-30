@@ -19,7 +19,7 @@ export default function ReviewInFilm(props) {
             {props.number_comment_reply}
           </Typography>
         </Box>
-        <Box component={Link} to={"/"} sx={{ textDecoration: "none", color: "inherit" }}>
+        <Box component={Link} to={"/"}>
           <p className="comment">{props.comment}</p>
         </Box>
         <Box display={"flex"} alignItems={"stretch"} fontWeight={600} fontSize={14} gap={0.5}>

@@ -3,23 +3,20 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { useNavigate } from "react-router-dom";
 import baseAPI from "../../apis/baseAPI";
 
 function Copyright(props) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
       {"Copyright © "}
-      <Link to="">
-        Your Website
-      </Link>
+      <Link to="">Your Website</Link>
       {new Date().getFullYear()}
       {"."}
     </Typography>
@@ -155,7 +152,7 @@ export default function SignUp() {
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link to="/sign-in">
+                <Link to="/sign-in" style={{ textDecoration: "underline", color: "#0095ff" }}>
                   Already have an account? Sign in
                 </Link>
               </Grid>

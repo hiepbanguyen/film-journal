@@ -15,10 +15,10 @@ export default function ProfileTags() {
           marginTop: "23px",
         }}
       >
-        <Box sx={{ color: "#fff", textDecoration: "none", "&:hover": { color: "#40bcf4" } }} component="a">
+        <Box sx={{ color: "#fff", "&:hover": { color: "#40bcf4" } }} component="a">
           tags
         </Box>
-        <Box sx={{ color: "#fff", textDecoration: "none", "&:hover": { color: "#40bcf4" } }} component="a">
+        <Box sx={{ color: "#fff", "&:hover": { color: "#40bcf4" } }} component="a">
           23
         </Box>
       </Box>

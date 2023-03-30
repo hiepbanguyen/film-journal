@@ -17,10 +17,7 @@ export const AuthBox = observer(() => {
       ) : (
         <>
           <Button variant={"contained"} color={"warning"} sx={{ boxShadow: "none" }}>
-            <Link
-              to={"/sign-in"}
-              style={{ textDecoration: "none", color: "inherit", display: "flex", alignItems: "center" }}
-            >
+            <Link to={"/sign-in"} style={{ display: "flex", alignItems: "center" }}>
               <Typography
                 variant={"body2"}
                 sx={(theme) => ({

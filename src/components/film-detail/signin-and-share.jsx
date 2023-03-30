@@ -18,7 +18,7 @@ export default function SigninAndShare() {
       divider={<Divider variant="fullWidth" sx={{ borderColor: "#2c3440" }} />}
     >
       <CustomButton2>
-        <Link to={"/sign-in"} style={{ textDecoration: "none", color: "inherit" }}>
+        <Link to={"/sign-in"}>
           <Typography fontSize={14} textAlign="center">
             Sign in to log or review...
           </Typography>

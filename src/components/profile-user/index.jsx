@@ -3,10 +3,9 @@ import { styled } from "@mui/material/styles";
 import { Avatar, Box, Button, Grid, Typography } from "@mui/material";
 import Container from "@mui/material/Container";
 import styles from "./profile.module.scss";
-import CustomTabs from "../common/tabs.jsx";
-import { ProfileTab } from "./tabs/profile/index.jsx";
 import GroupAvatars from "./avatar-group.jsx";
 import { ProfileStats } from "./profile-stats.jsx";
+import { NavLink, Outlet } from "react-router-dom";
 
 const Root = styled("div")({
   flexGrow: 1,
@@ -14,16 +13,16 @@ const Root = styled("div")({
   marginTop: 50,
 });
 
-const profileLabels = [
-  "Profile",
-  "Reviews",
-  "Watchlist",
-  "Lists",
-  "Likes",
-  "Tags",
-  "Activity",
-  "Network",
-  "Edit Profile",
+const profileTabs = [
+  { label: "Profile", href: "" },
+  { label: "Reviews", href: "/reviews" },
+  { label: "Watchlist", href: "/watchlist" },
+  { label: "Lists", href: "/lists" },
+  { label: "Likes", href: "/likes" },
+  { label: "Tags", href: "/tags" },
+  { label: "Activity", href: "/activity" },
+  { label: "Network", href: "/network" },
+  { label: "Edit Profile", href: "/edit-profile" },
 ];
 
 const ProfileUser = () => {
@@ -93,9 +92,36 @@ const ProfileUser = () => {
             <ProfileStats />
           </Grid>
         </Grid>
-        <CustomTabs labels={profileLabels}>
-          <ProfileTab />
-        </CustomTabs>
+        <Box
+          sx={{
+            border: "1px solid rgba(255,255,255,0.1)",
+            borderRadius: 1,
+            display: "flex",
+            flexWrap: "wrap",
+            gap: 2,
+            justifyContent: "center",
+          }}
+        >
+          {profileTabs.map((i, idx) => (
+            <NavLink
+              className={styles.tabs}
+              to={`/hiep${i.href}`}
+              key={idx}
+              style={({ isActive }) => {
+                return {
+                  paddingTop: 10,
+                  paddingBottom: 10,
+                  color: isActive ? "#fff" : "#ccc",
+                  borderBottom: isActive ? "1px solid #fff" : "none",
+                };
+              }}
+              end
+            >
+              {i.label}
+            </NavLink>
+          ))}
+        </Box>
+        <Outlet />
       </Container>
     </Root>
   );

@@ -39,7 +39,7 @@ export default function ListDetail() {
       <Box px={{ xs: 1, md: 12 }}>
         <Box display={"flex"} gap={1} alignItems={"center"}>
           <Typography>Created by</Typography>
-          <Link to={"/member/hiep"} style={{ textDecoration: "none", color: "inherit" }}>
+          <Link to={"/hiep"}>
             <Box display={"flex"} alignItems={"center"} gap={1}>
               <Avatar sx={{ height: 30, width: 30 }} />
               <strong>{"Ba Hiep"}</strong>

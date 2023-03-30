@@ -2,7 +2,6 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import ErrorPage from "./components/error-page/error-page.jsx";
-import SignUpPage from "./pages/sign-up.jsx";
 import ActiveUser from "./components/auth/active-user.jsx";
 import ResetPassword from "./components/auth/reset-password.jsx";
 import ForgotPassword from "./components/auth/forgot-password";
@@ -23,6 +22,9 @@ import { configure } from "axios-hooks";
 import LRU from "lru-cache";
 import Axios from "axios";
 import SignInSide from "./components/auth/sign-in.jsx";
+import SignUp from "./components/auth/sign-up.jsx";
+import { ProfileTab } from "./components/profile-user/tabs/profile";
+import { Box } from "@mui/material";
 
 const axios = Axios.create({
   baseURL: "https://localhost:44358/api/",
@@ -46,7 +48,7 @@ const router = createBrowserRouter([
       },
       {
         path: "sign-up",
-        element: <SignUpPage />,
+        element: <SignUp />,
       },
       {
         path: "sign-in",
@@ -91,6 +93,44 @@ const router = createBrowserRouter([
       {
         path: ":username/",
         element: <ProfileUser />,
+        children: [
+          {
+            path: "",
+            element: <ProfileTab />,
+          },
+          {
+            path: "reviews",
+            element: <Box />,
+          },
+          {
+            path: "watchlist",
+            element: <Box />,
+          },
+          {
+            path: "lists",
+            element: <Box />,
+          },
+          {
+            path: "likes",
+            element: <Box />,
+          },
+          {
+            path: "tags",
+            element: <Box />,
+          },
+          {
+            path: "activity",
+            element: <Box />,
+          },
+          {
+            path: "network",
+            element: <Box />,
+          },
+          {
+            path: "edit-profile",
+            element: <Box />,
+          },
+        ],
       },
       {
         path: ":username/review/:reviewId",

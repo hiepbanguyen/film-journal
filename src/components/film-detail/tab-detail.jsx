@@ -1,7 +1,6 @@
 import { Avatar, Box, Button, Typography } from "@mui/material";
 import CustomTabs from "../common/tabs.jsx";
 import React from "react";
-import { styled } from "@mui/system";
 import { formatCompactNumber } from "../../utils/number.js";
 
 const actors = [
@@ -253,12 +252,12 @@ const DetailsTab = () => {
     </>
   );
 };
-const labels = ["CAST", "CREW", "MORE DETAILS"];
+const tabs = [{ label: "CAST" }, { label: "CREW" }, { label: "MORE DETAILS" }];
 
 export default function TabDetail() {
   return (
     <Box>
-      <CustomTabs labels={labels} bottom_border_only={true}>
+      <CustomTabs tabs={tabs} bottom_border_only={true}>
         <CastTab />
         <CrewTab />
         <DetailsTab />
