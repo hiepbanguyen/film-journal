@@ -131,7 +131,7 @@ const router = createBrowserRouter([
         ],
       },
       {
-        path: ":username/review/:reviewId",
+        path: ":username/reviews/:reviewId",
         element: <ReviewDetail />,
       },
       {
