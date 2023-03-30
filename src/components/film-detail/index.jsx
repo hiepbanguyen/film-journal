@@ -77,7 +77,7 @@ const FilmDetail = () => {
             </Box>
             <Stack flex={1} pt={2} gap={4}>
               <CompiledRatings />
-              {!loggedIn ? <ActionBox /> : <SigninAndShare />}
+              {loggedIn ? <ActionBox /> : <SigninAndShare />}
             </Stack>
           </Box>
           <Box pb={5}>

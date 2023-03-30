@@ -1,9 +1,10 @@
-import { Box, Button, Divider, Rating, Stack, Typography } from "@mui/material";
+import { Box, Button, Divider, Stack, Typography } from "@mui/material";
 import RemoveRedEyeRoundedIcon from "@mui/icons-material/RemoveRedEyeRounded.js";
 import WatchLaterIcon from "@mui/icons-material/WatchLater";
 import FavoriteIcon from "@mui/icons-material/Favorite.js";
 import { styled } from "@mui/system";
 import React from "react";
+import ReviewDialog from "./review-dialog.jsx";
 
 const CustomButton1 = styled(Button)({
   flexDirection: "column",
@@ -38,6 +39,7 @@ const ReViewLikeWatchList = () => {
 };
 
 const CustomButton2 = styled(Button)({
+  width: "100%",
   padding: "10px 0 10px 0",
   color: "#bcd",
   "&:hover": {
@@ -52,11 +54,13 @@ export default function ActionBox() {
       divider={<Divider variant="fullWidth" sx={{ borderColor: "#2c3440" }} />}
     >
       <ReViewLikeWatchList />
-      <CustomButton2>
-        <Typography fontSize={14} textAlign="center">
-          Review or log...
-        </Typography>
-      </CustomButton2>
+      <ReviewDialog>
+        <CustomButton2>
+          <Typography fontSize={14} textAlign="center">
+            Review or log...
+          </Typography>
+        </CustomButton2>
+      </ReviewDialog>
       <CustomButton2>
         <Typography fontSize={14} textAlign="center">
           Add to lists...

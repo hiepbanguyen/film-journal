@@ -2,9 +2,9 @@ import Timeline from "@mui/lab/Timeline";
 import TimelineItem, { timelineItemClasses } from "@mui/lab/TimelineItem";
 import TimelineSeparator from "@mui/lab/TimelineSeparator";
 import TimelineDot from "@mui/lab/TimelineDot";
-import TimelineConnector from "@mui/lab/TimelineConnector";
 import TimelineContent from "@mui/lab/TimelineContent";
 import { TimelineOppositeContent } from "@mui/lab";
+import TimelineConnector from "@mui/lab/TimelineConnector";
 
 export default function Activity() {
   return (
@@ -34,6 +34,15 @@ export default function Activity() {
           <TimelineConnector />
         </TimelineSeparator>
         <TimelineContent>Patrick Willems reviewed and rated Scream V</TimelineContent>
+      </TimelineItem>
+      <TimelineConnector />
+      <TimelineItem>
+        <TimelineOppositeContent>2023/04/01</TimelineOppositeContent>
+        <TimelineSeparator>
+          <TimelineDot />
+          <TimelineConnector />
+        </TimelineSeparator>
+        <TimelineContent>Code</TimelineContent>
       </TimelineItem>
       <TimelineItem>
         <TimelineOppositeContent>2023/04/01</TimelineOppositeContent>

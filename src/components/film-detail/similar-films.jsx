@@ -1,4 +1,5 @@
-import { Box, Grid } from "@mui/material";
+import { Box } from "@mui/material";
+
 const similar_films = [
   {
     id: 1,
@@ -42,7 +43,6 @@ export default function SimilarFilms() {
     <Box className="similar_films">
       <Box className="tag_reviews">
         <p>SILIMAR FILMS</p>
-        <p>ALL</p>
       </Box>
       <Box display={"flex"} flexWrap={"wrap"}>
         {similar_films.map((similar_film_item, idx) => (
