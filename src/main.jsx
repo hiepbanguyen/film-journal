@@ -73,7 +73,7 @@ const router = createBrowserRouter([
         element: <Films />,
       },
       {
-        path: "film/:filmId",
+        path: "films/:filmId",
         element: <FilmDetail />,
       },
       {
@@ -85,11 +85,11 @@ const router = createBrowserRouter([
         element: <Journal />,
       },
       {
-        path: "journal/:journalId",
+        path: "journals/:journalId",
         element: <JournalArticle />,
       },
       {
-        path: ":username/",
+        path: "u/:username/",
         element: <ProfileUser />,
         children: [
           {
@@ -131,11 +131,11 @@ const router = createBrowserRouter([
         ],
       },
       {
-        path: ":username/reviews/:reviewId",
+        path: "u/:username/reviews/:reviewId",
         element: <ReviewDetail />,
       },
       {
-        path: ":username/list/:listId",
+        path: "u/:username/lists/:listId",
         element: <ListDetail />,
       },
       {
