@@ -20,7 +20,8 @@ const Popular = () => {
           <ListPreview
             key={idx}
             title={"Lorem Ipsum is simply dummy text"}
-            username={"Nguyễn Việt Hoàn"}
+            fullname={"Bá Hiệp Nguyễn"}
+            username={"bahiep"}
             favoriteCount={4}
             commentCount={50}
           />

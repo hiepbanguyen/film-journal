@@ -1,9 +1,10 @@
 import * as React from "react";
-import { Box, Divider, Grid, Typography } from "@mui/material";
+import { Box, Divider, Typography } from "@mui/material";
 import { FilmCardsStackedFive } from "../../../home/list-preview.jsx";
+import { Link, useParams } from "react-router-dom";
 
-export const WatchList = () => {
-  const [count, setCount] = React.useState("123");
+export const WatchList = (props) => {
+  const { username } = useParams();
   return (
     <Box>
       <Box display={"flex"} justifyContent={"space-between"} alignItems={"baseline"} color={"#fff"}>
@@ -11,17 +12,15 @@ export const WatchList = () => {
           watchlist
         </Typography>
         <Typography variant={"caption"} mt={5}>
-          {count}
+          {"123"}
         </Typography>
       </Box>
       <Divider variant="fullWidth" />
-      <Grid container mt={0} spacing={2} color={"#fff"}>
-        <Grid item xs={12} sm={6} md={12}>
-          <Box mt={2} mb={2} ml={{ md: 0, xs: "5%" }}>
-            <FilmCardsStackedFive />
-          </Box>
-        </Grid>
-      </Grid>
+      <Link to={`/u/${username}/watchlist`}>
+        <Box mt={4}>
+          <FilmCardsStackedFive />
+        </Box>
+      </Link>
     </Box>
   );
 };

@@ -64,7 +64,6 @@ export const ProfileTab = () => {
           <CompiledRatings />
           <WatchList />
           <RecentList title={"haon1231asdzxcasdasdasdasdasdas"} films={12} />
-          {/* <Diary /> */}
           <Box display={"flex"} justifyContent={"space-between"} alignItems={"baseline"}>
             <Typography variant={"body1"} textTransform={"uppercase"} mt={5} color="#fff">
               activity

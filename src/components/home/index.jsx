@@ -8,6 +8,7 @@ import { PopularReviews } from "./review-preview.jsx";
 import { PopularLists } from "./list-preview.jsx";
 import { PopularReviewers } from "./reviewer-preview.jsx";
 import React from "react";
+import { Link } from "react-router-dom";
 
 const WelcomeSection = () => {
   return (
@@ -24,9 +25,10 @@ const WelcomeSection = () => {
       </Typography>
       <Box mt={5} sx={{ display: "flex", justifyContent: "center" }}>
         <Button
+          component={Link}
           variant={"contained"}
           sx={{ background: "#00c030", textTransform: "uppercase" }}
-          href={"/sign-up/"}
+          to={"/sign-up/"}
           size={"large"}
         >
           Get started - It's free!

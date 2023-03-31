@@ -3,6 +3,7 @@ import FilmCard from "../common/film-card.jsx";
 import FavoriteIcon from "@mui/icons-material/Favorite.js";
 import ChatBubbleIcon from "@mui/icons-material/ChatBubble.js";
 import React from "react";
+import { Link } from "react-router-dom";
 
 export const PopularReviews = () => {
   return (
@@ -24,7 +25,8 @@ export const PopularReviews = () => {
                 "Lorem Ipsum is simply dummy text of the printing and typesetting industry. It has survived not only five centuries, but also the" +
                 " leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum"
               }
-              username={"Bá Hiệp Nguyễn"}
+              username={"bahiepnguyen"}
+              fullname={"Nguyen Ba Hiep"}
               ratings={4}
               likeCount={10}
               dislikeCount={0}
@@ -39,20 +41,28 @@ export const PopularReviews = () => {
 };
 
 function ReviewPreview(props) {
-  const { title, releasedYear, content, username, ratings, likeCount, commentCount } = props;
+  const { title, releasedYear, content, username, fullname, ratings, likeCount, commentCount } = props;
   return (
     <Box my={2}>
       <Box display={"flex"} alignItems={{ xs: "center", sm: "flex-start" }} gap={2}>
         <FilmCard />
-        <Box>
-          <Typography variant={"h5"}>
-            <strong style={{ color: "#fff" }}>{title}</strong> <span style={{ fontSize: 17 }}>{releasedYear}</span>
+        <Box component={Link} to={`/u/${username}/reviews/123`}>
+          <Typography variant={"h5"} sx={{ color: "#fff", ":hover": { color: "#00e8ff" } }}>
+            <strong style={{ color: "inherit" }}>{title}</strong>{" "}
+            <span style={{ fontSize: 17, color: "#9ab" }}>{releasedYear}</span>
           </Typography>
           <Box display={"flex"} flexWrap={"wrap"} gap={2} alignItems={"center"} my={1}>
-            <Box display={"flex"} alignItems={"center"} gap={1}>
+            <Box
+              component={Link}
+              to={`/u/${username}`}
+              display={"flex"}
+              alignItems={"center"}
+              gap={1}
+              sx={{ ":hover": { color: "#fff" } }}
+            >
               <Avatar sx={{ width: 25, height: 25 }} />
               <Typography variant={"body2"} fontWeight={600}>
-                {username}
+                {fullname ?? username}
               </Typography>
             </Box>
             <Rating value={ratings} size={"medium"} readOnly />

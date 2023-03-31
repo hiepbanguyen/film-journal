@@ -5,7 +5,7 @@ import Container from "@mui/material/Container";
 import styles from "./profile.module.scss";
 import GroupAvatars from "./avatar-group.jsx";
 import { ProfileStats } from "./profile-stats.jsx";
-import { NavLink, Outlet } from "react-router-dom";
+import { NavLink, Outlet, useParams } from "react-router-dom";
 
 const Root = styled("div")({
   flexGrow: 1,
@@ -26,7 +26,7 @@ const profileTabs = [
 ];
 
 const ProfileUser = () => {
-  const username = "viethoan2k1";
+  const { username } = useParams();
 
   return (
     <Root className={styles.profilePage}>
@@ -105,7 +105,7 @@ const ProfileUser = () => {
           {profileTabs.map((i, idx) => (
             <NavLink
               className={styles.tabs}
-              to={`/hiep${i.href}`}
+              to={`/u/${username}${i.href}`}
               key={idx}
               style={({ isActive }) => {
                 return {

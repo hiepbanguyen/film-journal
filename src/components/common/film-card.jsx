@@ -25,7 +25,7 @@ export default function FilmCard(props) {
           />
         </Card>
       ) : (
-        <Link to={link ?? "/film/1"}>
+        <Link to={link ?? "/films/1"}>
           <Card
             elevation={0}
             sx={{
