@@ -136,7 +136,7 @@ export default function ListReviewers() {
               </TableCell>
               <TableCell align="right" sx={{ color: "#9ab" }}>
                 {member.Followed ? (
-                  <Box
+                  <Button
                     className="btn-remove-follow"
                     sx={{
                       "&:hover .done-icon": {
