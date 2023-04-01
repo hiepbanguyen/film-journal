@@ -3,25 +3,20 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
-import Link from "@mui/material/Link";
+import { Link, useNavigate } from "react-router-dom";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { useNavigate } from "react-router-dom";
-import baseAPI from '../../apis/baseAPI';
+import baseAPI from "../../apis/baseAPI";
 
 function Copyright(props) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
       {"Copyright © "}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
-      </Link>{" "}
+      <Link to="">Your Website</Link>
       {new Date().getFullYear()}
       {"."}
     </Typography>
@@ -37,7 +32,6 @@ export default function SignUp() {
   const [errorPassword, setErrorPassword] = React.useState(false);
   const [errorMsg, setErrorMsg] = React.useState("");
 
-
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -47,9 +41,9 @@ export default function SignUp() {
 
     baseAPI
       .postAsync(`Users/signup`, {
-          UserName: data.get("userName"),
-          Email: data.get("email"),
-          Password: data.get("password")
+        UserName: data.get("userName"),
+        Email: data.get("email"),
+        Password: data.get("password"),
       })
       .then((res) => {
         if (res) {
@@ -58,7 +52,7 @@ export default function SignUp() {
         }
       })
       .catch((err) => {
-        setErrorMsg(err.response.data.devMsg)
+        setErrorMsg(err.response.data.devMsg);
       });
   };
 
@@ -81,15 +75,15 @@ export default function SignUp() {
       setErrorPassword(true);
     }
 
-    if(!errorUserName && !errorEmail && !errorPassword) {
+    if (!errorUserName && !errorEmail && !errorPassword) {
       return true;
     }
     return false;
-  }
+  };
 
   const validateEmail = (email) => {
     return email.match(
-      /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+      /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
     );
   };
 
@@ -123,20 +117,20 @@ export default function SignUp() {
                   id="userName"
                   label="UserName"
                   autoFocus
-                  error={errorUserName} 
+                  error={errorUserName}
                   helperText={errorUserName ? "UserName is required." : ""}
                 />
               </Grid>
               <Grid item xs={12}>
-                <TextField 
+                <TextField
                   required
-                  error={errorEmail || errorMsg} 
-                  fullWidth 
-                  id="email" 
-                  label="Email" 
-                  name="email" 
+                  error={errorEmail || errorMsg}
+                  fullWidth
+                  id="email"
+                  label="Email"
+                  name="email"
                   autoComplete="email"
-                  helperText={errorEmail ? "Email is invalid." : errorMsg }
+                  helperText={errorEmail ? "Email is invalid." : errorMsg}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -148,7 +142,7 @@ export default function SignUp() {
                   type="password"
                   id="password"
                   autoComplete="new-password"
-                  error={errorPassword} 
+                  error={errorPassword}
                   helperText={errorPassword ? "Password is required." : ""}
                 />
               </Grid>
@@ -158,7 +152,7 @@ export default function SignUp() {
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link href="/sign-in" variant="body2">
+                <Link to="/sign-in" style={{ textDecoration: "underline", color: "#0095ff" }}>
                   Already have an account? Sign in
                 </Link>
               </Grid>

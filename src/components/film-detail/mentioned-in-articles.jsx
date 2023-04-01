@@ -1,10 +1,10 @@
-import { Box, Typography } from "@mui/material";
+import { Box } from "@mui/material";
 
 export default function MentionedInArticles() {
   return (
     <Box>
       <Box className="tag_reviews">
-        <p style={{ textTransform: "uppercase" }}>Mentioned in articles:</p>
+        <p style={{ textTransform: "uppercase" }}>Mentioned in articles</p>
       </Box>
       <Box className="cart_summary" mt={5}>
         <img

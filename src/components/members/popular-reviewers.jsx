@@ -1,61 +1,67 @@
 import Container from "@mui/system/Container";
 import { Box, Button, Grid, CardMedia } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
+import { Link, useNavigate } from "react-router-dom";
 
 const listPopularReviewers = [
   {
-    userName: "MJ Cristiano",
+    userName: "mjcristiano",
+    fullName: "MJ Cristiano",
     userAvatar: "https://picsum.photos/200/200",
     filmCount: 127,
     reviewCount: 342,
     listTopFilmReview: [
-      { name: "La la land", thumbnail: "https://picsum.photos/200/310" },
-      { name: "Avenger End Game", thumbnail: "https://picsum.photos/200/320" },
-      { name: "Titanic", thumbnail: "https://picsum.photos/200/330" },
+      { name: "La la land", thumbnail: "https://picsum.photos/200/310", id: 1 },
+      { name: "Avenger End Game", thumbnail: "https://picsum.photos/200/320", id: 2 },
+      { name: "Titanic", thumbnail: "https://picsum.photos/200/330", id: 3 },
     ],
   },
   {
-    userName: "MJ Cristiano",
+    userName: "selenagomez",
+    fullName: "Selena Gomez",
     userAvatar: "https://picsum.photos/250/250",
     filmCount: 127,
     reviewCount: 342,
     listTopFilmReview: [
-      { name: "La la land", thumbnail: "https://picsum.photos/200/340" },
-      { name: "Avenger End Game", thumbnail: "https://picsum.photos/200/350" },
-      { name: "Titanic", thumbnail: "https://picsum.photos/200/360" },
+      { name: "La la land", thumbnail: "https://picsum.photos/200/340", id: 4 },
+      { name: "Avenger End Game", thumbnail: "https://picsum.photos/200/350", id: 5 },
+      { name: "Titanic", thumbnail: "https://picsum.photos/200/360", id: 6 },
     ],
   },
   {
-    userName: "MJ Cristiano",
+    userName: "jutinbb",
+    fullName: "Justin Bieber",
     userAvatar: "https://picsum.photos/230/230",
     filmCount: 127,
     reviewCount: 342,
     listTopFilmReview: [
-      { name: "La la land", thumbnail: "https://picsum.photos/200/370" },
-      { name: "Avenger End Game", thumbnail: "https://picsum.photos/200/380" },
-      { name: "Titanic", thumbnail: "https://picsum.photos/200/390" },
+      { name: "La la land", thumbnail: "https://picsum.photos/200/370", id: 7 },
+      { name: "Avenger End Game", thumbnail: "https://picsum.photos/200/380", id: 8 },
+      { name: "Titanic", thumbnail: "https://picsum.photos/200/390", id: 9 },
     ],
   },
   {
-    userName: "MJ Cristiano",
+    userName: "mjapple",
+    fullName: "MJ Apple",
     userAvatar: "https://picsum.photos/210/210",
     filmCount: 127,
     reviewCount: 342,
     listTopFilmReview: [
-      { name: "La la land", thumbnail: "https://picsum.photos/200/301" },
-      { name: "Avenger End Game", thumbnail: "https://picsum.photos/200/302" },
-      { name: "Titanic", thumbnail: "https://picsum.photos/200/303" },
+      { name: "La la land", thumbnail: "https://picsum.photos/200/301", id: 10 },
+      { name: "Avenger End Game", thumbnail: "https://picsum.photos/200/302", id: 11 },
+      { name: "Titanic", thumbnail: "https://picsum.photos/200/303", id: 12 },
     ],
   },
   {
-    userName: "MJ Cristiano",
+    userName: "mjm10",
+    fullName: "MJ Messi",
     userAvatar: "https://picsum.photos/220/220",
     filmCount: 127,
     reviewCount: 342,
     listTopFilmReview: [
-      { name: "La la land", thumbnail: "https://picsum.photos/200/304" },
-      { name: "Avenger End Game", thumbnail: "https://picsum.photos/200/305" },
-      { name: "Titanic", thumbnail: "https://picsum.photos/200/306" },
+      { name: "La la land", thumbnail: "https://picsum.photos/200/304", id: 13 },
+      { name: "Avenger End Game", thumbnail: "https://picsum.photos/200/305", id: 14 },
+      { name: "Titanic", thumbnail: "https://picsum.photos/200/306", id: 15 },
     ],
   },
 ];
@@ -71,19 +77,21 @@ function FeaturedPerson(props) {
         overflow: "hidden",
       }}
     >
-      <Box
-        component="img"
-        sx={{
-          height: "100%",
-          width: "90%",
-          transition: "0.2s",
-          borderRadius: "4px",
-          ":hover": {
-            border: "1px solid #9ab",
-          },
-        }}
-        src={film.thumbnail}
-      ></Box>
+      <Link to={"/films/" + film.id} style={{ width: "100%", height: "100%" }}>
+        <Box
+          component="img"
+          sx={{
+            height: "100%",
+            width: "90%",
+            transition: "0.2s",
+            borderRadius: "4px",
+            ":hover": {
+              border: "1px solid #9ab",
+            },
+          }}
+          src={film.thumbnail}
+        ></Box>
+      </Link>
     </Grid>
   ));
   return (
@@ -113,20 +121,28 @@ function FeaturedPerson(props) {
             position: "relative",
           }}
         >
-          <Box
-            component="img"
-            sx={{
+          <Link
+            to={"/u/" + props.user.userName}
+            style={{
               width: "100%",
-              height: "auto",
-              borderRadius: "50%",
-              transition: "0.2s",
-              ":hover": {
-                border: "1px solid #9ab",
-              },
+              height: "100%",
             }}
-            src={props.user.userAvatar}
-          ></Box>
-          <Box
+          >
+            <Box
+              component="img"
+              sx={{
+                width: "100%",
+                height: "auto",
+                borderRadius: "50%",
+                transition: "0.2s",
+                ":hover": {
+                  border: "1px solid #9ab",
+                },
+              }}
+              src={props.user.userAvatar}
+            ></Box>
+          </Link>
+          <Button
             component="span"
             sx={{
               position: "absolute",
@@ -135,6 +151,7 @@ function FeaturedPerson(props) {
               backgroundColor: "#567",
               height: "36px",
               width: "36px",
+              minWidth: "unset",
               borderRadius: "50%",
               color: "#fff",
               display: "flex",
@@ -147,32 +164,39 @@ function FeaturedPerson(props) {
             }}
           >
             <AddIcon></AddIcon>
-          </Box>
+          </Button>
         </Box>
         <Box sx={{ marginBottom: "8px" }}>
-          <Box
-            sx={{
+          <Link
+            to={"/u/" + props.user.userName}
+            style={{
               fontWeight: "600",
               color: "#fff",
               fontSize: "16px",
+              textAlign: "center",
+              textDecoration: "none",
+              display: "block",
             }}
           >
-            {props.user.userName}
-          </Box>
+            {props.user.fullName}
+          </Link>
           <Box
             sx={{
               fontSize: "14px",
+              " a:hover": {
+                color: "#fff",
+              },
             }}
           >
-            <Box
-              component="span"
-              sx={{
+            <Link
+              to={"/u/" + props.user.userName + "/films"}
+              style={{
                 marginRight: "8px",
               }}
             >
               {props.user.filmCount} films
-            </Box>
-            <Box component="span">{props.user.reviewCount} reviews</Box>
+            </Link>
+            <Link to={"/u/" + props.user.userName + "/reviews"}>{props.user.reviewCount} reviews</Link>
           </Box>
         </Box>
 

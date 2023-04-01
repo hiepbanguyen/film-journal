@@ -15,6 +15,7 @@ import DoneIcon from "@mui/icons-material/Done";
 import ClearIcon from "@mui/icons-material/Clear";
 import baseAPI from "../../apis/baseApi";
 import Enum from "../../apis/enums/Enum"
+import { Link, useNavigate } from "react-router-dom";
 
 export default function ListReviewers() {
   const [listMember, setListMember] = React.useState([]);
@@ -72,41 +73,66 @@ export default function ListReviewers() {
           {listMember.map((member, idx) => (
             <TableRow
               key={idx}
-              sx={{ "&:last-child td, &:last-child th": { border: 0 }, borderBottom: "2px solid #99aabb73" }}
+              sx={{
+                "&:last-child td, &:last-child th": { border: 0 },
+                borderBottom: "2px solid #99aabb73",
+                " a:hover": {
+                  color: "#fff",
+                },
+              }}
             >
-              <TableCell component="th" scope="row" sx={{ color: "#9ab" }}>
+              <TableCell scope="row" sx={{ color: "#9ab" }}>
                 <Box sx={{ display: "flex", alignItems: "center", justifyContent: "flex-start" }}>
-                  <Box sx={{ width: "40px", height: "40px", overflow: "hidden", marginRight: "8px" }}>
+                  <Link
+                    to={"/" + member.UserName}
+                    style={{ width: "40px", height: "40px", overflow: "hidden", marginRight: "8px" }}
+                  >
                     <Box
                       component="img"
                       sx={{
                         width: "100%",
                         height: "auto",
                         borderRadius: "50%",
+                        ":hover": {
+                          border: "1px solid #9ab",
+                        },
                       }}
                       src={member.Avatar}
                     ></Box>
-                  </Box>
+                  </Link>
                   <Box>
-                    <Box sx={{ color: "#fff", fontWeight: "600" }}>{member.UserName}</Box>
-                    <Box>{member.Reviews} Reviews</Box>
+                    <Link to={"/" + member.UserName} style={{ color: "#fff", fontWeight: "600" }}>
+                      {member.UserName}
+                    </Link>
+                    <Link to={"/" + member.UserName + "/reviews"} style={{ display: "block", transition: "0.2s" }}>
+                      {member.Reviews} Reviews
+                    </Link>
                   </Box>
                 </Box>
               </TableCell>
               <TableCell sx={{ color: "#9ab", display: { xs: "none", md: "table-cell" } }}>
-                <Box sx={{ display: "flex", alignItems: "center", lineHeight: "40px" }}>
-                  <RemoveRedEyeIcon sx={{ marginRight: "4px", color: "#00b020" }}></RemoveRedEyeIcon> {member.watched}
-                </Box>
+                <Link
+                  to={"/u/" + member.UserName + "/films"}
+                  style={{ display: "flex", alignItems: "center", lineHeight: "40px" }}
+                >
+                  <RemoveRedEyeIcon sx={{ marginRight: "4px", color: "#00b020" }}></RemoveRedEyeIcon> {member.Watched}
+                </Link>
               </TableCell>
               <TableCell sx={{ color: "#9ab", display: { xs: "none", md: "table-cell" } }}>
-                <Box sx={{ display: "flex", alignItems: "center", lineHeight: "40px" }}>
+                <Link
+                  to={"/u/" + member.UserName + "/lists"}
+                  style={{ display: "flex", alignItems: "center", lineHeight: "40px" }}
+                >
                   <GridViewIcon sx={{ marginRight: "4px", color: "#40bcf4" }}></GridViewIcon> {member.Lists}
-                </Box>
+                </Link>
               </TableCell>
               <TableCell sx={{ color: "#9ab", display: { xs: "none", md: "table-cell" } }}>
-                <Box sx={{ display: "flex", alignItems: "center", lineHeight: "40px" }}>
+                <Link
+                  to={"/u/" + member.UserName + "/likes"}
+                  style={{ display: "flex", alignItems: "center", lineHeight: "40px" }}
+                >
                   <FavoriteIcon sx={{ marginRight: "4px", color: "#ff9010" }}></FavoriteIcon> {member.Likes}
-                </Box>
+                </Link>
               </TableCell>
               <TableCell align="right" sx={{ color: "#9ab" }}>
                 {member.Followed ? (
@@ -122,6 +148,9 @@ export default function ListReviewers() {
                       },
                       display: "inline-block",
                       borderRadius: "50%",
+                      minWidth: "unset",
+                      padding: "0",
+                      height: "30px",
                     }}
                   >
                     <DoneIcon
@@ -145,9 +174,17 @@ export default function ListReviewers() {
                         display: "none",
                       }}
                     ></ClearIcon>
-                  </Box>
+                  </Button>
                 ) : (
-                  <Box>
+                  <Button
+                    sx={{
+                      display: "inline-block",
+                      borderRadius: "50%",
+                      minWidth: "unset",
+                      padding: "0",
+                      height: "30px",
+                    }}
+                  >
                     <AddIcon
                       className="add-icon"
                       sx={{
@@ -156,14 +193,14 @@ export default function ListReviewers() {
                         fontSize: "30px",
                         padding: "4px",
                         borderRadius: "50%",
-                        transition: "0.3s",
+                        transition: "0.2s",
                         "&:hover": {
                           backgroundColor: "#8e99a4",
                         },
                       }}
                       onClick={() => followingMember(member)}
                     ></AddIcon>
-                  </Box>
+                  </Button>
                 )}
               </TableCell>
             </TableRow>

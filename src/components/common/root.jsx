@@ -9,10 +9,8 @@ export default function Root() {
   }, []);
 
   return (
-    <>
-      <Layout>
-        <Outlet />
-      </Layout>
-    </>
+    <Layout>
+      <Outlet />
+    </Layout>
   );
 }

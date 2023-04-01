@@ -1,11 +1,9 @@
-import StarIcon from "@mui/icons-material/Star";
-
 export const COMPONENT_THEME = {
   MuiButton: {
     styleOverrides: {
       root: {
         color: "#fff",
-        elevation: 0,
+        boxShadow: 0,
         textTransform: "none",
       },
     },
@@ -72,6 +70,29 @@ export const COMPONENT_THEME = {
       },
       sizeMedium: {
         fontSize: 20,
+      },
+    },
+  },
+
+  MuiChip: {
+    styleOverrides: {
+      root: {
+        background: "#456",
+        color: "#9ab",
+        "&:hover": {
+          color: "#fff",
+          background: "#678",
+        },
+      },
+    },
+  },
+
+  MuiDialog: {
+    styleOverrides: {
+      root: {
+        "& .MuiDialog-paper": {
+          background: "#eee",
+        },
       },
     },
   },

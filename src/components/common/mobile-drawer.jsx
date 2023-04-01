@@ -1,6 +1,5 @@
 import * as React from "react";
-import Drawer from "@mui/material/Drawer";
-import { Box, Button, Divider, IconButton, Stack, SwipeableDrawer, Typography } from "@mui/material";
+import { Box, Button, Divider, IconButton, Stack, SwipeableDrawer } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import { Logo } from "./logo.jsx";
 import { AnimatedUnderlineBox } from "./animated-underline-box.jsx";
@@ -38,13 +37,7 @@ export default function MobileDrawer(props) {
           <Box mt={1}>
             {pages.map((i, idx) => (
               <React.Fragment key={idx}>
-                <Box
-                  component={Link}
-                  to={i.href}
-                  display={"flex"}
-                  justifyContent={"center"}
-                  sx={{ textDecoration: "none", color: "inherit" }}
-                >
+                <Box component={Link} to={i.href} display={"flex"} justifyContent={"center"}>
                   <Button sx={{ color: "inherit", mt: 1, textTransform: "uppercase" }}>
                     <AnimatedUnderlineBox open={currPath === i.href}>{i.label}</AnimatedUnderlineBox>
                   </Button>

@@ -77,6 +77,7 @@ function a11yProps(index) {
 export default function CustomTabs(props) {
   const { children, labels, bottom_border_only } = props;
   // open tab
+  // open tab
   const [openTab, setOpenTab] = React.useState(0);
 
   const handleChange = (event, newValue) => {

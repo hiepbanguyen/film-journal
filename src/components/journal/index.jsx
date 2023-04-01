@@ -8,8 +8,8 @@ import SelectTopic from "./topic-select.jsx";
 export default function Journal() {
   return (
     <Box sx={{ fontFamily: "TiemposTextWeb,Georgia,serif,ColorEmoji" }}>
-      <Box sx={{ background: "#445566", color: "#bcd" }}>
-        <Container sx={{ p: 5, pb: 20 }}>
+      <Box sx={{ background: "#456", color: "#bcd" }}>
+        <Container sx={{ p: 5, pb: 20, pt: 12 }}>
           <Box display={"flex"} justifyContent={"space-between"} alignItems={"center"}>
             <Typography
               fontWeight={800}
@@ -25,7 +25,7 @@ export default function Journal() {
             </Typography>
             <SelectTopic />
           </Box>
-          <Divider variant={"fullWidth"} sx={{ mb: 5, mt: 2 }} />
+          <Divider variant={"fullWidth"} sx={{ mb: 5, mt: 2, borderColor: "#bcd" }} />
           <SpotlightArticle
             topic={"Interview"}
             title={"An Appropriate Article Title"}

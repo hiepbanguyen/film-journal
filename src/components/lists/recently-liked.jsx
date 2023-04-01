@@ -3,11 +3,10 @@ import { styled } from "@mui/material/styles";
 import { Box, Divider, Grid, Typography } from "@mui/material";
 import Container from "@mui/material/Container";
 import { ListPreviewHorizontal, ListPreviewVertical } from "../home/list-preview";
-import Tags from "./tags";
+import Tags from "../common/tags.jsx";
 
 const Root = styled("div")({
   flexGrow: 1,
-  padding: 2,
   marginTop: 30,
 });
 

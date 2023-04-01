@@ -1,23 +1,15 @@
 import React from "react";
 import "./film-detail.scss";
-import ChatBubbleIcon from "@mui/icons-material/ChatBubble";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import StorageRoundedIcon from "@mui/icons-material/StorageRounded";
-import RemoveRedEyeRoundedIcon from "@mui/icons-material/RemoveRedEyeRounded";
-import GridViewSharpIcon from "@mui/icons-material/GridViewSharp";
-import SmartDisplayIcon from "@mui/icons-material/SmartDisplay";
 import CompiledRatings from "../common/compiled-ratings.jsx";
 import { Box, Container, Stack } from "@mui/material";
-import ViewsLikesLists from "./views-likes-lists.jsx";
 import SigninAndShare from "./signin-and-share.jsx";
-import TabDetail from "./tab-detail.jsx";
+import TabsCastNCrew from "./tabs-cast-n-crew.jsx";
 import MentionedInArticles from "./mentioned-in-articles.jsx";
-import PopularReviews from "./popular-reviews.jsx";
 import RelatedFilms from "./related-films.jsx";
 import SimilarFilms from "./similar-films.jsx";
-import RecentReviews from "./recent-reviews";
 import PosterAndDescription from "./poster-and-description.jsx";
 import ActionBox from "./action-box.jsx";
+import TabsReviews from "./tabs-reviews.jsx";
 
 const film_detail = {
   title: "Avatar: The Way of Water",
@@ -42,44 +34,45 @@ const FilmDetail = () => {
   const loggedIn = true;
   return (
     <>
-      <Box
-        width={{ xs: "95vw", md: "80vw" }}
-        component="img"
-        sx={{
-          position: "absolute",
-          top: -10,
-          left: 0,
-          right: 0,
-          marginX: "auto",
-          aspectRatio: "1920/1080",
-          alignSelf: "center",
-          zIndex: -2,
-        }}
-        alt="The house from the offer."
-        src={film_detail.banner}
-      />
-      <Box
-        width={{ xs: "95vw", md: "80vw" }}
-        sx={{
-          position: "absolute",
-          top: -10,
-          left: 0,
-          right: 0,
-          marginX: "auto",
-          aspectRatio: "1920/1080",
-          alignSelf: "center",
-          zIndex: -1,
-          background:
-            "linear-gradient(90deg,#14181d 0,rgba(20,24,29,.986) .97%,rgba(20,24,29,.945) 2.07833333%,rgba(20,24,29,.883) 3.29666667%,rgba(20,24,29,.803) 4.60166667%,rgba(20,24,29,.711) 5.96666667%,rgba(20,24,29,.61) 7.365%,rgba(20,24,29,.504) 8.77166667%,rgba(20,24,29,.398) 10.16%,rgba(20,24,29,.296) 11.505%,rgba(20,24,29,.203) 12.78%,rgba(20,24,29,.122) 13.95833333%,rgba(20,24,29,.059) 15.01666667%,rgba(20,24,29,.016) 15.92833333%,rgba(20,24,29,0) 16.66666667%,rgba(20,24,29,0) 83.33333333%,rgba(20,24,29,.016) 84.07166667%,rgba(20,24,29,.059) 84.98333333%,rgba(20,24,29,.122) 86.04166667%,rgba(20,24,29,.203) 87.22%,rgba(20,24,29,.296) 88.495%,rgba(20,24,29,.398) 89.84%,rgba(20,24,29,.504) 91.22833333%,rgba(20,24,29,.61) 92.635%,rgba(20,24,29,.711) 94.03333333%,rgba(20,24,29,.803) 95.39833333%,rgba(20,24,29,.883) 96.70333333%,rgba(20,24,29,.945) 97.92166667%,rgba(20,24,29,.986) 99.03%,#14181d),linear-gradient(0deg,#14181d 0,#14181d 21.48148148%,rgba(20,24,29,.986) 23.63703704%,rgba(20,24,29,.945) 26.1%,rgba(20,24,29,.883) 28.80740741%,rgba(20,24,29,.803) 31.70740741%,rgba(20,24,29,.711) 34.74074074%,rgba(20,24,29,.61) 37.84814815%,rgba(20,24,29,.504) 40.97407407%,rgba(20,24,29,.398) 44.05925926%,rgba(20,24,29,.296) 47.04814815%,rgba(20,24,29,.203) 49.88148148%,rgba(20,24,29,.122) 52.5%,rgba(20,24,29,.059) 54.85185185%,rgba(20,24,29,.016) 56.87777778%,rgba(20,24,29,0) 58.51851852%)",
-        }}
-      />
-
+      <Box position={"relative"}>
+        <Box
+          width={{ xs: "95vw", md: "80vw" }}
+          component="img"
+          sx={{
+            position: "absolute",
+            top: { md: -50 },
+            left: 0,
+            right: 0,
+            marginX: "auto",
+            aspectRatio: "1920/1080",
+            alignSelf: "center",
+            zIndex: -2,
+          }}
+          alt="The house from the offer."
+          src={film_detail.banner}
+        />
+        <Box
+          width={{ xs: "95vw", md: "80vw" }}
+          sx={{
+            position: "absolute",
+            top: { md: -50 },
+            left: 0,
+            right: 0,
+            marginX: "auto",
+            aspectRatio: "1920/1080",
+            alignSelf: "center",
+            zIndex: -1,
+            background:
+              "linear-gradient(90deg,#14181d 0,rgba(20,24,29,.986) .97%,rgba(20,24,29,.945) 2.07833333%,rgba(20,24,29,.883) 3.29666667%,rgba(20,24,29,.803) 4.60166667%,rgba(20,24,29,.711) 5.96666667%,rgba(20,24,29,.61) 7.365%,rgba(20,24,29,.504) 8.77166667%,rgba(20,24,29,.398) 10.16%,rgba(20,24,29,.296) 11.505%,rgba(20,24,29,.203) 12.78%,rgba(20,24,29,.122) 13.95833333%,rgba(20,24,29,.059) 15.01666667%,rgba(20,24,29,.016) 15.92833333%,rgba(20,24,29,0) 16.66666667%,rgba(20,24,29,0) 83.33333333%,rgba(20,24,29,.016) 84.07166667%,rgba(20,24,29,.059) 84.98333333%,rgba(20,24,29,.122) 86.04166667%,rgba(20,24,29,.203) 87.22%,rgba(20,24,29,.296) 88.495%,rgba(20,24,29,.398) 89.84%,rgba(20,24,29,.504) 91.22833333%,rgba(20,24,29,.61) 92.635%,rgba(20,24,29,.711) 94.03333333%,rgba(20,24,29,.803) 95.39833333%,rgba(20,24,29,.883) 96.70333333%,rgba(20,24,29,.945) 97.92166667%,rgba(20,24,29,.986) 99.03%,#14181d),linear-gradient(0deg,#14181d 0,#14181d 21.48148148%,rgba(20,24,29,.986) 23.63703704%,rgba(20,24,29,.945) 26.1%,rgba(20,24,29,.883) 28.80740741%,rgba(20,24,29,.803) 31.70740741%,rgba(20,24,29,.711) 34.74074074%,rgba(20,24,29,.61) 37.84814815%,rgba(20,24,29,.504) 40.97407407%,rgba(20,24,29,.398) 44.05925926%,rgba(20,24,29,.296) 47.04814815%,rgba(20,24,29,.203) 49.88148148%,rgba(20,24,29,.122) 52.5%,rgba(20,24,29,.059) 54.85185185%,rgba(20,24,29,.016) 56.87777778%,rgba(20,24,29,0) 58.51851852%)",
+          }}
+        />
+      </Box>
       <Container className="film_detail_page" sx={{ position: "relative", color: "#fff" }}>
-        <Box pt={{ xs: 10, sm: 25, md: 30 }} gap={5} mx={{ md: 10 }}>
+        <Box pt={{ xs: 20, sm: 32, lg: 40 }} gap={5} mx={{ md: 10 }}>
           <PosterAndDescription {...film_detail} />
           <Box display={"flex"} flexDirection={{ xs: "column-reverse", sm: "row" }} gap={5}>
             <Box flex={2}>
-              <TabDetail />
+              <TabsCastNCrew />
             </Box>
             <Stack flex={1} pt={2} gap={4}>
               <CompiledRatings />
@@ -87,8 +80,7 @@ const FilmDetail = () => {
             </Stack>
           </Box>
           <Box pb={5}>
-            <PopularReviews />
-            <RecentReviews />
+            <TabsReviews />
             <RelatedFilms />
             <SimilarFilms />
             <MentionedInArticles />
