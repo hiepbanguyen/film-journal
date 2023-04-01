@@ -101,7 +101,7 @@ export default function ReviewCard(props) {
           }}
         >
           <Link
-            to={"/" + review.user.userName + "/reviews/" + review.id}
+            to={"/u/" + review.user.userName + "/reviews/" + review.id}
             style={{
               fontWeight: "700",
               marginRight: "8px",
@@ -140,7 +140,7 @@ export default function ReviewCard(props) {
             }}
           >
             <Link
-              to={"/" + review.user.userName}
+              to={"/u/" + review.user.userName}
               style={{
                 width: "24px",
                 aspectRatio: "1/1",
@@ -159,7 +159,7 @@ export default function ReviewCard(props) {
               ></Box>
             </Link>
             <Link
-              to={"/" + review.user.userName}
+              to={"/u/" + review.user.userName}
               style={{
                 textDecoration: "none",
                 fontWeight: "600",
@@ -177,7 +177,7 @@ export default function ReviewCard(props) {
               ))}
             </Box>
             <Link
-              to={"/" + review.user.userName + "/reviews/" + review.id}
+              to={"/u/" + review.user.userName + "/reviews/" + review.id}
               style={{
                 display: "flex",
                 alignItems: "center",

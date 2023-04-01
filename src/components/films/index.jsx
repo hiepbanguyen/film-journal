@@ -2,7 +2,7 @@ import Container from "@mui/system/Container";
 import { Box, Grid } from "@mui/material";
 import FilmsListPopularFilms from "./list-popular-films";
 import FilmsListPopularReviews from "./list-popular-reviews";
-import FilmsSearchForm from "../common/films-search-form.jsx";
+import SearchForm from "../common/search-form.jsx";
 import FilmsAside from "./films-aside";
 
 export default function Films() {
@@ -10,7 +10,7 @@ export default function Films() {
     <Container>
       <Box sx={{ marginTop: 13, color: "#9ab" }}>
         <Box mb={2}>
-          <FilmsSearchForm />
+          <SearchForm />
         </Box>
         <FilmsListPopularFilms></FilmsListPopularFilms>
         <Box>
