@@ -2,7 +2,7 @@ import { Box, Button, FormControl, InputLabel, MenuItem, Select, TextField } fro
 import React, { useState } from "react";
 import StarIcon from "@mui/icons-material/Star.js";
 
-export default function FilmsSearchForm() {
+export default function SearchForm() {
   const [year, setYear] = useState("");
   const [rating, setRating] = useState("");
   const [genre, setGenre] = useState("");
@@ -100,7 +100,7 @@ export default function FilmsSearchForm() {
   };
 
   return (
-    <Box className="films-search-form">
+    <Box className="search-form">
       <form onSubmit={handleSubmitFormSearch}>
         <FormControl
           sx={{
@@ -118,12 +118,12 @@ export default function FilmsSearchForm() {
           }}
           size="small"
         >
-          <InputLabel sx={{ color: "#9ab", backgroundColor: "#14181c", padding: "0 8px" }} id="films-search-year-label">
+          <InputLabel sx={{ color: "#9ab", backgroundColor: "#14181c", padding: "0 8px" }} id="search-year-label">
             Year
           </InputLabel>
           <Select
-            labelId="films-search-year-label"
-            id="films-search-year"
+            labelId="search-year-label"
+            id="search-year"
             value={year}
             onChange={handleYearChange}
             sx={{ color: "#9ab" }}
@@ -153,13 +153,13 @@ export default function FilmsSearchForm() {
         >
           <InputLabel
             sx={{ color: "#9ab", backgroundColor: "#14181c", padding: "0 8px" }}
-            id="films-search-rating-label"
+            id="search-rating-label"
           >
             Rating
           </InputLabel>
           <Select
-            labelId="films-search-rating-label"
-            id="films-search-rating"
+            labelId="search-rating-label"
+            id="search-rating"
             value={rating}
             onChange={handleRatingChange}
             sx={{ color: "#9ab" }}
@@ -192,13 +192,13 @@ export default function FilmsSearchForm() {
         >
           <InputLabel
             sx={{ color: "#9ab", backgroundColor: "#14181c", padding: "0 8px" }}
-            id="films-search-genre-label"
+            id="search-genre-label"
           >
             Genre
           </InputLabel>
           <Select
-            labelId="films-search-genre-label"
-            id="films-search-genre"
+            labelId="search-genre-label"
+            id="search-genre"
             value={genre}
             onChange={handleGenreChange}
             sx={{ color: "#9ab" }}

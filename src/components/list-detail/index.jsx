@@ -1,5 +1,5 @@
 import Container from "@mui/system/Container";
-import FilmsSearchForm from "../common/films-search-form.jsx";
+import SearchForm from "../common/search-form.jsx";
 import { Avatar, Box, Divider, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 import PaginatedGrid from "../common/paginated_grid.jsx";
@@ -68,7 +68,7 @@ export default function ListDetail() {
           <i>Last updated: 6d</i>
         </Typography>
         <Box mb={{ xs: 2, lg: 0 }}>
-          <FilmsSearchForm />
+          <SearchForm />
         </Box>
         <Divider variant={"fullWidth"} />
         <Typography variant={"h5"} color={"#fff"} mt={1.5} mb={1}>
