@@ -149,7 +149,7 @@ export default function ListReviewers() {
               </TableCell>
               <TableCell sx={{ color: "#9ab", display: { xs: "none", md: "table-cell" } }}>
                 <Link
-                  to={"/" + row.user.userName + "/films"}
+                  to={"/u/" + row.user.userName + "/films"}
                   style={{ display: "flex", alignItems: "center", lineHeight: "40px" }}
                 >
                   <RemoveRedEyeIcon sx={{ marginRight: "4px", color: "#00b020" }}></RemoveRedEyeIcon> {row.watched}
@@ -157,7 +157,7 @@ export default function ListReviewers() {
               </TableCell>
               <TableCell sx={{ color: "#9ab", display: { xs: "none", md: "table-cell" } }}>
                 <Link
-                  to={"/" + row.user.userName + "/lists"}
+                  to={"/u/" + row.user.userName + "/lists"}
                   style={{ display: "flex", alignItems: "center", lineHeight: "40px" }}
                 >
                   <GridViewIcon sx={{ marginRight: "4px", color: "#40bcf4" }}></GridViewIcon> {row.lists}
@@ -165,7 +165,7 @@ export default function ListReviewers() {
               </TableCell>
               <TableCell sx={{ color: "#9ab", display: { xs: "none", md: "table-cell" } }}>
                 <Link
-                  to={"/" + row.user.userName + "/likes"}
+                  to={"/u/" + row.user.userName + "/likes"}
                   style={{ display: "flex", alignItems: "center", lineHeight: "40px" }}
                 >
                   <FavoriteIcon sx={{ marginRight: "4px", color: "#ff9010" }}></FavoriteIcon> {row.likes}

@@ -30,14 +30,14 @@ function Follow(props) {
         <Box
           sx={{ color: "#fff", textDecoration: "none", "&:hover": { color: "#40bcf4" } }}
           component="a"
-          href={props.data.isFollowing ? "/userName/following/" : "/userName/followers/"}
+          href={props.data.isFollowing ? "/u/userName/following/" : "/u/userName/followers/"}
         >
           {props.data.isFollowing ? "Following" : "Following you"}
         </Box>
         <Box
           sx={{ color: "#fff", textDecoration: "none", "&:hover": { color: "#40bcf4" } }}
           component="a"
-          href={props.data.isFollowing ? "/userName/following/" : "/userName/followers/"}
+          href={props.data.isFollowing ? "/u/userName/following/" : "/u/userName/followers/"}
         >
           {props.data.count}
         </Box>
@@ -46,7 +46,7 @@ function Follow(props) {
       <Box mt={2}>
         {props.data.list.map((user, idx) => (
           <Box sx={{ aspectRatio: "1/1", width: "16.6666666%", display: "inline-block" }} key={idx}>
-            <Box component="a" href={"/" + user.userName} sx={{ width: "100%", height: "100%" }}>
+            <Box component="a" href={"/u/" + user.userName} sx={{ width: "100%", height: "100%" }}>
               <Box
                 component="img"
                 src={user.avatar}
