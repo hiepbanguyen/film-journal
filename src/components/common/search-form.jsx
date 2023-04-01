@@ -1,13 +1,17 @@
 import { Box, Button, FormControl, InputLabel, MenuItem, Select, TextField } from "@mui/material";
 import React, { useState } from "react";
 import StarIcon from "@mui/icons-material/Star.js";
+import Grid from "@mui/material/Grid";
 
 export default function SearchForm() {
+  // Khai bao params
   const [year, setYear] = useState("");
   const [rating, setRating] = useState("");
   const [genre, setGenre] = useState("");
   const [filmName, setFilmName] = useState("");
 
+
+  // Data
   const [listYear, setListYear] = useState([
     { label: "Year", value: "" },
     { label: "Upcoming", value: "upcomming" },
@@ -62,6 +66,7 @@ export default function SearchForm() {
     { label: "Western", value: "western" },
   ]);
 
+  // Function Hanle value
   const handleYearChange = (event) => {
     setYear(event.target.value);
   };
@@ -78,20 +83,21 @@ export default function SearchForm() {
     setFilmName(event.target.value);
   };
 
+  // Submit Form
   const handleSubmitFormSearch = (event) => {
     event.preventDefault();
 
-    // Router to page '/films/search?filmName=...&year=...&genre=...&rating=...
     let url =
       "/films/search?" +
-      (filmName.length > 0 ? "filmName=" + filmName + "&" : "") +
-      (rating.length > 0 ? "rating=" + rating + "&" : "") +
-      (genre.length > 0 ? "genre=" + genre + "&" : "") +
-      (year.length > 0 ? "year=" + year : "");
+      (filmName.trim().length > 0 ? "filmName=" + filmName + "&" : "") +
+      (rating.trim().length > 0 ? "rating=" + rating + "&" : "") +
+      (genre.trim().length > 0 ? "genre=" + genre + "&" : "") +
+      (year.trim().length > 0 ? "year=" + year + "&" : "");
 
     console.log("url", url);
   };
 
+  // Clear form
   const handleClear = () => {
     setYear("");
     setGenre("");
@@ -102,160 +108,185 @@ export default function SearchForm() {
   return (
     <Box className="search-form">
       <form onSubmit={handleSubmitFormSearch}>
-        <FormControl
-          sx={{
-            minWidth: 120,
-            marginRight: "16px",
-            marginBottom: "16px",
-            " fieldset,svg": {
-              borderColor: "#9ab",
-              color: "#9ab",
-            },
-            ":hover fieldset,svg": {
-              borderColor: "#9ab",
-              color: "#9ab",
-            },
-          }}
-          size="small"
-        >
-          <InputLabel sx={{ color: "#9ab", backgroundColor: "#14181c", padding: "0 8px" }} id="search-year-label">
-            Year
-          </InputLabel>
-          <Select
-            labelId="search-year-label"
-            id="search-year"
-            value={year}
-            onChange={handleYearChange}
-            sx={{ color: "#9ab" }}
-          >
-            {listYear.map((year, idx) => (
-              <MenuItem key={idx} value={year.value}>
-                {year.label}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-        <FormControl
-          sx={{
-            minWidth: 120,
-            marginRight: "16px",
-            marginBottom: "16px",
-            " fieldset,svg": {
-              borderColor: "#9ab",
-              color: "#9ab",
-            },
-            ":hover fieldset,svg": {
-              borderColor: "#9ab",
-              color: "#9ab",
-            },
-          }}
-          size="small"
-        >
-          <InputLabel
-            sx={{ color: "#9ab", backgroundColor: "#14181c", padding: "0 8px" }}
-            id="search-rating-label"
-          >
-            Rating
-          </InputLabel>
-          <Select
-            labelId="search-rating-label"
-            id="search-rating"
-            value={rating}
-            onChange={handleRatingChange}
-            sx={{ color: "#9ab" }}
-          >
-            {listRating.map((rating, idx) => (
-              <MenuItem key={idx} value={rating.value}>
-                <Box sx={{ display: "flex", alignItems: "center" }}>
-                  {rating.label}{" "}
-                  {rating.value > 0 && <StarIcon sx={{ marginLeft: "4px", fontSize: "22px" }}></StarIcon>}
-                </Box>
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-        <FormControl
-          sx={{
-            minWidth: 180,
-            marginRight: "16px",
-            marginBottom: "16px",
-            " fieldset,svg": {
-              borderColor: "#9ab",
-              color: "#9ab",
-            },
-            ":hover fieldset,svg": {
-              borderColor: "#9ab",
-              color: "#9ab",
-            },
-          }}
-          size="small"
-        >
-          <InputLabel
-            sx={{ color: "#9ab", backgroundColor: "#14181c", padding: "0 8px" }}
-            id="search-genre-label"
-          >
-            Genre
-          </InputLabel>
-          <Select
-            labelId="search-genre-label"
-            id="search-genre"
-            value={genre}
-            onChange={handleGenreChange}
-            sx={{ color: "#9ab" }}
-          >
-            {listGenre.map((genre, idx) => (
-              <MenuItem key={idx} value={genre.value}>
-                {genre.label}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-        <TextField
-          id="film-name-search"
-          label="Find a film..."
-          variant="outlined"
-          value={filmName}
-          onChange={handleFilmNameChange}
-          size="small"
-          sx={{
-            marginRight: "24px",
-            marginBottom: "16px",
-            " input,label,fieldset": {
-              borderColor: "#9ab",
-              color: "#9ab",
-            },
-            ":hover input,label,fieldset": {
-              borderColor: "#9ab",
-              color: "#9ab",
-            },
-          }}
-        />
-        <Box sx={{ display: { xs: "block", md: "inline-block" } }}>
-          <Button
-            type="clear"
-            size="medium"
-            sx={{
-              marginRight: "16px",
-              border: "1px solid #9ab",
-              ":hover": { border: "1px solid #9ab" },
-            }}
-            onClick={handleClear}
-          >
-            Clear
-          </Button>
-          <Button
-            variant="contained"
-            type="submit"
-            size="medium"
-            sx={{
-              backgroundColor: "#9ab !important",
-              color: "#000",
-              ":hover": { backgroundColor: "#9ab !important" },
-            }}
-          >
-            Search
-          </Button>
-        </Box>
+        <Grid container columns={12} spacing={1}>
+          <Grid item xs={3} md={2}>
+            <FormControl
+              sx={{
+                width: "100%",
+                height: "40px",
+                " fieldset,svg": {
+                  borderColor: "#9ab",
+                  color: "#9ab",
+                },
+                ":hover fieldset,svg": {
+                  borderColor: "#9ab",
+                  color: "#9ab",
+                },
+              }}
+              size="small"
+            >
+              <InputLabel
+                sx={{
+                  color: "#9ab",
+                  fontSize: { xs: "14px", md: "16px" },
+                  backgroundColor: "#14181c",
+                  padding: "0 8px",
+                }}
+                id="search-year-label"
+              >
+                Year
+              </InputLabel>
+              <Select
+                labelId="search-year-label"
+                id="search-year"
+                value={year}
+                onChange={handleYearChange}
+                sx={{ color: "#9ab", fontSize: { xs: "14px", md: "16px" } }}
+              >
+                {listYear.map((year, idx) => (
+                  <MenuItem key={idx} value={year.value}>
+                    {year.label}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </Grid>
+          <Grid item xs={3} md={2}>
+            <FormControl
+              sx={{
+                width: "100%",
+                " fieldset,svg": {
+                  borderColor: "#9ab",
+                  color: "#9ab",
+                },
+                ":hover fieldset,svg": {
+                  borderColor: "#9ab",
+                  color: "#9ab",
+                },
+              }}
+              size="small"
+            >
+              <InputLabel
+                sx={{
+                  color: "#9ab",
+                  fontSize: { xs: "14px", md: "16px" },
+                  backgroundColor: "#14181c",
+                  padding: "0 8px",
+                }}
+                id="search-rating-label"
+              >
+                Rating
+              </InputLabel>
+              <Select
+                labelId="search-rating-label"
+                id="search-rating"
+                value={rating}
+                onChange={handleRatingChange}
+                sx={{ color: "#9ab", fontSize: { xs: "14px", md: "16px" } }}
+              >
+                {listRating.map((rating, idx) => (
+                  <MenuItem key={idx} value={rating.value}>
+                    <Box sx={{ display: "flex", alignItems: "center" }}>
+                      {rating.label}{" "}
+                      {rating.value > 0 && <StarIcon sx={{ marginLeft: "4px", fontSize: "22px" }}></StarIcon>}
+                    </Box>
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </Grid>
+          <Grid item xs={6} md={2}>
+            <FormControl
+              sx={{
+                width: "100%",
+                " fieldset,svg": {
+                  borderColor: "#9ab",
+                  color: "#9ab",
+                },
+                ":hover fieldset,svg": {
+                  borderColor: "#9ab",
+                  color: "#9ab",
+                },
+              }}
+              size="small"
+            >
+              <InputLabel
+                sx={{
+                  color: "#9ab",
+                  fontSize: { xs: "14px", md: "16px" },
+                  backgroundColor: "#14181c",
+                  padding: "0 8px",
+                }}
+                id="search-genre-label"
+              >
+                Genre
+              </InputLabel>
+              <Select
+                labelId="search-genre-label"
+                id="search-genre"
+                value={genre}
+                onChange={handleGenreChange}
+                sx={{ color: "#9ab", fontSize: { xs: "14px", md: "16px" } }}
+              >
+                {listGenre.map((genre, idx) => (
+                  <MenuItem key={idx} value={genre.value}>
+                    {genre.label}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </Grid>
+          <Grid item xs={6} md={3}>
+            <TextField
+              id="film-name-search"
+              label="Find a film..."
+              variant="outlined"
+              value={filmName}
+              onChange={handleFilmNameChange}
+              size="small"
+              sx={{
+                width: '100%',
+                fontSize: { xs: "14px", md: "16px" },
+                " input,label,fieldset": {
+                  borderColor: "#9ab",
+                  color: "#9ab",
+                },
+                ":hover input,label,fieldset": {
+                  borderColor: "#9ab",
+                  color: "#9ab",
+                },
+              }}
+            />
+          </Grid>
+          <Grid item xs={6} md={3}>
+            <Box sx={{ display: { xs: "block", md: "inline-block" } }}>
+              <Button
+                type="clear"
+                size="medium"
+                sx={{
+                  border: "1px solid #9ab",
+                  marginRight: '8px',
+                  ":hover": { border: "1px solid #9ab" },
+                }}
+                onClick={handleClear}
+              >
+                Clear
+              </Button>
+              <Button
+                variant="contained"
+                type="submit"
+                size="medium"
+                sx={{
+                  backgroundColor: "#9ab !important",
+                  color: "#000",
+                  ":hover": { backgroundColor: "#9ab !important" },
+                }}
+              >
+                Search
+              </Button>
+            </Box>
+          </Grid>
+        </Grid>
       </form>
     </Box>
   );
