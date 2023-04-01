@@ -122,7 +122,7 @@ function FeaturedPerson(props) {
           }}
         >
           <Link
-            to={"/" + props.user.userName}
+            to={"/u/" + props.user.userName}
             style={{
               width: "100%",
               height: "100%",
@@ -168,7 +168,7 @@ function FeaturedPerson(props) {
         </Box>
         <Box sx={{ marginBottom: "8px" }}>
           <Link
-            to={"/" + props.user.userName}
+            to={"/u/" + props.user.userName}
             style={{
               fontWeight: "600",
               color: "#fff",
@@ -189,14 +189,14 @@ function FeaturedPerson(props) {
             }}
           >
             <Link
-              to={"/" + props.user.userName + "/films"}
+              to={"/u/" + props.user.userName + "/films"}
               style={{
                 marginRight: "8px",
               }}
             >
               {props.user.filmCount} films
             </Link>
-            <Link to={"/" + props.user.userName + "/reviews"}>{props.user.reviewCount} reviews</Link>
+            <Link to={"/u/" + props.user.userName + "/reviews"}>{props.user.reviewCount} reviews</Link>
           </Box>
         </Box>
 

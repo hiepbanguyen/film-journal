@@ -40,19 +40,19 @@ function ListUser(props) {
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
-          marginBottom: "16px", 
+          marginBottom: "16px", color: "#9ab",
           "a:hover": { color: "#40bcf4" }
         }}
       >
         <Link
-          style={{ color: "#9ab", textDecoration: "none" }}
-          to={props.data.isFollowing ? "/userName/following/" : "/userName/followers/"}
+          style={{  textDecoration: "none" }}
+          to={props.data.isFollowing ? "/u/userName/following/" : "/u/userName/followers/"}
         >
           {props.data.isFollowing ? "You Follow" : "Following you"}
         </Link>
         <Link
-          style={{ color: "#9ab", textDecoration: "none" }}
-          to={props.data.isFollowing ? "/userName/following/" : "/userName/followers/"}
+          style={{ textDecoration: "none" }}
+          to={props.data.isFollowing ? "/u/userName/following/" : "/u/userName/followers/"}
         >
           {props.data.count}
         </Link>
@@ -60,7 +60,7 @@ function ListUser(props) {
       <Box>
         {props.data.list.map((user, idx) => (
           <Box key={idx} sx={{ aspectRatio: "1/1", width: "16.66666%", display: "inline-block" }}>
-            <Link to={"/" + user.userName} style={{ width: "100%", height: "100%" }}>
+            <Link to={"/u/" + user.userName} style={{ width: "100%", height: "100%" }}>
               <Box
                 component="img"
                 src={user.avatar}
