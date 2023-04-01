@@ -13,85 +13,48 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import AddIcon from "@mui/icons-material/Add";
 import DoneIcon from "@mui/icons-material/Done";
 import ClearIcon from "@mui/icons-material/Clear";
+import baseAPI from "../../apis/baseApi";
+import Enum from "../../apis/enums/Enum"
 import { Link, useNavigate } from "react-router-dom";
 
-function crData(user, watched, lists, likes, action) {
-  return { user, watched, lists, likes, action };
-}
-
-const rows = [
-  crData(
-    { name: "Frozen yoghurt", userName: "a", reviews: 124, avatar: "https://picsum.photos/100/100" },
-    396,
-    24,
-    257,
-    false,
-  ),
-  crData(
-    { name: "Ice cream sandwich", userName: "s", reviews: 2364, avatar: "https://picsum.photos/150/150" },
-    542,
-    47,
-    358,
-    false,
-  ),
-  crData(
-    { name: "Eclair", userName: "d", reviews: 1257, avatar: "https://picsum.photos/120/120" },
-    448,
-    866,
-    563,
-    true,
-  ),
-  crData(
-    { name: "Cupcake", userName: "f", reviews: 551, avatar: "https://picsum.photos/130/130" },
-    637,
-    235,
-    457,
-    false,
-  ),
-  crData(
-    { name: "Gingerbread", userName: "g", reviews: 946, avatar: "https://picsum.photos/110/110" },
-    648,
-    876,
-    965,
-    true,
-  ),
-  crData(
-    { name: "Frozen yoghurt", userName: "h", reviews: 124, avatar: "https://picsum.photos/105/105" },
-    396,
-    24,
-    257,
-    false,
-  ),
-  crData(
-    { name: "Ice cream sandwich", userName: "e", reviews: 2364, avatar: "https://picsum.photos/121/121" },
-    542,
-    47,
-    358,
-    false,
-  ),
-  crData(
-    { name: "Eclair", userName: "q", reviews: 1257, avatar: "https://picsum.photos/111/111" },
-    448,
-    866,
-    563,
-    true,
-  ),
-  crData(
-    { name: "Cupcake", userName: "b", reviews: 551, avatar: "https://picsum.photos/114/114" },
-    637,
-    235,
-    457,
-    false,
-  ),
-  crData(
-    { name: "Gingerbread", userName: "c", reviews: 946, avatar: "https://picsum.photos/127/127" },
-    648,
-    876,
-    965,
-    true,
-  ),
-];
 export default function ListReviewers() {
+  const [listMember, setListMember] = React.useState([]);
+
+  React.useEffect(()=>{
+    let param = {
+        pageSize: 20,
+        pageIndex: 1,
+        filter: "",
+        sort: "UserName",
+        typeUser: Enum.TypeUser.All,
+        userName: ""
+    }
+    baseAPI.postAsync(`Users/Paging`, param)
+    .then((res) => {
+      if (res) {
+        setListMember(res.data.Data)
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  },[]);
+
+  const followingMember = (member) => {
+    let param = {
+      UserID: JSON.parse(localStorage.getItem("user")).UserID,
+      FollowedUserID: member.UserID
+    }
+    baseAPI.postAsync(`Follows`, param)
+    .then((res) => {
+      if (res) {
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  }
+
   return (
     <TableContainer>
       <Table aria-label="simple table">
@@ -107,7 +70,7 @@ export default function ListReviewers() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row, idx) => (
+          {listMember.map((member, idx) => (
             <TableRow
               key={idx}
               sx={{
@@ -121,7 +84,7 @@ export default function ListReviewers() {
               <TableCell scope="row" sx={{ color: "#9ab" }}>
                 <Box sx={{ display: "flex", alignItems: "center", justifyContent: "flex-start" }}>
                   <Link
-                    to={"/" + row.user.userName}
+                    to={"/" + member.UserName}
                     style={{ width: "40px", height: "40px", overflow: "hidden", marginRight: "8px" }}
                   >
                     <Box
@@ -134,45 +97,45 @@ export default function ListReviewers() {
                           border: "1px solid #9ab",
                         },
                       }}
-                      src={row.user.avatar}
+                      src={member.Avatar}
                     ></Box>
                   </Link>
                   <Box>
-                    <Link to={"/" + row.user.userName} style={{ color: "#fff", fontWeight: "600" }}>
-                      {row.user.name}
+                    <Link to={"/" + member.UserName} style={{ color: "#fff", fontWeight: "600" }}>
+                      {member.UserName}
                     </Link>
-                    <Link to={"/" + row.user.userName + "/reviews"} style={{ display: "block", transition: "0.2s" }}>
-                      {row.user.reviews} Reviews
+                    <Link to={"/" + member.UserName + "/reviews"} style={{ display: "block", transition: "0.2s" }}>
+                      {member.Reviews} Reviews
                     </Link>
                   </Box>
                 </Box>
               </TableCell>
               <TableCell sx={{ color: "#9ab", display: { xs: "none", md: "table-cell" } }}>
                 <Link
-                  to={"/u/" + row.user.userName + "/films"}
+                  to={"/u/" + member.UserName + "/films"}
                   style={{ display: "flex", alignItems: "center", lineHeight: "40px" }}
                 >
-                  <RemoveRedEyeIcon sx={{ marginRight: "4px", color: "#00b020" }}></RemoveRedEyeIcon> {row.watched}
+                  <RemoveRedEyeIcon sx={{ marginRight: "4px", color: "#00b020" }}></RemoveRedEyeIcon> {member.Watched}
                 </Link>
               </TableCell>
               <TableCell sx={{ color: "#9ab", display: { xs: "none", md: "table-cell" } }}>
                 <Link
-                  to={"/u/" + row.user.userName + "/lists"}
+                  to={"/u/" + member.UserName + "/lists"}
                   style={{ display: "flex", alignItems: "center", lineHeight: "40px" }}
                 >
-                  <GridViewIcon sx={{ marginRight: "4px", color: "#40bcf4" }}></GridViewIcon> {row.lists}
+                  <GridViewIcon sx={{ marginRight: "4px", color: "#40bcf4" }}></GridViewIcon> {member.Lists}
                 </Link>
               </TableCell>
               <TableCell sx={{ color: "#9ab", display: { xs: "none", md: "table-cell" } }}>
                 <Link
-                  to={"/u/" + row.user.userName + "/likes"}
+                  to={"/u/" + member.UserName + "/likes"}
                   style={{ display: "flex", alignItems: "center", lineHeight: "40px" }}
                 >
-                  <FavoriteIcon sx={{ marginRight: "4px", color: "#ff9010" }}></FavoriteIcon> {row.likes}
+                  <FavoriteIcon sx={{ marginRight: "4px", color: "#ff9010" }}></FavoriteIcon> {member.Likes}
                 </Link>
               </TableCell>
               <TableCell align="right" sx={{ color: "#9ab" }}>
-                {row.action ? (
+                {member.Followed ? (
                   <Button
                     className="btn-remove-follow"
                     sx={{
@@ -235,6 +198,7 @@ export default function ListReviewers() {
                           backgroundColor: "#8e99a4",
                         },
                       }}
+                      onClick={() => followingMember(member)}
                     ></AddIcon>
                   </Button>
                 )}

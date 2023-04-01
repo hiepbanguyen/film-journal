@@ -1,35 +1,35 @@
 import Container from "@mui/system/Container";
 import { Box, Button, Grid, CardMedia } from "@mui/material";
 import * as React from "react";
+import baseAPI from "../../apis/baseApi";
+import Enum from "../../apis/enums/Enum"
 import { Link, useNavigate } from "react-router-dom";
 
-const Following = {
-  count: 8,
-  list: [
-    { userName: "banana", avatar: "https://picsum.photos/212/212" },
-    { userName: "apple", avatar: "https://picsum.photos/213/213" },
-    { userName: "orange", avatar: "https://picsum.photos/214/212" },
-    { userName: "mango", avatar: "https://picsum.photos/212/215" },
-    { userName: "coconut", avatar: "https://picsum.photos/216/212" },
-    { userName: "grape", avatar: "https://picsum.photos/212/217" },
-  ],
-  isFollowing: true,
-};
-
-const Follower = {
-  count: 10,
-  list: [
-    { userName: "orange", avatar: "https://picsum.photos/214/212" },
-    { userName: "mango", avatar: "https://picsum.photos/212/215" },
-    { userName: "banana", avatar: "https://picsum.photos/212/212" },
-    { userName: "apple", avatar: "https://picsum.photos/213/213" },
-    { userName: "cheri", avatar: "https://picsum.photos/216/216" },
-    { userName: "onion", avatar: "https://picsum.photos/217/217" },
-  ],
-  isFollowing: false,
-};
 
 function ListUser(props) {
+  const [list, setList] = React.useState([]);
+  const [total, setTotal] = React.useState(0);
+  React.useEffect(()=>{
+    let param = {
+      pageSize: 20,
+      pageIndex: 1,
+      filter: "",
+      sort: "UserName",
+      typeUser: props.isFollowing ? Enum.TypeUser.Following : Enum.TypeUser.Follower,
+      userName: JSON.parse(localStorage.getItem("user")).UserName
+    }
+    baseAPI.postAsync(`Users/Paging`, param)
+    .then((res) => {
+      if (res) {
+        setList(res.data.Data)
+        setTotal(res.data.Total)
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  },[]);
+
   return (
     <Box sx={{ marginBottom: "24px" }}>
       <Box
@@ -46,21 +46,21 @@ function ListUser(props) {
       >
         <Link
           style={{  textDecoration: "none" }}
-          to={props.data.isFollowing ? "/u/userName/following/" : "/u/userName/followers/"}
+          to={props.isFollowing ? "/u/userName/following/" : "/u/userName/followers/"}
         >
-          {props.data.isFollowing ? "You Follow" : "Following you"}
+          {props.isFollowing ? "You Follow" : "Following you"}
         </Link>
         <Link
           style={{ textDecoration: "none" }}
-          to={props.data.isFollowing ? "/u/userName/following/" : "/u/userName/followers/"}
+          to={props.isFollowing ? "/u/userName/following/" : "/u/userName/followers/"}
         >
-          {props.data.count}
+          {total}
         </Link>
       </Box>
       <Box>
-        {props.data.list.map((user, idx) => (
+        {list.map((user, idx) => (
           <Box key={idx} sx={{ aspectRatio: "1/1", width: "16.66666%", display: "inline-block" }}>
-            <Link to={"/u/" + user.userName} style={{ width: "100%", height: "100%" }}>
+            <Link to={"/u/" + user.UserName} style={{ width: "100%", height: "100%" }}>
               <Box
                 component="img"
                 src={user.avatar}
@@ -84,8 +84,8 @@ function ListUser(props) {
 export default function MembersAside() {
   return (
     <Box>
-      <ListUser data={Following}></ListUser>
-      <ListUser data={Follower}></ListUser>
+      <ListUser isFollowing={true} ></ListUser>
+      <ListUser isFollowing={false} ></ListUser>
     </Box>
   );
 }
