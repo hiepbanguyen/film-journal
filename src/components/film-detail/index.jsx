@@ -3,14 +3,13 @@ import "./film-detail.scss";
 import CompiledRatings from "../common/compiled-ratings.jsx";
 import { Box, Container, Stack } from "@mui/material";
 import SigninAndShare from "./signin-and-share.jsx";
-import TabDetail from "./tab-detail.jsx";
+import TabsCastNCrew from "./tabs-cast-n-crew.jsx";
 import MentionedInArticles from "./mentioned-in-articles.jsx";
-import PopularReviews from "./popular-reviews.jsx";
 import RelatedFilms from "./related-films.jsx";
 import SimilarFilms from "./similar-films.jsx";
-import RecentReviews from "./recent-reviews";
 import PosterAndDescription from "./poster-and-description.jsx";
 import ActionBox from "./action-box.jsx";
+import TabsReviews from "./tabs-reviews.jsx";
 
 const film_detail = {
   title: "Avatar: The Way of Water",
@@ -73,7 +72,7 @@ const FilmDetail = () => {
           <PosterAndDescription {...film_detail} />
           <Box display={"flex"} flexDirection={{ xs: "column-reverse", sm: "row" }} gap={5}>
             <Box flex={2}>
-              <TabDetail />
+              <TabsCastNCrew />
             </Box>
             <Stack flex={1} pt={2} gap={4}>
               <CompiledRatings />
@@ -81,8 +80,7 @@ const FilmDetail = () => {
             </Stack>
           </Box>
           <Box pb={5}>
-            <PopularReviews />
-            <RecentReviews />
+            <TabsReviews />
             <RelatedFilms />
             <SimilarFilms />
             <MentionedInArticles />

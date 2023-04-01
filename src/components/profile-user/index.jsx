@@ -15,14 +15,14 @@ const Root = styled("div")({
 
 const profileTabs = [
   { label: "Profile", href: "" },
-  { label: "Reviews", href: "/reviews" },
-  { label: "Watchlist", href: "/watchlist" },
-  { label: "Lists", href: "/lists" },
-  { label: "Likes", href: "/likes" },
-  { label: "Tags", href: "/tags" },
-  { label: "Activity", href: "/activity" },
-  { label: "Network", href: "/network" },
-  { label: "Edit Profile", href: "/edit-profile" },
+  { label: "Reviews", href: "reviews" },
+  { label: "Watchlist", href: "watchlist" },
+  { label: "Lists", href: "lists" },
+  { label: "Likes", href: "likes" },
+  { label: "Tags", href: "tags" },
+  { label: "Activity", href: "activity" },
+  { label: "Network", href: "network" },
+  { label: "Edit Profile", href: "edit-profile" },
 ];
 
 const ProfileUser = () => {
@@ -105,7 +105,7 @@ const ProfileUser = () => {
           {profileTabs.map((i, idx) => (
             <NavLink
               className={styles.tabs}
-              to={`/u/${username}${i.href}`}
+              to={`${i.href}`}
               key={idx}
               style={({ isActive }) => {
                 return {

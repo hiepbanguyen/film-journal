@@ -252,12 +252,12 @@ const DetailsTab = () => {
     </>
   );
 };
-const tabs = [{ label: "CAST" }, { label: "CREW" }, { label: "MORE DETAILS" }];
+const tabLabels = ["CAST", "CREW", "MORE DETAILS"];
 
-export default function TabDetail() {
+export default function TabsCastNCrew() {
   return (
     <Box>
-      <CustomTabs tabs={tabs} bottom_border_only={true}>
+      <CustomTabs labels={tabLabels} bottom_border_only={true}>
         <CastTab />
         <CrewTab />
         <DetailsTab />

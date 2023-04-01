@@ -27,6 +27,7 @@ import { ProfileTab } from "./components/profile-user/tabs/profile";
 import { Box } from "@mui/material";
 import SearchPage from "./components/search";
 import FilmsSearch from "./components/search/films_search.jsx";
+import AllFilmReviews from "./components/film-detail/reviews/index.jsx";
 
 const axios = Axios.create({
   baseURL: "https://localhost:44358/api/",
@@ -75,6 +76,10 @@ const router = createBrowserRouter([
       {
         path: "films/:filmId",
         element: <FilmDetail />,
+      },
+      {
+        path: "films/:filmId/reviews",
+        element: <AllFilmReviews />,
       },
       {
         path: "members",

@@ -75,7 +75,7 @@ function a11yProps(index) {
  * }
  */
 export default function CustomTabs(props) {
-  const { children, tabs, bottom_border_only } = props;
+  const { children, labels, bottom_border_only } = props;
   // open tab
   // open tab
   const [openTab, setOpenTab] = React.useState(0);
@@ -95,8 +95,8 @@ export default function CustomTabs(props) {
         }}
       >
         <StyledTabs value={openTab} onChange={handleChange} aria-label="styled tabs example">
-          {tabs.map((i, idx) => (
-            <StyledTab key={idx} label={i.label} {...a11yProps(idx)} />
+          {labels.map((i, idx) => (
+            <StyledTab key={idx} label={i} {...a11yProps(idx)} />
           ))}
         </StyledTabs>
       </Box>
