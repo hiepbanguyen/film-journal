@@ -23,14 +23,14 @@ export default function PaginationBase({ totalPage, pageIndex, onChange }) {
           padding: "8px",
           margin: "0 4px",
           "&:hover": {
-            bgcolor: "#eaeaea17",
+            bgcolor: "#eaeaea17 !important",
           },
         },
         "& .Mui-selected": {
           color: "#000",
-          bgcolor: "#9ab",
+          bgcolor: '#9ab !important',
           "&:hover": {
-            bgcolor: "#808d9b",
+            bgcolor: "#6f7d8b !important",
           },
         },
       }}
