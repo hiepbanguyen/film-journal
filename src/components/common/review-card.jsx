@@ -50,7 +50,7 @@ export default function ReviewCard(props) {
       >
         <Box
           component="img"
-          src={review.film.thumbnail}
+          src={review.film.thumbnail ?? "/"}
           alt="Image-review-film"
           sx={{ width: "100%", minHeight: "100%" }}
         ></Box>
@@ -83,7 +83,7 @@ export default function ReviewCard(props) {
                 },
                 fontSize: "18px",
               }}
-              onClick={() => handleLikeFilm(review.film.id)}
+              onClick={() => handleLikeFilm(review.film.id ?? 'filmId')}
             ></FavoriteIcon>
           </Box>
         </Box>
@@ -101,7 +101,7 @@ export default function ReviewCard(props) {
           }}
         >
           <Link
-            to={"/u/" + review.user.userName + "/reviews/" + review.id}
+            to={"/u/" + (review.user.userName ?? "userName") + "/reviews/" + (review.id ?? "reviewId")}
             style={{
               fontWeight: "700",
               marginRight: "8px",
@@ -110,9 +110,9 @@ export default function ReviewCard(props) {
               textDecoration: "none",
             }}
           >
-            {review.film.name}
+            {review.film.name ?? 'filnName'}
           </Link>
-          <Box sx={{ display: "inline-block" }}>{review.film.yearRelease}</Box>
+          <Box sx={{ display: "inline-block" }}>{review.film.yearRelease ?? 'filmYearRelease'}</Box>
         </Box>
         <Box
           sx={{
@@ -140,7 +140,7 @@ export default function ReviewCard(props) {
             }}
           >
             <Link
-              to={"/u/" + review.user.userName}
+              to={"/u/" + (review.user.userName ?? 'userName')}
               style={{
                 width: "24px",
                 aspectRatio: "1/1",
@@ -155,11 +155,12 @@ export default function ReviewCard(props) {
                   width: "100%",
                   height: "100%",
                 }}
-                src={review.user.avatar}
+                src={review.user.avatar ?? 'userAvatar'}
+                alt="user-avatar"
               ></Box>
             </Link>
             <Link
-              to={"/u/" + review.user.userName}
+              to={"/u/" + (review.user.userName ?? 'userName')}
               style={{
                 textDecoration: "none",
                 fontWeight: "600",
@@ -167,17 +168,17 @@ export default function ReviewCard(props) {
                 transition: "0.2s",
               }}
             >
-              {review.user.userFullname}
+              {(review.user.userFullname ?? 'userFullName')}
             </Link>
           </Box>
           <Box sx={{ display: "flex", alignItems: "center", "a:hover": { color: "#fff" } }}>
             <Box sx={{ lineHeight: "1px", marginRight: "12px" }}>
-              {Array.from({ length: review.rate }).map((i, idx) => (
+              {Array.from({ length: (review.rate ?? 0) }).map((i, idx) => (
                 <StarIcon key={idx} sx={{ color: "#00c030", fontSize: { xs: "18px", md: "20px" } }}></StarIcon>
               ))}
             </Box>
             <Link
-              to={"/u/" + review.user.userName + "/reviews/" + review.id}
+              to={"/u/" + (review.user.userName ?? 'userName') + "/reviews/" + (review.id ?? 'reviewId')}
               style={{
                 display: "flex",
                 alignItems: "center",
@@ -186,12 +187,12 @@ export default function ReviewCard(props) {
               }}
             >
               <ChatBubbleIcon sx={{ fontSize: "20px", marginRight: "4px" }}></ChatBubbleIcon>
-              <Box sx={{ fontSize: { xs: "14px", md: "14px" } }}>{formatTotalNumber(review.totalComment)}</Box>
+              <Box sx={{ fontSize: { xs: "14px", md: "14px" } }}>{formatTotalNumber(review.totalComment ?? 0)}</Box>
             </Link>
           </Box>
         </Box>
 
-        <Box sx={{ fontSize: { xs: "14px", md: "16px" } }}>{review.content}</Box>
+        <Box sx={{ fontSize: { xs: "14px", md: "16px" } }}>{review.content ?? 'review-content'}</Box>
       </Box>
     </Box>
   );
