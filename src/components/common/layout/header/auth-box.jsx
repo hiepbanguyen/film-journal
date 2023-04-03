@@ -1,4 +1,4 @@
-import UserStore from "../../../store/user.store.js";
+import UserStore from "../../../../store/user.store.js";
 import UserMenu from "./user-menu.jsx";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";

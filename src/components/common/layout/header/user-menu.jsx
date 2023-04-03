@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import { Divider, ListItemIcon, MenuItem } from "@mui/material";
 import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
 import LogoutIcon from "@mui/icons-material/Logout";
-import UserStore from "../../../store/user.store.js";
+import UserStore from "../../../../store/user.store.js";
 
 export default function UserMenu() {
   console.log(UserStore.user);

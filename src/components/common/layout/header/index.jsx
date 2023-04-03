@@ -7,7 +7,7 @@ import Button from "@mui/material/Button";
 import SearchBox from "./search-box.jsx";
 import MobileDrawer from "../mobile-drawer.jsx";
 import { Logo } from "../logo.jsx";
-import { AnimatedUnderlineBox } from "../animated-underline-box.jsx";
+import { AnimatedUnderlineBox } from "../../animated-underline-box.jsx";
 import { Link, useLocation } from "react-router-dom";
 import { AuthBox } from "./auth-box.jsx";
 

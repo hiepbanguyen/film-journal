@@ -8,7 +8,15 @@ export const COMPONENT_THEME = {
       },
     },
   },
-
+  MuiAvatar: {
+    styleOverrides: {
+      root: {
+        ":hover": {
+          border: "1px solid #fff",
+        },
+      },
+    },
+  },
   MuiCard: {
     styleOverrides: {
       root: {

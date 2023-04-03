@@ -7,7 +7,7 @@ import ResetPassword from "./components/auth/reset-password.jsx";
 import ForgotPassword from "./components/auth/forgot-password";
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "./theme/index.js";
-import Root from "./components/common/root.jsx";
+import Root from "./components/common/layout/root.jsx";
 import Home from "./components/home/index.jsx";
 import Journal from "./components/journal/index.jsx";
 import Lists from "./components/lists/index.jsx";
@@ -29,6 +29,9 @@ import SearchPage from "./components/search";
 import FilmsSearch from "./components/search/films_search.jsx";
 import AllFilmReviews from "./components/film-detail/reviews/index.jsx";
 import ReviewsTab from "./components/profile-user/tabs/reviews/index.jsx";
+import ReviewsSearch from "./components/search/reviews_search.jsx";
+import ListsSearch from "./components/search/lists_search.jsx";
+import MemberSearch from "./components/search/members_search.jsx";
 
 const axios = Axios.create({
   baseURL: "https://localhost:44358/api/",
@@ -154,15 +157,15 @@ const router = createBrowserRouter([
           },
           {
             path: "reviews/:searchParams",
-            element: <FilmsSearch />,
+            element: <ReviewsSearch />,
           },
           {
             path: "lists/:searchParams",
-            element: <FilmsSearch />,
+            element: <ListsSearch />,
           },
           {
             path: "members/:searchParams",
-            element: <FilmsSearch />,
+            element: <MemberSearch />,
           },
           // {
           //   path: "tags/:searchParams",

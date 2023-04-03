@@ -1,16 +1,19 @@
-import { Box, Divider, Typography } from "@mui/material";
+import { useParams } from "react-router-dom";
+import { Typography } from "@mui/material";
+import PaginatedList from "../common/paginated_list.jsx";
 import React from "react";
 import ReviewPreview from "../common/review-preview.jsx";
 
-export const PopularReviews = () => {
+export default function ReviewsSearch() {
+  const { searchParams } = useParams();
+
   return (
     <>
-      <Typography variant={"body1"} color={"#fff"} textTransform={"uppercase"}>
-        popular reviews this week
+      <Typography color={"#fff"} fontWeight={600}>
+        Found 15 reviews matching '{searchParams}':
       </Typography>
-      <Divider variant="fullWidth" />
-      <Box>
-        {Array.from({ length: 6 }).map((i, idx) => (
+      <PaginatedList rowsPerPage={10}>
+        {Array.from({ length: 15 }).map((i, idx) => (
           <React.Fragment key={idx}>
             <ReviewPreview
               title={"A film title"}
@@ -26,10 +29,9 @@ export const PopularReviews = () => {
               dislikeCount={0}
               commentCount={50}
             />
-            {idx < 5 && <Divider variant={"fullWidth"} />}
           </React.Fragment>
         ))}
-      </Box>
+      </PaginatedList>
     </>
   );
-};
+}

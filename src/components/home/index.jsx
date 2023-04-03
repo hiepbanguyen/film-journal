@@ -6,7 +6,7 @@ import { Features } from "./features.jsx";
 import { JustReviewed } from "./just-reviewed.jsx";
 import { PopularReviews } from "./popular-reviews.jsx";
 import { PopularLists } from "./list-preview.jsx";
-import { PopularReviewers } from "./reviewer-preview.jsx";
+import { PopularReviewers } from "./popular-reviewers.jsx";
 import React from "react";
 import { Link } from "react-router-dom";
 

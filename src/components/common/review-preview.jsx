@@ -1,5 +1,5 @@
 import { Avatar, Box, Rating, Typography } from "@mui/material";
-import FilmCard from "../common/film-card.jsx";
+import FilmCard from "./film-card.jsx";
 import FavoriteIcon from "@mui/icons-material/Favorite.js";
 import ChatBubbleIcon from "@mui/icons-material/ChatBubble.js";
 import React from "react";

@@ -1,5 +1,5 @@
 import { useRouteError } from "react-router-dom";
-import Layout from "./layout.jsx";
+import Layout from "./layout/layout.jsx";
 import { Box, Typography } from "@mui/material";
 
 export default function ErrorPage() {

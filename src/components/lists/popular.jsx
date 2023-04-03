@@ -10,7 +10,7 @@ const Popular = () => {
         popular this week
       </Typography>
       <Divider variant={"fullWidth"} />
-      <Box display={"flex"} flexWrap={"wrap"} gap={{ md: 5, lg: 10 }} justifyContent={"center"} color={"#fff"}>
+      <Box display={"flex"} flexWrap={"wrap"} gap={{ xs: 2, md: 5, lg: 10 }} justifyContent={"center"} color={"#fff"}>
         {Array.from({ length: 3 }).map((i, idx) => (
           <ListPreview
             key={idx}

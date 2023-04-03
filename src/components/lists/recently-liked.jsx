@@ -4,53 +4,12 @@ import { Avatar, Box, Divider, Grid, Typography } from "@mui/material";
 import Container from "@mui/material/Container";
 import { FilmCardsStackedFive } from "../home/list-preview";
 import { Link } from "react-router-dom";
-import FavoriteIcon from "@mui/icons-material/Favorite.js";
-import ChatBubbleIcon from "@mui/icons-material/ChatBubble.js";
+import { ListPreviewHorizontal } from "../common/list-preview-horizontal.jsx";
 
 const Root = styled("div")({
   flexGrow: 1,
   marginTop: 30,
 });
-
-const ListPreviewHorizontal = (props) => {
-  const { title, username, favoriteCount, commentCount, films, description } = props;
-
-  return (
-    <Box
-      component={Link}
-      to={"/u/hiep/lists/id123"}
-      display={"flex"}
-      flexDirection={{ xs: "column", sm: "row" }}
-      mt={3}
-      mb={5}
-    >
-      <Box>
-        <FilmCardsStackedFive />
-      </Box>
-      <Box ml={{ sm: 3 }}>
-        <Typography variant={"body2"}>{title}</Typography>
-        <Box display={"flex"} alignItems={"center"} my={1}>
-          <Avatar sx={{ width: 25, height: 25 }}>H</Avatar>
-          <Typography variant={"body2"} ml={0.5} mr={1}>
-            {username}
-          </Typography>
-          <Typography variant={"body2"} ml={0.5} mr={0.8}>
-            {`${films}`} films
-          </Typography>
-          <FavoriteIcon fontSize={"small"} />
-          <Typography variant={"body2"} ml={0.5} mr={1}>
-            {favoriteCount}
-          </Typography>
-          <ChatBubbleIcon fontSize={"small"} />
-          <Typography variant={"body2"} ml={0.5}>
-            {commentCount}
-          </Typography>
-        </Box>
-        <Typography variant={"body2"}>{description}</Typography>
-      </Box>
-    </Box>
-  );
-};
 
 const ListPreviewVertical = (props) => {
   const { title, username, films } = props;
@@ -88,20 +47,18 @@ const RecentlyLike = () => {
               </Typography>
             </Box>
             <Divider variant="fullWidth" />
-            <Box display={"flex"} justifyContent={{ xs: "center", lg: "flex-start" }}>
-              <Box>
-                {Array.from({ length: 7 }).map((i, idx) => (
-                  <ListPreviewHorizontal
-                    key={idx}
-                    title={"Lorem Ipsum is simply dummy text"}
-                    username={"Bá Hiệp Nguyễn"}
-                    favoriteCount={400}
-                    commentCount={50}
-                    films={2}
-                    description={"Lorem Ipsum is simply dummy text"}
-                  />
-                ))}
-              </Box>
+            <Box display={"flex"} flexDirection={"column"} alignItems={{ xs: "center", lg: "flex-start" }}>
+              {Array.from({ length: 7 }).map((i, idx) => (
+                <ListPreviewHorizontal
+                  key={idx}
+                  title={"Lorem Ipsum is simply dummy text"}
+                  username={"Bá Hiệp Nguyễn"}
+                  favoriteCount={400}
+                  commentCount={50}
+                  films={2}
+                  description={"Lorem Ipsum is simply dummy text"}
+                />
+              ))}
             </Box>
           </Grid>
           <Grid item xs={12} lg={4}>

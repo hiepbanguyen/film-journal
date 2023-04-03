@@ -2,7 +2,7 @@ import * as React from "react";
 import { Box, Button, Divider, IconButton, Stack, SwipeableDrawer } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import { Logo } from "./logo.jsx";
-import { AnimatedUnderlineBox } from "./animated-underline-box.jsx";
+import { AnimatedUnderlineBox } from "../animated-underline-box.jsx";
 import { Link } from "react-router-dom";
 
 export default function MobileDrawer(props) {

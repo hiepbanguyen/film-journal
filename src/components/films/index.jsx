@@ -3,7 +3,7 @@ import { Box, Divider, Grid, Typography } from "@mui/material";
 import FilmsListPopularFilms from "./list-popular-films";
 import SearchForm from "../common/search-form.jsx";
 import { JustReviewed } from "../home/just-reviewed.jsx";
-import { PopularReviewers } from "../home/reviewer-preview.jsx";
+import { PopularReviewers } from "../home/popular-reviewers.jsx";
 import React from "react";
 import FilmCard from "../common/film-card";
 import { PopularReviews } from "../home/popular-reviews.jsx";
