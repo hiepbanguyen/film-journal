@@ -4,14 +4,9 @@ import { Link } from "react-router-dom";
 export const PopularReviewers = () => {
   return (
     <>
-      <Box display={"flex"} justifyContent={"space-between"} alignItems={"baseline"} color={"#fff"}>
-        <Typography variant={"body1"} textTransform={"uppercase"} mt={5}>
-          popular reviewers
-        </Typography>
-        <Typography variant={"caption"} mt={5}>
-          MORE
-        </Typography>
-      </Box>
+      <Typography variant={"body1"} textTransform={"uppercase"} color={"#fff"} mt={5}>
+        popular reviewers
+      </Typography>
       <Divider variant="fullWidth" />
       <Grid container>
         {Array.from({ length: 5 }).map((i, idx) => (

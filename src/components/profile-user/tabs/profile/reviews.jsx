@@ -3,7 +3,7 @@ import { Box, Divider, Grid, Rating, Typography } from "@mui/material";
 import FilmCard from "../../../common/film-card.jsx";
 import FavoriteIcon from "@mui/icons-material/Favorite.js";
 
-export const RecentReviewFilm = (props) => {
+export const ReviewInProfile = (props) => {
   const { title, year, ratings, watchedAt, description, favoriteCount } = props;
 
   return (
@@ -58,7 +58,7 @@ export const PopularReview = () => {
       <Divider variant="fullWidth" />
       <Grid container color={"#fff"} mt={1}>
         {Array.from({ length: 2 }).map((i, idx) => (
-          <RecentReviewFilm
+          <ReviewInProfile
             key={idx}
             title={"Lorem Ipsum is simply dummy text"}
             year={"2020"}
@@ -89,7 +89,7 @@ export const RecentReview = () => {
       <Divider variant="fullWidth" />
       <Grid container color={"#fff"} mt={1}>
         {Array.from({ length: 2 }).map((i, idx) => (
-          <RecentReviewFilm
+          <ReviewInProfile
             key={idx}
             title={"Lorem Ipsum is simply dummy text"}
             year={"2020"}

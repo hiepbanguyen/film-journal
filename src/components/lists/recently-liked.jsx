@@ -3,7 +3,6 @@ import { styled } from "@mui/material/styles";
 import { Avatar, Box, Divider, Grid, Typography } from "@mui/material";
 import Container from "@mui/material/Container";
 import { FilmCardsStackedFive } from "../home/list-preview";
-import Tags from "../common/tags.jsx";
 import { Link } from "react-router-dom";
 import FavoriteIcon from "@mui/icons-material/Favorite.js";
 import ChatBubbleIcon from "@mui/icons-material/ChatBubble.js";
@@ -91,7 +90,7 @@ const RecentlyLike = () => {
             <Divider variant="fullWidth" />
             <Box display={"flex"} justifyContent={{ xs: "center", lg: "flex-start" }}>
               <Box>
-                {Array.from({ length: 10 }).map((i, idx) => (
+                {Array.from({ length: 7 }).map((i, idx) => (
                   <ListPreviewHorizontal
                     key={idx}
                     title={"Lorem Ipsum is simply dummy text"}
@@ -106,12 +105,9 @@ const RecentlyLike = () => {
             </Box>
           </Grid>
           <Grid item xs={12} lg={4}>
-            <Box display={"flex"} justifyContent={"space-between"} alignItems={"baseline"} color={"#fff"}>
-              <Typography variant={"body1"} textTransform={"uppercase"}>
-                crew picks
-              </Typography>
-              <Typography variant={"caption"}>MORE</Typography>
-            </Box>
+            <Typography variant={"body1"} color={"#fff"} textTransform={"uppercase"}>
+              crew picks
+            </Typography>
             <Divider variant="fullWidth" />
             <Box
               display={"flex"}
@@ -129,15 +125,15 @@ const RecentlyLike = () => {
                 />
               ))}
             </Box>
-            <Box color={"#fff"} mt={5}>
-              <Typography variant={"body1"} textTransform={"uppercase"}>
-                popular tags
-              </Typography>
-            </Box>
-            <Divider variant="fullWidth" />
-            <Box mt={2}>
-              <Tags />
-            </Box>
+            {/*<Box color={"#fff"} mt={5}>*/}
+            {/*  <Typography variant={"body1"} textTransform={"uppercase"}>*/}
+            {/*    popular tags*/}
+            {/*  </Typography>*/}
+            {/*</Box>*/}
+            {/*<Divider variant="fullWidth" />*/}
+            {/*<Box mt={2}>*/}
+            {/*  <Tags />*/}
+            {/*</Box>*/}
           </Grid>
         </Grid>
       </Container>

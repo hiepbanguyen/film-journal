@@ -1,46 +1,11 @@
-import { Avatar, Box, Divider, Rating, Typography } from "@mui/material";
+import { Avatar, Box, Rating, Typography } from "@mui/material";
 import FilmCard from "../common/film-card.jsx";
 import FavoriteIcon from "@mui/icons-material/Favorite.js";
 import ChatBubbleIcon from "@mui/icons-material/ChatBubble.js";
 import React from "react";
 import { Link } from "react-router-dom";
 
-export const PopularReviews = () => {
-  return (
-    <>
-      <Box display={"flex"} justifyContent={"space-between"} alignItems={"baseline"} color={"#fff"}>
-        <Typography variant={"body1"} textTransform={"uppercase"}>
-          popular reviews this week
-        </Typography>
-        <Typography variant={"caption"}>MORE</Typography>
-      </Box>
-      <Divider variant="fullWidth" />
-      <Box>
-        {Array.from({ length: 6 }).map((i, idx) => (
-          <React.Fragment key={idx}>
-            <ReviewPreview
-              title={"A film title"}
-              releasedYear={2022}
-              content={
-                "Lorem Ipsum is simply dummy text of the printing and typesetting industry. It has survived not only five centuries, but also the" +
-                " leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum"
-              }
-              username={"bahiepnguyen"}
-              fullname={"Nguyen Ba Hiep"}
-              ratings={4}
-              likeCount={10}
-              dislikeCount={0}
-              commentCount={50}
-            />
-            {idx < 5 && <Divider variant={"fullWidth"} />}
-          </React.Fragment>
-        ))}
-      </Box>
-    </>
-  );
-};
-
-function ReviewPreview(props) {
+export default function ReviewPreview(props) {
   const { title, releasedYear, content, username, fullname, ratings, likeCount, commentCount } = props;
   return (
     <Box my={2}>

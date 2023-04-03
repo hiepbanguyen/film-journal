@@ -5,14 +5,9 @@ export const ListAllTime = (props) => {
   return (
     <Container>
       <Box mb={2}>
-        <Box display={"flex"} justifyContent={"space-between"} alignItems={"baseline"} color={"#fff"}>
-          <Typography variant={"body1"} textTransform={"uppercase"} mt={5}>
-            all-time lists
-          </Typography>
-          <Typography variant={"caption"} mt={5}>
-            MORE
-          </Typography>
-        </Box>
+        <Typography variant={"body1"} color={"#fff"} textTransform={"uppercase"} mt={5}>
+          all-time lists
+        </Typography>
         <Divider variant="fullWidth" />
         <Grid container spacing={2} color={"#fff"}>
           {Array.from({ length: 2 }).map((i, idx) => (

@@ -4,7 +4,7 @@ import Typography from "@mui/material/Typography";
 import FilmCard from "../common/film-card.jsx";
 import { Features } from "./features.jsx";
 import { JustReviewed } from "./just-reviewed.jsx";
-import { PopularReviews } from "./review-preview.jsx";
+import { PopularReviews } from "./popular-reviews.jsx";
 import { PopularLists } from "./list-preview.jsx";
 import { PopularReviewers } from "./reviewer-preview.jsx";
 import React from "react";

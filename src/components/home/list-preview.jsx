@@ -51,12 +51,9 @@ const FilmCardsStackedTen = () => {
 export const PopularLists = () => {
   return (
     <>
-      <Box display={"flex"} justifyContent={"space-between"} alignItems={"baseline"} color={"#fff"}>
-        <Typography variant={"body1"} textTransform={"uppercase"}>
-          popular lists
-        </Typography>
-        <Typography variant={"caption"}>MORE</Typography>
-      </Box>
+      <Typography variant={"body1"} color={"#fff"} textTransform={"uppercase"}>
+        popular lists
+      </Typography>
       <Divider variant="fullWidth" />
       <Grid container spacing={1}>
         {Array.from({ length: 4 }).map((i, idx) => (
