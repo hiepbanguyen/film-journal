@@ -20,7 +20,9 @@ const ListPreviewVertical = (props) => {
         <FilmCardsStackedFive />
       </Box>
       <Box width={"100%"}>
-        <Typography variant={"body2"}>{title}</Typography>
+        <Typography variant={"body1"} color={"#fff"} sx={{ ":hover": { color: "#00e8ff" } }} fontWeight={600}>
+          {title}
+        </Typography>
         <Box display={"flex"} alignItems={"center"} my={1}>
           <Avatar sx={{ width: 25, height: 25 }}>H</Avatar>
           <Typography variant={"body2"} ml={0.5} mr={1}>

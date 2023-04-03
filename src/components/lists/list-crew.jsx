@@ -7,7 +7,9 @@ export const CrewList = (props) => {
   return (
     <Box mt={2} mb={2} component={Link} to={"/u/hiep/lists/id123"}>
       <FilmCardsStackedFive />
-      <Typography variant={"body2"}>{title}</Typography>
+      <Typography variant={"body1"} color={"#fff"} sx={{ ":hover": { color: "#00e8ff" } }} fontWeight={600}>
+        {title}
+      </Typography>
     </Box>
   );
 };

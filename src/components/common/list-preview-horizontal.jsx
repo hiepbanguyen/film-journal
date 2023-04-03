@@ -20,7 +20,7 @@ export const ListPreviewHorizontal = (props) => {
         <FilmCardsStackedFive />
       </Box>
       <Box ml={{ sm: 3 }}>
-        <Typography variant={"h6"} fontWeight={600}>
+        <Typography variant={"h6"} color={"#fff"} sx={{ ":hover": { color: "#00e8ff" } }} fontWeight={600}>
           {title}
         </Typography>
         <Box display={"flex"} alignItems={"center"} my={1}>
