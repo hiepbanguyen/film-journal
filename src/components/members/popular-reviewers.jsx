@@ -1,7 +1,6 @@
-import Container from "@mui/system/Container";
-import { Box, Button, Grid, CardMedia } from "@mui/material";
+import { Box, Button, Grid } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const listPopularReviewers = [
   {
@@ -67,33 +66,6 @@ const listPopularReviewers = [
 ];
 
 function FeaturedPerson(props) {
-  const listFilm = props.user.listTopFilmReview.map((film, idx) => (
-    <Grid
-      key={idx}
-      item
-      xs={4}
-      sx={{
-        height: "100%",
-        overflow: "hidden",
-      }}
-    >
-      <Link to={"/films/" + film.id} style={{ width: "100%", height: "100%" }}>
-        <Box
-          component="img"
-          sx={{
-            height: "100%",
-            width: "90%",
-            transition: "0.2s",
-            borderRadius: "4px",
-            ":hover": {
-              border: "1px solid #9ab",
-            },
-          }}
-          src={film.thumbnail}
-        ></Box>
-      </Link>
-    </Grid>
-  ));
   return (
     <Grid
       item
@@ -186,17 +158,11 @@ function FeaturedPerson(props) {
               " a:hover": {
                 color: "#fff",
               },
+              display: "flex",
+              justifyContent: "center",
             }}
           >
-            <Link
-              to={"/u/" + props.user.userName + "/films"}
-              style={{
-                marginRight: "8px",
-              }}
-            >
-              {props.user.filmCount} films
-            </Link>
-            <Link to={"/u/" + props.user.userName + "/reviews"}>{props.user.reviewCount} reviews</Link>
+            <Link to={"/u/" + props.user.userName + "/reviews"}>{props.user.reviewCount} films reviewed</Link>
           </Box>
         </Box>
 
@@ -208,7 +174,33 @@ function FeaturedPerson(props) {
               height: "70px",
             }}
           >
-            {listFilm}
+            {props.user.listTopFilmReview.map((film, idx) => (
+              <Grid
+                key={idx}
+                item
+                xs={4}
+                sx={{
+                  height: "100%",
+                  overflow: "hidden",
+                }}
+              >
+                <Link to={"/films/" + film.id} style={{ width: "100%", height: "100%" }}>
+                  <Box
+                    component="img"
+                    sx={{
+                      height: "100%",
+                      width: "90%",
+                      transition: "0.2s",
+                      borderRadius: "4px",
+                      ":hover": {
+                        border: "1px solid #9ab",
+                      },
+                    }}
+                    src={film.thumbnail}
+                  ></Box>
+                </Link>
+              </Grid>
+            ))}
           </Grid>
         </Box>
       </Box>
@@ -217,9 +209,6 @@ function FeaturedPerson(props) {
 }
 
 export default function PopularReviewers() {
-  const listReviewers = listPopularReviewers.map((user, idx) => (
-    <FeaturedPerson key={idx} user={user}></FeaturedPerson>
-  ));
   return (
     <Box
       sx={{
@@ -248,7 +237,9 @@ export default function PopularReviewers() {
       </Box>
       <Box className="featured-people">
         <Grid container spacing={0} columns={30}>
-          {listReviewers}
+          {listPopularReviewers.map((user, idx) => (
+            <FeaturedPerson key={idx} user={user}></FeaturedPerson>
+          ))}
         </Grid>
       </Box>
     </Box>
