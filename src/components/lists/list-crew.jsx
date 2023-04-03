@@ -1,5 +1,16 @@
 import { Box, Container, Divider, Typography } from "@mui/material";
-import { CrewList } from "../home/list-preview";
+import { FilmCardsStackedFive } from "../home/list-preview";
+import { Link } from "react-router-dom";
+
+export const CrewList = (props) => {
+  const { title } = props;
+  return (
+    <Box mt={2} mb={2} component={Link} to={"/u/hiep/lists/id123"}>
+      <FilmCardsStackedFive />
+      <Typography variant={"body2"}>{title}</Typography>
+    </Box>
+  );
+};
 
 export const ListCrew = (props) => {
   return (

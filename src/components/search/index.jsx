@@ -7,9 +7,8 @@ const searchCategories = [
   { label: "Films", href: "/films" },
   { label: "Reviews", href: "/reviews" },
   { label: "Lists", href: "/lists" },
-  { label: "Cast and crew", href: "/cast-and-crew" },
   { label: "Members", href: "/members" },
-  { label: "Tags", href: "/tags" },
+  // { label: "Tags", href: "/tags" },
 ];
 
 export default function SearchPage() {
@@ -17,7 +16,7 @@ export default function SearchPage() {
 
   return (
     <Container sx={{ mt: 10, color: "#9ab" }}>
-      <Grid container spacing={{ sm: 5 }}>
+      <Grid container spacing={{ xs: 2, sm: 5 }}>
         <Grid item xs={12} sm={4}>
           <Typography variant={"h6"} mb={1}>
             Show results for:

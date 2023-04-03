@@ -10,6 +10,7 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import UserStore from "../../../store/user.store.js";
 
 export default function UserMenu() {
+  console.log(UserStore.user);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
   const handleOpenUserMenu = (event) => {
@@ -55,7 +56,7 @@ export default function UserMenu() {
         open={Boolean(anchorElUser)}
         onClose={handleCloseUserMenu}
       >
-        <Link to="/hiep">
+        <Link to={`/u/hiep`}>
           <MenuItem>
             <ListItemIcon sx={{ color: "inherit" }}>
               <PersonOutlineIcon fontSize="small" />

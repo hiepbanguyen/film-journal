@@ -1,16 +1,14 @@
-import { Box, Divider, Grid } from "@mui/material";
+import { Box, Divider, Grid, Rating } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import FilmCard from "../../../common/film-card.jsx";
-import StarIcon from "@mui/icons-material/Star";
 import ListIcon from "@mui/icons-material/List";
 import { WatchList } from "./watchlist.jsx";
-import { RecentReview } from "./recent-review.jsx";
-import { PopularReview } from "./popular-review.jsx";
 import { RecentList } from "./recent-list.jsx";
 import ListFollow from "./following.jsx";
 import ProfileTags from "./profile-tags.jsx";
 import CompiledRatings from "../../../common/compiled-ratings.jsx";
 import Activity from "./activity.jsx";
+import { PopularReview, RecentReview } from "./reviews.jsx";
 
 export const ProfileTab = () => {
   return (
@@ -41,9 +39,7 @@ export const ProfileTab = () => {
             {Array.from({ length: 4 }).map((i, idx) => (
               <Grid item key={idx}>
                 <FilmCard size={140} />
-                {Array.from({ length: 5 }).map((i, idx) => (
-                  <StarIcon sx={{ color: "#8ea3c9" }} fontSize={"small"} key={idx} />
-                ))}
+                <Rating defaultValue={3} readOnly />
                 <ListIcon sx={{ color: "#8ea3c9", marginLeft: 1 }} fontSize={"small"} />
               </Grid>
             ))}

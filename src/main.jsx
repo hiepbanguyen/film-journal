@@ -118,10 +118,10 @@ const router = createBrowserRouter([
             path: "likes",
             element: <Box />,
           },
-          {
-            path: "tags",
-            element: <Box />,
-          },
+          // {
+          //   path: "tags",
+          //   element: <Box />,
+          // },
           {
             path: "activity",
             element: <Box />,
@@ -161,17 +161,13 @@ const router = createBrowserRouter([
             element: <FilmsSearch />,
           },
           {
-            path: "cast-and-crew/:searchParams",
-            element: <FilmsSearch />,
-          },
-          {
             path: "members/:searchParams",
             element: <FilmsSearch />,
           },
-          {
-            path: "tags/:searchParams",
-            element: <FilmsSearch />,
-          },
+          // {
+          //   path: "tags/:searchParams",
+          //   element: <FilmsSearch />,
+          // },
         ],
       },
     ],

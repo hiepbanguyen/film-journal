@@ -46,8 +46,13 @@ function ReviewPreview(props) {
     <Box my={2}>
       <Box display={"flex"} alignItems={{ xs: "center", sm: "flex-start" }} gap={2}>
         <FilmCard />
-        <Box component={Link} to={`/u/${username}/reviews/123`}>
-          <Typography variant={"h5"} sx={{ color: "#fff", ":hover": { color: "#00e8ff" } }}>
+        <Box>
+          <Typography
+            component={Link}
+            to={`/u/${username}/reviews/123`}
+            variant={"h5"}
+            sx={{ color: "#fff", ":hover": { color: "#00e8ff" } }}
+          >
             <strong style={{ color: "inherit" }}>{title}</strong>{" "}
             <span style={{ fontSize: 17, color: "#9ab" }}>{releasedYear}</span>
           </Typography>
@@ -66,16 +71,22 @@ function ReviewPreview(props) {
               </Typography>
             </Box>
             <Rating value={ratings} size={"medium"} readOnly />
-            <Box display={"flex"} gap={1}>
+            <Box
+              component={Link}
+              to={`/u/${username}/reviews/123`}
+              display={"flex"}
+              gap={1}
+              sx={{ ":hover": { color: "#fff" } }}
+            >
               <ChatBubbleIcon fontSize={"small"} />
               <Typography variant={"body2"}>{commentCount}</Typography>
             </Box>
           </Box>
           <Box sx={(theme) => ({ [theme.breakpoints.only("xs")]: { display: "none" } })}>
-            <Typography fontSize={15} mb={1}>
+            <Typography component={Link} to={`/u/${username}/reviews/123`} fontSize={15} mb={1}>
               {content}
             </Typography>
-            <Box display={"flex"} alignItems={"stretch"} fontWeight={600} fontSize={14} gap={0.5}>
+            <Box mt={1} display={"flex"} alignItems={"stretch"} fontWeight={600} fontSize={14} gap={0.5}>
               <FavoriteIcon
                 sx={{
                   fontSize: 18,
@@ -93,10 +104,10 @@ function ReviewPreview(props) {
         </Box>
       </Box>
       <Box mt={1} sx={(theme) => ({ [theme.breakpoints.not("xs")]: { display: "none" } })}>
-        <Typography fontSize={15} mb={1}>
+        <Typography component={Link} to={`/u/${username}/reviews/123`} fontSize={15} mb={1}>
           {content}
         </Typography>
-        <Box display={"flex"} alignItems={"stretch"} fontWeight={600} fontSize={14} gap={0.5}>
+        <Box mt={1} display={"flex"} alignItems={"stretch"} fontWeight={600} fontSize={14} gap={0.5}>
           <FavoriteIcon
             sx={{
               fontSize: 18,
