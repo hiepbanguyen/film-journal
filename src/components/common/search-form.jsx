@@ -10,7 +10,6 @@ export default function SearchForm() {
   const [genre, setGenre] = useState("");
   const [filmName, setFilmName] = useState("");
 
-
   // Data
   const [listYear, setListYear] = useState([
     { label: "Year", value: "" },
@@ -114,14 +113,6 @@ export default function SearchForm() {
               sx={{
                 width: "100%",
                 height: "40px",
-                " fieldset,svg": {
-                  borderColor: "#9ab",
-                  color: "#9ab",
-                },
-                ":hover fieldset,svg": {
-                  borderColor: "#9ab",
-                  color: "#9ab",
-                },
               }}
               size="small"
             >
@@ -155,14 +146,6 @@ export default function SearchForm() {
             <FormControl
               sx={{
                 width: "100%",
-                " fieldset,svg": {
-                  borderColor: "#9ab",
-                  color: "#9ab",
-                },
-                ":hover fieldset,svg": {
-                  borderColor: "#9ab",
-                  color: "#9ab",
-                },
               }}
               size="small"
             >
@@ -199,14 +182,6 @@ export default function SearchForm() {
             <FormControl
               sx={{
                 width: "100%",
-                " fieldset,svg": {
-                  borderColor: "#9ab",
-                  color: "#9ab",
-                },
-                ":hover fieldset,svg": {
-                  borderColor: "#9ab",
-                  color: "#9ab",
-                },
               }}
               size="small"
             >
@@ -245,13 +220,9 @@ export default function SearchForm() {
               onChange={handleFilmNameChange}
               size="small"
               sx={{
-                width: '100%',
+                width: "100%",
                 fontSize: { xs: "14px", md: "16px" },
-                " input,label,fieldset": {
-                  borderColor: "#9ab",
-                  color: "#9ab",
-                },
-                ":hover input,label,fieldset": {
+                input: {
                   borderColor: "#9ab",
                   color: "#9ab",
                 },
@@ -265,7 +236,7 @@ export default function SearchForm() {
                 size="medium"
                 sx={{
                   border: "1px solid #9ab",
-                  marginRight: '8px',
+                  marginRight: "8px",
                   ":hover": { border: "1px solid #9ab" },
                 }}
                 onClick={handleClear}

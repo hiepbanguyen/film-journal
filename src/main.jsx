@@ -27,11 +27,13 @@ import { ProfileTab } from "./components/profile-user/tabs/profile";
 import { Box } from "@mui/material";
 import SearchPage from "./components/search";
 import FilmsSearch from "./components/search/films_search.jsx";
-import AllFilmReviews from "./components/film-detail/reviews/index.jsx";
+import AllFilmReviews from "./components/film-detail/collections/reviews.jsx";
 import ReviewsTab from "./components/profile-user/tabs/reviews/index.jsx";
 import ReviewsSearch from "./components/search/reviews_search.jsx";
 import ListsSearch from "./components/search/lists_search.jsx";
 import MemberSearch from "./components/search/members_search.jsx";
+import AllFilmLists from "./components/film-detail/collections/lists.jsx";
+import AllFilmLikes from "./components/film-detail/collections/likes.jsx";
 
 const axios = Axios.create({
   baseURL: "https://localhost:44358/api/",
@@ -84,6 +86,14 @@ const router = createBrowserRouter([
       {
         path: "films/:filmId/reviews",
         element: <AllFilmReviews />,
+      },
+      {
+        path: "films/:filmId/lists",
+        element: <AllFilmLists />,
+      },
+      {
+        path: "films/:filmId/likes",
+        element: <AllFilmLikes />,
       },
       {
         path: "members",

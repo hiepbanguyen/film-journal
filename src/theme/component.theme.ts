@@ -94,7 +94,19 @@ export const COMPONENT_THEME = {
       },
     },
   },
-
+  MuiFormControl: {
+    styleOverrides: {
+      root: {
+        "fieldset,svg": {
+          borderColor: "#9ab",
+          color: "#9ab",
+        },
+        "&:hover fieldset": {
+          borderColor: "#fff !important",
+        },
+      },
+    },
+  },
   MuiDialog: {
     styleOverrides: {
       root: {
