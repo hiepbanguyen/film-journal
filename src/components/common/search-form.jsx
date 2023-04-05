@@ -112,7 +112,7 @@ export default function SearchForm() {
             <FormControl
               sx={{
                 width: "100%",
-                height: "40px",
+                height: "40px", 
               }}
               size="small"
             >
@@ -222,7 +222,7 @@ export default function SearchForm() {
               sx={{
                 width: "100%",
                 fontSize: { xs: "14px", md: "16px" },
-                input: {
+                " input,label,fieldset": {
                   borderColor: "#9ab",
                   color: "#9ab",
                 },
