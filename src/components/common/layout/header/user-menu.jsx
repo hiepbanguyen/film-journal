@@ -31,16 +31,6 @@ export default function UserMenu() {
       <Menu
         sx={{
           mt: "45px",
-          "& .MuiPaper-root": {
-            background: "#9ab",
-            color: "#2c3440",
-          },
-          "& .MuiMenuItem-root": {
-            "&:hover": {
-              background: "#678",
-              color: "#fff",
-            },
-          },
         }}
         id="menu-appbar"
         anchorEl={anchorElUser}

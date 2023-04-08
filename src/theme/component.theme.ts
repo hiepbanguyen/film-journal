@@ -116,4 +116,32 @@ export const COMPONENT_THEME = {
       },
     },
   },
+  // MuiMenuItem: {
+  //   styleOverrides: {
+  //     root: {
+  //       "& .Mui-selected": {
+  //         fontWeight: "bold",
+  //       },
+  //     },
+  //   },
+  // },
+  MuiMenu: {
+    styleOverrides: {
+      root: {
+        "& .MuiPaper-root": {
+          background: "#9ab",
+          color: "#2c3440",
+        },
+        "& .MuiMenuItem-root": {
+          "&:hover": {
+            background: "#678",
+            color: "#fff",
+          },
+        },
+        "& .Mui-selected": {
+          fontWeight: "bold",
+        },
+      },
+    },
+  },
 };
