@@ -9,7 +9,7 @@ export default function ListsSearch() {
 
   return (
     <>
-      <Typography color={"#fff"}>
+      <Typography color={"#fff"} fontStyle={"italic"}>
         Found 15 lists matching <strong>'{searchParams}'</strong>:
       </Typography>
       <PaginatedList rowsPerPage={10}>

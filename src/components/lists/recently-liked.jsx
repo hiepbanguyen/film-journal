@@ -48,7 +48,7 @@ const RecentlyLike = () => {
                 rencently liked
               </Typography>
             </Box>
-            <Divider variant="fullWidth" />
+            <Divider />
             <Box display={"flex"} flexDirection={"column"} alignItems={{ xs: "center", lg: "flex-start" }}>
               {Array.from({ length: 7 }).map((i, idx) => (
                 <ListPreviewHorizontal
@@ -67,7 +67,7 @@ const RecentlyLike = () => {
             <Typography variant={"body1"} color={"#fff"} textTransform={"uppercase"}>
               crew picks
             </Typography>
-            <Divider variant="fullWidth" />
+            <Divider />
             <Box
               display={"flex"}
               flexWrap={"wrap"}
@@ -89,7 +89,7 @@ const RecentlyLike = () => {
             {/*    popular tags*/}
             {/*  </Typography>*/}
             {/*</Box>*/}
-            {/*<Divider variant="fullWidth" />*/}
+            {/*<Divider  />*/}
             {/*<Box mt={2}>*/}
             {/*  <Tags />*/}
             {/*</Box>*/}

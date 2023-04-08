@@ -8,7 +8,7 @@ export const PopularReviews = () => {
       <Typography variant={"body1"} color={"#fff"} textTransform={"uppercase"}>
         popular reviews this week
       </Typography>
-      <Divider variant="fullWidth" />
+      <Divider />
       <Box>
         {Array.from({ length: 6 }).map((i, idx) => (
           <React.Fragment key={idx}>

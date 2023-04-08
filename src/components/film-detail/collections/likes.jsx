@@ -2,6 +2,8 @@ import { Box, Container, Stack, Typography } from "@mui/material";
 import React from "react";
 import NavBar from "./nav-bar.jsx";
 import ReviewFilters from "./filters.jsx";
+import PaginatedList from "../../common/paginated_list.jsx";
+import MemberPreview from "../../common/member-preview.jsx";
 
 export default function AllFilmLikes() {
   return (
@@ -11,10 +13,23 @@ export default function AllFilmLikes() {
           <NavBar filmId={1} />
           <ReviewFilters filterValues={["Highest Rating", "Lowest Rating", "Newest", "Earliest"]} showFrom={true} />
         </Stack>
-        <Box display={"flex"} justifyContent={"space-between"}>
-          <Typography color={"#fff"}>
+        <Box flex={1}>
+          <Typography color={"#fff"} fontStyle={"italic"}>
             There are 200 members who liked <strong>Avatar the Airbender</strong>
           </Typography>
+          <PaginatedList rowsPerPage={10}>
+            {Array.from({ length: 15 }).map((i, idx) => (
+              <React.Fragment key={idx}>
+                <MemberPreview
+                  fullname={"Ba Hiep"}
+                  username={"bahiep"}
+                  followers={15}
+                  following={20}
+                  filmsReviewed={200}
+                />
+              </React.Fragment>
+            ))}
+          </PaginatedList>
         </Box>
       </Box>
     </Container>

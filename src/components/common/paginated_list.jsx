@@ -16,7 +16,7 @@ export default function PaginatedList(props) {
 
   return (
     <>
-      <Stack divider={<Divider variant="fullWidth" />}>
+      <Stack divider={<Divider />}>
         {(rowsPerPage > 0 ? children?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage) : children).map(
           (row, idx) => (
             <Box key={idx}>{row}</Box>

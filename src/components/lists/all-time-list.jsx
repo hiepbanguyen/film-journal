@@ -8,7 +8,7 @@ export const ListAllTime = (props) => {
         <Typography variant={"body1"} color={"#fff"} textTransform={"uppercase"} mt={5}>
           all-time lists
         </Typography>
-        <Divider variant="fullWidth" />
+        <Divider />
         <Grid container spacing={2} color={"#fff"}>
           {Array.from({ length: 2 }).map((i, idx) => (
             <Grid key={idx} item xs={12} lg={6} sx={{ display: "flex", justifyContent: "center" }}>

@@ -52,7 +52,7 @@ export default function ActionBox() {
   return (
     <Stack
       sx={{ color: "#bcd", background: "#456", borderRadius: 1 }}
-      divider={<Divider variant="fullWidth" sx={{ borderColor: "#2c3440" }} />}
+      divider={<Divider sx={{ borderColor: "#2c3440" }} />}
     >
       <ReViewLikeWatchList />
       <ReviewDialog>

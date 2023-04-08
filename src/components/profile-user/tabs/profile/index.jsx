@@ -16,7 +16,7 @@ export const ProfileTab = () => {
         <Typography variant={"body1"} textTransform={"uppercase"} color="#fff">
           favorite films
         </Typography>
-        <Divider variant="fullWidth" />
+        <Divider />
         <Grid container mt={1} spacing={2.9}>
           {Array.from({ length: 4 }).map((i, idx) => (
             <Grid item key={idx}>
@@ -30,7 +30,7 @@ export const ProfileTab = () => {
             recent likes
           </Typography>
         </Box>
-        <Divider variant="fullWidth" />
+        <Divider />
         <Grid container mt={1} spacing={2.9}>
           {Array.from({ length: 4 }).map((i, idx) => (
             <Grid item key={idx}>
@@ -61,7 +61,7 @@ export const ProfileTab = () => {
             activity
           </Typography>
         </Box>
-        <Divider variant="fullWidth" />
+        <Divider />
         <Activity />
       </Grid>
     </Grid>

@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { Box } from "@mui/material";
+import { Box, Stack } from "@mui/material";
 import SearchForm from "../../../common/search-form";
-import ReviewCard from "../../../common/review-card";
 import PaginationBase from "../../../common/pagination-base";
+import ReviewPreview from "../../../common/review-preview.jsx";
 
 const data = {
   total: 6,
@@ -87,18 +87,28 @@ export default function ReviewsTab() {
     setPageIndex(newPage);
   };
 
-  const [listReviews, setListReviews] = useState(data.list);
-
   return (
     <Box className="profile-reviews-tab" sx={{ color: "#9ab", marginTop: "48px", paddingBottom: "48px" }}>
       <Box sx={{ marginBottom: "24px" }}>
         <SearchForm></SearchForm>
       </Box>
-      <Box>
-        {listReviews.map((review, idx) => (
-          <ReviewCard key={review.id} review={review}></ReviewCard>
+      <Stack>
+        {Array.from({ length: 3 }).map((i, idx) => (
+          <ReviewPreview
+            title={"A film title"}
+            releasedYear={2022}
+            content={
+              "Lorem Ipsum is simply dummy text of the printing and typesetting industry. It has survived not only five centuries, but also the" +
+              " leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum"
+            }
+            ratings={4}
+            likeCount={10}
+            commentCount={50}
+            reviewDate={new Date()}
+            notShowUser={true}
+          />
         ))}
-      </Box>
+      </Stack>
       <PaginationBase totalPage={totalPage} pageIndex={pageIndex} onChange={handleChangePage}></PaginationBase>
     </Box>
   );

@@ -15,7 +15,7 @@ export const WatchList = (props) => {
           {"123"}
         </Typography>
       </Box>
-      <Divider variant="fullWidth" />
+      <Divider />
       <Link to={`/u/${username}/watchlist`}>
         <Box mt={4}>
           <FilmCardsStackedFive />

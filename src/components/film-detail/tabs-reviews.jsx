@@ -108,7 +108,7 @@ export default function TabsReviews() {
     <Box mt={3}>
       <Tooltip title={"See all reviews"}>
         <Button component={Link} to={"reviews"} variant={"contained"} sx={{ bgcolor: "#456", mb: 1 }}>
-          <Typography variant={"h6"} mr={1}>
+          <Typography fontSize={16} pr={1}>
             All Reviews
           </Typography>
           <ArrowForwardIosIcon sx={{ fontSize: 16 }} />

@@ -15,7 +15,7 @@ export default function SigninAndShare() {
   return (
     <Stack
       sx={{ color: "#bcd", background: "#456", borderRadius: 1 }}
-      divider={<Divider variant="fullWidth" sx={{ borderColor: "#2c3440" }} />}
+      divider={<Divider sx={{ borderColor: "#2c3440" }} />}
     >
       <CustomButton2>
         <Link to={"/sign-in"}>

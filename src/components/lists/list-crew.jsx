@@ -21,7 +21,7 @@ export const ListCrew = (props) => {
         <Typography variant={"body1"} color={"#fff"} textTransform={"uppercase"}>
           crew lists
         </Typography>
-        <Divider variant="fullWidth" />
+        <Divider />
         <Box display={"flex"} flexWrap={"wrap"} gap={{ sm: 5, lg: 10 }} justifyContent={"center"} color={"#fff"}>
           {Array.from({ length: 3 }).map((i, idx) => (
             <CrewList key={idx} title={"Lorem Ipsum is simply dummy text"} />

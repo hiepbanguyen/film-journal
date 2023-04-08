@@ -19,7 +19,7 @@ export const FilmCardsStackedFive = () => {
     >
       {Array.from({ length: 5 }).map((i, idx) => (
         <Box key={idx} position={"relative"} zIndex={10 - idx} left={`-${idx * (50 / 5)}%`}>
-          <FilmCard list={true} shadow={idx !== 4} />
+          <FilmCard list={true} shadow={idx !== 4}/>
         </Box>
       ))}
     </Box>
@@ -41,7 +41,7 @@ const FilmCardsStackedTen = () => {
     >
       {Array.from({ length: 10 }).map((i, idx) => (
         <Box key={idx} position={"relative"} zIndex={10 - idx} left={`-${idx * 5}%`}>
-          <FilmCard list={true} shadow={idx !== 9} />
+          <FilmCard list={true} shadow={idx !== 9}/>
         </Box>
       ))}
     </Box>
@@ -54,7 +54,7 @@ export const PopularLists = () => {
       <Typography variant={"body1"} color={"#fff"} textTransform={"uppercase"}>
         popular lists
       </Typography>
-      <Divider variant="fullWidth" />
+      <Divider/>
       <Grid container spacing={1}>
         {Array.from({ length: 4 }).map((i, idx) => (
           <Grid key={idx} item xs={12} sm={6} md={12}>
@@ -83,7 +83,7 @@ export const AllTimeList = (props) => {
           },
         })}
       >
-        <FilmCardsStackedFive />
+        <FilmCardsStackedFive/>
       </Box>
       <Box
         sx={(theme) => ({
@@ -92,7 +92,7 @@ export const AllTimeList = (props) => {
           },
         })}
       >
-        <FilmCardsStackedTen />
+        <FilmCardsStackedTen/>
       </Box>
       <Typography variant={"body1"} color={"#fff"} sx={{ ":hover": { color: "#00e8ff" } }} fontWeight={600}>
         {title}
@@ -124,7 +124,7 @@ export default function ListPreview(props) {
       })}
     >
       <Link to={"/u/hiep/lists/id123"}>
-        <FilmCardsStackedFive />
+        <FilmCardsStackedFive/>
         <Typography variant={"body1"} color={"#fff"} sx={{ ":hover": { color: "#00e8ff" } }} fontWeight={600}>
           {title}
         </Typography>
@@ -144,11 +144,11 @@ export default function ListPreview(props) {
             {fullname ?? username}
           </Typography>
         </Box>
-        <FavoriteIcon fontSize={"small"} />
+        <FavoriteIcon fontSize={"small"}/>
         <Typography variant={"body2"} ml={0.5} mr={1}>
           {favoriteCount}
         </Typography>
-        <ChatBubbleIcon fontSize={"small"} />
+        <ChatBubbleIcon fontSize={"small"}/>
         <Typography variant={"body2"} ml={0.5}>
           {commentCount}
         </Typography>

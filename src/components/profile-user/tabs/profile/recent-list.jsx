@@ -16,7 +16,7 @@ export const RecentList = (props) => {
           {"123"}
         </Typography>
       </Box>
-      <Divider variant="fullWidth" />
+      <Divider />
       <Link to={`/u/${username}/lists/id123`}>
         <Box color={"#fff"} mt={4}>
           <FilmCardsStackedFive />

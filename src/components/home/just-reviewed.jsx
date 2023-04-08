@@ -13,7 +13,7 @@ export const JustReviewed = () => {
           1,249,135,774 films watched
         </Typography>
       </Box>
-      <Divider variant="fullWidth" />
+      <Divider />
       <Box display={"flex"} flexWrap={"wrap"} justifyContent={"center"} gap={1} mt={1.5}>
         {Array.from({ length: 12 }).map((i, idx) => (
           <FilmCard key={idx} />

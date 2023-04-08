@@ -1,7 +1,8 @@
 import * as React from "react";
-import { Box, Divider, Grid, Rating, Typography } from "@mui/material";
+import { Box, Divider, Rating, Stack, Typography } from "@mui/material";
 import FilmCard from "../../../common/film-card.jsx";
 import FavoriteIcon from "@mui/icons-material/Favorite.js";
+import ReviewPreview from "../../../common/review-preview.jsx";
 
 export const ReviewInProfile = (props) => {
   const { title, year, ratings, watchedAt, description, favoriteCount } = props;
@@ -52,20 +53,24 @@ export const PopularReview = () => {
           more
         </Typography>
       </Box>
-      <Divider variant="fullWidth" />
-      <Box container color={"#fff"} mt={1}>
+      <Divider />
+      <Stack color={"#9ab"} mt={1}>
         {Array.from({ length: 2 }).map((i, idx) => (
-          <ReviewInProfile
-            key={idx}
-            title={"Lorem Ipsum is simply dummy text"}
-            year={"2020"}
+          <ReviewPreview
+            title={"A film title"}
+            releasedYear={2022}
+            content={
+              "Lorem Ipsum is simply dummy text of the printing and typesetting industry. It has survived not only five centuries, but also the" +
+              " leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum"
+            }
             ratings={4}
-            watchedAt={"20/12/2023"}
-            description={"Lorem Ipsum is simply dummy text"}
-            favoriteCount={4}
+            likeCount={10}
+            commentCount={50}
+            reviewDate={new Date()}
+            notShowUser={true}
           />
         ))}
-      </Box>
+      </Stack>
     </Box>
   );
 };
@@ -81,22 +86,24 @@ export const RecentReview = () => {
           more
         </Typography>
       </Box>
-      <Divider variant="fullWidth" />
-      <Grid container color={"#fff"} mt={1}>
+      <Divider />
+      <Stack color={"#9ab"} mt={1}>
         {Array.from({ length: 2 }).map((i, idx) => (
-          <ReviewInProfile
-            key={idx}
-            title={"Lorem Ipsum is simply dummy text"}
-            year={"2020"}
+          <ReviewPreview
+            title={"A film title"}
+            releasedYear={2022}
+            content={
+              "Lorem Ipsum is simply dummy text of the printing and typesetting industry. It has survived not only five centuries, but also the" +
+              " leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum"
+            }
             ratings={4}
-            watchedAt={"20/12/2023"}
-            description={"Lorem Ipsum is simply dummy text"}
-            favoriteCount={4}
-            // favoriteCount={4}
-            // commentCount={50}
+            likeCount={10}
+            commentCount={50}
+            reviewDate={new Date()}
+            notShowUser={true}
           />
         ))}
-      </Grid>
+      </Stack>
     </Box>
   );
 };

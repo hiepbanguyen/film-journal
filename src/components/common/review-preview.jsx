@@ -18,13 +18,13 @@ export default function ReviewPreview(props) {
     likeCount,
     commentCount,
     reviewDate,
-    showFilmCard,
-    showUser,
+    notShowFilmCard,
+    notShowUser,
   } = props;
   return (
     <Box my={2}>
       <Box display={"flex"} alignItems={{ xs: "center", sm: "flex-start" }} gap={2}>
-        <FilmCard />
+        {!notShowFilmCard && <FilmCard />}
         <Box>
           <Typography
             component={Link}
@@ -36,7 +36,7 @@ export default function ReviewPreview(props) {
             <span style={{ fontSize: 17, color: "#9ab" }}>{releasedYear}</span>
           </Typography>
           <Box display={"flex"} flexWrap={"wrap"} gap={2} alignItems={"center"} my={1}>
-            {showFilmCard && (
+            {!notShowUser && (
               <Box
                 component={Link}
                 to={`/u/${username}`}
@@ -51,8 +51,8 @@ export default function ReviewPreview(props) {
                 </Typography>
               </Box>
             )}
-            <Box pt={0.25} display={"flex"} gap={1}>
-              <EventNoteIcon />
+            <Box display={"flex"} gap={1} sx={{ pt: 0.25 }}>
+              <EventNoteIcon fontSize={"small"} />
               <Typography fontSize={14}>{moment(reviewDate).format("MMM DD, YYYY")}</Typography>
             </Box>
             <Rating value={ratings} size={"medium"} readOnly />

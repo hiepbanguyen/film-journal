@@ -29,7 +29,7 @@ export default function FilmsSearch() {
 
   return (
     <>
-      <Typography color={"#fff"}>
+      <Typography color={"#fff"} fontStyle={"italic"}>
         Found 15 films matching <strong>'{searchParams}'</strong>:
       </Typography>
       <PaginatedList rowsPerPage={10}>
