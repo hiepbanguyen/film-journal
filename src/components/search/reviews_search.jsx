@@ -26,8 +26,8 @@ export default function ReviewsSearch() {
               fullname={"Nguyen Ba Hiep"}
               ratings={4}
               likeCount={10}
-              dislikeCount={0}
               commentCount={50}
+              reviewDate={new Date()}
             />
           </React.Fragment>
         ))}

@@ -74,7 +74,7 @@ const FilmDetail = () => {
             <Box flex={2}>
               <TabsCastNCrew />
             </Box>
-            <Stack flex={1} pt={2} gap={4}>
+            <Stack flex={1} pt={2} gap={4} sx={{ mt: 1.2 }}>
               <CompiledRatings />
               {loggedIn ? <ActionBox /> : <SigninAndShare />}
             </Stack>

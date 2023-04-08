@@ -23,8 +23,8 @@ export const PopularReviews = () => {
               fullname={"Nguyen Ba Hiep"}
               ratings={4}
               likeCount={10}
-              dislikeCount={0}
               commentCount={50}
+              reviewDate={new Date()}
             />
             {idx < 5 && <Divider variant={"fullWidth"} />}
           </React.Fragment>

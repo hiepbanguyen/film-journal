@@ -1,6 +1,7 @@
 import { Box, Divider, Tooltip, Typography } from "@mui/material";
 import StarHalfIcon from "@mui/icons-material/StarHalf";
 import StarIcon from "@mui/icons-material/Star.js";
+
 const compiledRatings = {
   each: {
     1: 10,
@@ -18,7 +19,7 @@ const compiledRatings = {
   avg: 3.9,
 };
 
-const RatingColumnMaxHeight = 80;
+const RatingColumnMaxHeight = 100;
 
 const RatingColumn = (props) => {
   const { value, label, total } = props;
@@ -55,7 +56,7 @@ const RatingColumn = (props) => {
 export default function CompiledRatings(props) {
   return (
     <Box>
-      <Box display={"flex"} justifyContent={"space-between"} alignItems={"baseline"} mb={1.2}>
+      <Box display={"flex"} justifyContent={"space-between"} alignItems={"baseline"}>
         <Typography fontSize={15}>RATINGS</Typography>
         <Typography variant={"body2"}>{compiledRatings.total}</Typography>
       </Box>

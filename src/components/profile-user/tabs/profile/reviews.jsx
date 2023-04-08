@@ -8,12 +8,10 @@ export const ReviewInProfile = (props) => {
 
   return (
     <Box display={"flex"} marginTop={3}>
-      <Box width={"20%"}>
-        <FilmCard />
-      </Box>
-      <Box width={"80%"}>
-        <Typography variant={"body1"} marginLeft={3}>
-          <strong style={{ fontSize: 20 }}>{title}</strong> <span style={{ color: "#9dbad7" }}>{year}</span>
+      <FilmCard />
+      <Box>
+        <Typography variant={"body1"} marginLeft={3} fontSize={20}>
+          <strong>{title}</strong> <span style={{ color: "#9dbad7" }}>{year}</span>
         </Typography>
         <Box alignItems={"center"} marginLeft={3}>
           <Box display={"flex"} mt={0.5}>
@@ -31,7 +29,6 @@ export const ReviewInProfile = (props) => {
             <FavoriteIcon fontSize={"small"} />
             <Typography variant={"body2"} marginLeft={1} color={"#e4d5d5"}>
               {" "}
-              Like review
             </Typography>
             <Typography variant={"body2"} marginLeft={1} color={"#fff"}>
               {" "}
@@ -56,7 +53,7 @@ export const PopularReview = () => {
         </Typography>
       </Box>
       <Divider variant="fullWidth" />
-      <Grid container color={"#fff"} mt={1}>
+      <Box container color={"#fff"} mt={1}>
         {Array.from({ length: 2 }).map((i, idx) => (
           <ReviewInProfile
             key={idx}
@@ -66,11 +63,9 @@ export const PopularReview = () => {
             watchedAt={"20/12/2023"}
             description={"Lorem Ipsum is simply dummy text"}
             favoriteCount={4}
-            // favoriteCount={4}
-            // commentCount={50}
           />
         ))}
-      </Grid>
+      </Box>
     </Box>
   );
 };

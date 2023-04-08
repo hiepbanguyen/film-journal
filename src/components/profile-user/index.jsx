@@ -6,6 +6,7 @@ import styles from "./profile.module.scss";
 import GroupAvatars from "./avatar-group.jsx";
 import { ProfileStats } from "./profile-stats.jsx";
 import { NavLink, Outlet, useParams } from "react-router-dom";
+import UserStore from "../../store/user.store";
 
 const Root = styled("div")({
   flexGrow: 1,
@@ -19,9 +20,10 @@ const profileTabs = [
   { label: "Watchlist", href: "watchlist" },
   { label: "Lists", href: "lists" },
   { label: "Likes", href: "likes" },
-  { label: "Tags", href: "tags" },
-  { label: "Activity", href: "activity" },
-  { label: "Network", href: "network" },
+  // { label: "Tags", href: "tags" },
+  // { label: "Activity", href: "activity" },
+  { label: "Following", href: "following" },
+  { label: "Followers", href: "followers" },
   { label: "Edit Profile", href: "edit-profile" },
 ];
 
@@ -36,7 +38,7 @@ const ProfileUser = () => {
           component="img"
           sx={{
             position: "absolute",
-            top: { md: -50 },
+            top: { md: -140 },
             left: 0,
             right: 0,
             marginX: "auto",
@@ -53,7 +55,7 @@ const ProfileUser = () => {
           width={{ xs: "95vw", md: "80vw" }}
           sx={{
             position: "absolute",
-            top: { md: -50 },
+            top: { md: -140 },
             left: 0,
             right: 0,
             marginX: "auto",
@@ -65,7 +67,7 @@ const ProfileUser = () => {
           }}
         />
       </Box>
-      <Container sx={{ mt: 40, color: "#fff" }}>
+      <Container sx={{ mt: 25, color: "#fff" }}>
         <Grid container spacing={2} marginTop mb={3}>
           <Grid item xs={8} container>
             <Grid item xs={2}>
@@ -102,7 +104,7 @@ const ProfileUser = () => {
             justifyContent: "center",
           }}
         >
-          {profileTabs.map((i, idx) => (
+          {(UserStore.isLoggedIn ? profileTabs : profileTabs.slice(0, -1)).map((i, idx) => (
             <NavLink
               className={styles.tabs}
               to={`${i.href}`}
