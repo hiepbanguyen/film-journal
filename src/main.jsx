@@ -35,6 +35,7 @@ import MemberSearch from "./components/search/members_search.jsx";
 import AllFilmLists from "./components/film-detail/collections/lists.jsx";
 import AllFilmLikes from "./components/film-detail/collections/likes.jsx";
 import { NewList } from "./components/lists/new-list/index.jsx";
+import { WatchList } from "./components/profile-user/tabs/profile/watchlist.jsx";
 
 const axios = Axios.create({
   baseURL: "https://localhost:44358/api/",
@@ -126,7 +127,7 @@ const router = createBrowserRouter([
           },
           {
             path: "watchlist",
-            element: <Box />,
+            element: <WatchList />,
           },
           {
             path: "lists",

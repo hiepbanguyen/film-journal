@@ -7,6 +7,7 @@ import { Pagination } from "@mui/material";
 
 export default function PaginationBase({ totalPage, pageIndex, onChange }) {
   const handleChangePage = (event, newPage) => {
+    if(pageIndex === newPage) return;
     onChange(newPage);
   };
 
