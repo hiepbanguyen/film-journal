@@ -131,6 +131,7 @@ export const COMPONENT_THEME = {
         "& .MuiPaper-root": {
           background: "#9ab",
           color: "#2c3440",
+          backdropFilter: "blur(5px)",
         },
         "& .MuiMenuItem-root": {
           "&:hover": {

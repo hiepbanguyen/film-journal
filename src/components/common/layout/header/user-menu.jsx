@@ -8,6 +8,7 @@ import { Divider, ListItemIcon, MenuItem } from "@mui/material";
 import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
 import LogoutIcon from "@mui/icons-material/Logout";
 import UserStore from "../../../../store/user.store.js";
+import NotiBox from "./noti-box.jsx";
 
 export default function UserMenu() {
   console.log(UserStore.user);
@@ -23,15 +24,26 @@ export default function UserMenu() {
 
   return (
     <>
+      <NotiBox />
       <Tooltip title="Open settings">
         <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
           <Avatar />
         </IconButton>
       </Tooltip>
       <Menu
-        sx={{
-          mt: "45px",
-        }}
+        sx={(theme) => ({
+          mt: "48px",
+          "& .MuiPopover-paper": {
+            background: "rgba(0,0,0,0.8)",
+            color: "#fff",
+          },
+          "& .MuiMenuItem-root": {
+            "&:hover": {
+              background: "rgba(255,255,255,0.2)",
+              color: "#fff",
+            },
+          },
+        })}
         id="menu-appbar"
         anchorEl={anchorElUser}
         anchorOrigin={{
@@ -54,7 +66,7 @@ export default function UserMenu() {
             Profile
           </MenuItem>
         </Link>
-        <Divider variant={"fullWidth"} />
+        <Divider variant={"fullWidth"} sx={{ borderColor: "#ddd" }} />
         <MenuItem onClick={() => UserStore.logout()}>
           <ListItemIcon sx={{ color: "inherit" }}>
             <LogoutIcon fontSize="small" />

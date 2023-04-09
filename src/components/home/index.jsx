@@ -14,7 +14,7 @@ const WelcomeSection = () => {
   return (
     <>
       <Typography
-        fontSize={{ md: 32, xs: 15 }}
+        fontSize={{ md: 32, sm: 26, xs: 15 }}
         fontWeight={"bold"}
         textAlign={"center"}
         fontFamily={"TiemposHeadlineWeb-Bold,Georgia,serif"}
@@ -88,7 +88,7 @@ export default function Home() {
       </Box>
       <Container>
         <Box display={"flex"} flexDirection={"column"} justifyContent={"center"} color={"#fff"}>
-          <Box mt={{ md: 30, xs: 10 }}>
+          <Box mt={{ sm: 30, xs: 20 }}>
             <WelcomeSection />
           </Box>
           <PopularFilms />
