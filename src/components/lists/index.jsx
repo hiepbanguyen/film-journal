@@ -7,6 +7,7 @@ import Popular from "./popular.jsx";
 import RecentlyLike from "./recently-liked.jsx";
 import { ListCrew } from "./list-crew.jsx";
 import { ListAllTime } from "./all-time-list.jsx";
+import { Link } from "react-router-dom";
 
 const Root = styled("div")({
   flexGrow: 1,
@@ -33,12 +34,14 @@ const Lists = () => {
           <Typography variant="h5" color="#abc" marginTop="30px">
             {tab}
           </Typography>
-          <Button
-            sx={{ color: "#fff", backgroundColor: "#175f70", fontSize: "13px", marginTop: "15px" }}
-            variant="contained"
-          >
-            Start your own list
-          </Button>
+          <Link to={"new"}>
+            <Button
+              sx={{ color: "#fff", backgroundColor: "#175f70", fontSize: "13px", marginTop: "15px" }}
+              variant="contained"
+            >
+              Start your own list
+            </Button>
+          </Link>
         </div>
       </Container>
       <Popular />

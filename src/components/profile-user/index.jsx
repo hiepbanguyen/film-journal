@@ -7,6 +7,7 @@ import GroupAvatars from "./avatar-group.jsx";
 import { ProfileStats } from "./profile-stats.jsx";
 import { NavLink, Outlet, useParams } from "react-router-dom";
 import UserStore from "../../store/user.store";
+import { observer } from "mobx-react-lite";
 
 const Root = styled("div")({
   flexGrow: 1,
@@ -26,6 +27,40 @@ const profileTabs = [
   { label: "Followers", href: "followers" },
   { label: "Edit Profile", href: "edit-profile" },
 ];
+
+const ProfileNavigation = observer(() => {
+  return (
+    <Box
+      sx={{
+        border: "1px solid rgba(255,255,255,0.1)",
+        borderRadius: 1,
+        display: "flex",
+        flexWrap: "wrap",
+        gap: 2,
+        justifyContent: "center",
+      }}
+    >
+      {(UserStore.isLoggedIn ? profileTabs : profileTabs.slice(0, -1)).map((i, idx) => (
+        <NavLink
+          className={styles.tabs}
+          to={`${i.href}`}
+          key={idx}
+          style={({ isActive }) => {
+            return {
+              paddingTop: 10,
+              paddingBottom: 10,
+              color: isActive ? "#fff" : "#ccc",
+              borderBottom: isActive ? "1px solid #fff" : "none",
+            };
+          }}
+          end
+        >
+          {i.label}
+        </NavLink>
+      ))}
+    </Box>
+  );
+});
 
 const ProfileUser = () => {
   const { username } = useParams();
@@ -94,35 +129,7 @@ const ProfileUser = () => {
             <ProfileStats />
           </Grid>
         </Grid>
-        <Box
-          sx={{
-            border: "1px solid rgba(255,255,255,0.1)",
-            borderRadius: 1,
-            display: "flex",
-            flexWrap: "wrap",
-            gap: 2,
-            justifyContent: "center",
-          }}
-        >
-          {(UserStore.isLoggedIn ? profileTabs : profileTabs.slice(0, -1)).map((i, idx) => (
-            <NavLink
-              className={styles.tabs}
-              to={`${i.href}`}
-              key={idx}
-              style={({ isActive }) => {
-                return {
-                  paddingTop: 10,
-                  paddingBottom: 10,
-                  color: isActive ? "#fff" : "#ccc",
-                  borderBottom: isActive ? "1px solid #fff" : "none",
-                };
-              }}
-              end
-            >
-              {i.label}
-            </NavLink>
-          ))}
-        </Box>
+        <ProfileNavigation />
         <Outlet />
       </Container>
     </Root>

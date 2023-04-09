@@ -1,9 +1,10 @@
-import { Link } from "@mui/material";
 import { Box, styled } from "@mui/system";
 
 export const AnimatedUnderlineBox = styled(Box, {
   shouldForwardProp: (props) => props !== "open",
 })(({ theme, open }) => ({
+  display: "flex",
+  gap: "4px",
   color: "rgba(255,255,255,0.75)",
   position: "relative",
   textDecoration: "none",
