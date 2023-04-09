@@ -11,7 +11,7 @@ export const PopularReviews = () => {
       <Divider />
       <Box>
         {Array.from({ length: 6 }).map((i, idx) => (
-          <React.Fragment key={idx}>
+          <Box mb={4} key={idx}>
             <ReviewPreview
               title={"A film title"}
               releasedYear={2022}
@@ -26,8 +26,7 @@ export const PopularReviews = () => {
               commentCount={50}
               reviewDate={new Date()}
             />
-            {idx < 5 && <Divider variant={"fullWidth"} />}
-          </React.Fragment>
+          </Box>
         ))}
       </Box>
     </>

@@ -51,15 +51,16 @@ const RecentlyLike = () => {
             <Divider />
             <Box display={"flex"} flexDirection={"column"} alignItems={{ xs: "center", lg: "flex-start" }}>
               {Array.from({ length: 7 }).map((i, idx) => (
-                <ListPreviewHorizontal
-                  key={idx}
-                  title={"Lorem Ipsum is simply dummy text"}
-                  username={"Bá Hiệp Nguyễn"}
-                  favoriteCount={400}
-                  commentCount={50}
-                  films={2}
-                  description={"Lorem Ipsum is simply dummy text"}
-                />
+                <Box key={idx} my={2}>
+                  <ListPreviewHorizontal
+                    title={"Lorem Ipsum is simply dummy text"}
+                    username={"Bá Hiệp Nguyễn"}
+                    favoriteCount={400}
+                    commentCount={50}
+                    films={2}
+                    description={"Lorem Ipsum is simply dummy text"}
+                  />
+                </Box>
               ))}
             </Box>
           </Grid>

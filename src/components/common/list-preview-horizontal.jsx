@@ -9,13 +9,7 @@ export const ListPreviewHorizontal = (props) => {
   const { title, username, favoriteCount, commentCount, films, description } = props;
 
   return (
-    <Box
-      component={Link}
-      to={"/u/hiep/lists/id123"}
-      display={"flex"}
-      flexDirection={{ xs: "column", sm: "row" }}
-      my={3}
-    >
+    <Box component={Link} to={"/u/hiep/lists/id123"} display={"flex"} flexDirection={{ xs: "column", sm: "row" }}>
       <Box>
         <FilmCardsStackedFive />
       </Box>

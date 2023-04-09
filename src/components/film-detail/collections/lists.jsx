@@ -19,15 +19,16 @@ export default function AllFilmLists() {
           </Typography>
           <PaginatedList rowsPerPage={10}>
             {Array.from({ length: 15 }).map((i, idx) => (
-              <ListPreviewHorizontal
-                key={idx}
-                title={"Lorem Ipsum is simply dummy text"}
-                username={"Bá Hiệp Nguyễn"}
-                favoriteCount={400}
-                commentCount={50}
-                films={2}
-                description={"Lorem Ipsum is simply dummy text"}
-              />
+              <Box key={idx} my={2}>
+                <ListPreviewHorizontal
+                  title={"Lorem Ipsum is simply dummy text"}
+                  username={"Bá Hiệp Nguyễn"}
+                  favoriteCount={400}
+                  commentCount={50}
+                  films={2}
+                  description={"Lorem Ipsum is simply dummy text"}
+                />
+              </Box>
             ))}
           </PaginatedList>
         </Box>
