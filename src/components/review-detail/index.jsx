@@ -1,7 +1,6 @@
 import Container from "@mui/system/Container";
-import { Box, Grid } from "@mui/material";
+import { Box } from "@mui/material";
 import ReviewDetailMainSection from "./review-detail-main-section";
-import ReviewDetailAside from "./review-detail-aside";
 import ReviewDetailListComment from "./review-detail-list-comment";
 
 export const reviewDetail = {
@@ -183,23 +182,12 @@ export const listComment = {
 export default function ReviewDetail() {
   return (
     <Container>
-      <Box sx={{ marginTop: 13 }}>
-        <Grid container spacing={8} columns={12}>
-          {/* Main */}
-          <Grid item xs={12} md={9}>
-            {/* Main-top */}
-            <ReviewDetailMainSection
-              reviewDetail={reviewDetail}
-              listLikedReview={listLikedReview}
-            ></ReviewDetailMainSection>
-            {/* List Cmt */}
-            <ReviewDetailListComment listComment={listComment} reviewDetail={reviewDetail}></ReviewDetailListComment>
-          </Grid>
-          {/* Aside */}
-          <Grid item xs={12} md={3}>
-            <ReviewDetailAside></ReviewDetailAside>
-          </Grid>
-        </Grid>
+      <Box sx={{ marginTop: 10, mx: { sm: 20 } }}>
+        {/* Main */}
+        {/* Main-top */}
+        <ReviewDetailMainSection reviewDetail={reviewDetail} listLikedReview={listLikedReview} />
+        {/* List Cmt */}
+        <ReviewDetailListComment listComment={listComment} reviewDetail={reviewDetail} />
       </Box>
     </Container>
   );

@@ -4,7 +4,6 @@ import { Avatar, Box, Divider, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 import PaginatedGrid from "../common/paginated_grid.jsx";
 import FilmCard from "../common/film-card";
-import Tags from "../common/tags.jsx";
 import ReviewDetailListComment from "../review-detail/review-detail-list-comment.jsx";
 import { listComment, reviewDetail } from "../review-detail/index.jsx";
 import FavoriteIcon from "@mui/icons-material/Favorite.js";
@@ -70,8 +69,8 @@ export default function ListDetail() {
         <Box mb={{ xs: 2, lg: 0 }}>
           <SearchForm />
         </Box>
-        <Divider variant={"fullWidth"} />
-        <Typography variant={"h5"} color={"#fff"} mt={1.5} mb={1}>
+        <Divider variant={"fullWidth"} sx={{ my: 3 }} />
+        <Typography variant={"h5"} color={"#fff"} mb={1}>
           <strong> {"List title"}</strong>
         </Typography>
         <Typography mb={3}>
@@ -89,9 +88,9 @@ export default function ListDetail() {
             <FilmCard size={"100%"} key={idx} link={`/film/${i.title.replace(" ", "-")}/${i.id}`} src={i.poster} />
           ))}
         </PaginatedGrid>
-        <Typography>Tags</Typography>
-        <Divider variant={"fullWidth"} sx={{ mb: 1.5 }} />
-        <Tags />
+        {/*<Typography>Tags</Typography>*/}
+        {/*<Divider variant={"fullWidth"} sx={{ mb: 1.5 }} />*/}
+        {/*<Tags />*/}
         <Box mt={2}></Box>
         <ReviewDetailListComment listComment={listComment} reviewDetail={reviewDetail} />
         {/*<FilmsListPopularFilms />*/}

@@ -1,6 +1,4 @@
-import { Box, Button, Grid, CardMedia } from "@mui/material";
-import SmartDisplayIcon from "@mui/icons-material/SmartDisplay";
-import amazonImg from "../../assets/img/amazon-us.png";
+import { Box, Grid } from "@mui/material";
 import userAvaTest from "../../assets/img/ava_user_test.jpg";
 import StarIcon from "@mui/icons-material/Star";
 import FavoriteIcon from "@mui/icons-material/Favorite";
@@ -91,100 +89,100 @@ function ReviewDetailThumnailLink(props) {
           }}
         ></Box>
       </Box>
-      <Box sx={{ border: "1px solid #303840", backgroundColor: "#14181c" }}>
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "flex-start",
-            alignItems: "center",
-            color: "#9ab",
-            py: "8px",
-            px: "10px",
-            backgroundColor: "#242c34",
-            cursor: "pointer",
-          }}
-        >
-          <SmartDisplayIcon sx={{ fontSize: "25px", mr: "12px" }}></SmartDisplayIcon>
-          <Box sx={{ fontSize: "12px" }} component="span">
-            Trailer
-          </Box>
-        </Box>
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "flex-start",
-            alignItems: "center",
-            color: "#9ab",
-            py: "8px",
-            pr: "10px",
-            ml: "10px",
-            borderBottom: "1px solid #242c34",
-            cursor: "pointer",
-          }}
-        >
-          <Box
-            component="img"
-            src={amazonImg}
-            sx={{
-              width: "28px",
-              heigth: "28px",
-              mr: "12px",
-            }}
-          ></Box>
-          <Box sx={{ fontSize: "12px" }} component="span">
-            Amazon US
-          </Box>
-        </Box>
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "flex-start",
-            alignItems: "center",
-            color: "#9ab",
-            py: "13px",
-            pr: "10px",
-            ml: "10px",
-            borderBottom: "1px solid #242c34",
-            cursor: "pointer",
-          }}
-        >
-          <Box sx={{ fontSize: "12px" }} component="span">
-            Go Pro tos customize
-          </Box>
-        </Box>
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            color: "#9ab",
-            py: "13px",
-            pr: "10px",
-            ml: "10px",
-            borderBottom: "1px solid #242c34",
-          }}
-        >
-          <Box
-            sx={{
-              fontSize: "12px",
-              cursor: "pointer",
-              color: "#039be5",
-            }}
-            component="span"
-          >
-            More...
-          </Box>
-          <Box
-            sx={{
-              fontSize: "12px",
-              cursor: "pointer",
-            }}
-            component="span"
-          >
-            Just watch
-          </Box>
-        </Box>
-      </Box>
+      {/*<Box sx={{ border: "1px solid #303840", backgroundColor: "#14181c" }}>*/}
+      {/*  <Box*/}
+      {/*    sx={{*/}
+      {/*      display: "flex",*/}
+      {/*      justifyContent: "flex-start",*/}
+      {/*      alignItems: "center",*/}
+      {/*      color: "#9ab",*/}
+      {/*      py: "8px",*/}
+      {/*      px: "10px",*/}
+      {/*      backgroundColor: "#242c34",*/}
+      {/*      cursor: "pointer",*/}
+      {/*    }}*/}
+      {/*  >*/}
+      {/*    <SmartDisplayIcon sx={{ fontSize: "25px", mr: "12px" }}></SmartDisplayIcon>*/}
+      {/*    <Box sx={{ fontSize: "12px" }} component="span">*/}
+      {/*      Trailer*/}
+      {/*    </Box>*/}
+      {/*  </Box>*/}
+      {/*  <Box*/}
+      {/*    sx={{*/}
+      {/*      display: "flex",*/}
+      {/*      justifyContent: "flex-start",*/}
+      {/*      alignItems: "center",*/}
+      {/*      color: "#9ab",*/}
+      {/*      py: "8px",*/}
+      {/*      pr: "10px",*/}
+      {/*      ml: "10px",*/}
+      {/*      borderBottom: "1px solid #242c34",*/}
+      {/*      cursor: "pointer",*/}
+      {/*    }}*/}
+      {/*  >*/}
+      {/*    <Box*/}
+      {/*      component="img"*/}
+      {/*      src={amazonImg}*/}
+      {/*      sx={{*/}
+      {/*        width: "28px",*/}
+      {/*        heigth: "28px",*/}
+      {/*        mr: "12px",*/}
+      {/*      }}*/}
+      {/*    ></Box>*/}
+      {/*    <Box sx={{ fontSize: "12px" }} component="span">*/}
+      {/*      Amazon US*/}
+      {/*    </Box>*/}
+      {/*  </Box>*/}
+      {/*  <Box*/}
+      {/*    sx={{*/}
+      {/*      display: "flex",*/}
+      {/*      justifyContent: "flex-start",*/}
+      {/*      alignItems: "center",*/}
+      {/*      color: "#9ab",*/}
+      {/*      py: "13px",*/}
+      {/*      pr: "10px",*/}
+      {/*      ml: "10px",*/}
+      {/*      borderBottom: "1px solid #242c34",*/}
+      {/*      cursor: "pointer",*/}
+      {/*    }}*/}
+      {/*  >*/}
+      {/*    <Box sx={{ fontSize: "12px" }} component="span">*/}
+      {/*      Go Pro tos customize*/}
+      {/*    </Box>*/}
+      {/*  </Box>*/}
+      {/*  <Box*/}
+      {/*    sx={{*/}
+      {/*      display: "flex",*/}
+      {/*      justifyContent: "space-between",*/}
+      {/*      alignItems: "center",*/}
+      {/*      color: "#9ab",*/}
+      {/*      py: "13px",*/}
+      {/*      pr: "10px",*/}
+      {/*      ml: "10px",*/}
+      {/*      borderBottom: "1px solid #242c34",*/}
+      {/*    }}*/}
+      {/*  >*/}
+      {/*    <Box*/}
+      {/*      sx={{*/}
+      {/*        fontSize: "12px",*/}
+      {/*        cursor: "pointer",*/}
+      {/*        color: "#039be5",*/}
+      {/*      }}*/}
+      {/*      component="span"*/}
+      {/*    >*/}
+      {/*      More...*/}
+      {/*    </Box>*/}
+      {/*    <Box*/}
+      {/*      sx={{*/}
+      {/*        fontSize: "12px",*/}
+      {/*        cursor: "pointer",*/}
+      {/*      }}*/}
+      {/*      component="span"*/}
+      {/*    >*/}
+      {/*      Just watch*/}
+      {/*    </Box>*/}
+      {/*  </Box>*/}
+      {/*</Box>*/}
     </Grid>
   );
 }
@@ -196,7 +194,7 @@ export default function ReviewDetailMainSection(props) {
         {/* Review */}
         <Grid container spacing={4} columns={13}>
           {/* Thumbail - link */}
-          <ReviewDetailThumnailLink reviewDetail={props.reviewDetail}></ReviewDetailThumnailLink>
+          <ReviewDetailThumnailLink reviewDetail={props.reviewDetail} />
           <Grid item xs={13} md={9} sx={{ order: { xs: "1", md: "2" } }}>
             {/* Info Review */}
             <Grid container spacing={2} columns={13}>
@@ -349,23 +347,21 @@ export default function ReviewDetailMainSection(props) {
               <FavoriteIcon sx={{ marginRight: "4px" }}></FavoriteIcon> {props.reviewDetail.likesCount} likes
             </Box>
             {/* User like related review */}
+            <Box
+              sx={{
+                textTransform: "uppercase",
+                fontSize: { xs: "12px", md: "13px" },
+                color: "#9ab",
+                borderBottom: "1px solid #9ab",
+                marginBottom: "16px",
+              }}
+            >
+              {props.reviewDetail.userFirstName} liked these review
+            </Box>
             <Box>
-              <Box
-                sx={{
-                  textTransform: "uppercase",
-                  fontSize: { xs: "12px", md: "13px" },
-                  color: "#9ab",
-                  borderBottom: "1px solid #9ab",
-                  marginBottom: "16px",
-                }}
-              >
-                {props.reviewDetail.userFirstName} liked these review
-              </Box>
-              <Box>
-                {props.listLikedReview.map((likedReview, index) => (
-                  <LikedReview likedReview={likedReview} key={index}></LikedReview>
-                ))}
-              </Box>
+              {props.listLikedReview.map((likedReview, index) => (
+                <LikedReview likedReview={likedReview} key={index}></LikedReview>
+              ))}
             </Box>
           </Grid>
         </Grid>
@@ -373,4 +369,3 @@ export default function ReviewDetailMainSection(props) {
     </>
   );
 }
-
