@@ -1,8 +1,54 @@
-import { Box, Checkbox, Container, Divider, FormControlLabel, Stack, TextField, Typography } from "@mui/material";
+import {
+  Box,
+  Card,
+  CardContent,
+  Checkbox,
+  Container,
+  Divider,
+  FormControlLabel,
+  Stack,
+  TextField,
+  Typography,
+} from "@mui/material";
 import React from "react";
 import { SearchFilms } from "./search-films.jsx";
+import ListIcon from "@mui/icons-material/List";
+import { enqueueSnackbar } from "notistack";
+
+const FilmCard = (props) => {
+  const { thumbnail, title, releasedYear } = props;
+
+  return (
+    <Card sx={{ background: "transparent", width: "100%" }} elevation={0}>
+      <CardContent sx={{ pl: 1, py: 0, ":last-child": { pb: 0 } }}>
+        <Box display={"flex"} alignItems={"center"}>
+          <img src={thumbnail} alt={title} height={45} width={30} style={{ borderRadius: "2px" }} />
+          <Box ml={1}>
+            <Typography color={"#9ab"}>
+              <strong style={{ color: "#fff" }}>{title}</strong> {releasedYear ?? "2022"}
+            </Typography>
+          </Box>
+        </Box>
+      </CardContent>
+    </Card>
+  );
+};
 
 export const NewList = () => {
+  const [addedFilms, setAddFilms] = React.useState([]);
+
+  const handleAddFilm = (newFilm) => {
+    if (addedFilms.find((i) => newFilm.id === i.id)) {
+      // console.log("You already added this film to your list");
+      enqueueSnackbar("You already added this film to your list", { variant: "error" });
+      return;
+    }
+    setAddFilms(addedFilms.concat(newFilm));
+  };
+
+  const handleRemoveFilm = (filmId) => {
+    setAddFilms(addedFilms.filter((i) => i.id !== filmId));
+  };
   return (
     <Container sx={{ color: "#9ab" }}>
       <Typography variant={"h5"}>New List</Typography>
@@ -32,13 +78,33 @@ export const NewList = () => {
               id="list-desc"
               fullWidth
               multiline
-              rows={8}
+              rows={10}
               placeholder={"Description"}
             />
           </Stack>
-          <Box flex={1}>
-            <SearchFilms />
-          </Box>
+          <Stack flex={1} gap={2}>
+            <SearchFilms handleAddFilm={handleAddFilm} />
+            <Box borderRadius={1} border={"1px solid #9ab"} p={1} height={314}>
+              {addedFilms.length > 0 ? (
+                <>
+                  {addedFilms.map((i, idx) => (
+                    <FilmCard key={idx} {...i} handleRemoveFilm={handleRemoveFilm} />
+                  ))}
+                </>
+              ) : (
+                <Box
+                  height={"100%"}
+                  display={"flex"}
+                  flexDirection={"column"}
+                  justifyContent={"center"}
+                  alignItems={"center"}
+                >
+                  <Typography>Films you added to your list appear here</Typography>
+                  <ListIcon sx={{ fontSize: 60 }} />
+                </Box>
+              )}
+            </Box>
+          </Stack>
         </Box>
       </form>
     </Container>

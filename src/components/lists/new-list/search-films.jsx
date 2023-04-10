@@ -2,70 +2,56 @@ import { Card, CardContent, CircularProgress, Popper, Typography } from "@mui/ma
 import TextField from "@mui/material/TextField";
 import React from "react";
 import { Box } from "@mui/system";
-import { styled } from "@mui/material/styles";
 import Autocomplete from "@mui/material/Autocomplete";
 import SearchIcon from "@mui/icons-material/Search";
 
 const exampleOptions = [
   {
+    id: 1,
     thumbnail:
       "https://a.ltrbxd.com/resized/film-poster/6/8/3/1/9/4/683194-do-revenge-0-70-0-105-crop.jpg?v=19da99b72f",
     title: "Do Revenge",
   },
   {
+    id: 2,
     thumbnail: "https://a.ltrbxd.com/resized/film-poster/9/9/4/3/1/4/994314-swarm-0-70-0-105-crop.jpg?v=256fc1c484",
     title: "Swarm",
   },
   {
+    id: 3,
     thumbnail: "https://a.ltrbxd.com/resized/film-poster/9/9/6/9/2/5/996925-beef-0-70-0-105-crop.jpg?v=c7399e5bdb",
     title: "Beef",
   },
   {
+    id: 4,
     thumbnail: "https://a.ltrbxd.com/resized/sm/upload/91/48/x5/do/sea_beast_xxlg-0-70-0-105-crop.jpg?v=52209df52e",
     title: "The Sea Beast",
   },
   {
+    id: 5,
     thumbnail:
       "https://a.ltrbxd.com/resized/film-poster/6/2/9/3/2/0/629320-decision-to-leave-0-70-0-105-crop.jpg?v=30eaeaf481",
     title: "Decision To Leave",
   },
   {
+    id: 6,
     thumbnail:
       "https://a.ltrbxd.com/resized/film-poster/4/4/9/4/4/2/449442-bodies-bodies-bodies-0-70-0-105-crop.jpg?v=1dfddd92ac",
     title: "Bodies Bodies Bodies",
   },
 ];
 
-const FilmCard = (props) => {
-  const { thumbnail, title, releasedYear } = props;
-
-  return (
-    <Card sx={{ background: "transparent", width: "100%" }} elevation={0}>
-      <CardContent sx={{ pl: 1, py: 0, ":last-child": { pb: 0 } }}>
-        <Box display={"flex"} alignItems={"center"}>
-          <img src={thumbnail} alt={title} height={45} width={30} style={{ borderRadius: "2px" }} />
-          <Box ml={1}>
-            <Typography color={"#9ab"}>
-              <strong style={{ color: "#fff" }}>{title}</strong> {releasedYear ?? "2022"}
-            </Typography>
-          </Box>
-        </Box>
-      </CardContent>
-    </Card>
-  );
-};
-
 const SearchOption = (props) => {
-  const { thumbnail, title, releasedYear } = props;
+  const { film, handleAddFilm } = props;
 
   return (
-    <Card sx={{ background: "transparent", width: "100%" }} elevation={0}>
+    <Card sx={{ background: "transparent", width: "100%" }} elevation={0} onClick={() => handleAddFilm(film)}>
       <CardContent sx={{ pl: 1, py: 0, ":last-child": { pb: 0 } }}>
         <Box display={"flex"} alignItems={"center"}>
-          <img src={thumbnail} alt={title} height={45} width={30} style={{ borderRadius: "2px" }} />
+          <img src={film.thumbnail} alt={film.title} height={45} width={30} style={{ borderRadius: "2px" }} />
           <Box ml={1}>
             <Typography color={"#9ab"}>
-              <strong style={{ color: "#fff" }}>{title}</strong> {releasedYear ?? "2022"}
+              <strong style={{ color: "#fff" }}>{film.title}</strong> {film.releasedYear ?? "2022"}
             </Typography>
           </Box>
         </Box>
@@ -74,14 +60,8 @@ const SearchOption = (props) => {
   );
 };
 
-export const Search = styled(Autocomplete)(({ theme }) => ({
-  width: 290,
-  [theme.breakpoints.down("sm")]: {
-    width: "100%",
-  },
-}));
-
-export const SearchFilms = () => {
+export const SearchFilms = (props) => {
+  const { handleAddFilm } = props;
   const [inputValue, setInputValue] = React.useState("");
   const [searchLoading, setSearchLoading] = React.useState(false);
   const [options, setOptions] = React.useState([]);
@@ -94,7 +74,7 @@ export const SearchFilms = () => {
   // );
   const fetch = (inputValue) => {
     setOptions(exampleOptions);
-    console.log(options);
+    // console.log(options);
     // setSearchLoading(false);
   };
   React.useEffect(() => {
@@ -106,7 +86,7 @@ export const SearchFilms = () => {
     fetch(inputValue);
   }, [inputValue]);
   return (
-    <Search
+    <Autocomplete
       fullWidth
       autoComplete={false}
       // disablePortal
@@ -139,10 +119,10 @@ export const SearchFilms = () => {
         />
       )}
       options={options}
-      getOptionLabel={(option) => option?.title ?? inputValue}
+      getOptionLabel={() => ""}
       renderOption={(props, option) => (
         <Box p={1} {...props}>
-          <SearchOption {...option} />
+          <SearchOption film={option} handleAddFilm={handleAddFilm} />
         </Box>
       )}
     />
