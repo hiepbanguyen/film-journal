@@ -69,7 +69,7 @@ function Follow(props) {
 
 export default function ListFollow() {
   return (
-    <Box>
+    <Box mt={5}>
       <Follow data={Following}></Follow>
     </Box>
   );
