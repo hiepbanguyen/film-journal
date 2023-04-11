@@ -1,8 +1,7 @@
-import { Card, CardContent, CircularProgress, Popper, Typography } from "@mui/material";
+import { Card, CardContent, CircularProgress, Typography } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import React from "react";
 import { Box } from "@mui/system";
-import Autocomplete from "@mui/material/Autocomplete";
 import SearchIcon from "@mui/icons-material/Search";
 
 const exampleOptions = [
@@ -42,10 +41,18 @@ const exampleOptions = [
 ];
 
 const SearchOption = (props) => {
-  const { film, handleAddFilm } = props;
+  const { film } = props;
 
   return (
-    <Card sx={{ background: "transparent", width: "100%" }} elevation={0} onClick={() => handleAddFilm(film)}>
+    <Card
+      sx={{
+        background: "transparent",
+        width: "100%",
+        py: 0.5,
+        ":hover": { bgcolor: "rgba(255,255,255,0.2)", cursor: "pointer" },
+      }}
+      elevation={0}
+    >
       <CardContent sx={{ pl: 1, py: 0, ":last-child": { pb: 0 } }}>
         <Box display={"flex"} alignItems={"center"}>
           <img src={film.thumbnail} alt={film.title} height={45} width={30} style={{ borderRadius: "2px" }} />
@@ -61,10 +68,10 @@ const SearchOption = (props) => {
 };
 
 export const SearchFilms = (props) => {
-  const { handleAddFilm } = props;
   const [inputValue, setInputValue] = React.useState("");
   const [searchLoading, setSearchLoading] = React.useState(false);
   const [options, setOptions] = React.useState([]);
+  const [openPopper, setOpenPopper] = React.useState(false);
   // const fetch = React.useCallback(
   //   debounce((inputValue) => {
   //     searchProject({ search: inputValue }).then((res) => setOptions(res.data?.getProjects ?? []));
@@ -74,6 +81,7 @@ export const SearchFilms = (props) => {
   // );
   const fetch = (inputValue) => {
     setOptions(exampleOptions);
+    setOpenPopper(true);
     // console.log(options);
     // setSearchLoading(false);
   };
@@ -81,50 +89,56 @@ export const SearchFilms = (props) => {
     setSearchLoading(true);
     if (!inputValue) {
       setSearchLoading(false);
+      setOpenPopper(false);
       return;
     }
     fetch(inputValue);
   }, [inputValue]);
+
+  const handleInputChange = (e) => {
+    e.preventDefault();
+    setInputValue(e.target.value);
+  };
+
   return (
-    <Autocomplete
-      fullWidth
-      autoComplete={false}
-      // disablePortal
-      freeSolo
-      onInputChange={(event, newInputValue) => {
-        setInputValue(newInputValue);
-      }}
-      PopperComponent={(prop) => (
-        <Popper {...prop} sx={{ width: { xs: "auto", sm: "500px !important" } }} placement={"bottom-start"} />
-      )}
-      renderInput={(params) => (
-        <TextField
-          {...params}
-          InputProps={{
-            ...params.InputProps,
-            startAdornment: <SearchIcon />,
-            style: {
-              padding: 0,
-              paddingLeft: 12,
-              height: 40,
-            },
-            endAdornment: (
-              <React.Fragment>
-                {searchLoading ? <CircularProgress color="inherit" size={12} sx={{ mr: 2 }} /> : null}
-                {/*{params.InputProps.endAdornment}*/}
-              </React.Fragment>
-            ),
+    <Box width={"100%"} position={"relative"}>
+      <TextField
+        fullWidth
+        value={inputValue}
+        onChange={handleInputChange}
+        InputProps={{
+          startAdornment: <SearchIcon sx={{ mr: 1 }} />,
+          style: {
+            padding: 0,
+            paddingLeft: 10,
+            height: 40,
+          },
+          endAdornment: (
+            <React.Fragment>
+              {searchLoading ? <CircularProgress color="inherit" size={12} sx={{ mr: 2 }} /> : null}
+              {/*{params.InputProps.endAdornment}*/}
+            </React.Fragment>
+          ),
+        }}
+        placeholder={"Enter a film's name..."}
+      />
+      <Box
+        position={"absolute"}
+        display={openPopper ? "block" : "none"}
+        sx={{ bgcolor: "#456", borderRadius: 1, color: "#9ab", mt: 1, width: "100%", p: 1 }}
+      >
+        <Box
+          sx={{ borderRadius: 1, height: 250, overflowY: "scroll" }}
+          onClick={() => {
+            setInputValue("");
+            setOpenPopper(false);
           }}
-          placeholder={"Enter a film's name..."}
-        />
-      )}
-      options={options}
-      getOptionLabel={() => ""}
-      renderOption={(props, option) => (
-        <Box p={1} {...props}>
-          <SearchOption film={option} handleAddFilm={handleAddFilm} />
+        >
+          {options.map((i, idx) => (
+            <SearchOption key={idx} film={i} />
+          ))}
         </Box>
-      )}
-    />
+      </Box>
+    </Box>
   );
 };
