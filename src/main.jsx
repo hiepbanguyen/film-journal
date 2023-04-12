@@ -35,7 +35,8 @@ import MemberSearch from "./components/search/members_search.jsx";
 import AllFilmLists from "./components/film-detail/collections/lists.jsx";
 import AllFilmLikes from "./components/film-detail/collections/likes.jsx";
 import { NewList } from "./components/lists/new-list/index.jsx";
-import { WatchList } from "./components/profile-user/tabs/watchlist/index.jsx";
+import { UserWatchList } from "./components/profile-user/tabs/watchlist/index.jsx";
+import { UserLists } from "./components/profile-user/lists/index.jsx";
 
 const axios = Axios.create({
   baseURL: "https://localhost:44358/api/",
@@ -127,11 +128,11 @@ const router = createBrowserRouter([
           },
           {
             path: "watchlist",
-            element: <WatchList />,
+            element: <UserWatchList />,
           },
           {
             path: "lists",
-            element: <Box />,
+            element: <UserLists />,
           },
           {
             path: "likes",
