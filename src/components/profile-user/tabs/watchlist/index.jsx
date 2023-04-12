@@ -5,14 +5,14 @@ import FavoriteIcon from "@mui/icons-material/Favorite.js";
 import Grid from "@mui/material/Grid";
 import PaginationBase from "../../../common/pagination-base";
 
-export const WatchList = (props) => {
+export const UserWatchList = (props) => {
   const { username } = useParams();
 
   const handleChangePage = (newPage) => {
     console.log('newPage: ', newPage);
   };
   let data = {
-    total: 18,
+    total: 24,
     pageIndex: 1,
     pageSize: 24,
     totalPage: 1,
@@ -161,6 +161,54 @@ export const WatchList = (props) => {
         isLiked: true,
         isWatched: true,
       },
+      {
+        id: 19,
+        thumbnail: "https://picsum.photos/200/304",
+        totalLikes: 12300,
+        totalReviews: 32454,
+        isLiked: true,
+        isWatched: true,
+      },
+      {
+        id: 20,
+        thumbnail: "https://picsum.photos/201/304",
+        totalLikes: 23445,
+        totalReviews: 567567,
+        isLiked: false,
+        isWatched: false,
+      },
+      {
+        id: 21,
+        thumbnail: "https://picsum.photos/202/303",
+        totalLikes: 453645,
+        totalReviews: 567567,
+        isLiked: false,
+        isWatched: true,
+      },
+      {
+        id: 22,
+        thumbnail: "https://picsum.photos/203/302",
+        totalLikes: 567567,
+        totalReviews: 56757,
+        isLiked: false,
+        isWatched: false,
+      },
+      {
+        id: 23,
+        thumbnail: "https://picsum.photos/203/301",
+        totalLikes: 567567,
+        totalReviews: 56757,
+        isLiked: true,
+        isWatched: true,
+      },
+      {
+        id: 24,
+        thumbnail: "https://picsum.photos/204/302",
+        totalLikes: 567567,
+        totalReviews: 56757,
+        isLiked: true,
+        isWatched: true,
+      },
     ],
   };
 
@@ -181,18 +229,23 @@ export const WatchList = (props) => {
         <Box>Watch List</Box>
         <Box>{data.total}</Box>
       </Box>
-      <Box>
-        <Grid container columns={24}>
-          {data.list.map((film) => (
-            <Grid key={film.id} item xs={8} sm={6} md={4} lg={3}>
-              <FilmCard key={film.id} film={film}></FilmCard>
+
+      {(data.list.length > 0) ? (
+        <Box>
+          <Box>
+            <Grid container columns={24}>
+              {data.list.map((film) => (
+                <Grid key={film.id} item xs={8} sm={6} md={4} lg={3}>
+                  <FilmCard key={film.id} film={film}></FilmCard>
+                </Grid>
+              ))}
             </Grid>
-          ))}
-        </Grid>
-      </Box>
-      <Box sx={{display: 'flex', justifyContent: 'end'}}>
-        <PaginationBase totalPage={data.totalPage} pageIndex={data.pageIndex} onChange={handleChangePage}></PaginationBase>
-      </Box>
+          </Box>
+          <Box sx={{ display: 'flex', justifyContent: 'end' }}>
+            <PaginationBase totalPage={data.totalPage} pageIndex={data.pageIndex} onChange={handleChangePage}></PaginationBase>
+          </Box>
+        </Box>
+      ) : (<Box>Không có dữ liệu</Box>)}
     </Box>
   );
 };
@@ -205,7 +258,7 @@ function FilmCard(props) {
         key={film.id}
         sx={{
           margin: "0 8px",
-          borderRadius: "4px",
+          borderRadius: "6px",
           overflow: "hidden",
           aspectRatio: "2/3",
           position: "relative",
