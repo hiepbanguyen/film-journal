@@ -162,7 +162,15 @@ const router = createBrowserRouter([
         element: <ReviewDetail />,
       },
       {
+        path: "u/:username/reviews/:reviewId/edit",
+        element: <ReviewDetail />,
+      },
+      {
         path: "u/:username/lists/:listId",
+        element: <ListDetail />,
+      },
+      {
+        path: "u/:username/lists/:listId/edit",
         element: <ListDetail />,
       },
       {
