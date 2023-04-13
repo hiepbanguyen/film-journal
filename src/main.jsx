@@ -37,6 +37,7 @@ import AllFilmLikes from "./components/film-detail/collections/likes.jsx";
 import { NewList } from "./components/lists/new-list/index.jsx";
 import { UserWatchList } from "./components/profile-user/tabs/watchlist/index.jsx";
 import { UserLists } from "./components/profile-user/lists/index.jsx";
+import NotistackWrapper from "./components/common/snackbar.jsx";
 
 const axios = Axios.create({
   baseURL: "https://localhost:44358/api/",
@@ -197,7 +198,9 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
-      <RouterProvider router={router} />
+      <NotistackWrapper>
+        <RouterProvider router={router} />
+      </NotistackWrapper>
     </ThemeProvider>
   </React.StrictMode>,
 );

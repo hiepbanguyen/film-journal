@@ -1,4 +1,4 @@
-import { Card, CardContent, CircularProgress, Typography } from "@mui/material";
+import { Card, CardContent, CircularProgress, ClickAwayListener, Typography } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import React from "react";
 import { Box } from "@mui/system";
@@ -41,7 +41,11 @@ const exampleOptions = [
 ];
 
 const SearchOption = (props) => {
-  const { film } = props;
+  const { film, handleFilmClick } = props;
+
+  const handleClick = () => {
+    handleFilmClick(film);
+  };
 
   return (
     <Card
@@ -52,6 +56,7 @@ const SearchOption = (props) => {
         ":hover": { bgcolor: "rgba(255,255,255,0.2)", cursor: "pointer" },
       }}
       elevation={0}
+      onClick={handleClick}
     >
       <CardContent sx={{ pl: 1, py: 0, ":last-child": { pb: 0 } }}>
         <Box display={"flex"} alignItems={"center"}>
@@ -100,6 +105,12 @@ export const SearchFilms = (props) => {
     setInputValue(e.target.value);
   };
 
+  const handleFilmClicked = (film) => {
+    props.handleAddFilm(film);
+    setInputValue("");
+    setOpenPopper(false);
+  };
+
   return (
     <Box width={"100%"} position={"relative"}>
       <TextField
@@ -122,23 +133,25 @@ export const SearchFilms = (props) => {
         }}
         placeholder={"Enter a film's name..."}
       />
-      <Box
-        position={"absolute"}
-        display={openPopper ? "block" : "none"}
-        sx={{ bgcolor: "#456", borderRadius: 1, color: "#9ab", mt: 1, width: "100%", p: 1 }}
-      >
+      <ClickAwayListener onClickAway={() => setOpenPopper(false)}>
         <Box
-          sx={{ borderRadius: 1, height: 250, overflowY: "scroll" }}
-          onClick={() => {
-            setInputValue("");
-            setOpenPopper(false);
-          }}
+          position={"absolute"}
+          display={openPopper ? "block" : "none"}
+          sx={{ zIndex: 10, bgcolor: "#456", borderRadius: 1, color: "#9ab", mt: 1, width: "100%", p: 1 }}
         >
-          {options.map((i, idx) => (
-            <SearchOption key={idx} film={i} />
-          ))}
+          <Box
+            sx={{ borderRadius: 1, height: 250, overflowY: "scroll" }}
+            // onClick={() => {
+            //   setInputValue("");
+            //   setOpenPopper(false);
+            // }}
+          >
+            {options.map((i, idx) => (
+              <SearchOption key={idx} film={i} handleFilmClick={handleFilmClicked} />
+            ))}
+          </Box>
         </Box>
-      </Box>
+      </ClickAwayListener>
     </Box>
   );
 };
