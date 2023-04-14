@@ -36,7 +36,7 @@ import AllFilmLists from "./components/film-detail/collections/lists.jsx";
 import AllFilmLikes from "./components/film-detail/collections/likes.jsx";
 import { NewList } from "./components/lists/new-list/index.jsx";
 import { UserWatchList } from "./components/profile-user/tabs/watchlist/index.jsx";
-import { UserLists } from "./components/profile-user/lists/index.jsx";
+import { UserLists } from "./components/profile-user/tabs/lists/index.jsx";
 import NotistackWrapper from "./components/common/snackbar.jsx";
 
 const axios = Axios.create({
