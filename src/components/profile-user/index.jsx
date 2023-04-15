@@ -25,7 +25,7 @@ const profileTabs = [
   // { label: "Activity", href: "activity" },
   { label: "Following", href: "following" },
   { label: "Followers", href: "followers" },
-  { label: "Edit Profile", href: "edit-profile" },
+  { label: "Information and Security", href: "edit-profile" },
 ];
 
 const ProfileNavigation = observer(() => {
@@ -40,7 +40,7 @@ const ProfileNavigation = observer(() => {
         justifyContent: "center",
       }}
     >
-      {(UserStore.isLoggedIn ? profileTabs : profileTabs.slice(0, -1)).map((i, idx) => (
+      {(UserStore.isLoggedIn ? profileTabs : profileTabs).map((i, idx) => (
         <NavLink
           className={styles.tabs}
           to={`${i.href}`}
