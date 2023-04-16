@@ -6,9 +6,9 @@ import React, { useState } from "react";
 export const Information = (props) => {
   // Khai bao params
   const [userInput, setUserInput] = useState({
-    userName: "",
+    userName: "cristiano07",
     fullName: "",
-    email: "",
+    email: "cris07@gmail.com",
     dateOfBirth: "",
     bio: "",
     errors: {
@@ -19,6 +19,8 @@ export const Information = (props) => {
       bio: "",
     },
   });
+
+  const [edit, setEdit] = useState(false);
 
   //   handle Input change
   const handleInputChange = (event) => {
@@ -98,10 +100,26 @@ export const Information = (props) => {
     >
       <Grid container columns={12}>
         <Grid item xs={12} sm={5}>
+          <Box sx={{marginBottom: '20px'}}>
+            <Button
+              variant="contained"
+              size="medium"
+              disabled={edit}
+              sx={{
+                backgroundColor: "#9ab !important",
+                color: "#000",
+                ":hover": { backgroundColor: "#9ab !important" },
+              }}
+              onClick={() => setEdit(true)}
+            >
+              Edit
+            </Button>
+          </Box>
           <form onSubmit={handleSubmit}>
             <TextField
               label="Username"
               name="userName"
+              disabled={!edit}
               value={userInput.userName}
               onChange={handleInputChange}
               InputLabelProps={{ shrink: true, required: true }}
@@ -111,15 +129,17 @@ export const Information = (props) => {
               sx={{
                 width: "100%",
                 fontSize: { xs: "14px", md: "16px" },
-                " input,label,fieldset": {
-                  borderColor: "#9ab",
-                  color: "#9ab",
+                " input,label,fieldset,.Mui-disabled": {
+                  borderColor: "#9ab !important",
+                  color: "#9ab !important",
+                  "-webkit-text-fill-color": "#9ab",
                 },
               }}
             />
             <TextField
               label="Fullname"
               name="fullName"
+              disabled={!edit}
               value={userInput.fullName}
               onChange={handleInputChange}
               InputLabelProps={{ shrink: true, required: true }}
@@ -129,15 +149,17 @@ export const Information = (props) => {
               sx={{
                 width: "100%",
                 fontSize: { xs: "14px", md: "16px" },
-                " input,label,fieldset": {
-                  borderColor: "#9ab",
-                  color: "#9ab",
+                " input,label,fieldset,.Mui-disabled": {
+                  borderColor: "#9ab !important",
+                  color: "#9ab !important",
+                  "-webkit-text-fill-color": "#9ab",
                 },
               }}
             />
             <TextField
               label="Email"
               name="email"
+              disabled={!edit}
               value={userInput.email}
               onChange={handleInputChange}
               InputLabelProps={{ shrink: true, required: true }}
@@ -147,9 +169,10 @@ export const Information = (props) => {
               sx={{
                 width: "100%",
                 fontSize: { xs: "14px", md: "16px" },
-                " input,label,fieldset": {
-                  borderColor: "#9ab",
-                  color: "#9ab",
+                " input,label,fieldset,.Mui-disabled": {
+                  borderColor: "#9ab !important",
+                  color: "#9ab !important",
+                  "-webkit-text-fill-color": "#9ab",
                 },
               }}
             />
@@ -157,6 +180,7 @@ export const Information = (props) => {
               name="dateOfBirth"
               label="Date of birth"
               type="date"
+              disabled={!edit}
               value={userInput.dateOfBirth}
               onChange={handleInputChange}
               //   error={!!userInput.errors.email}
@@ -166,15 +190,17 @@ export const Information = (props) => {
               sx={{
                 width: "100%",
                 fontSize: { xs: "14px", md: "16px" },
-                " input,label,fieldset": {
-                  borderColor: "#9ab",
-                  color: "#9ab",
+                " input,label,fieldset,.Mui-disabled": {
+                  borderColor: "#9ab !important",
+                  color: "#9ab !important",
+                  "-webkit-text-fill-color": "#9ab",
                 },
               }}
             />
             <TextField
               label="Bio"
               name="bio"
+              disabled={!edit}
               value={userInput.bio}
               onChange={handleInputChange}
               InputLabelProps={{ shrink: true, required: true }}
@@ -186,24 +212,39 @@ export const Information = (props) => {
                 width: "100%",
                 fontSize: { xs: "14px", md: "16px" },
                 height: "128px !Important",
-                " textarea,label,fieldset": {
-                  borderColor: "#9ab",
-                  color: "#9ab",
+                " textarea,label,fieldset,.Mui-disabled": {
+                  borderColor: "#9ab !important",
+                  color: "#9ab !important",
+                  "-webkit-text-fill-color": "#9ab",
                 },
               }}
             />
-            <Button
-              variant="contained"
-              type="submit"
-              size="medium"
-              sx={{
-                backgroundColor: "#9ab !important",
-                color: "#000",
-                ":hover": { backgroundColor: "#9ab !important" },
-              }}
-            >
-              Submit
-            </Button>
+            <Box>
+              <Button
+                type="clear"
+                size="medium"
+                sx={{
+                  border: "1px solid #9ab",
+                  marginRight: "8px",
+                  ":hover": { border: "1px solid #9ab" },
+                }}
+                onClick={handleCancel}
+              >
+                Cancel
+              </Button>
+              <Button
+                variant="contained"
+                type="submit"
+                size="medium"
+                sx={{
+                  backgroundColor: "#9ab !important",
+                  color: "#000",
+                  ":hover": { backgroundColor: "#9ab !important" },
+                }}
+              >
+                Submit
+              </Button>
+            </Box>
           </form>
         </Grid>
         <Grid item xs={12} md={6}></Grid>
