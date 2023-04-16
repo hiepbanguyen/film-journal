@@ -19,28 +19,44 @@ export const UserEditProfile = () => {
 
   return (
     <Box sx={{ width: "100%" }}>
-      <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+      <Box
+        sx={{
+          borderBottom: 1,
+          borderColor: "divider",
+          fontSize: '12px',
+          marginTop: '12px',
+          "span.css-1aquho2-MuiTabs-indicator": {
+            backgroundColor: "#9ab",
+          },
+        }}
+      >
         <Tabs value={tab} onChange={handleChange} aria-label="basic tabs example">
-          <Tab label="Information" />
-          <Tab label="Avatar" />
-          <Tab label="Password" />
+          <Tab style={{ fontSize: '12px',color: "#9ab" }} label="Information" />
+          <Tab style={{ fontSize: '12px',color: "#9ab" }} label="Avatar" />
+          <Tab style={{ fontSize: '12px',color: "#9ab" }} label="Password" />
         </Tabs>
       </Box>
-      <Box>
-        <Box sx={{
-            display: `${tab == 0 ? 'block' : 'none'}`
-        }}>
-            <Information></Information>
+      <Box sx={{marginTop: '32px'}}>
+        <Box
+          sx={{
+            display: `${tab == 0 ? "block" : "none"}`,
+          }}
+        >
+          <Information></Information>
         </Box>
-        <Box sx={{
-            display: `${tab == 1 ? 'block' : 'none'}`
-        }}>
-            <ChangeAvatar></ChangeAvatar>
+        <Box
+          sx={{
+            display: `${tab == 1 ? "block" : "none"}`,
+          }}
+        >
+          <ChangeAvatar></ChangeAvatar>
         </Box>
-        <Box sx={{
-            display: `${tab == 2 ? 'block' : 'none'}`
-        }}>
-            <ChangePassword></ChangePassword>
+        <Box
+          sx={{
+            display: `${tab == 2 ? "block" : "none"}`,
+          }}
+        >
+          <ChangePassword></ChangePassword>
         </Box>
       </Box>
     </Box>
