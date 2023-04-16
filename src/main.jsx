@@ -34,10 +34,11 @@ import ListsSearch from "./components/search/lists_search.jsx";
 import MemberSearch from "./components/search/members_search.jsx";
 import AllFilmLists from "./components/film-detail/collections/lists.jsx";
 import AllFilmLikes from "./components/film-detail/collections/likes.jsx";
-import { NewList } from "./components/lists/new-list/index.jsx";
+import { NewList } from "./components/lists/new/index.jsx";
 import { UserWatchList } from "./components/profile-user/tabs/watchlist/index.jsx";
 import { UserLists } from "./components/profile-user/lists/index.jsx";
 import NotistackWrapper from "./components/common/snackbar.jsx";
+import { EditList } from "./components/lists/edit/index.jsx";
 
 const axios = Axios.create({
   baseURL: "https://localhost:44358/api/",
@@ -163,7 +164,7 @@ const router = createBrowserRouter([
       },
       {
         path: "u/:username/reviews/:reviewId/edit",
-        element: <ReviewDetail />,
+        element: <EditList />,
       },
       {
         path: "u/:username/lists/:listId",
@@ -171,7 +172,7 @@ const router = createBrowserRouter([
       },
       {
         path: "u/:username/lists/:listId/edit",
-        element: <ListDetail />,
+        element: <EditList />,
       },
       {
         path: "search/",

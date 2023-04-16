@@ -19,8 +19,8 @@ import CloseIcon from "@mui/icons-material/Close";
 import { useSnackbar } from "notistack";
 import { useNavigate } from "react-router-dom";
 
-const FilmCard = (props) => {
-  const { thumbnail, title, releasedYear } = props;
+export const SelectedFilm = (props) => {
+  const { thumbnail, title, releasedYear, children } = props;
 
   return (
     <Card
@@ -41,17 +41,7 @@ const FilmCard = (props) => {
               <strong style={{ color: "#fff" }}>{title}</strong> {releasedYear ?? "2022"}
             </Typography>
           </Box>
-          <IconButton
-            sx={{
-              color: "#9ab",
-              ":hover": {
-                bgcolor: "rgba(255,255,255,0.2)",
-                color: "#fd435f",
-              },
-            }}
-          >
-            <CloseIcon />
-          </IconButton>
+          {children}
         </Box>
       </CardContent>
     </Card>
@@ -113,13 +103,21 @@ export const NewList = () => {
             <Box borderRadius={1} border={"1px solid #9ab"} p={1} height={314}>
               {addedFilms.length > 0 ? (
                 <Stack sx={{ height: "100%", overflowY: "auto" }}>
-                  {/*{addedFilms.map((i) => (*/}
-                  {/*  <Typography>{i.title}</Typography>*/}
-                  {/*))}*/}
                   {addedFilms.map((i, idx) => (
-                    <Box key={idx} onClick={() => handleRemoveFilm(i.id)}>
-                      <FilmCard {...i} />
-                    </Box>
+                    <SelectedFilm key={idx} {...i}>
+                      <IconButton
+                        sx={{
+                          color: "#9ab",
+                          ":hover": {
+                            bgcolor: "rgba(255,255,255,0.2)",
+                            color: "#fd435f",
+                          },
+                        }}
+                        onClick={() => handleRemoveFilm(i.id)}
+                      >
+                        <CloseIcon />
+                      </IconButton>
+                    </SelectedFilm>
                   ))}
                 </Stack>
               ) : (
