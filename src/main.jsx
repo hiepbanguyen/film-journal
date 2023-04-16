@@ -34,12 +34,12 @@ import ListsSearch from "./components/search/lists_search.jsx";
 import MemberSearch from "./components/search/members_search.jsx";
 import AllFilmLists from "./components/film-detail/collections/lists.jsx";
 import AllFilmLikes from "./components/film-detail/collections/likes.jsx";
-import { NewList } from "./components/lists/new/index.jsx";
+import { NewList } from "./components/list-detail/new/index.jsx";
 import { UserWatchList } from "./components/profile-user/tabs/watchlist/index.jsx";
 import { UserLists } from "./components/profile-user/tabs/lists/index.jsx";
 import { UserEditProfile } from "./components/profile-user/tabs/edit-profile/index.jsx";
 import NotistackWrapper from "./components/common/snackbar.jsx";
-import { EditList } from "./components/lists/edit/index.jsx";
+import { EditList } from "./components/list-detail/edit/index.jsx";
 
 const axios = Axios.create({
   baseURL: "https://localhost:44358/api/",
