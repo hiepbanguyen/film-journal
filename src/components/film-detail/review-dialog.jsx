@@ -47,14 +47,9 @@ export default function ReviewDialog(props) {
           <strong style={{ color: "#678" }}>{"Movie Title"}</strong> <span style={{ fontSize: 27 }}>{"2022"}</span>
         </DialogTitle>
         <DialogContent>
-          <Box display={"flex"} flexDirection={{ xs: "column", sm: "row" }} gap={{ sm: 5 }} alignItems={"flex-start"}>
-            <FormGroup>
-              <FormControlLabel control={<Checkbox />} label="I've watched this film before" />
-            </FormGroup>
-            <LocalizationProvider dateAdapter={AdapterMoment}>
-              <DateField variant={"standard"} label="Watched On" value={moment(new Date())} format={"YYYY/MM/DD"} />
-            </LocalizationProvider>
-          </Box>
+          <LocalizationProvider dateAdapter={AdapterMoment}>
+            <DateField variant={"standard"} label="Watched On" value={moment(new Date())} format={"YYYY/MM/DD"} />
+          </LocalizationProvider>
           <TextField
             autoFocus
             margin="dense"

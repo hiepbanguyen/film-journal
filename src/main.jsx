@@ -40,6 +40,7 @@ import { UserLists } from "./components/profile-user/tabs/lists/index.jsx";
 import { UserEditProfile } from "./components/profile-user/tabs/edit-profile/index.jsx";
 import NotistackWrapper from "./components/common/snackbar.jsx";
 import { EditList } from "./components/list-detail/edit/index.jsx";
+import { EditReview } from "./components/review-detail/edit/index.jsx";
 
 const axios = Axios.create({
   baseURL: "https://localhost:44358/api/",
@@ -165,7 +166,7 @@ const router = createBrowserRouter([
       },
       {
         path: "u/:username/reviews/:reviewId/edit",
-        element: <EditList />,
+        element: <EditReview />,
       },
       {
         path: "u/:username/lists/:listId",
