@@ -4,13 +4,20 @@ import Grid from "@mui/material/Grid";
 import React, { useState } from "react";
 
 export const Information = (props) => {
+  let data = {
+    userName: "cristiano07",
+    fullName: "Cristiano Ronaldo",
+    email: "cris07@gmail.com",
+    dateOfBirth: "2001-10-27",
+    bio: "I'm professional football player! GOAT - the Greatest Of All Times!",
+  };
   // Khai bao params
   const [userInput, setUserInput] = useState({
-    userName: "cristiano07",
-    fullName: "",
-    email: "cris07@gmail.com",
-    dateOfBirth: "",
-    bio: "",
+    userName: data.userName || "",
+    fullName: data.fullName || "",
+    email: data.email || "",
+    dateOfBirth: data.dateOfBirth || "",
+    bio: data.bio || "",
     errors: {
       userName: "",
       fullName: "",
@@ -43,6 +50,26 @@ export const Information = (props) => {
     if (validateInput()) {
       console.log(userInput);
     }
+  };
+
+  // handle cancel
+  const handleCancel = () => {
+    setUserInput({
+      userName: data.userName || "",
+      fullName: data.fullName || "",
+      email: data.email || "",
+      dateOfBirth: data.dateOfBirth || "",
+      bio: data.bio || "",
+      errors: {
+        userName: "",
+        fullName: "",
+        email: "",
+        dateOfBirth: "",
+        bio: "",
+      },
+    });
+
+    setEdit(false);
   };
 
   //   Validate input
@@ -100,15 +127,19 @@ export const Information = (props) => {
     >
       <Grid container columns={12}>
         <Grid item xs={12} sm={5}>
-          <Box sx={{marginBottom: '20px'}}>
+          <Box sx={{ marginBottom: "20px" }}>
             <Button
               variant="contained"
               size="medium"
               disabled={edit}
               sx={{
-                backgroundColor: "#9ab !important",
-                color: "#000",
-                ":hover": { backgroundColor: "#9ab !important" },
+                backgroundColor: "#1976d2 !important",
+                color: "#fff !important",
+                ":hover": { backgroundColor: "#1976d2 !important" },
+                "&.Mui-disabled": {
+                  backgroundColor: "#1462af !important",
+                  color: "#d0d0d0 !important",
+                },
               }}
               onClick={() => setEdit(true)}
             >
@@ -129,9 +160,11 @@ export const Information = (props) => {
               sx={{
                 width: "100%",
                 fontSize: { xs: "14px", md: "16px" },
-                " input,label,fieldset,.Mui-disabled": {
+                " input,label,fieldset": {
                   borderColor: "#9ab !important",
                   color: "#9ab !important",
+                },
+                ".css-1n4twyu-MuiInputBase-input-MuiOutlinedInput-input.Mui-disabled": {
                   "-webkit-text-fill-color": "#9ab",
                 },
               }}
@@ -142,16 +175,18 @@ export const Information = (props) => {
               disabled={!edit}
               value={userInput.fullName}
               onChange={handleInputChange}
-              InputLabelProps={{ shrink: true, required: true }}
+              InputLabelProps={{ shrink: true }}
               error={!!userInput.errors.fullName}
               helperText={userInput.errors.fullName}
               size="small"
               sx={{
                 width: "100%",
                 fontSize: { xs: "14px", md: "16px" },
-                " input,label,fieldset,.Mui-disabled": {
+                " input,label,fieldset": {
                   borderColor: "#9ab !important",
                   color: "#9ab !important",
+                },
+                ".css-1n4twyu-MuiInputBase-input-MuiOutlinedInput-input.Mui-disabled": {
                   "-webkit-text-fill-color": "#9ab",
                 },
               }}
@@ -169,9 +204,11 @@ export const Information = (props) => {
               sx={{
                 width: "100%",
                 fontSize: { xs: "14px", md: "16px" },
-                " input,label,fieldset,.Mui-disabled": {
+                " input,label,fieldset": {
                   borderColor: "#9ab !important",
                   color: "#9ab !important",
+                },
+                ".css-1n4twyu-MuiInputBase-input-MuiOutlinedInput-input.Mui-disabled": {
                   "-webkit-text-fill-color": "#9ab",
                 },
               }}
@@ -185,14 +222,16 @@ export const Information = (props) => {
               onChange={handleInputChange}
               //   error={!!userInput.errors.email}
               //   helperText={userInput.errors.email}
-              InputLabelProps={{ shrink: true, required: true }}
+              InputLabelProps={{ shrink: true }}
               size="small"
               sx={{
                 width: "100%",
                 fontSize: { xs: "14px", md: "16px" },
-                " input,label,fieldset,.Mui-disabled": {
+                " input,label,fieldset": {
                   borderColor: "#9ab !important",
                   color: "#9ab !important",
+                },
+                ".css-1n4twyu-MuiInputBase-input-MuiOutlinedInput-input.Mui-disabled": {
                   "-webkit-text-fill-color": "#9ab",
                 },
               }}
@@ -203,7 +242,7 @@ export const Information = (props) => {
               disabled={!edit}
               value={userInput.bio}
               onChange={handleInputChange}
-              InputLabelProps={{ shrink: true, required: true }}
+              InputLabelProps={{ shrink: true }}
               //   error={!!userInput.errors.bio}
               //   helperText={userInput.errors.bio}
               multiline
@@ -212,34 +251,47 @@ export const Information = (props) => {
                 width: "100%",
                 fontSize: { xs: "14px", md: "16px" },
                 height: "128px !Important",
-                " textarea,label,fieldset,.Mui-disabled": {
+                " textarea,label,fieldset": {
                   borderColor: "#9ab !important",
                   color: "#9ab !important",
+                },
+                ".css-1sqnrkk-MuiInputBase-input-MuiOutlinedInput-input.Mui-disabled": {
                   "-webkit-text-fill-color": "#9ab",
                 },
               }}
             />
             <Box>
               <Button
-                type="clear"
-                size="medium"
-                sx={{
-                  border: "1px solid #9ab",
-                  marginRight: "8px",
-                  ":hover": { border: "1px solid #9ab" },
-                }}
                 onClick={handleCancel}
+                disabled={!edit}
+                size="medium"
+                variant="contained"
+                sx={{
+                  marginRight: "8px",
+                  backgroundColor: "#d32f2f !important",
+                  color: "#fff !important",
+                  ":hover": { backgroundColor: "#d32f2f !important" },
+                  "&.Mui-disabled": {
+                    backgroundColor: "#b42626 !important",
+                    color: "#d0d0d0 !important",
+                  },
+                }}
               >
                 Cancel
               </Button>
               <Button
                 variant="contained"
                 type="submit"
+                disabled={!edit}
                 size="medium"
                 sx={{
-                  backgroundColor: "#9ab !important",
-                  color: "#000",
-                  ":hover": { backgroundColor: "#9ab !important" },
+                  backgroundColor: "#2e7d32 !important",
+                  color: "#fff !important",
+                  ":hover": { backgroundColor: "#2e7d32 !important" },
+                  "&.Mui-disabled": {
+                    backgroundColor: "#2a692d !important",
+                    color: "#d0d0d0 !important",
+                  },
                 }}
               >
                 Submit
