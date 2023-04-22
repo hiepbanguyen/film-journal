@@ -43,6 +43,7 @@ import { EditList } from "./components/list-detail/edit/index.jsx";
 import { EditReview } from "./components/review-detail/edit/index.jsx";
 import ProfileFollowers from "./components/profile-user/tabs/followers/index.jsx";
 import ProfileFollowing from "./components/profile-user/tabs/following/index.jsx";
+import ProfileLikes from "./components/profile-user/tabs/likes/index.jsx";
 
 const axios = Axios.create({
   baseURL: "https://localhost:44358/api/",
@@ -142,7 +143,7 @@ const router = createBrowserRouter([
           },
           {
             path: "likes",
-            element: <Box />,
+            element: <ProfileLikes />,
           },
           // {
           //   path: "tags",
