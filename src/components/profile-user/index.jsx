@@ -9,6 +9,7 @@ import { NavLink, Outlet, useParams } from "react-router-dom";
 import UserStore from "../../store/user.store";
 import { observer } from "mobx-react-lite";
 import useAxios from "axios-hooks";
+import { UserNotExist } from "../common/user-not-exist.jsx";
 
 const Root = styled("div")({
   flexGrow: 1,
@@ -71,6 +72,8 @@ const ProfileUser = () => {
 
   const [{ data, loading, error }, refetch] = useAxios(`Users/${username}/Profile`);
   // console.log(data);
+
+  if (!data) return <UserNotExist />;
 
   return (
     <Root className={styles.profilePage}>

@@ -11,7 +11,7 @@ import UserStore from "../../../../store/user.store.js";
 import NotiBox from "./noti-box.jsx";
 
 export default function UserMenu() {
-  console.log(UserStore.user);
+  // console.log(UserStore.user);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
   const handleOpenUserMenu = (event) => {
