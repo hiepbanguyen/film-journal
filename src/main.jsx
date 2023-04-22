@@ -41,6 +41,8 @@ import { UserEditProfile } from "./components/profile-user/tabs/edit-profile/ind
 import NotistackWrapper from "./components/common/snackbar.jsx";
 import { EditList } from "./components/list-detail/edit/index.jsx";
 import { EditReview } from "./components/review-detail/edit/index.jsx";
+import ProfileFollowers from "./components/profile-user/tabs/followers/index.jsx";
+import ProfileFollowing from "./components/profile-user/tabs/following/index.jsx";
 
 const axios = Axios.create({
   baseURL: "https://localhost:44358/api/",
@@ -148,11 +150,11 @@ const router = createBrowserRouter([
           // },
           {
             path: "following",
-            element: <Box />,
+            element: <ProfileFollowing />,
           },
           {
             path: "followers",
-            element: <Box />,
+            element: <ProfileFollowers />,
           },
           {
             path: "edit-profile",
