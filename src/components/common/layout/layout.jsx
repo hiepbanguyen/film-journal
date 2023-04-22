@@ -13,7 +13,7 @@ export default function Layout(props) {
           zIndex: -5000,
           backgroundColor: "#14181c",
           backgroundSize: "cover",
-          height: "100vh",
+          height: "500vh",
         }}
       />
       <Box
@@ -21,6 +21,7 @@ export default function Layout(props) {
         display={"flex"}
         flexDirection={"column"}
         justifyContent={"space-between"}
+        minWidth={"360px"}
         // sx={(theme) => ({
         //   [theme.breakpoints.up("md")]: {
         //     overflowY: "auto",
