@@ -200,15 +200,15 @@ export default function ProfileFollowing() {
     ],
   };
 
-  const [pageIndex, setPageIndex] = React.useState(data.pageIndex)
-  const [totalPage, setTotalPage] = React.useState(data.totalPage)
-  
+  const [pageIndex, setPageIndex] = React.useState(data.pageIndex);
+  const [totalPage, setTotalPage] = React.useState(data.totalPage);
+
   const handleChangePage = (newPage) => {
     console.log("newPage: ", newPage);
-    setPageIndex(newPage)
-};
+    setPageIndex(newPage);
+  };
   return (
-    <Box sx={{ marginTop: '24px', paddingBottom: '24px'}}>
+    <Box sx={{ marginTop: "24px", paddingBottom: "24px" }}>
       <TableContainer>
         <Table aria-label="simple table">
           <TableHead>
@@ -236,7 +236,7 @@ export default function ProfileFollowing() {
                 <TableCell scope="row" sx={{ color: "#9ab" }}>
                   <Box sx={{ display: "flex", alignItems: "center", justifyContent: "flex-start" }}>
                     <Link
-                      to={"/" + (member.UserName ?? "userName")}
+                      to={"/u/" + (member.UserName ?? "userName")}
                       style={{ width: "40px", height: "40px", overflow: "hidden", marginRight: "8px" }}
                     >
                       <Box
@@ -253,11 +253,11 @@ export default function ProfileFollowing() {
                       ></Box>
                     </Link>
                     <Box>
-                      <Link to={"/" + (member.UserName ?? "userName")} style={{ color: "#fff", fontWeight: "600" }}>
+                      <Link to={"/u/" + (member.UserName ?? "userName")} style={{ color: "#fff", fontWeight: "600" }}>
                         {member.UserName}
                       </Link>
                       <Link
-                        to={"/" + (member.UserName ?? "userName") + "/reviews"}
+                        to={"/u/" + (member.UserName ?? "userName") + "/reviews"}
                         style={{ display: "block", transition: "0.2s" }}
                       >
                         {member.Reviews} Reviews
@@ -355,7 +355,7 @@ export default function ProfileFollowing() {
           </TableBody>
         </Table>
       </TableContainer>
-      <Box sx={{ display: "flex", justifyContent: "end", marginTop: '24px' }}>
+      <Box sx={{ display: "flex", justifyContent: "end", marginTop: "24px" }}>
         <PaginationBase totalPage={totalPage} pageIndex={pageIndex} onChange={handleChangePage}></PaginationBase>
       </Box>
     </Box>
