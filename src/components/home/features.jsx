@@ -60,7 +60,7 @@ export const Features = () => {
           </FeatureCard>
         </Grid>
         <Grid item xs={12} md={6} lg={4}>
-          <FeatureCard content={"Keep a diary of your film watching (and upgrade to Pro for comprehensive stats)"}>
+          <FeatureCard content={"Keep a diary of your film watching as well as adding films to your watch list"}>
             <EventNoteIcon sx={{ fontSize: 50 }} />
           </FeatureCard>
         </Grid>

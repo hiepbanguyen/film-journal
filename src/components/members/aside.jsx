@@ -1,34 +1,34 @@
-import Container from "@mui/system/Container";
-import { Box, Button, Grid, CardMedia } from "@mui/material";
+import { Box } from "@mui/material";
 import * as React from "react";
 import baseAPI from "../../apis/baseApi";
-import Enum from "../../apis/enums/Enum"
-import { Link, useNavigate } from "react-router-dom";
-
+import Enum from "../../apis/enums/Enum";
+import { Link } from "react-router-dom";
+import UserStore from "../../store/user.store.js";
 
 function ListUser(props) {
   const [list, setList] = React.useState([]);
   const [total, setTotal] = React.useState(0);
-  React.useEffect(()=>{
+  React.useEffect(() => {
     let param = {
       pageSize: 20,
       pageIndex: 1,
       filter: "",
       sort: "UserName",
       typeUser: props.isFollowing ? Enum.TypeUser.Following : Enum.TypeUser.Follower,
-      userName: JSON.parse(localStorage.getItem("user")).UserName
-    }
-    baseAPI.postAsync(`Users/Paging`, param)
-    .then((res) => {
-      if (res) {
-        setList(res.data.Data)
-        setTotal(res.data.Total)
-      }
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-  },[]);
+      userName: UserStore.user.UserName,
+    };
+    baseAPI
+      .postAsync(`Users/Paging`, param)
+      .then((res) => {
+        if (res) {
+          setList(res.data.Data);
+          setTotal(res.data.Total);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   return (
     <Box sx={{ marginBottom: "24px" }}>
@@ -40,12 +40,13 @@ function ListUser(props) {
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
-          marginBottom: "16px", color: "#9ab",
-          "a:hover": { color: "#40bcf4" }
+          marginBottom: "16px",
+          color: "#9ab",
+          "a:hover": { color: "#40bcf4" },
         }}
       >
         <Link
-          style={{  textDecoration: "none" }}
+          style={{ textDecoration: "none" }}
           to={props.isFollowing ? "/u/userName/following/" : "/u/userName/followers/"}
         >
           {props.isFollowing ? "You Follow" : "Following you"}
@@ -84,8 +85,8 @@ function ListUser(props) {
 export default function MembersAside() {
   return (
     <Box>
-      <ListUser isFollowing={true} ></ListUser>
-      <ListUser isFollowing={false} ></ListUser>
+      <ListUser isFollowing={true}></ListUser>
+      <ListUser isFollowing={false}></ListUser>
     </Box>
   );
 }
