@@ -127,11 +127,9 @@ const ProfileUser = () => {
                     <Typography variant="h5" color="#fff" pt={1}>
                       {data.FullName ?? data.UserName}
                     </Typography>
-                    <Box>
-                      <Button variant="contained" sx={{ bgcolor: "#456", p: 0, py: 0.5 }}>
-                        Follow
-                      </Button>
-                    </Box>
+                    <Button variant="contained" sx={{ bgcolor: "#456", p: 0, py: 1 }}>
+                      Follow
+                    </Button>
                   </Box>
                 </Box>
                 <Typography variant={"body2"} color={"#9ab"} pt={1} pr={{ sm: 5, md: 10 }}>

@@ -232,7 +232,7 @@ export default function PopularReviewers() {
             textTransform: "uppercase",
           }}
         >
-          Popular this week
+          Popular members this week
         </Box>
       </Box>
       <Box className="featured-people">

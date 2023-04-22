@@ -1,5 +1,5 @@
 import Container from "@mui/system/Container";
-import { Box, Grid } from "@mui/material";
+import { Box, Grid, Typography } from "@mui/material";
 import PopularReviewers from "./popular-reviewers";
 import ListReviewers from "./list-reviewers";
 import MembersAside from "./aside";
@@ -9,6 +9,7 @@ export default function Members() {
     <Container
       sx={{
         marginTop: 10,
+        color: "#9ab",
       }}
     >
       <Box
@@ -31,15 +32,18 @@ export default function Members() {
           Film lovers, critics and friends — find popular members.
         </Box>
       </Box>
-      <PopularReviewers></PopularReviewers>
+      <PopularReviewers />
 
       <Box>
         <Grid container spacing={8} columns={13}>
           <Grid item xs={13} md={9}>
-            <ListReviewers></ListReviewers>
+            <Typography textTransform={"uppercase"} textAlign={"center"} fontWeight={"bold"} color={"#fff"} mb={2}>
+              Biggest contributers
+            </Typography>
+            <ListReviewers />
           </Grid>
           <Grid item xs={13} md={4}>
-            <MembersAside></MembersAside>
+            <MembersAside />
           </Grid>
         </Grid>
       </Box>

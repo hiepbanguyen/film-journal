@@ -25,7 +25,7 @@ export const StorageHelper = {
       const _result = localStorage.getItem("user");
       return _result != null && _result !== "" ? JSON.parse(_result) : undefined;
     } catch (err) {
-      console.log("error parse user: ");
+      console.log("error parse user: ", err);
     }
   },
 };

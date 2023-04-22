@@ -58,7 +58,7 @@ export default function SignInSide() {
           // localStorage.setItem("userInfo", JSON.stringify());
           // localStorage.setItem("token", JSON.stringify());
           // Chuyển đến trang homepage
-          navigate("/");
+          navigate(-1);
         }
       })
       .catch((err) => {

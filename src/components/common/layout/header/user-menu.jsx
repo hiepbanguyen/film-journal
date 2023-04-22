@@ -26,7 +26,7 @@ export default function UserMenu() {
       <NotiBox />
       <Tooltip title="Open settings">
         <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-          <Avatar />
+          <Avatar src={UserStore.user?.Avatar} />
         </IconButton>
       </Tooltip>
       <Menu
