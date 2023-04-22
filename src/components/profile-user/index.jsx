@@ -70,7 +70,7 @@ const avatarSize = 80;
 const ProfileUser = () => {
   const { username } = useParams();
 
-  const [{ data, loading, error }, refetch] = useAxios(`Users/${username}/Profile`);
+  const [{ data, loading, error }, refetch] = useAxios(`Users/${username}/Profile-info`);
   // console.log(data);
 
   if (!loading && !data) return <UserNotExist />;
@@ -92,9 +92,7 @@ const ProfileUser = () => {
             zIndex: -2,
           }}
           alt="The house from the offer."
-          src={
-            "https://a.ltrbxd.com/resized/sm/upload/82/hx/9r/sy/te44hmcKd8xDt6gQcSo62tZR2fC-1200-1200-675-675-crop-000000.jpg?v=8d5753ec55"
-          }
+          src={loading ? "" : data.Banner ?? "/src/assets/img/no-banner.png"}
         />
         <Box
           width={{ xs: "95vw", md: "80vw" }}
@@ -127,7 +125,7 @@ const ProfileUser = () => {
                     <Typography variant="h5" color="#fff" pt={1}>
                       {data.FullName ?? data.UserName}
                     </Typography>
-                    <Button variant="contained" sx={{ bgcolor: "#456", p: 0, py: 1 }}>
+                    <Button variant="contained" sx={{ bgcolor: "#456", p: 0, py: 0.5, mt: 0.5 }}>
                       Follow
                     </Button>
                   </Box>
@@ -140,7 +138,7 @@ const ProfileUser = () => {
                 <ProfileStats {...data} />
               </Box>
             </Box>
-            <GroupAvatars />
+            <GroupAvatars followers={data?.Followers} />
           </>
         )}
         <ProfileNavigation />

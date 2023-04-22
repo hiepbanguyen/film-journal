@@ -29,6 +29,7 @@ const RatingColumn = (props) => {
       <Box
         flexGrow={1}
         height={RatingColumnMaxHeight}
+        maxWidth={40}
         display={"flex"}
         alignItems={"flex-end"}
         mr={"1px"}
@@ -61,7 +62,7 @@ export default function CompiledRatings(props) {
         <Typography variant={"body2"}>{compiledRatings.total}</Typography>
       </Box>
       <Divider variant={"fullWidth"} />
-      <Box display={"flex"} alignItems={"flex-end"} mt={1}>
+      <Box display={"flex"} justifyContent={"center"} alignItems={"flex-end"} mt={1}>
         <Box display={"flex"} alignItems={"baseline"}>
           <StarHalfIcon sx={{ fontSize: 12, mr: 0.5, color: "#00c030" }} />
         </Box>
