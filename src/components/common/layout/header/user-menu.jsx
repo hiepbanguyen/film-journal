@@ -11,7 +11,6 @@ import UserStore from "../../../../store/user.store.js";
 import NotiBox from "./noti-box.jsx";
 
 export default function UserMenu() {
-  // console.log(UserStore.user);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
   const handleOpenUserMenu = (event) => {
@@ -58,7 +57,7 @@ export default function UserMenu() {
         open={Boolean(anchorElUser)}
         onClose={handleCloseUserMenu}
       >
-        <Link to={`/u/hiep`}>
+        <Link to={`/u/${UserStore.user?.UserName}`}>
           <MenuItem>
             <ListItemIcon sx={{ color: "inherit" }}>
               <PersonOutlineIcon fontSize="small" />

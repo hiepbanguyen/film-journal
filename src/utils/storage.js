@@ -1,4 +1,5 @@
 import axios from "axios";
+
 export const isClient = typeof window !== "undefined";
 
 export const StorageHelper = {
@@ -21,7 +22,7 @@ export const StorageHelper = {
       if (!localStorage) {
         return;
       }
-      const _result = JSON.stringify(localStorage.getItem("user"));
+      const _result = localStorage.getItem("user");
       return _result != null && _result !== "" ? JSON.parse(_result) : undefined;
     } catch (err) {
       console.log("error parse user: ");

@@ -13,9 +13,11 @@ class UserStore {
   get user() {
     return this._user;
   }
+
   get token() {
     return this._token;
   }
+
   get isLoggedIn() {
     return !!this._token;
     // return true;

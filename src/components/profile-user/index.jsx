@@ -73,7 +73,7 @@ const ProfileUser = () => {
   const [{ data, loading, error }, refetch] = useAxios(`Users/${username}/Profile`);
   // console.log(data);
 
-  if (!data) return <UserNotExist />;
+  if (!loading && !data) return <UserNotExist />;
 
   return (
     <Root className={styles.profilePage}>
