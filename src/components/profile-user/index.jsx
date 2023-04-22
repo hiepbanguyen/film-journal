@@ -1,6 +1,6 @@
 import React from "react";
 import { styled } from "@mui/material/styles";
-import { Avatar, Box, Button, Grid, Typography } from "@mui/material";
+import { Avatar, Box, Button, CircularProgress, Typography } from "@mui/material";
 import Container from "@mui/material/Container";
 import styles from "./profile.module.scss";
 import GroupAvatars from "./avatar-group.jsx";
@@ -8,6 +8,7 @@ import { ProfileStats } from "./profile-stats.jsx";
 import { NavLink, Outlet, useParams } from "react-router-dom";
 import UserStore from "../../store/user.store";
 import { observer } from "mobx-react-lite";
+import useAxios from "axios-hooks";
 
 const Root = styled("div")({
   flexGrow: 1,
@@ -25,7 +26,7 @@ const profileTabs = [
   // { label: "Activity", href: "activity" },
   { label: "Following", href: "following" },
   { label: "Followers", href: "followers" },
-  { label: "Information and Security", href: "edit-profile" },
+  { label: "Info and Security", href: "edit-profile" },
 ];
 
 const ProfileNavigation = observer(() => {
@@ -62,8 +63,14 @@ const ProfileNavigation = observer(() => {
   );
 });
 
+const bannerPositionTop = { xs: -30, sm: -50, md: -80, lg: -100 };
+const avatarSize = 80;
+
 const ProfileUser = () => {
   const { username } = useParams();
+
+  const [{ data, loading, error }, refetch] = useAxios(`Users/${username}/Profile`);
+  // console.log(data);
 
   return (
     <Root className={styles.profilePage}>
@@ -73,7 +80,7 @@ const ProfileUser = () => {
           component="img"
           sx={{
             position: "absolute",
-            top: { md: -140 },
+            top: bannerPositionTop,
             left: 0,
             right: 0,
             marginX: "auto",
@@ -90,7 +97,7 @@ const ProfileUser = () => {
           width={{ xs: "95vw", md: "80vw" }}
           sx={{
             position: "absolute",
-            top: { md: -140 },
+            top: bannerPositionTop,
             left: 0,
             right: 0,
             marginX: "auto",
@@ -102,33 +109,39 @@ const ProfileUser = () => {
           }}
         />
       </Box>
-      <Container sx={{ mt: 25, color: "#fff" }}>
-        <Grid container spacing={2} marginTop mb={3}>
-          <Grid item xs={8} container>
-            <Grid item xs={2}>
-              <Avatar
-                sx={{ width: 100, height: 100 }}
-                alt="Remy Sharp"
-                src="https://s.ltrbxd.com/static/img/avatar220.1dea069d.png"
-              />
-            </Grid>
-            <Grid item xs={10} marginTop={2}>
-              <Typography variant="h5" color="#fff">
-                {username}
-              </Typography>
-              <Typography variant={"body2"} color={"#9ab"}>
-                {"this is the biography"}
-              </Typography>
-              <Button variant="contained" sx={{ bgcolor: "#456", p: 0, py: 0.5 }}>
-                Follow
-              </Button>
-              <GroupAvatars />
-            </Grid>
-          </Grid>
-          <Grid item xs={4}>
-            <ProfileStats />
-          </Grid>
-        </Grid>
+      <Container sx={{ mt: { xs: 18, sm: 30 }, color: "#fff" }}>
+        {loading ? (
+          <Box display={"flex"} sx={{ justifyContent: "center" }} py={5}>
+            <CircularProgress />
+          </Box>
+        ) : (
+          <>
+            <Box display={"flex"} flexDirection={{ xs: "column", sm: "row" }}>
+              <Box flex={8}>
+                <Box sx={{ display: "flex" }}>
+                  <Avatar sx={{ width: avatarSize, height: avatarSize }} alt="Remy Sharp" src={data.Avatar} />
+                  <Box ml={1}>
+                    <Typography variant="h5" color="#fff" pt={1}>
+                      {data.FullName ?? data.UserName}
+                    </Typography>
+                    <Box>
+                      <Button variant="contained" sx={{ bgcolor: "#456", p: 0, py: 0.5 }}>
+                        Follow
+                      </Button>
+                    </Box>
+                  </Box>
+                </Box>
+                <Typography variant={"body2"} color={"#9ab"} pt={1} pr={{ sm: 5, md: 10 }}>
+                  {data.Bio}
+                </Typography>
+              </Box>
+              <Box flex={4}>
+                <ProfileStats {...data} />
+              </Box>
+            </Box>
+            <GroupAvatars />
+          </>
+        )}
         <ProfileNavigation />
         <Outlet />
       </Container>

@@ -1,5 +1,6 @@
-import { Box, Divider } from "@mui/material";
+import { Avatar, Box, Divider, Typography } from "@mui/material";
 import * as React from "react";
+import { Link } from "react-router-dom";
 
 const Following = {
   count: 8,
@@ -11,7 +12,6 @@ const Following = {
     { userName: "coconut", avatar: "https://picsum.photos/216/212" },
     { userName: "grape", avatar: "https://picsum.photos/212/217" },
   ],
-  isFollowing: true,
 };
 
 function Follow(props) {
@@ -27,40 +27,17 @@ function Follow(props) {
           marginTop: "23px",
         }}
       >
-        <Box
-          sx={{ color: "#fff", textDecoration: "none", "&:hover": { color: "#40bcf4" } }}
-          component="a"
-          href={props.data.isFollowing ? "/u/userName/following/" : "/u/userName/followers/"}
-        >
-          {props.data.isFollowing ? "Following" : "Following you"}
-        </Box>
-        <Box
-          sx={{ color: "#fff", textDecoration: "none", "&:hover": { color: "#40bcf4" } }}
-          component="a"
-          href={props.data.isFollowing ? "/u/userName/following/" : "/u/userName/followers/"}
-        >
-          {props.data.count}
-        </Box>
+        <Typography>{"Following"}</Typography>
+        <Link to={"following"}>
+          <Typography variant={"caption"} sx={{ ":hover": { color: "#40bcf4" } }}>
+            {"More"}
+          </Typography>
+        </Link>
       </Box>
       <Divider variant={"fullWidth"} />
-      <Box mt={2}>
+      <Box mt={2} display={"flex"} flexWrap={"wrap"} gap={0.25}>
         {props.data.list.map((user, idx) => (
-          <Box sx={{ aspectRatio: "1/1", width: "16.6666666%", display: "inline-block" }} key={idx}>
-            <Box component="a" href={"/u/" + user.userName} sx={{ width: "100%", height: "100%" }}>
-              <Box
-                component="img"
-                src={user.avatar}
-                sx={{
-                  width: "100%",
-                  height: "100%",
-                  borderRadius: "50%",
-                  "&:hover": {
-                    border: "2px solid #9ab",
-                  },
-                }}
-              ></Box>
-            </Box>
-          </Box>
+          <Avatar key={idx} src={user.avatar} />
         ))}
       </Box>
     </Box>

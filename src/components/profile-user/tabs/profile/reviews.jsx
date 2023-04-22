@@ -45,18 +45,14 @@ export const ReviewInProfile = (props) => {
 export const PopularReview = () => {
   return (
     <Box my={5}>
-      <Box display={"flex"} justifyContent={"space-between"} alignItems={"baseline"} color={"#fff"}>
-        <Typography variant={"body1"} textTransform={"uppercase"}>
-          popular review
-        </Typography>
-        <Typography variant={"caption"} textTransform={"uppercase"}>
-          more
-        </Typography>
-      </Box>
+      <Typography variant={"body1"} textTransform={"uppercase"} color={"#fff"}>
+        popular reviews
+      </Typography>
       <Divider />
       <Stack color={"#9ab"} mt={1}>
         {Array.from({ length: 2 }).map((i, idx) => (
           <ReviewPreview
+            key={idx}
             title={"A film title"}
             releasedYear={2022}
             content={
@@ -78,18 +74,14 @@ export const PopularReview = () => {
 export const RecentReview = () => {
   return (
     <Box my={5}>
-      <Box display={"flex"} justifyContent={"space-between"} alignItems={"baseline"} color={"#fff"}>
-        <Typography variant={"body1"} textTransform={"uppercase"}>
-          recent review
-        </Typography>
-        <Typography variant={"caption"} textTransform={"uppercase"}>
-          more
-        </Typography>
-      </Box>
+      <Typography variant={"body1"} textTransform={"uppercase"} color={"#fff"}>
+        recent reviews
+      </Typography>
       <Divider />
       <Stack color={"#9ab"} mt={1}>
         {Array.from({ length: 2 }).map((i, idx) => (
           <ReviewPreview
+            key={idx}
             title={"A film title"}
             releasedYear={2022}
             content={

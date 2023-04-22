@@ -10,19 +10,46 @@ export const RecentList = (props) => {
     <Box>
       <Box display={"flex"} justifyContent={"space-between"} alignItems={"baseline"} color={"#fff"}>
         <Typography variant={"body1"} textTransform={"uppercase"} mt={5}>
-          recent list
+          recent lists
         </Typography>
-        <Typography variant={"caption"} mt={5}>
-          {"123"}
-        </Typography>
+        <Link to={"lists"}>
+          <Typography variant={"caption"} textTransform={"uppercase"} mt={5} sx={{ ":hover": { color: "#40bcf4" } }}>
+            more
+          </Typography>
+        </Link>
       </Box>
       <Divider />
       <Link to={`/u/${username}/lists/id123`}>
-        <Box color={"#fff"} mt={4}>
-          <FilmCardsStackedFive />
-          <Typography>
-            {title} <span> {`${films}`} films</span>
-          </Typography>
+        <Box sx={{ display: "flex", justifyContent: "center" }}>
+          <Box color={"#fff"} mt={4}>
+            <FilmCardsStackedFive />
+            <Typography fontSize={14} fontWeight={"bold"}>
+              12 films
+            </Typography>
+            <Typography>{title}</Typography>
+          </Box>
+        </Box>
+      </Link>
+      <Link to={`/u/${username}/lists/id123`}>
+        <Box sx={{ display: "flex", justifyContent: "center" }}>
+          <Box color={"#fff"} mt={4}>
+            <FilmCardsStackedFive />
+            <Typography fontSize={14} fontWeight={"bold"}>
+              12 films
+            </Typography>
+            <Typography>{title}</Typography>
+          </Box>
+        </Box>
+      </Link>
+      <Link to={`/u/${username}/lists/id123`}>
+        <Box sx={{ display: "flex", justifyContent: "center" }}>
+          <Box color={"#fff"} mt={4}>
+            <FilmCardsStackedFive />
+            <Typography fontSize={14} fontWeight={"bold"}>
+              12 films
+            </Typography>
+            <Typography>{title}</Typography>
+          </Box>
         </Box>
       </Link>
     </Box>

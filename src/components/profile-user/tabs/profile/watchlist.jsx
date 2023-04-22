@@ -11,13 +11,15 @@ export const WatchList = (props) => {
         <Typography variant={"body1"} textTransform={"uppercase"} mt={5}>
           watchlist
         </Typography>
-        <Typography variant={"caption"} mt={5}>
-          {"123"}
-        </Typography>
+        <Link to={"watchlist"}>
+          <Typography variant={"caption"} textTransform={"uppercase"} sx={{ ":hover": { color: "#40bcf4" } }}>
+            {"More"}
+          </Typography>
+        </Link>
       </Box>
       <Divider />
       <Link to={`/u/${username}/watchlist`}>
-        <Box mt={4}>
+        <Box mt={4} sx={{ display: "flex", justifyContent: "center" }}>
           <FilmCardsStackedFive />
         </Box>
       </Link>

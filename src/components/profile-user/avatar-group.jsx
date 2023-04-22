@@ -5,7 +5,7 @@ import { Box, Typography } from "@mui/material";
 
 export default function GroupAvatars() {
   return (
-    <Box display={"flex"} alignItems={"center"} sx={{ fontSize: 13 }} mt={1.5}>
+    <Box display={"flex"} alignItems={"center"} sx={{ fontSize: 13 }} my={1.5}>
       <AvatarGroup
         max={4}
         sx={{
