@@ -42,7 +42,7 @@ const ProfileNavigation = observer(() => {
         justifyContent: "center",
       }}
     >
-      {(UserStore.isLoggedIn ? profileTabs : profileTabs).map((i, idx) => (
+      {(UserStore.isLoggedIn ? profileTabs : profileTabs.filter((i) => i.href !== "edit-profile")).map((i, idx) => (
         <NavLink
           className={styles.tabs}
           to={`${i.href}`}

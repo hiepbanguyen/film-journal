@@ -1,5 +1,5 @@
 import Container from "@mui/material/Container";
-import { Box, Button, Grid } from "@mui/material";
+import { Box, Button, Divider, Grid } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import FilmCard from "../common/film-card.jsx";
 import { Features } from "./features.jsx";
@@ -9,6 +9,9 @@ import { PopularLists } from "./list-preview.jsx";
 import { PopularReviewers } from "./popular-reviewers.jsx";
 import React from "react";
 import { Link } from "react-router-dom";
+import ReviewCard from "../common/review-card.jsx";
+import UserStore from "../../store/user.store.js";
+import { observer } from "mobx-react-lite";
 
 const WelcomeSection = () => {
   return (
@@ -50,7 +53,61 @@ const PopularFilms = () => {
     </Box>
   );
 };
+
+const NewFromFriends = () => {
+  return (
+    <Box mt={{ xs: 7, md: 13, lg: 18 }}>
+      <Typography fontSize={{ md: 30, sm: 25, xs: 20 }} textAlign={"center"} fontFamily={"Georgia"} color={"#b0c3d7"}>
+        {"Welcome back, "}
+        <Link to={`/u/${UserStore.user?.UserName}`} style={{ color: "#fff" }}>
+          {UserStore.user?.FullName ?? UserStore.user?.UserName}
+        </Link>
+        {"."}
+        <br />
+        {"Here's what your friends have been watching..."}
+      </Typography>
+      <Typography mt={5}>NEW FROM FRIENDS</Typography>
+      <Divider />
+      <Box display={"flex"} flexWrap={"wrap"} justifyContent={"center"} gap={2} mt={3}>
+        {Array.from({ length: 8 }).map((i, idx) => (
+          <ReviewCard
+            key={idx}
+            size={{ xs: 100, md: 120 }}
+            rating={3.5}
+            username={"bahiep"}
+            link={"/u/bahiep/reviews/324"}
+            avatar={
+              "https://a.ltrbxd.com/resized/avatar/twitter/1/6/4/1/1/5/6/shard/http___pbs.twimg.com_profile_images_1603038301899956226_mcfyp7Bu-0-48-0-48-crop.jpg?v=44bebebad9"
+            }
+          />
+        ))}
+      </Box>
+    </Box>
+  );
+};
+
+const Welcome = observer(() => {
+  // console.log("is logged in", !!UserStore.token);
+
+  return (
+    <>
+      {!UserStore.isLoadedFromLocal ? (
+        <></>
+      ) : UserStore.isLoggedIn ? (
+        <NewFromFriends />
+      ) : (
+        <>
+          <WelcomeSection />
+          <PopularFilms />
+          <Features />
+        </>
+      )}
+    </>
+  );
+});
+
 export default function Home() {
+  // console.log("render home");
   return (
     <>
       <Box position={"relative"}>
@@ -87,12 +144,8 @@ export default function Home() {
         />
       </Box>
       <Container>
-        <Box display={"flex"} flexDirection={"column"} justifyContent={"center"} color={"#fff"}>
-          <Box mt={{ sm: 30, xs: 20 }}>
-            <WelcomeSection />
-          </Box>
-          <PopularFilms />
-          <Features />
+        <Box mt={{ sm: 30, xs: 20 }} display={"flex"} flexDirection={"column"} justifyContent={"center"} color={"#fff"}>
+          <Welcome />
           <JustReviewed />
           <Grid container spacing={{ md: 5 }} sx={{ color: "#9ab" }} pt={3}>
             <Grid item xs={12} md={7.5} lg={8.5}>

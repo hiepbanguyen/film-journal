@@ -35,8 +35,8 @@ const FeatureCard = (props) => {
 export const Features = () => {
   return (
     <>
-      <Typography variant={"body1"} textTransform={"uppercase"} mt={5}>
-        FilmLogger lets you...
+      <Typography variant={"h6"} mt={5} textAlign={"center"}>
+        FilmJournal lets you...
       </Typography>
       <Grid container spacing={1} mt={1}>
         <Grid item xs={12} md={6} lg={4}>

@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Box, Button, Divider, Typography } from "@mui/material";
+import { Box, Button, Divider } from "@mui/material";
 import { Link, useParams } from "react-router-dom";
 import FavoriteIcon from "@mui/icons-material/Favorite.js";
 import ChatBubbleIcon from "@mui/icons-material/ChatBubble";
@@ -176,41 +176,39 @@ export const UserLists = (props) => {
 
   return (
     <Box sx={{ margin: "48px 0", color: "#9ab" }}>
-      <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-        <Box sx={{ textTransform: "uppercase" }}>Lists</Box>
-      </Box>
-      <Divider></Divider>
-      <Box>
-        <Grid container columns={12} spacing={4}>
-          <Grid item xs={12} lg={8}>
-            {data.list.length > 0 ? (
-              <Box>
-                <Box sx={{ marginBottom: "20px" }}>
-                  {data.list.map((listFilm) => (
-                    <ListFilmCard key={listFilm.id} item={listFilm}></ListFilmCard>
-                  ))}
-                </Box>
-                <Box sx={{ display: "flex", justifyContent: "end" }}>
-                  <PaginationBase
-                    totalPage={data.totalPage}
-                    pageIndex={pageIndex}
-                    onChange={handleChangePage}
-                  ></PaginationBase>
-                </Box>
+      <Grid container columns={12} spacing={4}>
+        <Grid item xs={12} lg={8}>
+          <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+            <Box sx={{ textTransform: "uppercase" }}>Lists</Box>
+          </Box>
+          <Divider />
+          {data.list.length > 0 ? (
+            <Box>
+              <Box sx={{ marginBottom: "20px" }}>
+                {data.list.map((listFilm) => (
+                  <ListFilmCard key={listFilm.id} item={listFilm}></ListFilmCard>
+                ))}
               </Box>
-            ) : (
-              <Box>Khong co du lieu</Box>
-            )}
-          </Grid>
-          <Grid item xs={12} lg={4}>
-            <Link to={`/u/${username}/lists/new`}>
-              <Button style={{ marginTop: "20px" }} variant="contained">
-                Add New List
-              </Button>
-            </Link>
-          </Grid>
+              <Box sx={{ display: "flex", justifyContent: "end" }}>
+                <PaginationBase
+                  totalPage={data.totalPage}
+                  pageIndex={pageIndex}
+                  onChange={handleChangePage}
+                ></PaginationBase>
+              </Box>
+            </Box>
+          ) : (
+            <Box>Khong co du lieu</Box>
+          )}
         </Grid>
-      </Box>
+        <Grid item xs={12} lg={4}>
+          <Link to={`/u/${username}/lists/new`}>
+            <Button style={{ marginTop: "20px" }} variant="contained">
+              Add New List
+            </Button>
+          </Link>
+        </Grid>
+      </Grid>
     </Box>
   );
 };

@@ -24,7 +24,6 @@ import Axios from "axios";
 import SignInSide from "./components/auth/sign-in.jsx";
 import SignUp from "./components/auth/sign-up.jsx";
 import { ProfileTab } from "./components/profile-user/tabs/profile";
-import { Box } from "@mui/material";
 import SearchPage from "./components/search";
 import FilmsSearch from "./components/search/films_search.jsx";
 import AllFilmReviews from "./components/film-detail/collections/reviews.jsx";
@@ -44,7 +43,6 @@ import { EditReview } from "./components/review-detail/edit/index.jsx";
 import ProfileFollowers from "./components/profile-user/tabs/followers/index.jsx";
 import ProfileFollowing from "./components/profile-user/tabs/following/index.jsx";
 import ProfileLikes from "./components/profile-user/tabs/likes/index.jsx";
-import ProfileAddNewListFilm from "./components/profile-user/tabs/lists/new/index.jsx";
 
 const axios = Axios.create({
   baseURL: "https://localhost:44358/api/",
@@ -141,10 +139,6 @@ const router = createBrowserRouter([
           {
             path: "lists",
             element: <UserLists />,
-          },
-          {
-            path: "lists/new",
-            element: <ProfileAddNewListFilm />,
           },
           {
             path: "likes",

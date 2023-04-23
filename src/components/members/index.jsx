@@ -1,7 +1,7 @@
 import Container from "@mui/system/Container";
 import { Box, Grid, Typography } from "@mui/material";
 import PopularReviewers from "./popular-reviewers";
-import ListReviewers from "./list-reviewers";
+import { ListReviewers } from "./list-reviewers";
 import MembersAside from "./aside";
 
 export default function Members() {

@@ -16,8 +16,9 @@ import baseAPI from "../../apis/baseApi";
 import Enum from "../../apis/enums/Enum";
 import { Link } from "react-router-dom";
 import UserStore from "../../store/user.store.js";
+import { observer } from "mobx-react-lite";
 
-export default function ListReviewers() {
+export const ListReviewers = observer(() => {
   const [listMember, setListMember] = React.useState([]);
 
   React.useEffect(() => {
@@ -66,10 +67,14 @@ export default function ListReviewers() {
             <TableCell sx={{ color: "#fff", display: { xs: "none", md: "table-cell" } }}>Reviews</TableCell>
             <TableCell sx={{ color: "#fff", display: { xs: "none", md: "table-cell" } }}>Lists</TableCell>
             <TableCell sx={{ color: "#fff", display: { xs: "none", md: "table-cell" } }}>Likes</TableCell>
-            {UserStore.isLoggedIn && (
-              <TableCell align="right" sx={{ color: "#fff" }}>
-                Follow
-              </TableCell>
+            {!UserStore.isLoadedFromLocal ? (
+              <></>
+            ) : (
+              UserStore.isLoggedIn && (
+                <TableCell align="right" sx={{ color: "#fff" }}>
+                  Follow
+                </TableCell>
+              )
             )}
           </TableRow>
         </TableHead>
@@ -136,76 +141,80 @@ export default function ListReviewers() {
                   <FavoriteIcon sx={{ marginRight: "4px", color: "#ff9010" }}></FavoriteIcon> {member.Likes}
                 </Link>
               </TableCell>
-              {UserStore.isLoggedIn && (
-                <TableCell align="right" sx={{ color: "#9ab" }}>
-                  {member.Followed ? (
-                    <Button
-                      className="btn-remove-follow"
-                      sx={{
-                        "&:hover .done-icon": {
-                          backgroundColor: "#000",
-                          display: "none",
-                        },
-                        "&:hover .clear-icon": {
-                          display: "inline",
-                        },
-                        display: "inline-block",
-                        borderRadius: "50%",
-                        minWidth: "unset",
-                        padding: "0",
-                        height: "30px",
-                      }}
-                    >
-                      <DoneIcon
-                        className="done-icon"
+              {!UserStore.isLoadedFromLocal ? (
+                <></>
+              ) : (
+                UserStore.isLoggedIn && (
+                  <TableCell align="right" sx={{ color: "#9ab" }}>
+                    {member.Followed ? (
+                      <Button
+                        className="btn-remove-follow"
                         sx={{
-                          color: "#fff",
-                          backgroundColor: "#00b020",
-                          fontSize: "30px",
-                          padding: "4px",
-                          borderRadius: "50%",
-                        }}
-                      ></DoneIcon>
-                      <ClearIcon
-                        className="clear-icon"
-                        sx={{
-                          color: "#fff",
-                          backgroundColor: "#ff9010",
-                          fontSize: "30px",
-                          padding: "4px",
-                          borderRadius: "50%",
-                          display: "none",
-                        }}
-                      ></ClearIcon>
-                    </Button>
-                  ) : (
-                    <Button
-                      sx={{
-                        display: "inline-block",
-                        borderRadius: "50%",
-                        minWidth: "unset",
-                        padding: "0",
-                        height: "30px",
-                      }}
-                    >
-                      <AddIcon
-                        className="add-icon"
-                        sx={{
-                          color: "#fff",
-                          backgroundColor: "#556677",
-                          fontSize: "30px",
-                          padding: "4px",
-                          borderRadius: "50%",
-                          transition: "0.2s",
-                          "&:hover": {
-                            backgroundColor: "#8e99a4",
+                          "&:hover .done-icon": {
+                            backgroundColor: "#000",
+                            display: "none",
                           },
+                          "&:hover .clear-icon": {
+                            display: "inline",
+                          },
+                          display: "inline-block",
+                          borderRadius: "50%",
+                          minWidth: "unset",
+                          padding: "0",
+                          height: "30px",
                         }}
-                        onClick={() => followingMember(member)}
-                      ></AddIcon>
-                    </Button>
-                  )}
-                </TableCell>
+                      >
+                        <DoneIcon
+                          className="done-icon"
+                          sx={{
+                            color: "#fff",
+                            backgroundColor: "#00b020",
+                            fontSize: "30px",
+                            padding: "4px",
+                            borderRadius: "50%",
+                          }}
+                        ></DoneIcon>
+                        <ClearIcon
+                          className="clear-icon"
+                          sx={{
+                            color: "#fff",
+                            backgroundColor: "#ff9010",
+                            fontSize: "30px",
+                            padding: "4px",
+                            borderRadius: "50%",
+                            display: "none",
+                          }}
+                        ></ClearIcon>
+                      </Button>
+                    ) : (
+                      <Button
+                        sx={{
+                          display: "inline-block",
+                          borderRadius: "50%",
+                          minWidth: "unset",
+                          padding: "0",
+                          height: "30px",
+                        }}
+                      >
+                        <AddIcon
+                          className="add-icon"
+                          sx={{
+                            color: "#fff",
+                            backgroundColor: "#556677",
+                            fontSize: "30px",
+                            padding: "4px",
+                            borderRadius: "50%",
+                            transition: "0.2s",
+                            "&:hover": {
+                              backgroundColor: "#8e99a4",
+                            },
+                          }}
+                          onClick={() => followingMember(member)}
+                        ></AddIcon>
+                      </Button>
+                    )}
+                  </TableCell>
+                )
               )}
             </TableRow>
           ))}
@@ -213,4 +222,4 @@ export default function ListReviewers() {
       </Table>
     </TableContainer>
   );
-}
+});
