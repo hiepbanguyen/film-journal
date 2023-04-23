@@ -1,11 +1,7 @@
 import * as React from "react";
-import { Box, Divider, Typography, Grid, Tabs, Tab } from "@mui/material";
+import { Box, Tab, Tabs } from "@mui/material";
 // import Tabs from '@mui/material/Tabs';
 // import Tab from '@mui/material/Tab';
-import { Link, useParams } from "react-router-dom";
-import FavoriteIcon from "@mui/icons-material/Favorite.js";
-import ChatBubbleIcon from "@mui/icons-material/ChatBubble";
-import PaginationBase from "../../../common/pagination-base";
 import { Information } from "./information";
 import { ChangeAvatar } from "./change-avatar";
 import { ChangePassword } from "./change-password";
@@ -18,31 +14,31 @@ export const UserEditProfile = () => {
   };
 
   return (
-    <Box sx={{ width: "100%" }}>
+    <Box sx={{ display: "flex", flexDirection: "column ", alignItems: "center" }}>
       <Box
         sx={{
           borderBottom: 1,
           borderColor: "divider",
-          fontSize: '12px',
-          marginTop: '12px',
+          fontSize: "12px",
+          marginTop: "12px",
           "span.css-1aquho2-MuiTabs-indicator": {
             backgroundColor: "#9ab",
           },
         }}
       >
         <Tabs value={tab} onChange={handleChange} aria-label="basic tabs example">
-          <Tab style={{ fontSize: '12px',color: "#9ab" }} label="Information" />
-          <Tab style={{ fontSize: '12px',color: "#9ab" }} label="Avatar" />
-          <Tab style={{ fontSize: '12px',color: "#9ab" }} label="Password" />
+          <Tab style={{ fontSize: "12px", color: "#9ab" }} label="Information" />
+          <Tab style={{ fontSize: "12px", color: "#9ab" }} label="Avatar" />
+          <Tab style={{ fontSize: "12px", color: "#9ab" }} label="Password" />
         </Tabs>
       </Box>
-      <Box sx={{marginTop: '32px'}}>
+      <Box sx={{ marginTop: "32px" }}>
         <Box
           sx={{
             display: `${tab == 0 ? "block" : "none"}`,
           }}
         >
-          <Information></Information>
+          <Information />
         </Box>
         <Box
           sx={{

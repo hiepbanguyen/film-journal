@@ -1,8 +1,6 @@
-import { Box, Button, Grid, CardMedia } from "@mui/material";
+import { Box, Button, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
 import * as React from "react";
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
-import { Link, useNavigate, useSearchParams } from "react-router-dom";
-import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
+import { Link } from "react-router-dom";
 import GridViewIcon from "@mui/icons-material/GridView";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import AddIcon from "@mui/icons-material/Add";
@@ -208,7 +206,7 @@ export default function ProfileFollowing() {
     setPageIndex(newPage);
   };
   return (
-    <Box sx={{ marginTop: "24px", paddingBottom: "24px" }}>
+    <Box sx={{ marginTop: "24px", paddingBottom: "24px", mx: { md: 20 } }}>
       <TableContainer>
         <Table aria-label="simple table">
           <TableHead>

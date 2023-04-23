@@ -143,7 +143,7 @@ export default function Home() {
           }}
         />
       </Box>
-      <Container>
+      <Container sx={{ mb: 3 }}>
         <Box mt={{ sm: 30, xs: 20 }} display={"flex"} flexDirection={"column"} justifyContent={"center"} color={"#fff"}>
           <Welcome />
           <JustReviewed />

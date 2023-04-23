@@ -85,7 +85,8 @@ export default function ReviewPreview(props) {
       </Box>
       <Box mt={1} sx={(theme) => ({ [theme.breakpoints.not("xs")]: { display: "none" } })}>
         <Typography component={Link} to={`/u/${username}/reviews/123`} fontSize={15} mb={1}>
-          {content}
+          {String(content).slice(0, 210)}
+          {"..."}
         </Typography>
         <Box mt={1} display={"flex"} alignItems={"stretch"} fontWeight={600} fontSize={14} gap={0.5}>
           <FavoriteIcon

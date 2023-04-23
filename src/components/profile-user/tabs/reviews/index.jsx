@@ -89,10 +89,10 @@ export default function ReviewsTab() {
 
   return (
     <Box className="profile-reviews-tab" sx={{ color: "#9ab", marginTop: "48px", paddingBottom: "48px" }}>
-      <Box sx={{ marginBottom: "24px" }}>
-        <SearchForm></SearchForm>
+      <Box sx={{ marginBottom: "24px", display: "flex", justifyContent: "center" }}>
+        <SearchForm />
       </Box>
-      <Stack>
+      <Stack sx={{ mx: { md: 20 } }}>
         {Array.from({ length: 3 }).map((i, idx) => (
           <ReviewPreview
             title={"A film title"}
