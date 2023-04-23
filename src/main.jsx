@@ -44,6 +44,7 @@ import { EditReview } from "./components/review-detail/edit/index.jsx";
 import ProfileFollowers from "./components/profile-user/tabs/followers/index.jsx";
 import ProfileFollowing from "./components/profile-user/tabs/following/index.jsx";
 import ProfileLikes from "./components/profile-user/tabs/likes/index.jsx";
+import ProfileAddNewListFilm from "./components/profile-user/tabs/lists/new/index.jsx";
 
 const axios = Axios.create({
   baseURL: "https://localhost:44358/api/",
@@ -140,6 +141,10 @@ const router = createBrowserRouter([
           {
             path: "lists",
             element: <UserLists />,
+          },
+          {
+            path: "lists/new",
+            element: <ProfileAddNewListFilm />,
           },
           {
             path: "likes",
