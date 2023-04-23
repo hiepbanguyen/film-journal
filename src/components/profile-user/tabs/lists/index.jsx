@@ -8,11 +8,6 @@ import PaginationBase from "../../../common/pagination-base";
 
 export const UserLists = (props) => {
 
-    const { username } = useParams();
-    const handleChangePage = (newPage) => {
-        console.log("newPage: ", newPage);
-    };
-
     let data = {
         total: 10,
         pageIndex: 1,
@@ -171,6 +166,14 @@ export const UserLists = (props) => {
         ]
     }
 
+    const { username } = useParams();
+    const [pageIndex, setPageIndex] = React.useState(data.pageIndex)
+    const handleChangePage = (newPage) => {
+        console.log("newPage: ", newPage);
+        setPageIndex(newPage)
+    };
+
+
     return (
         <Box sx={{ margin: '48px 0', color: '#9ab' }}>
             <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
@@ -184,7 +187,7 @@ export const UserLists = (props) => {
                             <Box>
                                 <Box sx={{marginBottom: '20px'}}>{data.list.map(listFilm => (<ListFilmCard key={listFilm.id} item={listFilm}></ListFilmCard>))}</Box>
                                 <Box sx={{ display: 'flex', justifyContent: 'end' }}>
-                                    <PaginationBase totalPage={data.totalPage} pageIndex={data.pageIndex} onChange={handleChangePage}></PaginationBase>
+                                    <PaginationBase totalPage={data.totalPage} pageIndex={pageIndex} onChange={handleChangePage}></PaginationBase>
                                 </Box>
                             </Box>) : (<Box>Khong co du lieu</Box>)}
                     </Grid>
