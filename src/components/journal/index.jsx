@@ -3,7 +3,6 @@ import SpotlightArticle from "./spotlight-article.jsx";
 import ArticlesAfterSpotlight from "./articles-after-spotlight.jsx";
 import LifeInFilm from "./life-in-film.jsx";
 import FestivalCircuit from "./festival-circuit.jsx";
-import SelectTopic from "./topic-select.jsx";
 
 export default function Journal() {
   return (
@@ -23,7 +22,7 @@ export default function Journal() {
             >
               JOURNAL
             </Typography>
-            <SelectTopic />
+            {/*<SelectTopic />*/}
           </Box>
           <Divider variant={"fullWidth"} sx={{ mb: 5, mt: 2, borderColor: "#bcd" }} />
           <SpotlightArticle

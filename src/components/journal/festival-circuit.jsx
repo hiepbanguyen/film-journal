@@ -6,11 +6,7 @@ import ArticlePreview from "./article-preview.jsx";
 export default function FestivalCircuit() {
   return (
     <>
-      <JournalDivider
-        topic={"Festival Circuit"}
-        topicDesc={"News, interviews and wrap-ups from our festival crew."}
-        link={"/"}
-      />
+      <JournalDivider topic={"Festival Circuit"} topicDesc={"News, interviews and wrap-ups from our festival crew."} />
       <Grid container spacing={2} mt={3} pb={8}>
         {articles.slice(0, 3).map((i, idx) => (
           <Grid item key={idx} xs={12} md={4}>

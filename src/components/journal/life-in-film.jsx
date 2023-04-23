@@ -9,7 +9,6 @@ export default function LifeInFilm() {
       <JournalDivider
         topic={"Life in Film"}
         topicDesc={"Our questionnaire uncovering filmmakers’ screen inspirations."}
-        link={"/"}
       />
       <Grid container spacing={2} mt={3} pb={8}>
         {articles.slice(3, 6).map((i, idx) => (

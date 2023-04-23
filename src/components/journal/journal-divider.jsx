@@ -1,8 +1,7 @@
-import { Box, Button, Divider, Typography } from "@mui/material";
-import NavigateNextIcon from "@mui/icons-material/NavigateNext.js";
+import { Box, Divider, Typography } from "@mui/material";
 
 export default function JournalDivider(props) {
-  const { topic, topicDesc, link } = props;
+  const { topic, topicDesc } = props;
   return (
     <>
       <Divider variant={"fullWidth"} color={"#456"} />
@@ -15,9 +14,6 @@ export default function JournalDivider(props) {
             {topicDesc}
           </Typography>
         </Box>
-        <Button sx={{ color: "#456", fontSize: 12, fontWeight: 800 }} href={link}>
-          More <NavigateNextIcon sx={{ fontSize: 20 }} />
-        </Button>
       </Box>
     </>
   );
