@@ -5,13 +5,15 @@ import FilmCard from "../common/film-card.jsx";
 import { Features } from "./features.jsx";
 import { JustReviewed } from "./just-reviewed.jsx";
 import { PopularReviews } from "./popular-reviews.jsx";
-import { PopularLists } from "./list-preview.jsx";
+import { PopularLists } from "./popular-lists.jsx";
 import { PopularReviewers } from "./popular-reviewers.jsx";
 import React from "react";
 import { Link } from "react-router-dom";
 import ReviewCard from "../common/review-card.jsx";
 import UserStore from "../../store/user.store.js";
 import { observer } from "mobx-react-lite";
+import { Loading } from "../common/loading.jsx";
+import { RecentJournals } from "./recent-journals.jsx";
 
 const WelcomeSection = () => {
   return (
@@ -92,7 +94,7 @@ const Welcome = observer(() => {
   return (
     <>
       {!UserStore.isLoadedFromLocal ? (
-        <></>
+        <Loading />
       ) : UserStore.isLoggedIn ? (
         <NewFromFriends />
       ) : (
@@ -156,6 +158,7 @@ export default function Home() {
               <PopularReviewers />
             </Grid>
           </Grid>
+          <RecentJournals />
         </Box>
       </Container>
     </>

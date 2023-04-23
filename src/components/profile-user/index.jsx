@@ -1,6 +1,6 @@
 import React from "react";
 import { styled } from "@mui/material/styles";
-import { Avatar, Box, Button, CircularProgress, Typography } from "@mui/material";
+import { Avatar, Box, Button, Typography } from "@mui/material";
 import Container from "@mui/material/Container";
 import styles from "./profile.module.scss";
 import GroupAvatars from "./avatar-group.jsx";
@@ -10,6 +10,7 @@ import UserStore from "../../store/user.store";
 import { observer } from "mobx-react-lite";
 import useAxios from "axios-hooks";
 import { UserNotExist } from "../common/user-not-exist.jsx";
+import { Loading } from "../common/loading.jsx";
 
 const Root = styled("div")({
   flexGrow: 1,
@@ -112,9 +113,7 @@ const ProfileUser = () => {
       </Box>
       <Container sx={{ mt: { xs: 18, sm: 30 }, color: "#fff" }}>
         {loading ? (
-          <Box display={"flex"} sx={{ justifyContent: "center" }} py={5}>
-            <CircularProgress />
-          </Box>
+          <Loading />
         ) : (
           <>
             <Box display={"flex"} flexDirection={{ xs: "column", sm: "row" }}>

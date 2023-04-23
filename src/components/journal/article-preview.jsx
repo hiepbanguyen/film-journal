@@ -14,6 +14,7 @@ export default function ArticlePreview(props) {
           "&:hover": {
             transform: "scale(1.05)",
           },
+          borderRadius: 1,
         }}
       />
       <Box>

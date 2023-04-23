@@ -1,16 +1,14 @@
-import React from "react";
-import { Avatar, Box, Divider, Typography } from "@mui/material";
-import Container from "@mui/material/Container";
-import { Link } from "react-router-dom";
-import FavoriteIcon from "@mui/icons-material/Favorite.js";
-import ChatBubbleIcon from "@mui/icons-material/ChatBubble.js";
+import { Avatar, Box, Divider, Grid, Typography } from "@mui/material";
 import FilmCard from "../common/film-card.jsx";
+import ChatBubbleIcon from "@mui/icons-material/ChatBubble.js";
+import FavoriteIcon from "@mui/icons-material/Favorite.js";
+import { Link } from "react-router-dom";
 
-const FilmCardsStackedFiveBig = () => {
+export const FilmCardsStackedFive = () => {
   return (
     <Box
       display={"flex"}
-      width={303}
+      width={289}
       sx={{
         mb: 2,
         "&:hover": {
@@ -20,15 +18,39 @@ const FilmCardsStackedFiveBig = () => {
       }}
     >
       {Array.from({ length: 5 }).map((i, idx) => (
-        <Box key={idx} position={"relative"} zIndex={10 - idx} left={`-${idx * 25}%`}>
-          <FilmCard list={true} shadow={idx !== 4} size={120} />
+        <Box key={idx} position={"relative"} zIndex={10 - idx} left={`-${idx * (50 / 5)}%`}>
+          <FilmCard list={true} shadow={idx !== 4} />
         </Box>
       ))}
     </Box>
   );
 };
 
-function PopularListPreview(props) {
+export const PopularLists = () => {
+  return (
+    <>
+      <Typography variant={"body1"} color={"#fff"} textTransform={"uppercase"}>
+        popular lists
+      </Typography>
+      <Divider />
+      <Grid container spacing={1}>
+        {Array.from({ length: 3 }).map((i, idx) => (
+          <Grid key={idx} item xs={12} sm={6} md={12}>
+            <ListPreview
+              title={"Lorem Ipsum is simply dummy text"}
+              fullname={"Bá Hiệp Nguyễn"}
+              username={"bahiep"}
+              favoriteCount={4}
+              commentCount={50}
+            />
+          </Grid>
+        ))}
+      </Grid>
+    </>
+  );
+};
+
+export default function ListPreview(props) {
   const { title, username, fullname, favoriteCount, commentCount } = props;
   return (
     <Box
@@ -42,7 +64,7 @@ function PopularListPreview(props) {
       })}
     >
       <Link to={"/u/hiep/lists/id123"}>
-        <FilmCardsStackedFiveBig />
+        <FilmCardsStackedFive />
         <Typography variant={"body1"} color={"#fff"} sx={{ ":hover": { color: "#00e8ff" } }} fontWeight={600}>
           {title}
         </Typography>
@@ -74,27 +96,3 @@ function PopularListPreview(props) {
     </Box>
   );
 }
-
-const Popular = () => {
-  return (
-    <Container maxWidth="lg">
-      <Typography variant={"body1"} color={"#fff"} textTransform={"uppercase"} mt={5}>
-        popular this week
-      </Typography>
-      <Divider variant={"fullWidth"} />
-      <Box display={"flex"} flexWrap={"wrap"} gap={{ xs: 2, md: 5, lg: 10 }} justifyContent={"center"} color={"#fff"}>
-        {Array.from({ length: 3 }).map((i, idx) => (
-          <PopularListPreview
-            key={idx}
-            title={"Lorem Ipsum is simply dummy text"}
-            fullname={"Bá Hiệp Nguyễn"}
-            username={"bahiep"}
-            favoriteCount={4}
-            commentCount={50}
-          />
-        ))}
-      </Box>
-    </Container>
-  );
-};
-export default Popular;

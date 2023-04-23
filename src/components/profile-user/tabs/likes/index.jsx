@@ -3,7 +3,7 @@ import * as React from "react";
 import PaginationBase from "../../../common/pagination-base";
 import FilmCard from "../../../common/film-card";
 import ReviewPreview from "../../../common/review-preview";
-import ListPreview from "../../../home/list-preview";
+import ListPreview from "../../../home/popular-lists.jsx";
 
 export default function ProfileLikes() {
   let dataListLikedFilm = {

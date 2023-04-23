@@ -1,18 +1,13 @@
 import React from "react";
-import { styled } from "@mui/material/styles";
-import { Button, Typography } from "@mui/material";
+import { Button, Grid, Typography } from "@mui/material";
 import Container from "@mui/material/Container";
 import { makeStyles } from "@mui/styles";
-import Popular from "./popular.jsx";
+import WeeklyPopular from "./weekly-popular.jsx";
 import RecentlyLike from "./recently-liked.jsx";
-import { ListCrew } from "./list-crew.jsx";
-import { ListAllTime } from "./all-time-list.jsx";
+import { MostEngaged } from "./most-engaged.jsx";
+import { ListAllTime } from "./all-time-popular.jsx";
 import { Link } from "react-router-dom";
-
-const Root = styled("div")({
-  flexGrow: 1,
-  paddingTop: 60,
-});
+import { MonthlyPopular } from "./monthly-popular.jsx";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -28,27 +23,32 @@ const Lists = () => {
   const classes = useStyles();
 
   return (
-    <Root>
-      <Container maxWidth="lg">
-        <div className={classes.container}>
-          <Typography variant="h5" color="#abc" marginTop="30px">
-            {tab}
-          </Typography>
-          <Link to={"new"}>
-            <Button
-              sx={{ color: "#fff", backgroundColor: "#175f70", fontSize: "13px", marginTop: "15px" }}
-              variant="contained"
-            >
-              Start your own list
-            </Button>
-          </Link>
-        </div>
-      </Container>
-      <Popular />
-      <RecentlyLike />
-      <ListCrew />
+    <Container maxWidth="lg" sx={{ mt: 10 }}>
+      <div className={classes.container}>
+        <Typography variant="h5" color="#abc" marginTop="30px">
+          {tab}
+        </Typography>
+        <Link to={"new"}>
+          <Button
+            sx={{ color: "#fff", backgroundColor: "#175f70", fontSize: "13px", marginTop: "15px" }}
+            variant="contained"
+          >
+            Start your own list
+          </Button>
+        </Link>
+      </div>
+      <WeeklyPopular />
+      <Grid container spacing={5} color={"#9ab"} my={1}>
+        <Grid item xs={12} lg={8}>
+          <RecentlyLike />
+        </Grid>
+        <Grid item xs={12} lg={4}>
+          <MonthlyPopular />
+        </Grid>
+      </Grid>
+      <MostEngaged />
       <ListAllTime />
-    </Root>
+    </Container>
   );
 };
 export default Lists;

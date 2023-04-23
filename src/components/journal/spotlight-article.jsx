@@ -1,5 +1,4 @@
-import { Box, Container, Divider, Link, Typography } from "@mui/material";
-import { styled } from "@mui/system";
+import { Box, Link, Typography } from "@mui/material";
 import Timestamp from "./timestamp.jsx";
 
 export default function SpotlightArticle(props) {
@@ -16,6 +15,7 @@ export default function SpotlightArticle(props) {
           "&:hover": {
             transform: "scale(1.1)",
           },
+          borderRadius: 1,
         }}
       />
 

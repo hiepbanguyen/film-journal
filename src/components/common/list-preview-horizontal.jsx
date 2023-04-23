@@ -1,6 +1,6 @@
 import { Avatar, Box, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
-import { FilmCardsStackedFive } from "../home/list-preview.jsx";
+import { FilmCardsStackedFive } from "../home/popular-lists.jsx";
 import FavoriteIcon from "@mui/icons-material/Favorite.js";
 import ChatBubbleIcon from "@mui/icons-material/ChatBubble.js";
 import React from "react";

@@ -1,4 +1,4 @@
-import { Box, Button, Container, Divider, Grid, Link, Typography } from "@mui/material";
+import { Box, Button, Grid, Link, Typography } from "@mui/material";
 import Timestamp from "./timestamp.jsx";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 
@@ -66,8 +66,8 @@ export const articles = [
   },
 ];
 
-const ArticlePreview = (props) => {
-  const { topic, title, intro, author, date, link, imgSrc } = props;
+export const ArticlePreview = (props) => {
+  const { topic, title, intro, author, date, link, imgSrc, bgColor } = props;
   return (
     <Box
       component={Link}
@@ -79,7 +79,9 @@ const ArticlePreview = (props) => {
       alignItems="center"
       textAlign={"center"}
       mb={4}
-      px={{ sm: 3 }}
+      mx={{ sm: 3 }}
+      borderRadius={1}
+      bgcolor={bgColor}
     >
       <Box
         component={"img"}
@@ -90,38 +92,40 @@ const ArticlePreview = (props) => {
           "&:hover": {
             transform: "scale(1.05)",
           },
+          borderRadius: !!bgColor ? "4px 4px 0 0" : 1,
         }}
       />
-      <Typography fontSize={13} fontWeight={600}>
-        {topic}
-        <Timestamp date={date} />
-      </Typography>
-      <Box>
-        <Typography
-          display={"inline"}
-          variant={"h6"}
-          color={"#456"}
-          fontWeight={600}
-          sx={{ ":hover": { textDecoration: "underline" } }}
-        >
-          {title}
-          {"."}
+      <Box p={!!bgColor && 2}>
+        <Typography fontSize={13} fontWeight={600} color={"#9ab"}>
+          {topic}
+          <Timestamp date={date} />
         </Typography>
-        <Typography display={"inline"} color={"#89a"} fontSize={18} fontWeight={500}>
-          {" "}
-          {intro}
+        <Box mt={1} mb={2}>
+          <Typography
+            display={"inline"}
+            variant={"h6"}
+            fontWeight={600}
+            sx={{ ":hover": { textDecoration: "underline" } }}
+          >
+            {title}
+            {"."}
+          </Typography>
+          <Typography display={"inline"} color={"#89a"} fontSize={18} fontWeight={500}>
+            {" "}
+            {intro}
+          </Typography>
+        </Box>
+        <Typography
+          letterSpacing={3}
+          textTransform={"uppercase"}
+          color={"#9ab"}
+          fontSize={12}
+          fontWeight={600}
+          fontFamily={"Graphik-Regular-Web,sans-serif"}
+        >
+          {author}
         </Typography>
       </Box>
-      <Typography
-        letterSpacing={3}
-        textTransform={"uppercase"}
-        color={"#9ab"}
-        fontSize={12}
-        fontWeight={600}
-        fontFamily={"Graphik-Regular-Web,sans-serif"}
-      >
-        {author}
-      </Typography>
     </Box>
   );
 };
@@ -129,7 +133,7 @@ const ArticlePreview = (props) => {
 export default function ArticlesAfterSpotlight() {
   return (
     <>
-      <Grid container spacing={2} sx={{ position: "relative", top: -60 }}>
+      <Grid container spacing={2} sx={{ position: "relative", top: -60, color: "#456" }}>
         {articles.map((i, idx) => (
           <Grid item key={idx} xs={12} md={4}>
             <ArticlePreview

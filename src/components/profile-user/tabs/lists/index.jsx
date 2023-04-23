@@ -5,7 +5,7 @@ import FavoriteIcon from "@mui/icons-material/Favorite.js";
 import ChatBubbleIcon from "@mui/icons-material/ChatBubble";
 import Grid from "@mui/material/Grid";
 import PaginationBase from "../../../common/pagination-base";
-import { FilmCardsStackedFive } from "../../../home/list-preview";
+import { FilmCardsStackedFive } from "../../../home/popular-lists.jsx";
 
 export const UserLists = (props) => {
   let data = {

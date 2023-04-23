@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Box, Divider, Typography } from "@mui/material";
-import { FilmCardsStackedFive } from "../../../home/list-preview.jsx";
+import { FilmCardsStackedFive } from "../../../home/popular-lists.jsx";
 import { Link, useParams } from "react-router-dom";
 
 export const WatchList = (props) => {
