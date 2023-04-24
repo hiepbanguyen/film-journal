@@ -11,6 +11,7 @@ import { observer } from "mobx-react-lite";
 import useAxios from "axios-hooks";
 import { UserNotExist } from "../common/user-not-exist.jsx";
 import { Loading } from "../common/loading.jsx";
+import defaultUserBanner from "../../assets/img/default-user-banner.png";
 
 const Root = styled("div")({
   flexGrow: 1,
@@ -93,7 +94,7 @@ const ProfileUser = () => {
             zIndex: -2,
           }}
           alt="The house from the offer."
-          src={loading ? "" : data.Banner ?? "/src/assets/img/no-banner.png"}
+          src={loading ? "" : data.Banner ?? defaultUserBanner}
         />
         <Box
           width={{ xs: "95vw", md: "80vw" }}

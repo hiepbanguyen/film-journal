@@ -1,5 +1,6 @@
 import { Card, CardMedia } from "@mui/material";
 import { Link } from "react-router-dom";
+import blankCard from "../../assets/img/blank-card-list.png";
 
 export default function FilmCard(props) {
   const { size, list, link, shadow, src } = props;
@@ -10,19 +11,12 @@ export default function FilmCard(props) {
           elevation={0}
           sx={{
             width: size ?? 80,
+            height: size ? (size * 3) / 2 : 120,
             boxShadow: list && shadow ? "8px 0 5px -2px #000" : "none",
             border: "1px solid rgba(0,0,0,0.3)",
           }}
         >
-          <CardMedia
-            component="img"
-            height="100%"
-            image={
-              src ??
-              "https://a.ltrbxd.com/resized/film-poster/8/2/2/3/3/3/822333-the-quiet-girl-0-150-0-225-crop.jpg?v=34c5de0af7"
-            }
-            alt="Paella dish"
-          />
+          <CardMedia component="img" height="100%" image={src ?? blankCard} alt="Paella dish" />
         </Card>
       ) : (
         <Link to={link ?? "/films/1"}>
@@ -30,6 +24,7 @@ export default function FilmCard(props) {
             elevation={0}
             sx={{
               width: size ?? 80,
+              height: size ? (size * 3) / 2 : 120,
               boxShadow: list ? "8px 0 5px -2px #000" : "none",
               border: "1px solid rgba(0,0,0,0.2)",
               "&:hover": {

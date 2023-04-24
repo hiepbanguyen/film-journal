@@ -4,8 +4,12 @@ import { Link } from "react-router-dom";
 import FavoriteIcon from "@mui/icons-material/Favorite.js";
 import ChatBubbleIcon from "@mui/icons-material/ChatBubble.js";
 import FilmCard from "../common/film-card.jsx";
+import { Loading } from "../common/loading";
+import useAxios from "axios-hooks";
 
-const FilmCardsStackedFiveBig = () => {
+const FilmCardsStackedFiveBig = ({ posters }) => {
+  // console.log(posters);
+
   return (
     <Box
       display={"flex"}
@@ -20,7 +24,7 @@ const FilmCardsStackedFiveBig = () => {
     >
       {Array.from({ length: 5 }).map((i, idx) => (
         <Box key={idx} position={"relative"} zIndex={10 - idx} left={`-${idx * 25}%`}>
-          <FilmCard list={true} shadow={idx !== 4} size={120} />
+          <FilmCard list={true} shadow={idx !== 4} size={120} src={posters[idx]?.Poster_path} />
         </Box>
       ))}
     </Box>
@@ -28,7 +32,8 @@ const FilmCardsStackedFiveBig = () => {
 };
 
 function PopularListPreview(props) {
-  const { title, username, fullname, favoriteCount, commentCount } = props;
+  const { title, username, fullname, favoriteCount, commentCount, posters, listLink } = props;
+  // console.log(posters);
   return (
     <Box
       mt={2}
@@ -40,8 +45,8 @@ function PopularListPreview(props) {
         },
       })}
     >
-      <Link to={"/u/hiep/lists/id123"}>
-        <FilmCardsStackedFiveBig />
+      <Link to={listLink}>
+        <FilmCardsStackedFiveBig posters={posters} />
         <Typography variant={"body1"} color={"#fff"} sx={{ ":hover": { color: "#00e8ff" } }} fontWeight={600}>
           {title}
         </Typography>
@@ -75,6 +80,8 @@ function PopularListPreview(props) {
 }
 
 const WeeklyPopular = () => {
+  const [{ data, loading, error }, refetch] = useAxios(`Lists/Popular/Week`);
+
   return (
     <>
       <Typography variant={"body1"} color={"#fff"} textTransform={"uppercase"} mt={5}>
@@ -82,16 +89,24 @@ const WeeklyPopular = () => {
       </Typography>
       <Divider variant={"fullWidth"} />
       <Box display={"flex"} flexWrap={"wrap"} gap={{ xs: 2, md: 5, lg: 10 }} justifyContent={"center"} color={"#9ab"}>
-        {Array.from({ length: 3 }).map((i, idx) => (
-          <PopularListPreview
-            key={idx}
-            title={"Lorem Ipsum is simply dummy text"}
-            fullname={"Bá Hiệp Nguyễn"}
-            username={"bahiep"}
-            favoriteCount={4}
-            commentCount={50}
-          />
-        ))}
+        {loading ? (
+          <Loading paddingY={10} />
+        ) : (
+          <>
+            {data.map((i, idx) => (
+              <PopularListPreview
+                key={idx}
+                title={i.ListName ?? ""}
+                fullname={i.User?.FullName ?? ""}
+                username={i.User?.UserName ?? ""}
+                favoriteCount={i.TotalLike ?? 0}
+                commentCount={i.TotalComment ?? 0}
+                posters={i.List}
+                listLink={`/u/${i.User?.UserName}/lists/${i.ListID}`}
+              />
+            ))}
+          </>
+        )}
       </Box>
     </>
   );
