@@ -182,7 +182,7 @@ export const listComment = {
 export default function ReviewDetail() {
   return (
     <Container>
-      <Box sx={{ marginTop: 10, mx: { sm: 20 } }}>
+      <Box sx={{ marginTop: 10, mx: { md: 10, lg: 20 } }}>
         {/* Main */}
         {/* Main-top */}
         <ReviewDetailMainSection reviewDetail={reviewDetail} listLikedReview={listLikedReview} />

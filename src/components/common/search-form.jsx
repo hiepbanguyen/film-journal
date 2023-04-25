@@ -1,68 +1,59 @@
 import { Box, Button, FormControl, InputLabel, MenuItem, Select, TextField } from "@mui/material";
 import React, { useState } from "react";
-import StarIcon from "@mui/icons-material/Star.js";
 
+const listYear = [
+  { label: "Upcoming", value: "upcomming" },
+  { label: "2020s", value: "2020s" },
+  { label: "2010s", value: "2010s" },
+  { label: "2000s", value: "2000s" },
+  { label: "1990s", value: "1990s" },
+  { label: "1980s", value: "1980s" },
+  { label: "1970s", value: "1970s" },
+  { label: "1960s", value: "1960s" },
+  { label: "1950s", value: "1950s" },
+  { label: "1940s", value: "1940s" },
+  { label: "1930s", value: "1930s" },
+  { label: "1920s", value: "1920s" },
+  { label: "1910s", value: "1910s" },
+  { label: "1900s", value: "1900s" },
+  { label: "1890s", value: "1890s" },
+  { label: "1880s", value: "1880s" },
+  { label: "1870s", value: "1870s" },
+];
+
+const listRating = [
+  { label: "Ascending", value: "asc" },
+  { label: "Descending", value: "desc" },
+];
+
+const listGenre = [
+  { label: "Action", value: "action" },
+  { label: "Adventure", value: "adventure" },
+  { label: "Animation", value: "animation" },
+  { label: "Comedy", value: "comedy" },
+  { label: "Crime", value: "crime" },
+  { label: "Documentary", value: "documentary" },
+  { label: "Drama", value: "srama" },
+  { label: "Family", value: "family" },
+  { label: "Fantasy", value: "fantasy" },
+  { label: "History", value: "history" },
+  { label: "Horror", value: "horror" },
+  { label: "History", value: "history" },
+  { label: "Music", value: "music" },
+  { label: "Mystery", value: "mystery" },
+  { label: "Romance", value: "romance" },
+  { label: "Since Fiction", value: "since-fiction" },
+  { label: "TV Movie", value: "tv-movie" },
+  { label: "Thriller", value: "thriller" },
+  { label: "War", value: "war" },
+  { label: "Western", value: "western" },
+];
 export default function SearchForm() {
   // Khai bao params
   const [year, setYear] = useState("");
   const [rating, setRating] = useState("");
   const [genre, setGenre] = useState("");
   const [filmName, setFilmName] = useState("");
-
-  // Data
-  const [listYear, setListYear] = useState([
-    { label: "Year", value: "" },
-    { label: "Upcoming", value: "upcomming" },
-    { label: "2020s", value: "2020s" },
-    { label: "2010s", value: "2010s" },
-    { label: "2000s", value: "2000s" },
-    { label: "1990s", value: "1990s" },
-    { label: "1980s", value: "1980s" },
-    { label: "1970s", value: "1970s" },
-    { label: "1960s", value: "1960s" },
-    { label: "1950s", value: "1950s" },
-    { label: "1940s", value: "1940s" },
-    { label: "1930s", value: "1930s" },
-    { label: "1920s", value: "1920s" },
-    { label: "1910s", value: "1910s" },
-    { label: "1900s", value: "1900s" },
-    { label: "1890s", value: "1890s" },
-    { label: "1880s", value: "1880s" },
-    { label: "1870s", value: "1870s" },
-  ]);
-
-  const [listRating, setListRating] = useState([
-    { label: "Rating", value: "" },
-    { label: "5", value: "5" },
-    { label: "4", value: "4" },
-    { label: "3", value: "3" },
-    { label: "2", value: "2" },
-    { label: "1", value: "1" },
-  ]);
-
-  const [listGenre, setListGenre] = useState([
-    { label: "Genre", value: "" },
-    { label: "Action", value: "action" },
-    { label: "Adventure", value: "adventure" },
-    { label: "Animation", value: "animation" },
-    { label: "Comedy", value: "comedy" },
-    { label: "Crime", value: "crime" },
-    { label: "Documentary", value: "documentary" },
-    { label: "Drama", value: "srama" },
-    { label: "Family", value: "family" },
-    { label: "Fantasy", value: "fantasy" },
-    { label: "History", value: "history" },
-    { label: "Horror", value: "horror" },
-    { label: "History", value: "history" },
-    { label: "Music", value: "music" },
-    { label: "Mystery", value: "mystery" },
-    { label: "Romance", value: "romance" },
-    { label: "Since Fiction", value: "since-fiction" },
-    { label: "TV Movie", value: "tv-movie" },
-    { label: "Thriller", value: "thriller" },
-    { label: "War", value: "war" },
-    { label: "Western", value: "western" },
-  ]);
 
   // Function Hanle value
   const handleYearChange = (event) => {
@@ -81,20 +72,6 @@ export default function SearchForm() {
     setFilmName(event.target.value);
   };
 
-  // Submit Form
-  const handleSubmitFormSearch = (event) => {
-    event.preventDefault();
-
-    let url =
-      "/films/search?" +
-      (filmName.trim().length > 0 ? "filmName=" + filmName + "&" : "") +
-      (rating.trim().length > 0 ? "rating=" + rating + "&" : "") +
-      (genre.trim().length > 0 ? "genre=" + genre + "&" : "") +
-      (year.trim().length > 0 ? "year=" + year + "&" : "");
-
-    console.log("url", url);
-  };
-
   // Clear form
   const handleClear = () => {
     setYear("");
@@ -105,7 +82,7 @@ export default function SearchForm() {
 
   return (
     <Box className="search-form">
-      <form onSubmit={handleSubmitFormSearch}>
+      <form>
         <Box display={"flex"} flexWrap={"wrap"} gap={1}>
           <FormControl
             sx={{
@@ -167,10 +144,7 @@ export default function SearchForm() {
             >
               {listRating.map((rating, idx) => (
                 <MenuItem key={idx} value={rating.value}>
-                  <Box sx={{ display: "flex", alignItems: "center" }}>
-                    {rating.label}{" "}
-                    {rating.value > 0 && <StarIcon sx={{ marginLeft: "4px", fontSize: "22px" }}></StarIcon>}
-                  </Box>
+                  <Box sx={{ display: "flex", alignItems: "center" }}>{rating.label}</Box>
                 </MenuItem>
               ))}
             </Select>
@@ -226,7 +200,6 @@ export default function SearchForm() {
           />
           <Box sx={{ display: { xs: "block", md: "inline-block" } }}>
             <Button
-              type="clear"
               size="medium"
               sx={{
                 border: "1px solid #9ab",
