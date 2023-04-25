@@ -1,4 +1,4 @@
-import { Box } from "@mui/material";
+import { Box, Divider } from "@mui/material";
 import * as React from "react";
 import baseAPI from "../../apis/baseApi";
 import Enum from "../../apis/enums/Enum";
@@ -36,12 +36,10 @@ function ListUser(props) {
         sx={{
           fontSize: { xs: "12px", md: "14px" },
           textTransform: "uppercase",
-          borderBottom: "1px solid #9ab",
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
-          marginBottom: "16px",
-          color: "#9ab",
+          color: "#fff",
           "a:hover": { color: "#40bcf4" },
         }}
       >
@@ -78,6 +76,7 @@ function ListUser(props) {
           </Box>
         ))}
       </Box>
+      <Divider />
     </Box>
   );
 }

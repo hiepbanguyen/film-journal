@@ -7,7 +7,7 @@ export default function PosterAndDescription(props) {
     <>
       <Box display={"flex"} gap={{ xs: 2, sm: 5 }} mb={3}>
         <Box>
-          <Box component={"img"} sx={{ borderRadius: 2 }} src={props.image} alt="" width={{ xs: 100, sm: 240 }} />
+          <Box component={"img"} sx={{ borderRadius: 1 }} src={props.image} alt="" width={{ xs: 100, sm: 240 }} />
           <Box
             gap={1}
             sx={(theme) => ({

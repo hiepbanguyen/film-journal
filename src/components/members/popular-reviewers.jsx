@@ -1,4 +1,4 @@
-import { Box, Button, Grid } from "@mui/material";
+import { Box, Button, Divider, Grid } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import { Link } from "react-router-dom";
 
@@ -219,13 +219,12 @@ export default function PopularReviewers() {
         className="popular-reviewers-title"
         sx={{
           marginBottom: { xs: "16px", md: "20px" },
-          borderBottom: "1px #9ab solid",
         }}
       >
         <Box
           component="h1"
           sx={{
-            color: "#9ab",
+            color: "#fff",
             fontWeight: "400",
             fontSize: { xs: "14px", md: "16px" },
             margin: "0",
@@ -234,6 +233,7 @@ export default function PopularReviewers() {
         >
           Popular members this week
         </Box>
+        <Divider />
       </Box>
       <Box className="featured-people">
         <Grid container spacing={0} columns={30}>

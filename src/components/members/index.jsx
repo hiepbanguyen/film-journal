@@ -1,8 +1,10 @@
 import Container from "@mui/system/Container";
-import { Box, Grid, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import PopularReviewers from "./popular-reviewers";
 import { ListReviewers } from "./list-reviewers";
 import MembersAside from "./aside";
+import { observer } from "mobx-react-lite";
+import UserStore from "../../store/user.store.js";
 
 export default function Members() {
   return (
@@ -34,19 +36,27 @@ export default function Members() {
       </Box>
       <PopularReviewers />
 
-      <Box>
-        <Grid container spacing={8} columns={13}>
-          <Grid item xs={13} md={9}>
-            <Typography textTransform={"uppercase"} textAlign={"center"} fontWeight={"bold"} color={"#fff"} mb={2}>
-              Biggest contributers
-            </Typography>
-            <ListReviewers />
-          </Grid>
-          <Grid item xs={13} md={4}>
-            <MembersAside />
-          </Grid>
-        </Grid>
+      <Box display={"flex"} flexWrap={"wrap"} flexDirection={{ xs: "column", md: "row" }} gap={{ xs: 5, md: 5 }}>
+        <Box flex={3}>
+          <Typography textTransform={"uppercase"} textAlign={"center"} fontWeight={"bold"} color={"#fff"} mb={2}>
+            Biggest contributers
+          </Typography>
+          <ListReviewers />
+        </Box>
+        <Aside />
       </Box>
     </Container>
   );
 }
+
+const Aside = observer(() => {
+  return (
+    <>
+      {UserStore.isLoggedIn && (
+        <Box flex={1}>
+          <MembersAside />
+        </Box>
+      )}
+    </>
+  );
+});

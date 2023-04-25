@@ -64,9 +64,9 @@ export const ListReviewers = observer(() => {
         <TableHead>
           <TableRow sx={{ borderBottom: "2px solid #99aabb73" }}>
             <TableCell sx={{ color: "#fff" }}>Name</TableCell>
-            <TableCell sx={{ color: "#fff", display: { xs: "none", md: "table-cell" } }}>Reviews</TableCell>
-            <TableCell sx={{ color: "#fff", display: { xs: "none", md: "table-cell" } }}>Lists</TableCell>
-            <TableCell sx={{ color: "#fff", display: { xs: "none", md: "table-cell" } }}>Likes</TableCell>
+            <TableCell sx={{ color: "#fff", display: { xs: "none", sm: "table-cell" } }}>Reviews</TableCell>
+            <TableCell sx={{ color: "#fff", display: { xs: "none", sm: "table-cell" } }}>Lists</TableCell>
+            <TableCell sx={{ color: "#fff", display: { xs: "none", sm: "table-cell" } }}>Likes</TableCell>
             {!UserStore.isLoadedFromLocal ? (
               <></>
             ) : (
@@ -117,7 +117,7 @@ export const ListReviewers = observer(() => {
                   </Box>
                 </Box>
               </TableCell>
-              <TableCell sx={{ color: "#9ab", display: { xs: "none", md: "table-cell" } }}>
+              <TableCell sx={{ color: "#9ab", display: { xs: "none", sm: "table-cell" } }}>
                 <Link
                   to={"/u/" + member.UserName + "/reviews"}
                   style={{ display: "flex", alignItems: "center", lineHeight: "40px" }}
@@ -125,7 +125,7 @@ export const ListReviewers = observer(() => {
                   <RemoveRedEyeIcon sx={{ marginRight: "4px", color: "#00b020" }}></RemoveRedEyeIcon> {member.Reviews}
                 </Link>
               </TableCell>
-              <TableCell sx={{ color: "#9ab", display: { xs: "none", md: "table-cell" } }}>
+              <TableCell sx={{ color: "#9ab", display: { xs: "none", sm: "table-cell" } }}>
                 <Link
                   to={"/u/" + member.UserName + "/lists"}
                   style={{ display: "flex", alignItems: "center", lineHeight: "40px" }}
@@ -133,7 +133,7 @@ export const ListReviewers = observer(() => {
                   <GridViewIcon sx={{ marginRight: "4px", color: "#40bcf4" }}></GridViewIcon> {member.Lists}
                 </Link>
               </TableCell>
-              <TableCell sx={{ color: "#9ab", display: { xs: "none", md: "table-cell" } }}>
+              <TableCell sx={{ color: "#9ab", display: { xs: "none", sm: "table-cell" } }}>
                 <Link
                   to={"/u/" + member.UserName + "/likes"}
                   style={{ display: "flex", alignItems: "center", lineHeight: "40px" }}
