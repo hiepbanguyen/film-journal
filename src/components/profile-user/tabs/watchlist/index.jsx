@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Box, Divider, Typography } from "@mui/material";
+import { Box } from "@mui/material";
 import { Link, useParams } from "react-router-dom";
 import FavoriteIcon from "@mui/icons-material/Favorite.js";
 import Grid from "@mui/material/Grid";
@@ -9,7 +9,7 @@ export const UserWatchList = (props) => {
   const { username } = useParams();
 
   const handleChangePage = (newPage) => {
-    console.log('newPage: ', newPage);
+    console.log("newPage: ", newPage);
   };
   let data = {
     total: 24,
@@ -213,9 +213,11 @@ export const UserWatchList = (props) => {
   };
 
   return (
-    <Box sx={{
-      marginTop: '32px'
-    }}>
+    <Box
+      sx={{
+        marginTop: "32px",
+      }}
+    >
       <Box
         sx={{
           display: "flex",
@@ -230,7 +232,7 @@ export const UserWatchList = (props) => {
         <Box>{data.total}</Box>
       </Box>
 
-      {(data.list.length > 0) ? (
+      {data.list.length > 0 ? (
         <Box>
           <Box>
             <Grid container columns={24}>
@@ -241,11 +243,13 @@ export const UserWatchList = (props) => {
               ))}
             </Grid>
           </Box>
-          <Box sx={{ display: 'flex', justifyContent: 'end' }}>
-            <PaginationBase totalPage={data.totalPage} pageIndex={data.pageIndex} onChange={handleChangePage}></PaginationBase>
+          <Box sx={{ display: "flex", justifyContent: "end" }}>
+            <PaginationBase totalPage={data.totalPage} pageIndex={data.pageIndex} onChange={handleChangePage} />
           </Box>
         </Box>
-      ) : (<Box>Không có dữ liệu</Box>)}
+      ) : (
+        <Box>Không có dữ liệu</Box>
+      )}
     </Box>
   );
 };

@@ -190,11 +190,7 @@ export const UserLists = (props) => {
                 ))}
               </Box>
               <Box sx={{ display: "flex", justifyContent: "end" }}>
-                <PaginationBase
-                  totalPage={data.totalPage}
-                  pageIndex={pageIndex}
-                  onChange={handleChangePage}
-                ></PaginationBase>
+                <PaginationBase totalPage={data.totalPage} pageIndex={pageIndex} onChange={handleChangePage} />
               </Box>
             </Box>
           ) : (

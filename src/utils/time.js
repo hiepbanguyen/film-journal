@@ -10,5 +10,5 @@ export function estimatedTimeElapsed(date = new Date()) {
   if (hours > 0) return hours + "h";
   let minutes = Math.floor((dateNow - date) / (60 * 1000));
   if (minutes > 0) return minutes + "m";
-  else return "just now";
+  else return "now";
 }

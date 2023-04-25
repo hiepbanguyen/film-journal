@@ -5,29 +5,29 @@ import FilmCard from "../../../common/film-card";
 import ReviewPreview from "../../../common/review-preview";
 import ListPreview from "../../../home/popular-lists.jsx";
 
-export default function ProfileLikes() {
-  let dataListLikedFilm = {
-    totalPage: 2,
-    total: 37,
-    pageIndex: 1,
-    pageSize: 20,
-    list: [],
-  };
-  let dataListLikedReview = {
-    totalPage: 2,
-    total: 12,
-    pageIndex: 1,
-    pageSize: 6,
-    list: [],
-  };
-  let dataListLikedList = {
-    totalPage: 2,
-    total: 18,
-    pageIndex: 1,
-    pageSize: 10,
-    list: [],
-  };
+const dataListLikedFilm = {
+  totalPage: 2,
+  total: 37,
+  pageIndex: 1,
+  pageSize: 20,
+  list: [],
+};
+const dataListLikedReview = {
+  totalPage: 2,
+  total: 12,
+  pageIndex: 1,
+  pageSize: 6,
+  list: [],
+};
+const dataListLikedList = {
+  totalPage: 2,
+  total: 18,
+  pageIndex: 1,
+  pageSize: 10,
+  list: [],
+};
 
+export default function ProfileLikes() {
   const [pageIndexFilm, setPageIndexFilm] = React.useState(dataListLikedFilm.pageIndex);
   const [pageIndexReview, setPageIndexReview] = React.useState(dataListLikedReview.pageIndex);
   const [pageIndexList, setPageIndexList] = React.useState(dataListLikedList.pageIndex);
@@ -60,7 +60,7 @@ export default function ProfileLikes() {
               totalPage={dataListLikedFilm.totalPage}
               pageIndex={pageIndexFilm}
               onChange={handleChangePageFilm}
-            ></PaginationBase>
+            />
           </Box>
           <Grid container columns={12} rowSpacing={1}>
             {Array.from({ length: 20 }).map((i, index) => (
@@ -83,7 +83,7 @@ export default function ProfileLikes() {
               totalPage={dataListLikedReview.totalPage}
               pageIndex={pageIndexReview}
               onChange={handleChangePageReview}
-            ></PaginationBase>
+            />
           </Box>
 
           <Stack color={"#9ab"} mt={1}>
@@ -118,7 +118,7 @@ export default function ProfileLikes() {
               totalPage={dataListLikedList.totalPage}
               pageIndex={pageIndexList}
               onChange={handleChangePageList}
-            ></PaginationBase>
+            />
           </Box>
 
           <Box>

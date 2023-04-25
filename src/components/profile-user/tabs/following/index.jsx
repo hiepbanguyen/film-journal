@@ -354,7 +354,7 @@ export default function ProfileFollowing() {
         </Table>
       </TableContainer>
       <Box sx={{ display: "flex", justifyContent: "end", marginTop: "24px" }}>
-        <PaginationBase totalPage={totalPage} pageIndex={pageIndex} onChange={handleChangePage}></PaginationBase>
+        <PaginationBase totalPage={totalPage} pageIndex={pageIndex} onChange={handleChangePage} />
       </Box>
     </Box>
   );

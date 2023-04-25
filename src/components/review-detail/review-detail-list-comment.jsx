@@ -2,8 +2,10 @@ import { Avatar, Box, Button, Divider, Grid, Typography } from "@mui/material";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { estimatedTimeElapsed } from "../../utils/time.js";
+import PaginationBase from "../common/pagination-base.jsx";
 
 export default function ReviewDetailListComment(props) {
+  let listComment = props.listComment;
   const [newCommentContent, setNewCommentContent] = useState("");
 
   const handleNewCommentContentChange = (event) => {
@@ -25,13 +27,18 @@ export default function ReviewDetailListComment(props) {
     setNewCommentContent("");
   };
 
-  const HandleEnterInput = (event) => {
+  const handleEnterInput = (event) => {
     if (event.keyCode === 13) {
       postNewComment();
     }
   };
+  const [pageIdx, setPageIdx] = React.useState(1);
 
-  let listComment = props.listComment;
+  const handleChangePage = (newPage) => {
+    console.log("New page film", newPage);
+    setPageIdx(newPage);
+  };
+
   return (
     <Box sx={{ flexGrow: 1, color: "#9ab" }}>
       <Typography textTransform={"uppercase"} fontWeight={"bold"}>
@@ -43,6 +50,7 @@ export default function ReviewDetailListComment(props) {
           <Comment comment={comment} key={idx} />
         ))}
       </Box>
+      <PaginationBase totalPage={2} pageIndex={pageIdx} onChange={handleChangePage} />
       <Box sx={{ marginBottom: "80px" }}>
         <Grid container spacing={4} columns={13}>
           <Grid item xs={13} md={4}></Grid>
@@ -65,7 +73,7 @@ export default function ReviewDetailListComment(props) {
                 marginBottom: "12px",
               }}
               value={newCommentContent}
-              onKeyUp={HandleEnterInput}
+              onKeyUp={handleEnterInput}
               onChange={handleNewCommentContentChange}
             ></Box>
             <Box sx={{ display: "flex", justifyContent: "end" }}>

@@ -109,7 +109,7 @@ export default function ReviewsTab() {
           />
         ))}
       </Stack>
-      <PaginationBase totalPage={totalPage} pageIndex={pageIndex} onChange={handleChangePage}></PaginationBase>
+      <PaginationBase totalPage={totalPage} pageIndex={pageIndex} onChange={handleChangePage} />
     </Box>
   );
 }
