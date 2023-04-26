@@ -57,13 +57,14 @@ export default function ReviewDetailListComment(props) {
           <Grid item xs={13} md={9}>
             <Box
               component="textarea"
-              placeholder={"Reply as " + props.reviewDetail.userName + "..."}
+              placeholder={"Write your comment here..."}
               sx={{
                 height: "100px",
                 maxHeight: "100px",
                 width: "100%",
                 backgroundColor: "#2c3440",
                 border: "none",
+                borderRadius: 1,
                 padding: "5px",
                 color: "#9ab",
                 ":focus": {
@@ -111,18 +112,20 @@ function Comment(props) {
         <Grid container spacing={1}>
           {/* User-time */}
           <Grid item xs={12} md={3}>
-            <Box
-              component={Link}
-              to={"/u/" + props.comment.userName.toLowerCase()}
-              display={"flex"}
-              alignItems={"center"}
-              gap={1}
-              sx={{ ":hover": { color: "#fff" } }}
-            >
-              <Avatar sx={{ width: 25, height: 25 }} alt="User Avatar test" src={props.comment.userAvatar} />
-              <Typography variant={"body2"} fontWeight={600}>
-                {props.comment.userName}
-              </Typography>{" "}
+            <Box display={"flex"} alignItems={"center"} gap={1}>
+              <Box
+                component={Link}
+                to={"/u/" + props.comment.userName.toLowerCase()}
+                display={"flex"}
+                alignItems={"center"}
+                gap={1}
+                sx={{ ":hover": { color: "#fff" } }}
+              >
+                <Avatar sx={{ width: 25, height: 25 }} alt="User Avatar test" src={props.comment.userAvatar} />
+                <Typography variant={"body2"} fontWeight={600}>
+                  {props.comment.userName}
+                </Typography>{" "}
+              </Box>
               <Typography variant={"body2"}>{estimatedTimeElapsed(props.comment.time)}</Typography>
             </Box>
           </Grid>
