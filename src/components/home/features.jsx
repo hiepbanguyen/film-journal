@@ -5,7 +5,7 @@ import FavoriteIcon from "@mui/icons-material/Favorite.js";
 import FormatAlignLeftIcon from "@mui/icons-material/FormatAlignLeft.js";
 import StarRateIcon from "@mui/icons-material/StarRate.js";
 import EventNoteIcon from "@mui/icons-material/EventNote.js";
-import ViewListIcon from "@mui/icons-material/ViewList.js";
+import GridViewSharpIcon from "@mui/icons-material/GridViewSharp.js";
 
 const FeatureCard = (props) => {
   const { children, content } = props;
@@ -13,7 +13,6 @@ const FeatureCard = (props) => {
     <Box
       component={Card}
       sx={{
-        background: "#445566",
         width: "100%",
         height: 100,
         ":hover": { background: "#00c030" },
@@ -36,8 +35,8 @@ const FeatureCard = (props) => {
 export const Features = () => {
   return (
     <>
-      <Typography variant={"body1"} textTransform={"uppercase"} mt={5}>
-        FilmLogger lets you...
+      <Typography variant={"h6"} mt={5} textAlign={"center"}>
+        FilmJournal lets you...
       </Typography>
       <Grid container spacing={1} mt={1}>
         <Grid item xs={12} md={6} lg={4}>
@@ -61,13 +60,13 @@ export const Features = () => {
           </FeatureCard>
         </Grid>
         <Grid item xs={12} md={6} lg={4}>
-          <FeatureCard content={"Keep a diary of your film watching (and upgrade to Pro for comprehensive stats)"}>
+          <FeatureCard content={"Keep a diary of your film watching as well as adding films to your watch list"}>
             <EventNoteIcon sx={{ fontSize: 50 }} />
           </FeatureCard>
         </Grid>
         <Grid item xs={12} md={6} lg={4}>
           <FeatureCard content={"Compile and share lists of films on any topic and keep a watchlist of films to see"}>
-            <ViewListIcon sx={{ fontSize: 50 }} />
+            <GridViewSharpIcon sx={{ fontSize: 50 }} />
           </FeatureCard>
         </Grid>
       </Grid>

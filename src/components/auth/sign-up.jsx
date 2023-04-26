@@ -3,23 +3,20 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
-import Link from "@mui/material/Link";
+import { Link, useNavigate } from "react-router-dom";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import baseAPI from "../../apis/baseAPI";
 
 function Copyright(props) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
       {"Copyright © "}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
-      </Link>{" "}
+      <Link to="">Your Website</Link>
       {new Date().getFullYear()}
       {"."}
     </Typography>
@@ -29,13 +26,65 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function SignUp() {
+  const navigate = useNavigate();
+  const [errorUserName, setErrorUserName] = React.useState(false);
+  const [errorEmail, setErrorEmail] = React.useState(false);
+  const [errorPassword, setErrorPassword] = React.useState(false);
+  const [errorMsg, setErrorMsg] = React.useState("");
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+    if (!validate(data)) {
+      return;
+    }
+
+    baseAPI
+      .postAsync(`Users/signup`, {
+        UserName: data.get("userName"),
+        Email: data.get("email"),
+        Password: data.get("password"),
+      })
+      .then((res) => {
+        if (res) {
+          // Chuyển đến trang login
+          navigate("/sign-in");
+        }
+      })
+      .catch((err) => {
+        setErrorMsg(err.response.data.devMsg);
+      });
+  };
+
+  const validate = (data) => {
+    if (!validateEmail(data.get("email"))) {
+      setErrorEmail(true);
+    } else {
+      setErrorEmail(false);
+    }
+
+    if (data.get("userName")) {
+      setErrorUserName(false);
+    } else {
+      setErrorUserName(true);
+    }
+
+    if (data.get("password")) {
+      setErrorPassword(false);
+    } else {
+      setErrorPassword(true);
+    }
+
+    if (!errorUserName && !errorEmail && !errorPassword) {
+      return true;
+    }
+    return false;
+  };
+
+  const validateEmail = (email) => {
+    return email.match(
+      /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+    );
   };
 
   return (
@@ -59,29 +108,30 @@ export default function SignUp() {
           </Typography>
           <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
             <Grid container spacing={2}>
-              <Grid item xs={12} sm={6}>
+              <Grid item xs={12} sm={12}>
                 <TextField
                   autoComplete="given-name"
-                  name="firstName"
+                  name="userName"
                   required
                   fullWidth
-                  id="firstName"
-                  label="First Name"
+                  id="userName"
+                  label="UserName"
                   autoFocus
-                />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  required
-                  fullWidth
-                  id="lastName"
-                  label="Last Name"
-                  name="lastName"
-                  autoComplete="family-name"
+                  error={errorUserName}
+                  helperText={errorUserName ? "UserName is required." : ""}
                 />
               </Grid>
               <Grid item xs={12}>
-                <TextField required fullWidth id="email" label="Email Address" name="email" autoComplete="email" />
+                <TextField
+                  required
+                  error={errorEmail || errorMsg}
+                  fullWidth
+                  id="email"
+                  label="Email"
+                  name="email"
+                  autoComplete="email"
+                  helperText={errorEmail ? "Email is invalid." : errorMsg}
+                />
               </Grid>
               <Grid item xs={12}>
                 <TextField
@@ -92,12 +142,8 @@ export default function SignUp() {
                   type="password"
                   id="password"
                   autoComplete="new-password"
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <FormControlLabel
-                  control={<Checkbox value="allowExtraEmails" color="primary" />}
-                  label="I want to receive inspiration, marketing promotions and updates via email."
+                  error={errorPassword}
+                  helperText={errorPassword ? "Password is required." : ""}
                 />
               </Grid>
             </Grid>
@@ -106,7 +152,7 @@ export default function SignUp() {
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link href="/src/pages" variant="body2">
+                <Link to="/sign-in" style={{ textDecoration: "underline", color: "#0095ff" }}>
                   Already have an account? Sign in
                 </Link>
               </Grid>

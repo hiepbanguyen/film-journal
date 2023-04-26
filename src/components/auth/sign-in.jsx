@@ -5,27 +5,21 @@ import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
-import Link from "@mui/material/Link";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import ConstantURL from "../../script/resources/ConstantURL.js";
-import { useNavigate } from "react-router-dom";
-import { useSearchParams } from "react-router-dom";
-
-import axios from "axios";
+import baseAPI from "../../apis/baseApi";
+import UserStore from "../../store/user.store.js";
 
 function Copyright(props) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
       {"Copyright © "}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
-      </Link>{" "}
-      {new Date().getFullYear()}
+      <Link to="">Your Website</Link> {new Date().getFullYear()}
       {"."}
     </Typography>
   );
@@ -36,29 +30,67 @@ const theme = createTheme();
 export default function SignInSide() {
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
-  const queryParams = new URLSearchParams(window.location.search)
-  let username = queryParams.get("username")
+  const queryParams = new URLSearchParams(window.location.search);
+  let email = queryParams.get("email");
+  const [errorEmail, setErrorEmail] = React.useState(false);
+  const [errorPassword, setErrorPassword] = React.useState(false);
+  const [errorMsg, setErrorMsg] = React.useState("");
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    axios
-      .get(`${ConstantURL.BaseDomain}Users/login`, {
+
+    if (!validate(data)) {
+      return;
+    }
+
+    baseAPI
+      .getAsync(`Users/login`, {
         params: {
-          userName: data.get("username"),
+          email: data.get("email"),
           password: data.get("password"),
         },
       })
       .then((res) => {
         if (res) {
+          // set the user information in localStorage
+          UserStore.saveLoginInfo(res.data.Token, res.data.User);
+          // localStorage.setItem("userInfo", JSON.stringify());
+          // localStorage.setItem("token", JSON.stringify());
           // Chuyển đến trang homepage
-          navigate("/");
+          navigate(-1);
         }
       })
       .catch((err) => {
-        console.error(err);
+        setErrorMsg(err.response.data.devMsg);
       });
   };
-  
+
+  const validate = (data) => {
+    if (!validateEmail(data.get("email"))) {
+      setErrorEmail(true);
+    } else {
+      setErrorEmail(false);
+    }
+
+    if (data.get("password")) {
+      setErrorPassword(false);
+    } else {
+      setErrorPassword(true);
+    }
+
+    if (!errorEmail && !errorPassword) {
+      return true;
+    }
+    return false;
+  };
+
+  const validateEmail = (email) => {
+    return email.match(
+      /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+    );
+  };
+
   return (
     <ThemeProvider theme={theme}>
       <Grid container component="main" sx={{ height: "100vh" }}>
@@ -69,7 +101,7 @@ export default function SignInSide() {
           sm={4}
           md={7}
           sx={{
-            backgroundImage: "url(https://source.unsplash.com/random)",
+            backgroundImage: "url()",
             backgroundRepeat: "no-repeat",
             backgroundColor: (t) => (t.palette.mode === "light" ? t.palette.grey[50] : t.palette.grey[900]),
             backgroundSize: "cover",
@@ -79,7 +111,7 @@ export default function SignInSide() {
         <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
           <Box
             sx={{
-              my: 8,
+              mt: 10,
               mx: 4,
               display: "flex",
               flexDirection: "column",
@@ -94,17 +126,20 @@ export default function SignInSide() {
             </Typography>
             <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
               <TextField
-                defaultValue={username}
+                defaultValue={email}
+                error={errorEmail}
                 margin="normal"
                 required
                 fullWidth
-                id="username"
-                label="UserName"
-                name="username"
-                autoComplete="username"
+                id="email"
+                label="Email"
+                name="email"
+                autoComplete="email"
                 autoFocus
-                />
+                helperText={errorEmail ? "Email is invalid." : ""}
+              />
               <TextField
+                error={errorPassword}
                 margin="normal"
                 required
                 fullWidth
@@ -113,6 +148,7 @@ export default function SignInSide() {
                 type="password"
                 id="password"
                 autoComplete="current-password"
+                helperText={errorPassword ? "Password is required." : errorMsg}
               />
               <FormControlLabel control={<Checkbox value="remember" color="primary" />} label="Remember me" />
               <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
@@ -120,12 +156,12 @@ export default function SignInSide() {
               </Button>
               <Grid container>
                 <Grid item xs>
-                  <Link href="src/components/auth/sign-in.jsx#" variant="body2">
+                  <Link to="/forgot-password" style={{ textDecoration: "underline", color: "#0095ff" }}>
                     Forgot password?
                   </Link>
                 </Grid>
                 <Grid item>
-                  <Link href="/src/pages/sign-up" variant="body2">
+                  <Link to="/sign-up" style={{ textDecoration: "underline", color: "#0095ff" }}>
                     {"Don't have an account? Sign Up"}
                   </Link>
                 </Grid>
