@@ -6,21 +6,22 @@ import ChatBubbleIcon from "@mui/icons-material/ChatBubble.js";
 import React from "react";
 
 export const ListPreviewHorizontal = (props) => {
-  const { title, username, favoriteCount, commentCount, films, description } = props;
+  const { title, fullname, userAvatar, username, favoriteCount, commentCount, films, description, posters, listLink } =
+    props;
 
   return (
-    <Box component={Link} to={"/u/hiep/lists/id123"} display={"flex"} flexDirection={{ xs: "column", sm: "row" }}>
+    <Box component={Link} to={listLink} display={"flex"} flexDirection={{ xs: "column", sm: "row" }}>
       <Box>
-        <FilmCardsStackedFive />
+        <FilmCardsStackedFive posters={posters} />
       </Box>
       <Box ml={{ sm: 3 }}>
         <Typography variant={"h6"} color={"#fff"} sx={{ ":hover": { color: "#00e8ff" } }} fontWeight={600}>
           {title}
         </Typography>
         <Box display={"flex"} alignItems={"center"} my={1}>
-          <Avatar sx={{ width: 25, height: 25 }}>H</Avatar>
+          <Avatar sx={{ width: 25, height: 25 }} src={userAvatar ?? ""} />
           <Typography variant={"body2"} ml={0.5} mr={1}>
-            {username}
+            {fullname ?? username}
           </Typography>
           <Typography variant={"body2"} ml={0.5} mr={0.8}>
             {`${films}`} films
@@ -34,7 +35,10 @@ export const ListPreviewHorizontal = (props) => {
             {commentCount}
           </Typography>
         </Box>
-        <Typography variant={"body2"}>{description}</Typography>
+        <Typography variant={"body2"}>
+          {String(description).slice(0, 200)}
+          {"..."}
+        </Typography>
       </Box>
     </Box>
   );

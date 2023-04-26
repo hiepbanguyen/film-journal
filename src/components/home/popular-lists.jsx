@@ -4,7 +4,9 @@ import ChatBubbleIcon from "@mui/icons-material/ChatBubble.js";
 import FavoriteIcon from "@mui/icons-material/Favorite.js";
 import { Link } from "react-router-dom";
 
-export const FilmCardsStackedFive = () => {
+export const FilmCardsStackedFive = ({ posters }) => {
+  // console.log(posters);
+
   return (
     <Box
       display={"flex"}
@@ -19,7 +21,7 @@ export const FilmCardsStackedFive = () => {
     >
       {Array.from({ length: 5 }).map((i, idx) => (
         <Box key={idx} position={"relative"} zIndex={10 - idx} left={`-${idx * (50 / 5)}%`}>
-          <FilmCard list={true} shadow={idx !== 4} />
+          <FilmCard list={true} shadow={idx !== 4} src={posters && posters[idx]?.Poster_path} />
         </Box>
       ))}
     </Box>

@@ -3,6 +3,8 @@ import { FilmCardsStackedFive } from "../home/popular-lists.jsx";
 import { Link } from "react-router-dom";
 import React from "react";
 import { ListPreviewVertical } from "./recently-liked.jsx";
+import useAxios from "axios-hooks";
+import { Loading } from "../common/loading.jsx";
 
 export const CrewList = (props) => {
   const { title } = props;
@@ -17,6 +19,8 @@ export const CrewList = (props) => {
 };
 
 export const MostEngaged = (props) => {
+  const [{ data, loading, error }, refetch] = useAxios(`Lists/MostEngaged`);
+
   return (
     <Box>
       <Typography variant={"body1"} color={"#fff"} textTransform={"uppercase"}>
@@ -24,14 +28,24 @@ export const MostEngaged = (props) => {
       </Typography>
       <Divider />
       <Box display={"flex"} flexWrap={"wrap"} gap={{ sm: 5, lg: 10 }} justifyContent={"center"} color={"#9ab"}>
-        {Array.from({ length: 3 }).map((i, idx) => (
-          <ListPreviewVertical
-            key={idx}
-            title={"Lorem Ipsum is simply dummy text"}
-            username={"Nguyễn Việt Hoàn"}
-            films={100}
-          />
-        ))}
+        {loading ? (
+          <Loading paddingY={10} />
+        ) : (
+          <>
+            {data.map((i, idx) => (
+              <ListPreviewVertical
+                key={idx}
+                title={i.ListName ?? ""}
+                fullname={i.User?.FullName ?? ""}
+                username={i.User?.UserName ?? ""}
+                userAvatar={i.User?.Avatar ?? ""}
+                films={i.Total ?? 0}
+                posters={i.List}
+                listLink={`/u/${i.User?.UserName}/lists/${i.ListID}`}
+              />
+            ))}
+          </>
+        )}
       </Box>
     </Box>
   );

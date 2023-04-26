@@ -32,7 +32,7 @@ const FilmCardsStackedFiveBig = ({ posters }) => {
 };
 
 function PopularListPreview(props) {
-  const { title, username, fullname, favoriteCount, commentCount, posters, listLink } = props;
+  const { title, username, fullname, userAvatar, favoriteCount, commentCount, posters, listLink } = props;
   // console.log(posters);
   return (
     <Box
@@ -61,7 +61,7 @@ function PopularListPreview(props) {
           alignItems={"center"}
           sx={{ ":hover": { color: "#fff" } }}
         >
-          <Avatar sx={{ width: 25, height: 25 }}>H</Avatar>
+          <Avatar sx={{ width: 25, height: 25 }} src={userAvatar} />
           <Typography variant={"body2"} ml={0.5} mr={1}>
             {fullname ?? username}
           </Typography>
@@ -99,6 +99,7 @@ const WeeklyPopular = () => {
                 title={i.ListName ?? ""}
                 fullname={i.User?.FullName ?? ""}
                 username={i.User?.UserName ?? ""}
+                userAvatar={i.User?.Avatar ?? ""}
                 favoriteCount={i.TotalLike ?? 0}
                 commentCount={i.TotalComment ?? 0}
                 posters={i.List}
