@@ -107,9 +107,6 @@ export default function ListDetail() {
             <FilmCard size={"100%"} key={idx} link={`/film/${i.title.replace(" ", "-")}/${i.id}`} src={i.poster} />
           ))}
         </PaginatedGrid>
-        {/*<Typography>Tags</Typography>*/}
-        {/*<Divider variant={"fullWidth"} sx={{ mb: 1.5 }} />*/}
-        {/*<Tags />*/}
         <Typography textTransform={"uppercase"} fontWeight={"bold"}>
           15 likes
         </Typography>

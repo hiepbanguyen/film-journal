@@ -10,7 +10,7 @@ export const ListPreviewHorizontal = (props) => {
     props;
 
   return (
-    <Box component={Link} to={listLink} display={"flex"} flexDirection={{ xs: "column", sm: "row" }}>
+    <Box component={Link} to={listLink ?? ""} display={"flex"} flexDirection={{ xs: "column", sm: "row" }}>
       <Box>
         <FilmCardsStackedFive posters={posters} />
       </Box>
