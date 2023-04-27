@@ -28,7 +28,7 @@ export default function FilmCard(props) {
               boxShadow: list ? "8px 0 5px -2px #000" : "none",
               border: "1px solid rgba(0,0,0,0.2)",
               "&:hover": {
-                border: "2px solid #00e054",
+                border: "1px solid #00e054",
               },
             }}
           >

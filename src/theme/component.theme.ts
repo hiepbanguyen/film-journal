@@ -14,6 +14,7 @@ export const COMPONENT_THEME = {
         ":hover": {
           border: "1px solid #fff",
         },
+        border: "1px solid rgba(0,0,0,0.2)",
       },
     },
   },

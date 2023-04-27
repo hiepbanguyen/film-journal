@@ -26,6 +26,7 @@ export const PopularReviews = () => {
                 content={i.Content ?? ""}
                 username={i.User?.UserName ?? ""}
                 fullname={i.User?.FullName ?? ""}
+                userAvatar={i.User?.Avatar ?? ""}
                 ratings={i.Rate ?? 0}
                 likeCount={i.TotalLike ?? 0}
                 commentCount={i.TotalComment ?? 0}

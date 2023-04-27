@@ -15,6 +15,7 @@ export default function ReviewPreview(props) {
     content,
     username,
     fullname,
+    userAvatar,
     ratings,
     likeCount,
     commentCount,
@@ -47,7 +48,7 @@ export default function ReviewPreview(props) {
                 gap={1}
                 sx={{ ":hover": { color: "#fff" } }}
               >
-                <Avatar sx={{ width: 25, height: 25 }} />
+                <Avatar sx={{ width: 25, height: 25 }} src={userAvatar} />
                 <Typography variant={"body2"} fontWeight={600}>
                   {fullname ?? username}
                 </Typography>
@@ -74,10 +75,6 @@ export default function ReviewPreview(props) {
               <FavoriteIcon
                 sx={{
                   fontSize: 18,
-                  "& :hover": {
-                    cursor: "pointer",
-                    color: "rgba(255, 89, 89, 1)",
-                  },
                 }}
               />
               <span>
@@ -96,10 +93,6 @@ export default function ReviewPreview(props) {
           <FavoriteIcon
             sx={{
               fontSize: 18,
-              "& :hover": {
-                cursor: "pointer",
-                color: "rgba(255, 89, 89, 1)",
-              },
             }}
           />
           <span>
