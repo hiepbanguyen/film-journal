@@ -4,11 +4,11 @@ import { Avatar, Box, Button, Divider, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 import PaginatedGrid from "../common/paginated_grid.jsx";
 import FilmCard from "../common/film-card";
-import ReviewDetailListComment from "../review-detail/review-detail-list-comment.jsx";
 import { listComment, reviewDetail } from "../review-detail/index.jsx";
 import React from "react";
 import { observer } from "mobx-react-lite";
 import UserStore from "../../store/user.store.js";
+import ListCommentSection from "./list-comment-section.jsx";
 
 let films = [
   {
@@ -116,7 +116,7 @@ export default function ListDetail() {
             <Avatar key={idx} />
           ))}
         </Box>
-        <ReviewDetailListComment listComment={listComment} reviewDetail={reviewDetail} />
+        <ListCommentSection listComment={listComment} reviewDetail={reviewDetail} />
         {/*<FilmsListPopularFilms />*/}
       </Box>
     </Container>

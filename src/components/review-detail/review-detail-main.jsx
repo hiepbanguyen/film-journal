@@ -4,12 +4,17 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import NotesIcon from "@mui/icons-material/Notes";
 import FilmCard from "../common/film-card";
 import React from "react";
+import { EditButton } from "../common/edit-button.jsx";
+import { Link } from "react-router-dom";
+import moment from "moment";
 
 function LikedReview(props) {
+  //TODO: liked reviews
+  const { link } = props;
   return (
     <Box
-      component="a"
-      href={props.likedReview.reviewLink}
+      component={Link}
+      to={link ?? ""}
       sx={{
         display: "inline-flex",
         flexDirection: "column",
@@ -21,16 +26,13 @@ function LikedReview(props) {
       }}
     >
       <Box sx={{ position: "relative", display: "inline-block" }}>
-        <Box
-          component="img"
-          src={props.likedReview.userAvatar}
+        <Avatar
+          src={""}
           sx={{
-            height: "40px",
-            width: "40px",
-            borderRadius: "50%",
-            marginBottom: "0",
+            height: 40,
+            width: 40,
           }}
-        ></Box>
+        ></Avatar>
         <Box
           sx={{
             position: "absolute",
@@ -54,14 +56,14 @@ function LikedReview(props) {
           lineHeight: "1px",
         }}
       >
-        {Array.from({ length: props.likedReview.reviewRate }).map((star, index) => (
+        {Array.from({ length: 2 }).map((star, index) => (
           <StarIcon
             sx={{
               fontSize: "12px",
               color: "#9ab",
             }}
             key={index}
-          ></StarIcon>
+          />
         ))}
       </Box>
     </Box>
@@ -69,10 +71,11 @@ function LikedReview(props) {
 }
 
 const ReviewContent = (props) => {
+  const { data } = props;
   return (
     <>
       <Typography fontSize={15} my={3}>
-        {props.reviewDetail.reviewContent}
+        {data.Content ?? ""}
       </Typography>
       {/* Likes */}
       <Box my={1} display={"flex"} alignItems={"stretch"} fontWeight={600} fontSize={14} gap={0.5}>
@@ -86,7 +89,7 @@ const ReviewContent = (props) => {
           }}
         />
         <span>
-          {props.reviewDetail.likesCount} {" likes"}
+          {data.TotalLike ?? 0} {" likes"}
         </span>
       </Box>
       {/* User like related review */}
@@ -97,78 +100,91 @@ const ReviewContent = (props) => {
           color: "#9ab",
         }}
       >
-        {props.reviewDetail.userFirstName} liked these review
+        <b>{data.User?.FullName ?? data.User?.UserName ?? ""}</b> liked these review
       </Box>
       <Divider sx={{ mb: 1 }} />
       <Box>
-        {props.listLikedReview.map((likedReview, index) => (
-          <LikedReview likedReview={likedReview} key={index}></LikedReview>
+        {data.UsersLikeReview?.map((i, index) => (
+          <LikedReview likedReview={i} key={index}></LikedReview>
         ))}
       </Box>
     </>
   );
 };
 
-export default function ReviewDetailMainSection(props) {
+export default function ReviewDetailMain(props) {
+  const { data } = props;
   return (
     <>
       <Box sx={{ flexGrow: 1, color: "#9ab" }} mb={5}>
         {/* Review */}
         <Box display={"flex"} gap={3}>
           {/* Thumbail - link */}
-          <FilmCard size={{ xs: 100, sm: 140, md: 200 }} src={props.reviewDetail.poster} />
+          <FilmCard size={{ xs: 100, sm: 140, md: 200 }} src={data.Film?.Poster_path} />
           <Box flex={1}>
             {/* Info Review */}
             {/* User */}
-            <Box
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "flex-start",
-              }}
-            >
-              <Avatar sx={{ width: 28, height: 28, mr: 1 }} />
+            <Box display={"flex"} justifyContent={"space-between"}>
               <Box
-                component="span"
+                component={Link}
+                to={data.User?.UserName ? `/u/${data.User?.UserName}` : ""}
                 sx={{
-                  color: "#9ab",
-                  fontSize: "12px",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "flex-start",
                 }}
               >
-                {"Review by "}
-                <span
-                  style={{
-                    fontWeight: "600",
+                <Avatar sx={{ width: 28, height: 28, mr: 1 }} src={data.User?.Avatar ?? ""} />
+                <Box
+                  component="span"
+                  sx={{
+                    color: "#9ab",
+                    fontSize: "12px",
+                    ":hover": {
+                      color: "#fff",
+                    },
                   }}
                 >
-                  {props.reviewDetail.userName}
-                </span>
+                  {"Review by "}
+                  <span
+                    style={{
+                      fontWeight: "600",
+                    }}
+                  >
+                    {data.User?.FullName ?? data.User?.UserName ?? ""}
+                  </span>
+                </Box>
               </Box>
+              <EditButton />
             </Box>
             <Divider sx={{ my: 0.5, display: { xs: "none", sm: "block" } }} />
             {/* Info Post */}
             <Box>
               {/* Name Film */}
-              <Box
-                my={1}
-                sx={{
-                  fontSize: { xs: 16, md: 18 },
-                  fontWeight: "600",
-                  color: "#adbfd2",
-                }}
-              >
-                {props.reviewDetail.filmName}
+              <Link to={data.Film?.FilmID ? `/films/${data.Film?.FilmID}` : ""}>
+                {" "}
                 <Box
-                  component="span"
+                  my={1}
                   sx={{
-                    pl: 1,
-                    fontWeight: "400",
+                    fontSize: { xs: 16, md: 18 },
+                    fontWeight: "600",
                     color: "#adbfd2",
+                    ":hover": {
+                      color: "#fff",
+                    },
                   }}
                 >
-                  {props.reviewDetail.yearRelease}
+                  {data.Film?.Title ?? ""}
+                  <span
+                    style={{
+                      paddingLeft: "4px",
+                      fontWeight: 400,
+                    }}
+                  >
+                    {data.Film?.Release_date ? new Date(data.Film?.Release_date).getFullYear() : ""}
+                  </span>
                 </Box>
-              </Box>
+              </Link>
               {/* Release Year - Star Rate */}
               {/* Watched Time */}
               <Box
@@ -184,7 +200,7 @@ export default function ReviewDetailMainSection(props) {
               >
                 <Rating
                   readOnly
-                  value={props.reviewDetail.rate}
+                  value={data.Rate ?? 0}
                   sx={{
                     fontSize: {
                       xs: 18,
@@ -192,13 +208,13 @@ export default function ReviewDetailMainSection(props) {
                     },
                   }}
                 />
-                {props.reviewDetail.watchedTime}
+                {data.WatchedDate ? "Watched " + moment(data.WatchedDate).format("DD MMM, YYYY") : ""}
               </Box>
             </Box>
 
             {/* Review Content */}
             <Box sx={(theme) => ({ [theme.breakpoints.only("xs")]: { display: "none" } })}>
-              <ReviewContent {...props} />
+              <ReviewContent {...props} data={data} />
             </Box>
           </Box>
         </Box>

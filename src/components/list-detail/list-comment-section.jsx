@@ -1,10 +1,12 @@
-import { Avatar, Box, Button, Divider, Grid, Typography } from "@mui/material";
+import { Box, Button, Divider, Grid, Typography } from "@mui/material";
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import { estimatedTimeElapsed } from "../../utils/time.js";
 import PaginationBase from "../common/pagination-base.jsx";
+import { Comment } from "../common/comment.jsx";
 
-export default function ReviewDetailListComment(props) {
+export default function ListCommentSection(props) {
+  const { data } = props;
+  console.log(data);
+  // const [comments, setComments] = useState(data.Data ?? []);
   let listComment = props.listComment;
   const [newCommentContent, setNewCommentContent] = useState("");
 
@@ -42,12 +44,12 @@ export default function ReviewDetailListComment(props) {
   return (
     <Box sx={{ flexGrow: 1, color: "#9ab" }}>
       <Typography textTransform={"uppercase"} fontWeight={"bold"}>
-        {listComment.total} comments
+        {0} comments
       </Typography>
       <Divider />
       <Box mb={3}>
         {listComment.list.map((comment, idx) => (
-          <Comment comment={comment} key={idx} />
+          <Comment {...comment} key={idx} />
         ))}
       </Box>
       <PaginationBase totalPage={2} pageIndex={pageIdx} onChange={handleChangePage} />
@@ -96,48 +98,3 @@ export default function ReviewDetailListComment(props) {
     </Box>
   );
 }
-
-function Comment(props) {
-  return (
-    <>
-      <Box
-        my={2}
-        sx={{
-          flexGrow: 1,
-          color: "#9ab",
-          fontSize: "14px",
-          display: "flex",
-        }}
-      >
-        <Grid container spacing={1}>
-          {/* User-time */}
-          <Grid item xs={12} md={3}>
-            <Box display={"flex"} alignItems={"center"} gap={1}>
-              <Box
-                component={Link}
-                to={"/u/" + props.comment.userName.toLowerCase()}
-                display={"flex"}
-                alignItems={"center"}
-                gap={1}
-                sx={{ ":hover": { color: "#fff" } }}
-              >
-                <Avatar sx={{ width: 25, height: 25 }} alt="User Avatar test" src={props.comment.userAvatar} />
-                <Typography variant={"body2"} fontWeight={600}>
-                  {props.comment.userName}
-                </Typography>{" "}
-              </Box>
-              <Typography variant={"body2"}>{estimatedTimeElapsed(props.comment.time)}</Typography>
-            </Box>
-          </Grid>
-          {/* Comment-content */}
-          <Grid item xs={12} md={9} sx={{ display: "flex", alignItems: "center" }}>
-            {props.comment.content}
-          </Grid>
-        </Grid>
-      </Box>
-      <Divider />
-    </>
-  );
-}
-
-// Format Date to string (from date to now)

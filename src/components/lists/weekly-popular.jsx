@@ -81,7 +81,7 @@ function PopularListPreview(props) {
 
 const WeeklyPopular = () => {
   const [{ data, loading, error }, refetch] = useAxios(`Lists/Popular/Week`);
-
+  // console.log("render weekly popular");
   return (
     <>
       <Typography variant={"body1"} color={"#fff"} textTransform={"uppercase"} mt={5}>

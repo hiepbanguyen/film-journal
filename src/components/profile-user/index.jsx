@@ -9,7 +9,7 @@ import { NavLink, Outlet, useParams } from "react-router-dom";
 import UserStore from "../../store/user.store";
 import { observer } from "mobx-react-lite";
 import useAxios from "axios-hooks";
-import { UserNotExist } from "../common/user-not-exist.jsx";
+import { PageNotExist } from "../common/page-not-exist.jsx";
 import { Loading } from "../common/loading.jsx";
 import defaultUserBanner from "../../assets/img/default-user-banner.png";
 
@@ -75,7 +75,7 @@ const ProfileUser = () => {
   const [{ data, loading, error }, refetch] = useAxios(`Users/${username}/Profile-info`);
   // console.log(data);
 
-  if (!loading && !data) return <UserNotExist />;
+  if (!loading && !data) return <PageNotExist />;
 
   return (
     <Root className={styles.profilePage}>

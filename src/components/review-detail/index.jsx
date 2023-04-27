@@ -1,7 +1,12 @@
 import Container from "@mui/system/Container";
 import { Box } from "@mui/material";
-import ReviewDetailMainSection from "./review-detail-main-section";
-import ReviewDetailListComment from "./review-detail-list-comment";
+import ReviewDetailMain from "./review-detail-main.jsx";
+import ReviewCommentSection from "./review-comment-section.jsx";
+import { useParams } from "react-router-dom";
+import useAxios from "axios-hooks";
+import React from "react";
+import { Loading } from "../common/loading.jsx";
+import { PageNotExist } from "../common/page-not-exist.jsx";
 
 export const reviewDetail = {
   userFirstName: "Pepe",
@@ -15,15 +20,6 @@ export const reviewDetail = {
   poster:
     "https://a.ltrbxd.com/resized/film-poster/5/6/6/2/3/7/566237-ant-man-and-the-wasp-quantumania-0-300-0-450-crop.jpg?v=27ced3fac4",
 };
-
-const listLikedReview = [
-  { userName: "Apple", userAvatar: "https://picsum.photos/200/200", reviewLink: "/review-detail/", reviewRate: 3 },
-  { userName: "Orange", userAvatar: "https://picsum.photos/202/200", reviewLink: "/review-detail/", reviewRate: 4 },
-  { userName: "Grape", userAvatar: "https://picsum.photos/203/200", reviewLink: "/review-detail/", reviewRate: 2 },
-  { userName: "Cherri", userAvatar: "https://picsum.photos/201/200", reviewLink: "/review-detail/", reviewRate: 5 },
-  { userName: "Banana", userAvatar: "https://picsum.photos/200/202", reviewLink: "/review-detail/", reviewRate: 3 },
-  { userName: "Mango", userAvatar: "https://picsum.photos/200/203", reviewLink: "/review-detail/", reviewRate: 1 },
-];
 
 export const listComment = {
   total: 20,
@@ -180,14 +176,17 @@ export const listComment = {
 };
 
 export default function ReviewDetail() {
+  const { reviewId } = useParams();
+  const [{ data: detail, loading: detailLoading, error: detailError }] = useAxios(`Reviews/${reviewId}/detail`);
+  if (!detailLoading && !detail) return <PageNotExist />;
+
   return (
     <Container>
       <Box sx={{ marginTop: 10, mx: { md: 10, lg: 20 } }}>
         {/* Main */}
-        {/* Main-top */}
-        <ReviewDetailMainSection reviewDetail={reviewDetail} listLikedReview={listLikedReview} />
-        {/* List Cmt */}
-        <ReviewDetailListComment listComment={listComment} reviewDetail={reviewDetail} />
+        {detailLoading ? <Loading paddingY={15} /> : <ReviewDetailMain data={detail} />}
+        {/* Comments */}
+        <ReviewCommentSection listComment={listComment} reviewDetail={reviewDetail} reviewId={reviewId} />
       </Box>
     </Container>
   );
