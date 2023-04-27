@@ -1,8 +1,13 @@
-import { Box, Divider, Link } from "@mui/material";
+import { Box, Divider } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import FilmCard from "../common/film-card.jsx";
+import useAxios from "axios-hooks";
+import { Loading } from "../common/loading.jsx";
+import React from "react";
 
 export const JustReviewed = () => {
+  const [{ data, loading, error }, refetch] = useAxios(`Films/JustReviewed`);
+
   return (
     <>
       <Box display={"flex"} justifyContent={"space-between"} alignItems={"baseline"}>
@@ -14,20 +19,17 @@ export const JustReviewed = () => {
         </Typography>
       </Box>
       <Divider />
-      <Box display={"flex"} flexWrap={"wrap"} justifyContent={"center"} gap={1} mt={1.5}>
-        {Array.from({ length: 12 }).map((i, idx) => (
-          <FilmCard key={idx} />
-        ))}
-      </Box>
-      <Typography variant={"h5"} mt={5} textAlign={"center"}>
+      {loading ? (
+        <Loading paddingY={10} />
+      ) : (
+        <Box display={"flex"} flexWrap={"wrap"} justifyContent={"center"} gap={1} mt={1.5}>
+          {data.map((i, idx) => (
+            <FilmCard key={idx} link={i.FilmID && `/films/${i.FilmID}`} src={i.poster_path} />
+          ))}
+        </Box>
+      )}
+      <Typography variant={"h6"} mt={3} textAlign={"center"}>
         Write and share reviews. Compile your own lists. Share your life in film.
-      </Typography>
-      <Typography variant={"body1"} textAlign={"center"} mb={3}>
-        Below are some popular reviews and lists from this week.{" "}
-        <Link href={"/sign-up/"} color={"inherit"}>
-          <strong>Sign up</strong>
-        </Link>{" "}
-        to create your own.
       </Typography>
     </>
   );

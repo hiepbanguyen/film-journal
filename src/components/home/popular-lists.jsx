@@ -3,6 +3,9 @@ import FilmCard from "../common/film-card.jsx";
 import ChatBubbleIcon from "@mui/icons-material/ChatBubble.js";
 import FavoriteIcon from "@mui/icons-material/Favorite.js";
 import { Link } from "react-router-dom";
+import useAxios from "axios-hooks";
+import { Loading } from "../common/loading.jsx";
+import React from "react";
 
 export const FilmCardsStackedFive = ({ posters }) => {
   // console.log(posters);
@@ -29,31 +32,40 @@ export const FilmCardsStackedFive = ({ posters }) => {
 };
 
 export const PopularLists = () => {
+  const [{ data, loading, error }, refetch] = useAxios(`Lists/Popular/Week`);
+
   return (
     <>
       <Typography variant={"body1"} color={"#fff"} textTransform={"uppercase"}>
         popular lists
       </Typography>
       <Divider />
-      <Grid container spacing={1}>
-        {Array.from({ length: 3 }).map((i, idx) => (
-          <Grid key={idx} item xs={12} sm={6} md={12}>
-            <ListPreview
-              title={"Lorem Ipsum is simply dummy text"}
-              fullname={"Bá Hiệp Nguyễn"}
-              username={"bahiep"}
-              favoriteCount={4}
-              commentCount={50}
-            />
-          </Grid>
-        ))}
-      </Grid>
+      {loading ? (
+        <Loading paddingY={10} />
+      ) : (
+        <Grid container spacing={1}>
+          {data.map((i, idx) => (
+            <Grid key={idx} item xs={12} sm={6} md={12}>
+              <ListPreview
+                title={i.ListName ?? ""}
+                fullname={i.User?.FullName ?? ""}
+                username={i.User?.UserName ?? ""}
+                userAvatar={i.User?.Avatar ?? ""}
+                favoriteCount={i.TotalLike ?? 0}
+                commentCount={i.TotalComment ?? 0}
+                posters={i.List}
+                listLink={`/u/${i.User?.UserName}/lists/${i.ListID}`}
+              />
+            </Grid>
+          ))}
+        </Grid>
+      )}
     </>
   );
 };
 
 export default function ListPreview(props) {
-  const { title, username, fullname, favoriteCount, commentCount } = props;
+  const { title, username, fullname, userAvatar, favoriteCount, commentCount, posters, listLink } = props;
   return (
     <Box
       mt={2}
@@ -65,8 +77,8 @@ export default function ListPreview(props) {
         },
       })}
     >
-      <Link to={"/u/hiep/lists/id123"}>
-        <FilmCardsStackedFive />
+      <Link to={listLink ?? ""}>
+        <FilmCardsStackedFive posters={posters} />
         <Typography variant={"body1"} color={"#fff"} sx={{ ":hover": { color: "#00e8ff" } }} fontWeight={600}>
           {title}
         </Typography>
@@ -81,7 +93,7 @@ export default function ListPreview(props) {
           alignItems={"center"}
           sx={{ ":hover": { color: "#fff" } }}
         >
-          <Avatar sx={{ width: 25, height: 25 }}>H</Avatar>
+          <Avatar sx={{ width: 25, height: 25 }} src={userAvatar} />
           <Typography variant={"body2"} ml={0.5} mr={1}>
             {fullname ?? username}
           </Typography>

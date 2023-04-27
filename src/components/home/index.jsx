@@ -61,8 +61,10 @@ const NewFromFriends = () => {
     <Box mt={{ xs: 7, md: 13, lg: 18 }}>
       <Typography fontSize={{ md: 30, sm: 25, xs: 20 }} textAlign={"center"} fontFamily={"Georgia"} color={"#b0c3d7"}>
         {"Welcome back, "}
-        <Link to={`/u/${UserStore.user?.UserName}`} style={{ color: "#fff" }}>
-          {UserStore.user?.FullName ?? UserStore.user?.UserName}
+        <Link to={`/u/${UserStore.user?.UserName}`}>
+          <Box component={"span"} sx={{ color: "#fff", ":hover": { textDecoration: "underline" } }}>
+            {UserStore.user?.FullName ?? UserStore.user?.UserName}
+          </Box>
         </Link>
         {"."}
         <br />

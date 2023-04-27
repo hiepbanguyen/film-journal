@@ -32,15 +32,7 @@ export default function FilmCard(props) {
               },
             }}
           >
-            <CardMedia
-              component="img"
-              height="100%"
-              image={
-                src ??
-                "https://a.ltrbxd.com/resized/film-poster/8/2/2/3/3/3/822333-the-quiet-girl-0-150-0-225-crop.jpg?v=34c5de0af7"
-              }
-              alt="Paella dish"
-            />
+            <CardMedia component="img" height="100%" image={src ?? blankCard} alt="Paella dish" />
           </Card>
         </Link>
       )}

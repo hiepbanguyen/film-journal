@@ -1,5 +1,6 @@
 import { makeAutoObservable } from "mobx";
 import { StorageHelper } from "../utils/storage.js";
+import axios from "axios";
 
 class UserStore {
   _user = null;
@@ -46,6 +47,7 @@ class UserStore {
     const tokenLocal = StorageHelper.getToken();
     if (tokenLocal && tokenLocal !== "") {
       this._token = tokenLocal;
+      axios.defaults.headers.common["Authorization"] = tokenLocal;
     }
     return {
       user: this.user,
@@ -59,12 +61,14 @@ class UserStore {
     this._token = token;
     StorageHelper.setToken(this._token);
     StorageHelper.setUser(this._user);
+    axios.defaults.headers.common["Authorization"] = token;
   }
 
   logout() {
     this._user = null;
     this._token = null;
     StorageHelper.clearSession();
+    delete axios.defaults.headers.common["Authorization"];
   }
 }
 

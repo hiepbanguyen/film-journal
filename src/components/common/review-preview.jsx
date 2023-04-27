@@ -11,6 +11,7 @@ export default function ReviewPreview(props) {
   const {
     title,
     releasedYear,
+    poster,
     content,
     username,
     fullname,
@@ -18,17 +19,18 @@ export default function ReviewPreview(props) {
     likeCount,
     commentCount,
     reviewDate,
+    link,
     notShowFilmCard,
     notShowUser,
   } = props;
   return (
     <Box my={2}>
       <Box display={"flex"} alignItems={{ xs: "center", sm: "flex-start" }} gap={2}>
-        {!notShowFilmCard && <FilmCard />}
+        {!notShowFilmCard && <FilmCard src={poster} />}
         <Box>
           <Typography
             component={Link}
-            to={`/u/${username}/reviews/123`}
+            to={link ?? ""}
             variant={"h5"}
             sx={{ color: "#fff", ":hover": { color: "#00e8ff" } }}
           >
@@ -51,10 +53,12 @@ export default function ReviewPreview(props) {
                 </Typography>
               </Box>
             )}
-            <Box display={"flex"} gap={1} sx={{ pt: 0.25 }}>
-              <EventNoteIcon fontSize={"small"} />
-              <Typography fontSize={14}>{moment(reviewDate).format("MMM DD, YYYY")}</Typography>
-            </Box>
+            {reviewDate && (
+              <Box display={"flex"} gap={1} sx={{ pt: 0.25 }}>
+                <EventNoteIcon fontSize={"small"} />
+                <Typography fontSize={14}>{moment(reviewDate).format("MMM DD, YYYY")}</Typography>
+              </Box>
+            )}
             <Rating value={ratings} size={"medium"} readOnly />
             <Box display={"flex"} gap={1}>
               <ChatBubbleIcon fontSize={"small"} />
@@ -62,7 +66,7 @@ export default function ReviewPreview(props) {
             </Box>
           </Box>
           <Box sx={(theme) => ({ [theme.breakpoints.only("xs")]: { display: "none" } })}>
-            <Typography component={Link} to={`/u/${username}/reviews/123`} fontSize={15} mb={1}>
+            <Typography component={Link} to={link ?? ""} fontSize={15} mb={1}>
               {String(content).slice(0, 210)}
               {"..."}
             </Typography>
@@ -84,7 +88,7 @@ export default function ReviewPreview(props) {
         </Box>
       </Box>
       <Box mt={1} sx={(theme) => ({ [theme.breakpoints.not("xs")]: { display: "none" } })}>
-        <Typography component={Link} to={`/u/${username}/reviews/123`} fontSize={15} mb={1}>
+        <Typography component={Link} to={link ?? ""} fontSize={15} mb={1}>
           {String(content).slice(0, 210)}
           {"..."}
         </Typography>
