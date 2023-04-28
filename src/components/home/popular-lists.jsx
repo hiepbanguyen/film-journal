@@ -37,7 +37,7 @@ export const PopularLists = () => {
   return (
     <>
       <Typography variant={"body1"} color={"#fff"} textTransform={"uppercase"}>
-        popular lists
+        popular lists this week
       </Typography>
       <Divider />
       {loading ? (

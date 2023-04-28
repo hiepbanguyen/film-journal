@@ -1,5 +1,4 @@
 import { Avatar, Box, Divider, Rating, Typography } from "@mui/material";
-import StarIcon from "@mui/icons-material/Star";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import NotesIcon from "@mui/icons-material/Notes";
 import FilmCard from "../common/film-card";
@@ -9,8 +8,7 @@ import { Link } from "react-router-dom";
 import moment from "moment";
 
 function LikedReview(props) {
-  //TODO: liked reviews
-  const { link } = props;
+  const { link, rating, avatar } = props;
   return (
     <Box
       component={Link}
@@ -25,14 +23,14 @@ function LikedReview(props) {
         },
       }}
     >
-      <Box sx={{ position: "relative", display: "inline-block" }}>
+      <Box pb={0.5} sx={{ position: "relative", display: "inline-block" }}>
         <Avatar
-          src={""}
+          src={avatar}
           sx={{
-            height: 40,
-            width: 40,
+            height: 50,
+            width: 50,
           }}
-        ></Avatar>
+        />
         <Box
           sx={{
             position: "absolute",
@@ -48,24 +46,10 @@ function LikedReview(props) {
               borderRadius: "50%",
               border: "1px solid #9ab",
             }}
-          ></NotesIcon>
+          />
         </Box>
       </Box>
-      <Box
-        sx={{
-          lineHeight: "1px",
-        }}
-      >
-        {Array.from({ length: 2 }).map((star, index) => (
-          <StarIcon
-            sx={{
-              fontSize: "12px",
-              color: "#9ab",
-            }}
-            key={index}
-          />
-        ))}
-      </Box>
+      <Rating readOnly value={rating} sx={{ fontSize: 12 }} />
     </Box>
   );
 }
@@ -104,8 +88,13 @@ const ReviewContent = (props) => {
       </Box>
       <Divider sx={{ mb: 1 }} />
       <Box>
-        {data.UsersLikeReview?.map((i, index) => (
-          <LikedReview likedReview={i} key={index}></LikedReview>
+        {data.ReviewsLikedByUser?.map((i, index) => (
+          <LikedReview
+            key={index}
+            link={`/u/${i?.UserName}/reviews/${i?.ReviewID}`}
+            avatar={i.Avatar ?? ""}
+            rating={i.Rate ?? 0}
+          />
         ))}
       </Box>
     </>

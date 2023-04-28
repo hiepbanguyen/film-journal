@@ -175,9 +175,12 @@ export const listComment = {
   ],
 };
 
+const TakeLikedReviews = 10;
 export default function ReviewDetail() {
   const { reviewId } = useParams();
-  const [{ data: detail, loading: detailLoading, error: detailError }] = useAxios(`Reviews/${reviewId}/detail`);
+  const [{ data: detail, loading: detailLoading, error: detailError }] = useAxios(
+    `Reviews/${reviewId}/detail?limitUser=${TakeLikedReviews}`,
+  );
   if (!detailLoading && !detail) return <PageNotExist />;
 
   return (

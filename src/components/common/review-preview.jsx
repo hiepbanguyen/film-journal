@@ -50,7 +50,7 @@ export default function ReviewPreview(props) {
               >
                 <Avatar sx={{ width: 25, height: 25 }} src={userAvatar} />
                 <Typography variant={"body2"} fontWeight={600}>
-                  {fullname ?? username}
+                  {fullname ? fullname : username}
                 </Typography>
               </Box>
             )}

@@ -4,57 +4,70 @@ import PaginationBase from "../common/pagination-base.jsx";
 import useAxios from "axios-hooks";
 import { Loading } from "../common/loading.jsx";
 import { Comment } from "../common/comment.jsx";
+import UserStore from "../../store/user.store.js";
+import { useNavigate } from "react-router-dom";
 
 const PageSize = 10;
 export default function ReviewCommentSection(props) {
   const { reviewId } = props;
-
+  const navigate = useNavigate();
   const [comments, setComments] = useState([]);
   const [newCommentContent, setNewCommentContent] = useState("");
   const [pageIdx, setPageIdx] = React.useState(1);
-  const [{ data, loading, error }, refetch] = useAxios({
+  const [{ data, loading, error }, refetchComments] = useAxios({
     url: `Reviews/${reviewId}/Comments`,
     method: "POST",
     data: {
       pageSize: PageSize,
       pageIndex: pageIdx,
     },
+    useCache: false,
   });
+  const [{}, postComment] = useAxios(
+    {
+      url: `Comments/${reviewId}/reviews`,
+      method: "post",
+    },
+    { manual: true },
+  );
 
   useEffect(() => {
     // if (data) console.log(data);
-    setComments(data?.Data ?? []);
+    if (!loading) {
+      setComments(data?.Data ?? []);
+    }
   }, [loading]);
+
+  useEffect(() => {
+    refetchComments();
+  }, [pageIdx]);
 
   const handleNewCommentContentChange = (event) => {
     setNewCommentContent(event.target.value);
   };
 
-  const postNewComment = () => {
+  const postNewComment = async () => {
+    if (!UserStore.isLoggedIn) navigate("/sign-in");
     if (newCommentContent.trim() === "") return;
-
-    const newComment = {
-      UserName: "Apple",
-      FullName: "sscs",
-      Avatar: "https://picsum.photos/200/200",
-      Content: newCommentContent,
-      CreatedDate: new Date(),
-    };
-    setComments([...comments, newComment]);
+    // setComments([...comments, newComment]);
+    await postComment({
+      data: {
+        Content: newCommentContent,
+      },
+    });
+    await refetchComments();
     setNewCommentContent("");
   };
 
-  const handleEnterInput = (event) => {
+  const handleEnterInput = async (event) => {
     if (event.keyCode === 13) {
-      postNewComment();
+      await postNewComment();
     }
   };
 
   const handleChangePage = (newPage) => {
     // console.log(newPage);
     setPageIdx(newPage);
-    // TODO: error
-    refetch();
   };
 
   return (

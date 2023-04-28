@@ -49,6 +49,19 @@ const axios = Axios.create({
 });
 const cache = new LRU({ max: 10 });
 configure({ axios, cache });
+axios.interceptors.request.use(
+  async (config) => {
+    const token = localStorage.getItem("token");
+
+    if (token) {
+      config.headers = {
+        authorization: token,
+      };
+    }
+    return config;
+  },
+  (error) => Promise.reject(error),
+);
 
 const router = createBrowserRouter([
   {
