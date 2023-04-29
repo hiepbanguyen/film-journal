@@ -1,11 +1,12 @@
 import { Avatar, Box, Divider, Rating, Typography } from "@mui/material";
-import FavoriteIcon from "@mui/icons-material/Favorite";
 import NotesIcon from "@mui/icons-material/Notes";
 import FilmCard from "../common/film-card";
 import React from "react";
 import { EditButton } from "../common/edit-button.jsx";
 import { Link } from "react-router-dom";
 import moment from "moment";
+import { LikeButton } from "../common/like-button.jsx";
+import { estimatedTimeElapsed } from "../../utils/time.js";
 
 function LikedReview(props) {
   const { link, rating, avatar } = props;
@@ -62,16 +63,8 @@ const ReviewContent = (props) => {
         {data.Content ?? ""}
       </Typography>
       {/* Likes */}
-      <Box my={1} display={"flex"} alignItems={"stretch"} fontWeight={600} fontSize={14} gap={0.5}>
-        <FavoriteIcon
-          sx={{
-            fontSize: 18,
-            "& :hover": {
-              cursor: "pointer",
-              color: "rgba(255, 89, 89, 1)",
-            },
-          }}
-        />
+      <Box my={1} display={"flex"} alignItems={"center"} fontWeight={600} fontSize={14} gap={1}>
+        <LikeButton />
         <span>
           {data.TotalLike ?? 0} {" likes"}
         </span>
@@ -144,14 +137,13 @@ export default function ReviewDetailMain(props) {
                   </span>
                 </Box>
               </Box>
-              <EditButton />
+              <EditButton username={data.User?.UserName ?? ""} />
             </Box>
             <Divider sx={{ my: 0.5, display: { xs: "none", sm: "block" } }} />
             {/* Info Post */}
             <Box>
               {/* Name Film */}
               <Link to={data.Film?.FilmID ? `/films/${data.Film?.FilmID}` : ""}>
-                {" "}
                 <Box
                   my={1}
                   sx={{
@@ -198,6 +190,7 @@ export default function ReviewDetailMain(props) {
                   }}
                 />
                 {data.WatchedDate ? "Watched " + moment(data.WatchedDate).format("DD MMM, YYYY") : ""}
+                {data.ModifiedDate && <i>Last updated: {estimatedTimeElapsed(new Date(data?.ModifiedDate))}</i>}
               </Box>
             </Box>
 

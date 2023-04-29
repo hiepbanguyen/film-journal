@@ -59,12 +59,6 @@ export default function ReviewCommentSection(props) {
     setNewCommentContent("");
   };
 
-  const handleEnterInput = async (event) => {
-    if (event.keyCode === 13) {
-      await postNewComment();
-    }
-  };
-
   const handleChangePage = (newPage) => {
     // console.log(newPage);
     setPageIdx(newPage);
@@ -85,7 +79,7 @@ export default function ReviewCommentSection(props) {
               <Comment {...i} key={idx} />
             ))}
           </Box>
-          <PaginationBase totalPage={data.TotalPage ?? 0} pageIndex={pageIdx} onChange={handleChangePage} />
+          <PaginationBase totalPage={data.TotalPage ?? 1} pageIndex={pageIdx} onChange={handleChangePage} />
         </>
       )}
       <Box sx={{ marginBottom: "80px" }}>
@@ -111,7 +105,6 @@ export default function ReviewCommentSection(props) {
                 marginBottom: "12px",
               }}
               value={newCommentContent}
-              onKeyUp={handleEnterInput}
               onChange={handleNewCommentContentChange}
             ></Box>
             <Box sx={{ display: "flex", justifyContent: "end" }}>

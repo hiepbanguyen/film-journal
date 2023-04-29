@@ -23,7 +23,6 @@ export default function GroupAvatars(props) {
         </AvatarGroup>
       ) : (
         <>
-          {" "}
           {followers.List.map((i, idx) => (
             <Avatar key={idx} alt={i.FullName} src={i.Avatar} />
           ))}

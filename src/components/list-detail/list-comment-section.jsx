@@ -1,58 +1,87 @@
 import { Box, Button, Divider, Grid, Typography } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import PaginationBase from "../common/pagination-base.jsx";
 import { Comment } from "../common/comment.jsx";
+import { useNavigate } from "react-router-dom";
+import useAxios from "axios-hooks";
+import UserStore from "../../store/user.store.js";
+import { Loading } from "../common/loading.jsx";
 
+const PageSize = 10;
 export default function ListCommentSection(props) {
-  const { data } = props;
-  console.log(data);
-  // const [comments, setComments] = useState(data.Data ?? []);
-  let listComment = props.listComment;
+  const { listId } = props;
+  const navigate = useNavigate();
+  const [comments, setComments] = useState([]);
   const [newCommentContent, setNewCommentContent] = useState("");
+  const [pageIdx, setPageIdx] = React.useState(1);
+  const [{ data, loading, error }, refetchComments] = useAxios({
+    url: `Lists/${listId}/Comments`,
+    method: "POST",
+    data: {
+      pageSize: PageSize,
+      pageIndex: pageIdx,
+    },
+    useCache: false,
+  });
+  const [{}, postComment] = useAxios(
+    {
+      url: `Comments/${listId}/lists`,
+      method: "post",
+    },
+    { manual: true },
+  );
+
+  useEffect(() => {
+    // if (data) console.log(data);
+    if (!loading) {
+      setComments(data?.Data ?? []);
+    }
+  }, [loading]);
+
+  useEffect(() => {
+    refetchComments();
+  }, [pageIdx]);
 
   const handleNewCommentContentChange = (event) => {
     setNewCommentContent(event.target.value);
   };
 
-  const postNewComment = () => {
+  const postNewComment = async () => {
+    if (!UserStore.isLoggedIn) navigate("/sign-in");
     if (newCommentContent.trim() === "") return;
-
-    const newComment = {
-      userName: "Apple",
-      userAvatar: "https://picsum.photos/200/200",
-      content: newCommentContent,
-      time: new Date(),
-      id: Math.random() * 100,
-    };
-    listComment.list.push(newComment);
-
+    // setComments([...comments, newComment]);
+    await postComment({
+      data: {
+        Content: newCommentContent,
+      },
+    });
+    await refetchComments();
     setNewCommentContent("");
   };
 
-  const handleEnterInput = (event) => {
-    if (event.keyCode === 13) {
-      postNewComment();
-    }
-  };
-  const [pageIdx, setPageIdx] = React.useState(1);
-
   const handleChangePage = (newPage) => {
-    console.log("New page film", newPage);
+    // console.log(newPage);
     setPageIdx(newPage);
   };
 
   return (
     <Box sx={{ flexGrow: 1, color: "#9ab" }}>
-      <Typography textTransform={"uppercase"} fontWeight={"bold"}>
-        {0} comments
-      </Typography>
-      <Divider />
-      <Box mb={3}>
-        {listComment.list.map((comment, idx) => (
-          <Comment {...comment} key={idx} />
-        ))}
-      </Box>
-      <PaginationBase totalPage={2} pageIndex={pageIdx} onChange={handleChangePage} />
+      {loading ? (
+        <Loading paddingY={10} />
+      ) : (
+        <>
+          <Typography textTransform={"uppercase"} fontWeight={"bold"}>
+            {data.Total ?? 0} comments
+          </Typography>
+          <Divider />
+          <Box mb={3}>
+            {comments.map((i, idx) => (
+              <Comment {...i} key={idx} />
+            ))}
+          </Box>
+          <PaginationBase totalPage={data.TotalPage ?? 0} pageIndex={pageIdx} onChange={handleChangePage} />
+        </>
+      )}
       <Box sx={{ marginBottom: "80px" }}>
         <Grid container spacing={4} columns={13}>
           <Grid item xs={13} md={4}></Grid>
@@ -76,7 +105,6 @@ export default function ListCommentSection(props) {
                 marginBottom: "12px",
               }}
               value={newCommentContent}
-              onKeyUp={handleEnterInput}
               onChange={handleNewCommentContentChange}
             ></Box>
             <Box sx={{ display: "flex", justifyContent: "end" }}>

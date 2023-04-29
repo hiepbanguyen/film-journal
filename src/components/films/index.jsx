@@ -26,7 +26,7 @@ const MonthlyPopularFilms = () => {
 export default function Films() {
   return (
     <Container>
-      <Box sx={{ marginTop: 13, color: "#fff" }}>
+      <Box sx={{ marginTop: 13, color: "#fff", mb: 5 }}>
         <Box mb={2}>
           <SearchForm />
         </Box>

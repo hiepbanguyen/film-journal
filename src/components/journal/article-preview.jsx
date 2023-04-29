@@ -32,7 +32,6 @@ export default function ArticlePreview(props) {
           {"."}
         </Typography>
         <Typography display={"inline"} color={"#89a"} fontSize={18} fontWeight={500}>
-          {" "}
           {intro}
         </Typography>
       </Box>

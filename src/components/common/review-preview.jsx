@@ -10,6 +10,7 @@ import moment from "moment";
 export default function ReviewPreview(props) {
   const {
     title,
+    filmId,
     releasedYear,
     poster,
     content,
@@ -27,7 +28,7 @@ export default function ReviewPreview(props) {
   return (
     <Box my={2}>
       <Box display={"flex"} alignItems={{ xs: "center", sm: "flex-start" }} gap={2}>
-        {!notShowFilmCard && <FilmCard src={poster} />}
+        {!notShowFilmCard && <FilmCard src={poster} link={`/films/${filmId}`} />}
         <Box>
           <Typography
             component={Link}

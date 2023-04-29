@@ -1,22 +1,8 @@
 import { Box, Divider, Typography } from "@mui/material";
-import { FilmCardsStackedFive } from "../home/popular-lists.jsx";
-import { Link } from "react-router-dom";
 import React from "react";
 import { ListPreviewVertical } from "./recently-liked.jsx";
 import useAxios from "axios-hooks";
 import { Loading } from "../common/loading.jsx";
-
-export const CrewList = (props) => {
-  const { title } = props;
-  return (
-    <Box mt={2} mb={2} component={Link} to={"/u/hiep/lists/id123"}>
-      <FilmCardsStackedFive />
-      <Typography variant={"body1"} color={"#9ab"} sx={{ ":hover": { color: "#00e8ff" } }} fontWeight={600}>
-        {title}
-      </Typography>
-    </Box>
-  );
-};
 
 export const MostEngaged = (props) => {
   const [{ data, loading, error }, refetch] = useAxios(`Lists/MostEngaged`);

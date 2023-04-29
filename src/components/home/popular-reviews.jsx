@@ -22,6 +22,7 @@ export const PopularReviews = () => {
               <ReviewPreview
                 title={i.Film?.Title ?? ""}
                 poster={i.Film?.Poster_path ?? ""}
+                filmId={i.Film?.FilmID ?? ""}
                 releasedYear={i.Film?.Release_date ? new Date(i.Film?.Release_date).getFullYear() : ""}
                 content={i.Content ?? ""}
                 username={i.User?.UserName ?? ""}
