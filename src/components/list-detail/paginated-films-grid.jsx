@@ -1,12 +1,14 @@
-import { Box, Grid } from "@mui/material";
+import { Box, Divider, Grid } from "@mui/material";
 import FilmCard from "../common/film-card.jsx";
 import PaginationBase from "../common/pagination-base.jsx";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import useAxios from "axios-hooks";
 import { Loading } from "../common/loading";
+import SearchForm from "../common/search-form.jsx";
 
 const PageSize = 48;
-export const PaginatedFilmsGrid = ({ listId }) => {
+export const PaginatedFilmsGrid = ({ listId, children }) => {
+  const [filters, setFilters] = useState(null);
   const [pageIdx, setPageIdx] = React.useState(1);
   const [{ data, loading, error }, refetchFilms] = useAxios({
     url: `Lists/${listId}/Films`,
@@ -14,6 +16,7 @@ export const PaginatedFilmsGrid = ({ listId }) => {
     data: {
       pageSize: PageSize,
       pageIndex: pageIdx,
+      ...filters,
     },
     useCache: false,
   });
@@ -22,12 +25,22 @@ export const PaginatedFilmsGrid = ({ listId }) => {
     refetchFilms();
   }, [pageIdx]);
 
+  const onSubmit = async (values) => {
+    setFilters(values);
+    await refetchFilms();
+  };
+
   const handleChangePage = (newPage) => {
     setPageIdx(newPage);
   };
 
   return (
     <Box mb={12}>
+      <Box mb={{ xs: 2, lg: 0 }}>
+        <SearchForm onSubmit={onSubmit} />
+      </Box>
+      <Divider variant={"fullWidth"} sx={{ my: 3 }} />
+      {children}
       {loading ? (
         <Loading paddingY={10} />
       ) : (

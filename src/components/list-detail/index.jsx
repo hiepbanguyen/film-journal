@@ -1,6 +1,5 @@
 import Container from "@mui/system/Container";
-import SearchForm from "../common/search-form.jsx";
-import { Avatar, Box, Divider, Typography } from "@mui/material";
+import { Avatar, Box, Typography } from "@mui/material";
 import { Link, useParams } from "react-router-dom";
 import React from "react";
 import ListCommentSection from "./list-comment-section.jsx";
@@ -22,7 +21,7 @@ export default function ListDetail() {
     <Container sx={{ marginTop: 10, color: "#9ab" }}>
       <Box px={{ xs: 0, md: 12 }}>
         {detailLoading ? (
-          <Loading paddingY={10} />
+          <Loading paddingY={5} />
         ) : (
           <>
             <Box display={"flex"} sx={{ justifyContent: "space-between", alignItems: "center" }}>
@@ -60,19 +59,16 @@ export default function ListDetail() {
                 <i>Last updated: {estimatedTimeElapsed(new Date(detail?.ModifiedDate))}</i>
               </Typography>
             )}
-            <Box mb={{ xs: 2, lg: 0 }}>
-              <SearchForm />
-            </Box>
-            <Divider variant={"fullWidth"} sx={{ my: 3 }} />
-            <Typography variant={"h5"} color={"#fff"} mb={1}>
-              <strong> {detail?.ListName ?? ""}</strong>
-            </Typography>
-            <Typography mb={3} fontSize={15}>
-              {detail?.Description ?? ""}
-            </Typography>
           </>
         )}
-        <PaginatedFilmsGrid listId={listId} />
+        <PaginatedFilmsGrid listId={listId}>
+          <Typography variant={"h5"} color={"#fff"} mb={1}>
+            <strong> {detail?.ListName ?? ""}</strong>
+          </Typography>
+          <Typography mb={3} fontSize={15}>
+            {detail?.Description ?? ""}
+          </Typography>
+        </PaginatedFilmsGrid>
         <ListCommentSection listId={listId} />
         {/*<FilmsListPopularFilms />*/}
       </Box>

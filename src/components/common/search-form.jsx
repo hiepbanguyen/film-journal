@@ -1,24 +1,25 @@
 import { Box, Button, FormControl, InputLabel, MenuItem, Select, TextField } from "@mui/material";
 import React, { useState } from "react";
+import { useForm } from "react-hook-form";
 
 const listYear = [
-  { label: "Upcoming", value: "upcomming" },
-  { label: "2020s", value: "2020s" },
-  { label: "2010s", value: "2010s" },
-  { label: "2000s", value: "2000s" },
-  { label: "1990s", value: "1990s" },
-  { label: "1980s", value: "1980s" },
-  { label: "1970s", value: "1970s" },
-  { label: "1960s", value: "1960s" },
-  { label: "1950s", value: "1950s" },
-  { label: "1940s", value: "1940s" },
-  { label: "1930s", value: "1930s" },
-  { label: "1920s", value: "1920s" },
-  { label: "1910s", value: "1910s" },
-  { label: "1900s", value: "1900s" },
-  { label: "1890s", value: "1890s" },
-  { label: "1880s", value: "1880s" },
-  { label: "1870s", value: "1870s" },
+  { label: "Upcoming", value: -1 },
+  { label: "2020s", value: 2020 },
+  { label: "2010s", value: 2010 },
+  { label: "2000s", value: 2000 },
+  { label: "1990s", value: 1990 },
+  { label: "1980s", value: 1980 },
+  { label: "1970s", value: 1970 },
+  { label: "1960s", value: 1960 },
+  { label: "1950s", value: 1950 },
+  { label: "1940s", value: 1940 },
+  { label: "1930s", value: 1930 },
+  { label: "1920s", value: 1920 },
+  { label: "1910s", value: 1910 },
+  { label: "1900s", value: 1900 },
+  { label: "1890s", value: 1890 },
+  { label: "1880s", value: 1880 },
+  { label: "1870s", value: 1870 },
 ];
 
 const listRating = [
@@ -33,7 +34,7 @@ const listGenre = [
   { label: "Comedy", value: "comedy" },
   { label: "Crime", value: "crime" },
   { label: "Documentary", value: "documentary" },
-  { label: "Drama", value: "srama" },
+  { label: "Drama", value: "drama" },
   { label: "Family", value: "family" },
   { label: "Fantasy", value: "fantasy" },
   { label: "History", value: "history" },
@@ -42,13 +43,13 @@ const listGenre = [
   { label: "Music", value: "music" },
   { label: "Mystery", value: "mystery" },
   { label: "Romance", value: "romance" },
-  { label: "Since Fiction", value: "since-fiction" },
-  { label: "TV Movie", value: "tv-movie" },
+  { label: "Science Fiction", value: "science fiction" },
   { label: "Thriller", value: "thriller" },
   { label: "War", value: "war" },
   { label: "Western", value: "western" },
 ];
-export default function SearchForm() {
+export default function SearchForm({ onSubmit }) {
+  const { setValue, handleSubmit, reset } = useForm();
   // Khai bao params
   const [year, setYear] = useState("");
   const [rating, setRating] = useState("");
@@ -57,23 +58,28 @@ export default function SearchForm() {
 
   // Function Hanle value
   const handleYearChange = (event) => {
+    setValue("year", event.target.value);
     setYear(event.target.value);
   };
 
   const handleRatingChange = (event) => {
+    setValue("rating", event.target.value);
     setRating(event.target.value);
   };
 
   const handleGenreChange = (event) => {
+    setValue("genre", event.target.value);
     setGenre(event.target.value);
   };
 
   const handleFilmNameChange = (event) => {
+    setValue("filmName", event.target.value);
     setFilmName(event.target.value);
   };
 
   // Clear form
   const handleClear = () => {
+    reset();
     setYear("");
     setGenre("");
     setRating("");
@@ -82,7 +88,7 @@ export default function SearchForm() {
 
   return (
     <Box className="search-form">
-      <form>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <Box display={"flex"} flexWrap={"wrap"} gap={1}>
           <FormControl
             sx={{
