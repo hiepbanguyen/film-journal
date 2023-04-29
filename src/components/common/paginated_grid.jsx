@@ -1,6 +1,5 @@
 import * as React from "react";
-import TablePagination from "@mui/material/TablePagination";
-import { Grid, useTheme } from "@mui/material";
+import { useTheme } from "@mui/material";
 import { Box, styled } from "@mui/system";
 import IconButton from "@mui/material/IconButton";
 import LastPageIcon from "@mui/icons-material/LastPage";
@@ -66,55 +65,5 @@ export function TablePaginationActions(props) {
         {theme.direction === "rtl" ? <FirstPageIcon /> : <LastPageIcon />}
       </CustomIconButton>
     </Box>
-  );
-}
-
-export default function PaginatedGrid(props) {
-  const { itemsPerPage, children } = props;
-  const [page, setPage] = React.useState(0);
-
-  // Avoid a layout jump when reaching the last page with empty rows.
-
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage);
-  };
-
-  return (
-    <>
-      <Grid container spacing={1} columns={24}>
-        {(itemsPerPage > 0 ? children?.slice(page * itemsPerPage, page * itemsPerPage + itemsPerPage) : children).map(
-          (row, index) => (
-            <Grid item key={index} xs={6} sm={4} md={3}>
-              {row}
-            </Grid>
-          ),
-        )}
-      </Grid>
-      <TablePagination
-        component={"div"}
-        rowsPerPageOptions={[itemsPerPage]}
-        count={children.length}
-        rowsPerPage={itemsPerPage}
-        page={page}
-        SelectProps={{
-          inputProps: {
-            "aria-label": "rows per page",
-          },
-          native: true,
-        }}
-        onPageChange={handleChangePage}
-        // onRowsPerPageChange={handleChangeRowsPerPage}
-        ActionsComponent={TablePaginationActions}
-        sx={{
-          color: PaginationColor,
-          "& .MuiTablePagination-spacer": {
-            display: "none",
-          },
-          "& .MuiTablePagination-toolbar": {
-            justifyContent: "center",
-          },
-        }}
-      />
-    </>
   );
 }
