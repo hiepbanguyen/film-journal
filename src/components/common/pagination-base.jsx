@@ -1,14 +1,10 @@
 import React from "react";
-import { NavLink, Outlet, useParams } from "react-router-dom";
-import { useState } from "react";
 import { Pagination } from "@mui/material";
-// import { styled } from "@mui/material/styles";
-// import styles from "../../assets/scss/common.module.scss";
 
 export default function PaginationBase({ totalPage, pageIndex, onChange }) {
-  const handleChangePage = (event, newPage) => {
-    if(pageIndex === newPage) return;
-    onChange(newPage);
+  const handleChangePage = async (event, newPage) => {
+    if (pageIndex === newPage) return;
+    await onChange(newPage);
   };
 
   return (
@@ -17,7 +13,7 @@ export default function PaginationBase({ totalPage, pageIndex, onChange }) {
       page={pageIndex}
       onChange={handleChangePage}
       sx={{
-        float: 'right',
+        float: "right",
         "& .MuiButtonBase-root": {
           color: "#9ab",
           borderRadius: "50%",
@@ -29,7 +25,7 @@ export default function PaginationBase({ totalPage, pageIndex, onChange }) {
         },
         "& .Mui-selected": {
           color: "#000",
-          bgcolor: '#9ab !important',
+          bgcolor: "#9ab !important",
           "&:hover": {
             bgcolor: "#6f7d8b !important",
           },

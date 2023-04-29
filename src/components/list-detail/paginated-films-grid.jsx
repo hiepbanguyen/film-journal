@@ -1,7 +1,7 @@
 import { Box, Divider, Grid } from "@mui/material";
 import FilmCard from "../common/film-card.jsx";
 import PaginationBase from "../common/pagination-base.jsx";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import useAxios from "axios-hooks";
 import { Loading } from "../common/loading";
 import SearchForm from "../common/search-form.jsx";
@@ -21,17 +21,19 @@ export const PaginatedFilmsGrid = ({ listId, children }) => {
     useCache: false,
   });
 
-  useEffect(() => {
-    refetchFilms();
-  }, [pageIdx]);
+  // useEffect(() => {
+  //   refetchFilms();
+  // }, [pageIdx]);
 
   const onSubmit = async (values) => {
+    setPageIdx(1);
     setFilters(values);
     await refetchFilms();
   };
 
-  const handleChangePage = (newPage) => {
+  const handleChangePage = async (newPage) => {
     setPageIdx(newPage);
+    await refetchFilms();
   };
 
   return (
