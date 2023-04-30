@@ -4,11 +4,11 @@ import TwitterIcon from "@mui/icons-material/Twitter";
 import FacebookOutlinedIcon from "@mui/icons-material/FacebookOutlined";
 import MailOutlineOutlinedIcon from "@mui/icons-material/MailOutlineOutlined";
 import InsertLinkOutlinedIcon from "@mui/icons-material/InsertLinkOutlined";
-import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
+import { Box } from "@mui/material";
 
 function ListIconShare() {
   return (
-    <div className="meta_share_list">
+    <Box className="meta_share_list">
       <ul>
         <li>
           <TwitterIcon></TwitterIcon>
@@ -23,9 +23,10 @@ function ListIconShare() {
           <InsertLinkOutlinedIcon></InsertLinkOutlinedIcon>
         </li>
       </ul>
-    </div>
+    </Box>
   );
 }
+
 const FurtherReadlist = [
   "75th Directors Guild of America Awards—a list by Shawn Stubbs",
   "34th Producers Guild of America Awards—a list by Shawn Stubbs",
@@ -34,40 +35,16 @@ const FurtherReadlist = [
   "Art Directors Guild 2023 winners and nominees",
 ];
 
-function FilmTeaser() {
-  return (
-    <div className="film_teaser">
-      <img
-        src="https://marvel-b1-cdn.bc0a.com/f00000000234031/www.pacificu.edu/sites/default/files/Images/editors/3643/ems.cHJkLWVtcy1hc3NldHMvbW92aWVzL2JlOWE2OTE2LWVlZGEtNGYzNC1hODM2LTZlYzk1MDMwMTNmOS5qcGc%3D.jpeg"
-        alt=""
-      />
-      <div>
-        <a href="">
-          <b>Guillermo del Toro's Pinocchio</b> <span>2022</span>
-        </a>
-        <p className="directed" style={{ margin: 0 }}>
-          Directed by
-          <div>
-            <span>Guillermo del Toro,</span>
-            <br />
-            <span>Mark Gustafson</span>
-          </div>
-        </p>
-      </div>
-    </div>
-  );
-}
-
 function Further() {
   return (
-    <div className="further">
+    <Box className="further">
       <h3>FURTHER READING</h3>
       <ul>
         {FurtherReadlist.map((futher) => (
           <li style={{ marginTop: 10 }}>{futher}</li>
         ))}
       </ul>
-    </div>
+    </Box>
   );
 }
 
@@ -93,12 +70,13 @@ const related_articles = [
     displayname: "MIA VICINO",
   },
 ];
+
 function Articles() {
   return (
-    <div className="articles">
+    <Box className="articles">
       {related_articles.map((article) => (
-        <div className="article_item">
-          <img src={article.image} alt="" />
+        <Box className="article_item">
+          <Box component="img" maxWidth={"80vw"} src={article.image} alt="" />
           <p style={{ fontSize: 12 }}>
             <b style={{ fontWeight: 800 }}>{article.category}</b> . {article.time}
           </p>
@@ -106,77 +84,72 @@ function Articles() {
             <span style={{ fontSize: 22, fontWeight: 800 }}>{article.title}</span> {article.description}
           </p>
           <span style={{ fontWeight: 600 }}>{article.displayname}</span>
-        </div>
+        </Box>
       ))}
-    </div>
+    </Box>
   );
 }
 
 const JournalArticle = () => {
   return (
-    <div id="journal-article-page" style={{ marginTop: 50 }}>
-      <header>
-        <div id="nav">
-          <a href>
-            <span className="label">Journal</span>
-          </a>
-          <div className="nav_list">
-            <ul>
-              <li>Archive</li>
-              <li>Newsletter</li>
-              <li>Podcast</li>
-            </ul>
-          </div>
-        </div>
-        <div className="border_line" />
-        <div className="label_header">
-          <div className="meta">
-            <a href>Podcast</a>
-          </div>
-          <div className="article-title">
-            <h1>Best in Show: Guilds and Guillermo</h1>
-          </div>
-          <div className="metasharinglayout">
-            <div className="meta_timestamp">
-              <div className="meta_timestamp_user">
-                <img
-                  src="https://secure.gravatar.com/avatar/d31a4b9508ddd892eb3f904c6ce6bd2d?rating=PG&size=48&border=&default=https%3A%2F%2Fs.ltrbxd.com%2Fstatic%2Fimg%2Favatar48.7a758b1e.png"
-                  alt=""
-                />
-                <a href className="name">
-                  MIA VICINO
-                </a>
-              </div>
-              <div className="meta_timestamp_date">
-                <time dateTime="2023-03-02T21:58:29.995Z" className="localtime-d-mmm-yyyy">
-                  3 Mar 2023
-                </time>
-              </div>
-            </div>
-            <ListIconShare></ListIconShare>
-          </div>
-        </div>
-      </header>
-      <div id="main">
-        <div className="banner_top" />
-        <div id="banner">
-          <div className="img_banner">
-            <img src="https://a.ltrbxd.com/sm/upload/sm/gz/tz/de/header.jpeg?k=bfbb148c77" alt="" />
+    <Box id="journal-article-page" style={{ marginTop: 50, fontFamily: "TiemposTextWeb,Georgia,serif,ColorEmoji" }}>
+      <Box id="nav">
+        <span className="label">Journal</span>
+      </Box>
+      <Box className="border_line" />
+      <Box className="label_header">
+        <Box className="meta">
+          <a href>Podcast</a>
+        </Box>
+        <Box className="article-title">
+          <h1>Best in Show: Guilds and Guillermo</h1>
+        </Box>
+        <Box className="metasharinglayout">
+          <Box className="meta_timestamp">
+            <Box className="meta_timestamp_user">
+              <Box
+                component="img"
+                maxWidth={"80vw"}
+                src="https://secure.gravatar.com/avatar/d31a4b9508ddd892eb3f904c6ce6bd2d?rating=PG&size=48&border=&default=https%3A%2F%2Fs.ltrbxd.com%2Fstatic%2Fimg%2Favatar48.7a758b1e.png"
+                alt=""
+              />
+              <a href className="name">
+                MIA VICINO
+              </a>
+            </Box>
+            <Box className="meta_timestamp_date">
+              <time dateTime="2023-03-02T21:58:29.995Z" className="localtime-d-mmm-yyyy">
+                3 Mar 2023
+              </time>
+            </Box>
+          </Box>
+          <ListIconShare></ListIconShare>
+        </Box>
+      </Box>
+      <Box id="main">
+        <Box id="banner">
+          <Box className="img_banner">
+            <Box
+              component="img"
+              maxWidth={"80vw"}
+              src="https://a.ltrbxd.com/sm/upload/sm/gz/tz/de/header.jpeg?k=bfbb148c77"
+              alt=""
+            />
             <figcaption className="figure-caption caption">
               Paddingto meetsMarcel the Shell with Shoes On, courtesy of JaytheChou.
             </figcaption>
-          </div>
-        </div>
-        <div id="content">
-          <div className="body">
-            <div className="subhead">
+          </Box>
+        </Box>
+        <Box id="content">
+          <Box className="body">
+            <Box className="subhead">
               <p>
                 As the very nearly! last of the guild awards land, we recap the BAFTAs and Césars, and chat with
                 Pinocchio stop motion maestros Guillermo del Toro and Mark Gustafson.&nbsp;
               </p>
-            </div>
-            <div className="body_text">
-              <div className="article-base rich-content">
+            </Box>
+            <Box className="body_text">
+              <Box className="article-base rich-content">
                 <p>
                   Welcome back to Best in Show! Last week, we brought you a write-up of our interview with The Banshees
                   of Inisherin (and Twilight!) composer Carter Burwell. This week, we've returned to give you a status
@@ -184,8 +157,8 @@ const JournalArticle = () => {
                   guilds guilds guilds galore!
                   <strong />
                 </p>
-              </div>
-              <div className="body_text_content_item">
+              </Box>
+              <Box className="body_text_content_item">
                 <h2>Pinocchio, Annie Awards and Guillermo del Toro's love of Paddington</h2>
                 <p>
                   “Paddington 2 is a damn masterpiece.” That was music from Guillermo del Toro's mouth to our ears
@@ -202,14 +175,18 @@ const JournalArticle = () => {
                   hand, along with best animated movie from the Producers' Guild and the Hollywood Critics' Association
                   (HCA).&nbsp;
                 </p>
-                <div style={{ position: "relative" }}>
-                  <img src="https://a.ltrbxd.com/sm/upload/vy/qa/rr/wr/paddington.jpeg?k=894cbc471f" alt="" />
+                <Box style={{ position: "relative" }}>
+                  <Box
+                    component="img"
+                    maxWidth={"80vw"}
+                    src="https://a.ltrbxd.com/sm/upload/vy/qa/rr/wr/paddington.jpeg?k=894cbc471f"
+                    alt=""
+                  />
                   <figcaption className="figure-caption caption">
                     Serial Paddington memer Jay the Chou has even managed to sneak the bear into Guillermo del Toro's
                     Pinocchio.&nbsp;
                   </figcaption>
-                  <FilmTeaser></FilmTeaser>
-                </div>
+                </Box>
                 <p>
                   Our dear, also-Oscar-nominated Marcel the Shell with Shoes On has also won several trophies of late,
                   with special notice for Jenny Slate's voice work as the eponymous shell from both the Annies and the
@@ -220,8 +197,10 @@ const JournalArticle = () => {
                   is a goodie).
                   <strong />
                 </p>
-                <div style={{ position: "relative" }}>
-                  <img
+                <Box style={{ position: "relative" }}>
+                  <Box
+                    component="img"
+                    maxWidth={"80vw"}
                     src="https://a.ltrbxd.com/resized/sm/upload/qx/vt/p9/6m/guillermo-0-960-0-0.jpg?k=d36bbce2c0"
                     alt=""
                   />
@@ -231,10 +210,9 @@ const JournalArticle = () => {
                       <span className="_sr-only">Photographer…</span> Stuart Wilson/​Getty Images
                     </span>
                   </figcaption>
-                  <FilmTeaser></FilmTeaser>
-                </div>
-              </div>
-              <div className="body_text_content_item">
+                </Box>
+              </Box>
+              <Box className="body_text_content_item">
                 <h2>BAFTA </h2>
                 <p>
                   Our London editor Ella Kemp was on the BAFTA red carpet (grabbing four favorites from Ke Huy Quan and
@@ -247,18 +225,19 @@ const JournalArticle = () => {
                   out our HQ story for the complete list of BAFTA victors, and Letterboxd member Jaime's list of
                   nominees and winners ranked by number of nominations.
                 </p>
-                <div style={{ position: "relative" }}>
-                  <img
+                <Box style={{ position: "relative" }}>
+                  <Box
+                    component="img"
+                    maxWidth={"80vw"}
                     src="https://a.ltrbxd.com/resized/sm/upload/0n/up/f4/uo/night-0-960-0-0.jpg?k=8604d43ef0"
                     alt=""
                   />
                   <figcaption className="figure-caption caption">
                     Behind the scenes of The Night of the 12th.&nbsp;
                   </figcaption>
-                  <FilmTeaser></FilmTeaser>
-                </div>
-              </div>
-              <div className="body_text_content_item">
+                </Box>
+              </Box>
+              <Box className="body_text_content_item">
                 <h2>César Awards</h2>
                 <p>
                   Just across the Channel from the BAFTAs, the 48th César Awards—the French film industry's top
@@ -278,13 +257,18 @@ const JournalArticle = () => {
                   ‘Where Is My Mind?' and a standing ovation. To see all the winners, check out this list by
                   Thomas.&nbsp;
                 </p>
-                <img src="https://a.ltrbxd.com/resized/sm/upload/vs/5z/kj/f9/eeaao-0-960-0-0.jpg?k=51ee55be56" alt="" />
+                <Box
+                  component="img"
+                  maxWidth={"80vw"}
+                  src="https://a.ltrbxd.com/resized/sm/upload/vs/5z/kj/f9/eeaao-0-960-0-0.jpg?k=51ee55be56"
+                  alt=""
+                />
                 <figcaption className="figure-caption caption">
                   Shirley Kurata's designs for Jobu Tupaki contributed to her Costume Designers Guild win for Everything
                   Everywhere All at Once.
                 </figcaption>
-              </div>
-              <div className="body_text_content_item">
+              </Box>
+              <Box className="body_text_content_item">
                 <h2>Guilds round-up</h2>
                 <p>
                   WhileEverything Everywhere All at Once only managed an editing win at the BAFTAs, it completely swept
@@ -314,7 +298,9 @@ const JournalArticle = () => {
                   design from the ADG. Check the further reading section below for a full list of all 2023 guild winners
                   and nominees.&nbsp;
                 </p>
-                <img
+                <Box
+                  component="img"
+                  maxWidth={"80vw"}
                   src="https://a.ltrbxd.com/resized/sm/upload/8k/1e/bn/1l/babylon-0-960-0-0.jpg?k=0d5429d166"
                   alt=""
                 />
@@ -329,11 +315,13 @@ const JournalArticle = () => {
                   microphone in front of your face and beg for your Four Faves.&nbsp;
                 </p>
                 <p>New episodes of 'Best in Show' drop every Tuesday until the end of March.</p>
-              </div>
-              <div className="inner">
-                <div className="inner_body">
-                  <div className="inner_user">
-                    <img
+              </Box>
+              <Box className="inner">
+                <Box className="inner_body">
+                  <Box className="inner_user">
+                    <Box
+                      component="img"
+                      maxWidth={"80vw"}
                       className="user_img"
                       src="https://secure.gravatar.com/avatar/d31a4b9508ddd892eb3f904c6ce6bd2d?rating=PG&size=48&border=&default=https%3A%2F%2Fs.ltrbxd.com%2Fstatic%2Fimg%2Favatar48.7a758b1e.png"
                       alt=""
@@ -341,97 +329,32 @@ const JournalArticle = () => {
                     <a href="" className="name">
                       MIA VICINO
                     </a>
-                  </div>
-                  <div className="inner_account">
+                  </Box>
+                  <Box className="inner_account">
                     <b style={{ fontSize: 12 }}>Mia on Letterboxd &gt; </b>
-                  </div>
-                </div>
-                <div style={{ width: "100%", marginTop: 12, textAlign: "center" }} className="border_line" />
-              </div>
+                  </Box>
+                </Box>
+                <Box style={{ width: "100%", marginTop: 12, textAlign: "center" }} className="border_line" />
+              </Box>
               <Further></Further>
-              <div style={{ display: "flex", justifyContent: "space-between", width: "85%", marginTop: 60 }}>
+              <Box style={{ display: "flex", justifyContent: "space-between", width: "85%", marginTop: 60 }}>
                 <span>TAGS</span>
                 <span style={{ color: "#9ab", fontWeight: 700 }}>AWARDS</span>
                 <span style={{ color: "#9ab", fontWeight: 700 }}>BEST IN SHOW</span>
                 <span style={{ color: "#9ab", fontWeight: 700 }}>PODCAST</span>
                 <span style={{ color: "#9ab", fontWeight: 700 }}>CESARS</span>
                 <span style={{ color: "#9ab", fontWeight: 700 }}>BAFTA</span>
-              </div>
-              <div style={{ textAlign: "center", width: "100%", margin: "40px 0" }}>
+              </Box>
+              <Box style={{ textAlign: "center", width: "100%", margin: "40px 0" }}>
                 <ListIconShare></ListIconShare>
-              </div>
-            </div>
-          </div>
-          <div style={{ width: "100%", marginTop: 12, textAlign: "center" }} className="border_line" />
+              </Box>
+            </Box>
+          </Box>
+          <Box style={{ width: "100%", marginTop: 12, textAlign: "center" }} className="border_line" />
           <Articles></Articles>
-        </div>
-      </div>
-      <footer>
-        <div className="content_footer">
-          <div className="topics" style={{ width: "41.677%" }}>
-            <h4 style={{ marginBottom: 15 }}>TOPICS</h4>
-            <ul class="topicslist">
-              <li class="listitem">Big Picture</li>
-              <li class="listitem">Cinemascope</li>
-              <li class="listitem">Community</li>
-              <li class="listitem">Deep Impact</li>
-              <li class="listitem">Festival Circuit</li>
-              <li class="listitem">Interview</li>
-              <li class="listitem">Life in Film</li>
-              <li class="listitem">Platform</li>
-              <li class="listitem">Podcast</li>
-              <li class="listitem">Shelf Life</li>
-              <li class="listitem">Year in Review</li>
-            </ul>
-            <div className="topic_search">
-              <input type="search" placeholder="Search..." />
-              <div style={{ position: "absolute", zIndex: 1, top: 10, right: 0 }}>
-                <SearchOutlinedIcon></SearchOutlinedIcon>
-              </div>
-            </div>
-          </div>
-          <div className="masthead" style={{ width: "41.677%" }}>
-            <h4>MASTHEAD</h4>
-            <p style={{ margin: "10px 0 15px 0" }}>
-              Journal is Letterboxd’s online magazine. Our mission is to get more films, big and small, onto your
-              watchlists, spotlight the best writing from our community, and bring you news from our crew behind the
-              scenes. Along the way, we dig deeper into the movies we’re obsessed with, meet the people who make them,
-              and explore the culture that surrounds them. We welcome pitches.
-            </p>
-            <ul class="mastheadlist">
-              <li class="listitem">
-                <a href="https://apple.co/3TfzHVG">Podcast</a>
-              </li>
-              <li class="listitem">
-                <a href="https://twitter.com/letterboxd" target="_blank" rel="noopener noreferrer">
-                  Twitter
-                </a>
-              </li>
-              <li class="listitem">
-                <a href="https://www.facebook.com/letterboxd" target="_blank" rel="noopener noreferrer">
-                  Facebook
-                </a>
-              </li>
-              <li class="listitem">
-                <a href="https://www.instagram.com/letterboxd" target="_blank" rel="noopener noreferrer">
-                  Instagram
-                </a>
-              </li>
-              <li class="listitem">
-                <a href="https://www.youtube.com/letterboxdhq" target="_blank" rel="noopener noreferrer">
-                  YouTube
-                </a>
-              </li>
-              <li class="listitem">
-                <a href="/journal/rss/" target="_blank" rel="noopener noreferrer">
-                  RSS
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </footer>
-    </div>
+        </Box>
+      </Box>
+    </Box>
   );
 };
 export default JournalArticle;

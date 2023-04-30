@@ -100,7 +100,6 @@ export default function ForgotPassword() {
             </Button>
           </Box>
         </Box>
-        <Copyright sx={{ mt: -3 }} />
       </Container>
     </ThemeProvider>
   );

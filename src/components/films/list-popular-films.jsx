@@ -183,7 +183,7 @@ export default function FilmsListPopularFilms() {
           {data?.Data?.map((i, idx) => (
             <Box key={idx}>
               <Box p={1}>
-                <FilmCard size={"100%"} src={i?.Poster_path} link={`Films/${i?.FilmID ?? 0}`} alt={"Film Poster"} />
+                <FilmCard size={"100%"} src={i?.Poster_path} link={`/films/${i?.FilmID ?? 0}`} alt={"Film Poster"} />
               </Box>
               <Box
                 sx={{
@@ -192,7 +192,12 @@ export default function FilmsListPopularFilms() {
                   justifyContent: "center",
                 }}
               >
-                <ViewsLikesLists views={i?.ReviewsCount ?? 0} likes={i?.LikesCount ?? 0} lists={i?.Appears ?? 0} />
+                <ViewsLikesLists
+                  views={i?.ReviewsCount ?? 0}
+                  likes={i?.LikesCount ?? 0}
+                  lists={i?.Appears ?? 0}
+                  filmId={i?.FilmID}
+                />
               </Box>
             </Box>
           ))}
