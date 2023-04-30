@@ -25,7 +25,7 @@ export const RecentLists = ({ username, data }) => {
               <Typography fontSize={14} fontWeight={"bold"}>
                 {i?.Total ?? 0} films
               </Typography>
-              <Typography>{"title"}</Typography>
+              <Typography>{i?.Title ?? ""}</Typography>
             </Box>
           </Box>
         </Link>

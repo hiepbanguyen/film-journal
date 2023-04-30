@@ -11,6 +11,7 @@ export default function Members() {
     <Container
       sx={{
         marginTop: 10,
+        marginBottom: 5,
         color: "#9ab",
       }}
     >

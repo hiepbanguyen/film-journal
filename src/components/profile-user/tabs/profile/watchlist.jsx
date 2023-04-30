@@ -1,10 +1,9 @@
 import * as React from "react";
 import { Box, Divider, Typography } from "@mui/material";
 import { FilmCardsStackedFive } from "../../../home/popular-lists.jsx";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 
-export const WatchList = (props) => {
-  const { username } = useParams();
+export const WatchList = ({ data }) => {
   return (
     <Box>
       <Box display={"flex"} justifyContent={"space-between"} alignItems={"baseline"} color={"#fff"}>
@@ -18,9 +17,9 @@ export const WatchList = (props) => {
         </Link>
       </Box>
       <Divider />
-      <Link to={`/u/${username}/watchlist`}>
+      <Link to={`watchlist`}>
         <Box mt={4} sx={{ display: "flex", justifyContent: "center" }}>
-          <FilmCardsStackedFive />
+          <FilmCardsStackedFive posters={data?.List} />
         </Box>
       </Link>
     </Box>

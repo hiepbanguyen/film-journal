@@ -1,9 +1,9 @@
 import Container from "@mui/system/Container";
-import { Avatar, Box, Typography } from "@mui/material";
+import { Avatar, Box, Divider, Typography } from "@mui/material";
 import { Link, useParams } from "react-router-dom";
 import React from "react";
 import ListCommentSection from "./list-comment-section.jsx";
-import { PaginatedFilmsGrid } from "./paginated-films-grid.jsx";
+import { PaginatedFilmsGrid } from "../common/paginated-films-grid.jsx";
 import { EditButton } from "../common/edit-button.jsx";
 import { LikeButton } from "../common/like-button.jsx";
 import useAxios from "axios-hooks";
@@ -60,7 +60,8 @@ export default function ListDetail() {
             )}
           </>
         )}
-        <PaginatedFilmsGrid listId={listId}>
+        <PaginatedFilmsGrid fetchUrl={`Lists/${listId}/Films`}>
+          <Divider sx={{ my: 3 }} />
           <Typography variant={"h5"} color={"#fff"} mb={1}>
             <strong> {detail?.ListName ?? ""}</strong>
           </Typography>

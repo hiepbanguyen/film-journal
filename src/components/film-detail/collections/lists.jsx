@@ -9,7 +9,7 @@ export default function AllFilmLists() {
     <Container sx={{ mt: 10, color: "#9ab", pb: 5 }}>
       <Box display={"flex"} flexDirection={{ xs: "column", sm: "row" }} gap={3}>
         <Stack gap={3} width={{ sm: 170 }}>
-          <NavBar filmId={1} />
+          <NavBar />
           <ReviewFilters filterValues={["Popularity", "Most recent", "Earliest"]} showFrom={true} />
         </Stack>
         <Box flex={1}>

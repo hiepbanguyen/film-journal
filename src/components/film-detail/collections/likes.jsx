@@ -8,7 +8,7 @@ export default function AllFilmLikes() {
     <Container sx={{ mt: 10, color: "#9ab", pb: 5 }}>
       <Box display={"flex"} flexDirection={{ xs: "column", sm: "row" }} gap={3}>
         <Stack gap={3} width={{ sm: 170 }}>
-          <NavBar filmId={1} />
+          <NavBar />
         </Stack>
         <Box flex={1}>
           <Typography color={"#fff"} fontStyle={"italic"} mb={2}>

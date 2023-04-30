@@ -40,7 +40,7 @@ export default function ReviewCommentSection(props) {
 
   useEffect(() => {
     refetchComments();
-  }, [pageIdx]);
+  }, [pageIdx, reviewId]);
 
   const handleNewCommentContentChange = (event) => {
     setNewCommentContent(event.target.value);

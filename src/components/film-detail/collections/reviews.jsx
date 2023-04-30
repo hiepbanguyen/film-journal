@@ -9,7 +9,7 @@ export default function AllFilmReviews() {
     <Container sx={{ mt: 10, color: "#9ab", pb: 5 }}>
       <Box display={"flex"} flexDirection={{ xs: "column", sm: "row" }} gap={5}>
         <Stack gap={5} width={{ sm: 170 }}>
-          <NavBar filmId={1} />
+          <NavBar />
           <ReviewFilters
             filterValues={["Popularity", "Highest Rating", "Lowest Rating", "Most Recent", "Earliest"]}
             showFrom={true}
@@ -36,6 +36,7 @@ export default function AllFilmReviews() {
                   commentCount={50}
                   reviewDate={new Date()}
                   notShowFilmCard={true}
+                  notShowTitle={true}
                 />
               </React.Fragment>
             ))}

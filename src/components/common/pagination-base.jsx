@@ -2,9 +2,9 @@ import React from "react";
 import { Pagination } from "@mui/material";
 
 export default function PaginationBase({ totalPage, pageIndex, onChange }) {
-  const handleChangePage = async (event, newPage) => {
+  const handleChangePage = (event, newPage) => {
     if (pageIndex === newPage) return;
-    await onChange(newPage);
+    onChange(newPage);
   };
 
   return (

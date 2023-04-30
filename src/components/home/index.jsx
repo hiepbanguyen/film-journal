@@ -14,6 +14,7 @@ import UserStore from "../../store/user.store.js";
 import { observer } from "mobx-react-lite";
 import { Loading } from "../common/loading.jsx";
 import { RecentJournals } from "./recent-journals.jsx";
+import useAxios from "axios-hooks";
 
 const WelcomeSection = () => {
   return (
@@ -47,12 +48,27 @@ const WelcomeSection = () => {
 };
 
 const PopularFilms = () => {
+  const [{ data, loading, error }] = useAxios({
+    url: `Films/Popular`,
+    method: "POST",
+    data: {
+      pageSize: 6,
+      pageIndex: 1,
+    },
+  });
+
   return (
-    <Box display={"flex"} flexWrap={"wrap"} justifyContent={"center"} gap={2} mt={5}>
-      {Array.from({ length: 6 }).map((i, idx) => (
-        <FilmCard key={idx} size={140} />
-      ))}
-    </Box>
+    <>
+      {loading ? (
+        <Loading paddingY={10} />
+      ) : (
+        <Box display={"flex"} flexWrap={"wrap"} justifyContent={"center"} gap={2} mt={5}>
+          {data?.Data.map((i, idx) => (
+            <FilmCard key={idx} size={140} link={`/films/${i?.FilmID}`} src={i?.Poster_path} />
+          ))}
+        </Box>
+      )}
+    </>
   );
 };
 

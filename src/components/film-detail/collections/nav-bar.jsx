@@ -1,12 +1,12 @@
 import { Box } from "@mui/material";
-import { NavLink } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
 import styles from "../../profile-user/profile.module.scss";
 import React from "react";
 
 const categories = ["reviews", "lists", "likes"];
 
-export default function NavBar(props) {
-  const { filmId } = props;
+export default function NavBar() {
+  const { filmId } = useParams();
   return (
     <Box
       sx={{

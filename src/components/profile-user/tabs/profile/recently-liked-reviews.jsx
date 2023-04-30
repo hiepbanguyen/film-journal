@@ -2,7 +2,7 @@ import { Box, Divider } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import ReviewCard from "../../../common/review-card.jsx";
 
-export const RecentlyLikedReviews = () => {
+export const RecentlyLikedReviews = ({ data }) => {
   return (
     <>
       <Box display={"flex"} justifyContent={"space-between"} alignItems={"baseline"}>
@@ -12,16 +12,16 @@ export const RecentlyLikedReviews = () => {
       </Box>
       <Divider />
       <Box display={"flex"} flexWrap={"wrap"} mt={3} gap={{ xs: 1, sm: 3 }} sx={{ justifyContent: "center" }}>
-        {Array.from({ length: 4 }).map((i, idx) => (
+        {data?.map((i, idx) => (
           <ReviewCard
             key={idx}
             size={{ xs: 100, md: 120 }}
-            rating={3.5}
-            username={"bahiep"}
-            link={"/u/bahiep/reviews/324"}
-            avatar={
-              "https://a.ltrbxd.com/resized/avatar/twitter/1/6/4/1/1/5/6/shard/http___pbs.twimg.com_profile_images_1603038301899956226_mcfyp7Bu-0-48-0-48-crop.jpg?v=44bebebad9"
-            }
+            rating={i?.Rate ?? 0}
+            username={i?.User?.UserName}
+            fullname={i?.User?.FullName}
+            link={`/u/${i?.User?.UserName}/reviews/${i?.ReviewID}`}
+            avatar={i?.User?.Avatar}
+            poster={i?.Film?.Poster_path}
           />
         ))}
       </Box>

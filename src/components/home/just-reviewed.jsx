@@ -24,8 +24,8 @@ export const JustReviewed = () => {
           </Box>
           <Divider />
           <Box display={"flex"} flexWrap={"wrap"} justifyContent={"center"} gap={1} mt={1.5}>
-            {data.Data.map((i, idx) => (
-              <FilmCard key={idx} link={i.FilmID && `/films/${i.FilmID}`} src={i.poster_path} />
+            {data?.Data?.map((i, idx) => (
+              <FilmCard key={idx} link={i.FilmID && `/films/${i.FilmID}`} src={i?.Poster_path} />
             ))}
           </Box>
         </>

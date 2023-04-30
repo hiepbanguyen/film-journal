@@ -1,11 +1,9 @@
 import Container from "@mui/system/Container";
-import { Box, Divider, Grid, Typography } from "@mui/material";
+import { Box, Divider, Typography } from "@mui/material";
 import FilmsListPopularFilms from "./list-popular-films";
-import SearchForm from "../common/search-form.jsx";
-import { JustReviewed } from "../home/just-reviewed.jsx";
 import React from "react";
 import FilmCard from "../common/film-card";
-import { PopularReviews } from "../home/popular-reviews.jsx";
+import { PaginatedFilmsGrid } from "../common/paginated-films-grid.jsx";
 
 const MonthlyPopularFilms = () => {
   return (
@@ -27,19 +25,10 @@ export default function Films() {
   return (
     <Container>
       <Box sx={{ marginTop: 13, color: "#fff", mb: 5 }}>
-        <Box mb={2}>
-          <SearchForm />
+        <FilmsListPopularFilms />
+        <Box mb={3}>
+          <PaginatedFilmsGrid fetchUrl={"Films/Paging"} />
         </Box>
-        <FilmsListPopularFilms></FilmsListPopularFilms>
-        <JustReviewed />
-        <Grid container spacing={{ md: 5 }} sx={{ color: "#9ab" }} pt={3}>
-          <Grid item xs={12} md={7.5} lg={8.5}>
-            <PopularReviews />
-          </Grid>
-          <Grid item xs={12} md={4.5} lg={3.5}>
-            <MonthlyPopularFilms />
-          </Grid>
-        </Grid>
       </Box>
     </Container>
   );

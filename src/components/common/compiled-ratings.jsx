@@ -86,7 +86,7 @@ export default function CompiledRatings({ stats }) {
             fontWeight={600}
             sx={{ textShadow: "0px 0px 20px #fff,0px 0px 20px #614ad3" }}
           >
-            {compiledRatings.avg}
+            {stats?.RateAverage?.toFixed(1)}
           </Typography>
           <Box display={"flex"} alignItems={"baseline"}>
             {Array.from({ length: 5 }).map((i, idx) => (

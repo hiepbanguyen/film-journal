@@ -1,10 +1,10 @@
-import { Avatar, Box, Rating, Typography } from "@mui/material";
+import { Avatar, Box, Rating } from "@mui/material";
 import { Link } from "react-router-dom";
 import FormatAlignLeftIcon from "@mui/icons-material/FormatAlignLeft";
 import * as React from "react";
 
 export default function ReviewCard(props) {
-  const { size, rating, username, avatar, link } = props;
+  const { size, rating, username, fullname, avatar, link, poster } = props;
   return (
     <Box component={Link} to={link}>
       <Box
@@ -20,19 +20,26 @@ export default function ReviewCard(props) {
         <Box
           component="img"
           width={size ?? 80}
-          src={
-            "https://a.ltrbxd.com/resized/film-poster/8/2/2/3/3/3/822333-the-quiet-girl-0-150-0-225-crop.jpg?v=34c5de0af7"
-          }
+          src={poster}
           alt="movie title"
           sx={{
             borderRadius: "4px 4px 0 0",
           }}
         />
-        <Box display={"flex"} gap={1} pl={0.5} pb={0.75}>
+        <Box display={"flex"} alignItems={"center"} gap={0.5} px={0.35} pb={0.5} width={size}>
           <Avatar sx={{ width: 20, height: 20 }} src={avatar} alt={"avatar"} />
-          <Typography fontSize={13} fontWeight={"bold"}>
-            {username}
-          </Typography>
+          <Box
+            fontSize={11}
+            fontWeight={"bold"}
+            width={size - 30}
+            sx={{
+              overflow: "hidden",
+              whiteSpace: "nowrap",
+              textOverflow: "ellipsis",
+            }}
+          >
+            {fullname ? fullname : username}
+          </Box>
         </Box>
       </Box>
       <Box display={"flex"} justifyContent={"center"} pt={0.5}>
