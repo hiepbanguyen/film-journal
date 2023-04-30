@@ -20,6 +20,7 @@ export default function ReviewPreview(props) {
     ratings,
     likeCount,
     commentCount,
+    spoiler,
     reviewDate,
     link,
     notShowFilmCard,
@@ -33,7 +34,7 @@ export default function ReviewPreview(props) {
           <Typography
             component={Link}
             to={link ?? ""}
-            variant={"h5"}
+            variant={"h6"}
             sx={{ color: "#fff", ":hover": { color: "#00e8ff" } }}
           >
             <strong style={{ color: "inherit" }}>{title}</strong>{" "}

@@ -1,6 +1,7 @@
 import { Box, Divider, Tooltip, Typography } from "@mui/material";
 import StarHalfIcon from "@mui/icons-material/StarHalf";
 import StarIcon from "@mui/icons-material/Star.js";
+import { useMemo } from "react";
 
 const compiledRatings = {
   each: {
@@ -22,10 +23,10 @@ const compiledRatings = {
 const RatingColumnMaxHeight = 100;
 
 const RatingColumn = (props) => {
-  const { value, label, total } = props;
+  const { count, rating, percent } = props;
 
   return (
-    <Tooltip title={`${value} ratings of ${label / 2} stars (${((value / total) * 100).toFixed(0)}%)`}>
+    <Tooltip title={`${count} ratings of ${rating} stars (${percent}%)`}>
       <Box
         flexGrow={1}
         height={RatingColumnMaxHeight}
@@ -46,7 +47,7 @@ const RatingColumn = (props) => {
         <Box
           className={"rating-column"}
           width={"100%"}
-          height={`${(value / total) * 100}%`}
+          height={`${percent}%`}
           sx={{ background: "#456", borderRadius: "3px 3px 0 0" }}
         ></Box>
       </Box>
@@ -54,20 +55,27 @@ const RatingColumn = (props) => {
   );
 };
 
-export default function CompiledRatings(props) {
+export default function CompiledRatings({ stats }) {
+  const sortedRatings = useMemo(() => {
+    if (stats.List) {
+      return stats.List.sort((a, b) => a.Value - b.Value);
+    }
+    return [];
+  }, [stats.Total]);
+  // console.log(sortedRatings);
   return (
     <Box>
       <Box display={"flex"} justifyContent={"space-between"} alignItems={"baseline"}>
         <Typography fontSize={15}>RATINGS</Typography>
-        <Typography variant={"body2"}>{compiledRatings.total}</Typography>
+        <Typography variant={"body2"}>{stats.Total}</Typography>
       </Box>
       <Divider variant={"fullWidth"} />
       <Box display={"flex"} justifyContent={"center"} alignItems={"flex-end"} mt={1}>
         <Box display={"flex"} alignItems={"baseline"}>
           <StarHalfIcon sx={{ fontSize: 12, mr: 0.5, color: "#00c030" }} />
         </Box>
-        {Object.entries(compiledRatings.each).map(([rating, numOfRatings], idx) => (
-          <RatingColumn key={idx} value={numOfRatings} label={rating} total={compiledRatings.total} />
+        {sortedRatings.map((i, idx) => (
+          <RatingColumn key={idx} count={i.Total} rating={i.Value} percent={i.Percent} />
         ))}
         <Box width={"3px"} />
         <Box display={"flex"} flexDirection={"column"} justifyContent={"flex-end"} gap={1}>

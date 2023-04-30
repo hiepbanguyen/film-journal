@@ -8,7 +8,6 @@ const searchCategories = [
   { label: "Reviews", href: "/reviews" },
   { label: "Lists", href: "/lists" },
   { label: "Members", href: "/members" },
-  // { label: "Tags", href: "/tags" },
 ];
 
 export default function SearchPage() {

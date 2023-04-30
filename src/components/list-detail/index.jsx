@@ -13,7 +13,9 @@ import { estimatedTimeElapsed } from "../../utils/time.js";
 
 export default function ListDetail() {
   const { listId } = useParams();
-  const [{ data: detail, loading: detailLoading, error: detailError }] = useAxios(`Lists/${listId}/Detail`);
+  const [{ data: detail, loading: detailLoading, error: detailError }, refetchDetail] = useAxios(
+    `Lists/${listId}/Detail`,
+  );
 
   if (!detailLoading && !detail) return <PageNotExist />;
 
@@ -49,7 +51,7 @@ export default function ListDetail() {
               <EditButton username={detail?.User?.UserName ?? ""} />
             </Box>
             <Box my={1} display={"flex"} alignItems={"center"} fontWeight={600} fontSize={14} gap={1}>
-              <LikeButton likes={detail?.TotalLike ?? 0} type={"list"} id={listId} />
+              <LikeButton likes={detail?.TotalLike ?? 0} type={"list"} id={listId} refetchDetail={refetchDetail} />
             </Box>
             {detail?.ModifiedDate && (
               <Typography mb={2} fontSize={14}>

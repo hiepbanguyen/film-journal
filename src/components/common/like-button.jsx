@@ -5,8 +5,9 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder.js";
 import useAxios from "axios-hooks";
 import UserStore from "../../store/user.store.js";
 import { useNavigate } from "react-router-dom";
+import { observer } from "mobx-react-lite";
 
-export const LikeButton = ({ likes, type, id }) => {
+export const LikeButton = observer(({ likes, type, id, refetchDetail }) => {
   const navigate = useNavigate();
   const [likeCount, setLikeCount] = React.useState(likes);
   const [isLiked, setIsLiked] = React.useState(false);
@@ -27,6 +28,8 @@ export const LikeButton = ({ likes, type, id }) => {
   useEffect(() => {
     if (UserStore.isLoggedIn) {
       getUserLiked();
+    } else {
+      setIsLiked(false);
     }
   }, [UserStore.isLoggedIn]);
 
@@ -40,11 +43,7 @@ export const LikeButton = ({ likes, type, id }) => {
       return;
     }
     await toggleLike();
-    if (isLiked) {
-      setLikeCount(likeCount - 1);
-    } else {
-      setLikeCount(likeCount + 1);
-    }
+    await refetchDetail();
     setIsLiked(!isLiked);
   };
   return (
@@ -80,4 +79,4 @@ export const LikeButton = ({ likes, type, id }) => {
       </span>
     </>
   );
-};
+});

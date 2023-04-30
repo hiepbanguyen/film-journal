@@ -14,40 +14,36 @@ const Following = {
   ],
 };
 
-function Follow(props) {
-  return (
-    <Box sx={{ marginBottom: "24px" }}>
-      <Box
-        sx={{
-          fontSize: { xs: "12px", md: "14px" },
-          textTransform: "uppercase",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          marginTop: "23px",
-        }}
-      >
-        <Typography>{"Following"}</Typography>
-        <Link to={"following"}>
-          <Typography variant={"caption"} sx={{ ":hover": { color: "#40bcf4" } }}>
-            {"More"}
-          </Typography>
-        </Link>
-      </Box>
-      <Divider variant={"fullWidth"} />
-      <Box mt={2} display={"flex"} flexWrap={"wrap"} gap={0.25}>
-        {props.data.list.map((user, idx) => (
-          <Avatar key={idx} src={user.avatar} />
-        ))}
-      </Box>
-    </Box>
-  );
-}
-
-export default function ListFollow() {
+export default function ListFollow({ following }) {
   return (
     <Box mt={5}>
-      <Follow data={Following}></Follow>
+      <Box sx={{ marginBottom: "24px" }}>
+        <Box
+          sx={{
+            fontSize: { xs: "12px", md: "14px" },
+            textTransform: "uppercase",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            marginTop: "23px",
+          }}
+        >
+          <Typography>{"Following"}</Typography>
+          <Link to={"following"}>
+            <Typography variant={"caption"} sx={{ ":hover": { color: "#40bcf4" } }}>
+              {"More"}
+            </Typography>
+          </Link>
+        </Box>
+        <Divider variant={"fullWidth"} />
+        <Box mt={2} display={"flex"} flexWrap={"wrap"} gap={0.25}>
+          {following.map((i, idx) => (
+            <Link key={idx} to={`/u/${i?.UserName}`}>
+              <Avatar key={idx} src={i?.Avatar} />
+            </Link>
+          ))}
+        </Box>
+      </Box>
     </Box>
   );
 }

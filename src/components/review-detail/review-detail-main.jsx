@@ -56,7 +56,7 @@ function LikedReview(props) {
 }
 
 const ReviewContent = (props) => {
-  const { data } = props;
+  const { data, refetchDetail } = props;
   return (
     <>
       <Typography fontSize={15} my={3}>
@@ -64,7 +64,7 @@ const ReviewContent = (props) => {
       </Typography>
       {/* Likes */}
       <Box my={1} display={"flex"} alignItems={"center"} fontWeight={600} fontSize={14} gap={1}>
-        <LikeButton likes={data.TotalLike ?? 0} type={"review"} id={data?.ReviewID} />
+        <LikeButton likes={data.TotalLike ?? 0} type={"review"} id={data?.ReviewID} refetchDetail={refetchDetail} />
       </Box>
       {/* User like related review */}
       <Box
@@ -92,7 +92,7 @@ const ReviewContent = (props) => {
 };
 
 export default function ReviewDetailMain(props) {
-  const { data } = props;
+  const { data, refetchDetail } = props;
   return (
     <>
       <Box sx={{ flexGrow: 1, color: "#9ab" }} mb={5}>
@@ -193,12 +193,12 @@ export default function ReviewDetailMain(props) {
 
             {/* Review Content */}
             <Box sx={(theme) => ({ [theme.breakpoints.only("xs")]: { display: "none" } })}>
-              <ReviewContent {...props} data={data} />
+              <ReviewContent {...props} data={data} refetchDetail={refetchDetail} />
             </Box>
           </Box>
         </Box>
         <Box sx={(theme) => ({ [theme.breakpoints.not("xs")]: { display: "none" } })}>
-          <ReviewContent {...props} />
+          <ReviewContent {...props} data={data} refetchDetail={refetchDetail} />
         </Box>
       </Box>
     </>

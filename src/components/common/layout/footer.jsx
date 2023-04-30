@@ -4,13 +4,20 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { Link } from "react-router-dom";
+import TwitterIcon from "@mui/icons-material/Twitter";
+import FacebookIcon from "@mui/icons-material/Facebook";
+import InstagramIcon from "@mui/icons-material/Instagram";
+import YouTubeIcon from "@mui/icons-material/YouTube";
+import TelegramIcon from "@mui/icons-material/Telegram";
 
 function Copyright() {
   return (
-    <Typography variant="body2" color="text.secondary">
+    <Typography variant="body2" color="#678">
       {"Copyright © "}
-      <Link to="">Your Website</Link> {new Date().getFullYear()}
+      <Link to="">FilmJournal</Link> {new Date().getFullYear()}
       {"."}
+      <br />
+      {"This site is protected by reCAPTCHA and the Google privacy policy and terms of service apply."}
     </Typography>
   );
 }
@@ -31,12 +38,21 @@ export default function Footer() {
           py: 3,
           px: 2,
           mt: "auto",
-          backgroundColor: (theme) =>
-            theme.palette.mode === "light" ? theme.palette.grey[300] : theme.palette.grey[800],
+          backgroundColor: "#2c3440",
+          color: "#b0c2d5",
         }}
       >
-        <Container maxWidth="sm">
-          <Typography variant="body1">My sticky footer can be found here.</Typography>
+        <Container maxWidth="md">
+          <Box display={"flex"} gap={1} flexWrap={"wrap"} justifyContent={"space-between"} mb={1}>
+            <Typography variant="body1">Made by Hiệp, Hoàn, Long, Đức, Giang, Quang.</Typography>
+            <Box display={"flex"} gap={1}>
+              <TwitterIcon />
+              <FacebookIcon />
+              <InstagramIcon />
+              <YouTubeIcon />
+              <TelegramIcon />
+            </Box>
+          </Box>
           <Copyright />
         </Container>
       </Box>

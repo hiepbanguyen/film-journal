@@ -39,7 +39,7 @@ const AllTimePopular = (props) => {
           },
         })}
       >
-        <FilmCardsStackedFive posters={posters}/>
+        <FilmCardsStackedFive posters={posters} />
       </Box>
       <Box
         sx={(theme) => ({
@@ -48,13 +48,13 @@ const AllTimePopular = (props) => {
           },
         })}
       >
-        <FilmCardsStackedTen posters={posters}/>
+        <FilmCardsStackedTen posters={posters} />
       </Box>
       <Typography variant={"body1"} color={"#fff"} sx={{ ":hover": { color: "#00e8ff" } }} fontWeight={600}>
         {title}
       </Typography>
       <Box display={"flex"} alignItems={"center"} my={1}>
-        <Avatar sx={{ width: 25, height: 25 }} src={userAvatar ?? ""}/>
+        <Avatar sx={{ width: 25, height: 25 }} src={userAvatar ?? ""} />
         <Typography variant={"body2"} ml={0.5} mr={1}>
           Created by {`${fullname ?? username}`}
         </Typography>
@@ -74,24 +74,26 @@ export const ListAllTime = () => {
       <Typography variant={"body1"} color={"#fff"} textTransform={"uppercase"} mt={5}>
         all-time popular
       </Typography>
-      <Divider/>
+      <Divider />
 
       {loading ? (
-        <Loading paddingY={10}/>
+        <Loading paddingY={10} />
       ) : (
-        <Grid container spacing={2} color={"#9ab"}>            {data.map((i, idx) => (
-          <Grid key={idx} item xs={12} lg={6} sx={{ display: "flex", justifyContent: "center" }}>
-            <AllTimePopular
-              title={i.ListName ?? ""}
-              fullname={i.User?.FullName ?? ""}
-              username={i.User?.UserName ?? ""}
-              userAvatar={i.User?.Avatar ?? ""}
-              films={i.Total ?? 0}
-              posters={i.List}
-              listLink={`/u/${i.User?.UserName}/lists/${i.ListID}`}
-            />
-          </Grid>
-        ))}
+        <Grid container spacing={2} color={"#9ab"}>
+          {" "}
+          {data.map((i, idx) => (
+            <Grid key={idx} item xs={12} lg={6} sx={{ display: "flex", justifyContent: "center" }}>
+              <AllTimePopular
+                title={i.ListName ?? ""}
+                fullname={i.User?.FullName ?? ""}
+                username={i.User?.UserName ?? ""}
+                userAvatar={i.User?.Avatar ?? ""}
+                films={i.Total ?? 0}
+                posters={i.List}
+                listLink={`/u/${i.User?.UserName}/lists/${i.ListID}`}
+              />
+            </Grid>
+          ))}
         </Grid>
       )}
     </Box>

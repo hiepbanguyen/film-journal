@@ -2,13 +2,44 @@ import { Box, Divider, Grid } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import FilmCard from "../../../common/film-card.jsx";
 import { WatchList } from "./watchlist.jsx";
-import { RecentList } from "./recent-list.jsx";
+import { RecentLists } from "./recent-lists.jsx";
 import ListFollow from "./following.jsx";
 import CompiledRatings from "../../../common/compiled-ratings.jsx";
-import { PopularReview, RecentReview } from "./reviews.jsx";
-import ReviewCard from "../../../common/review-card.jsx";
+import { PopularReviews, RecentReviews } from "./reviews.jsx";
+import { useParams } from "react-router-dom";
+import useAxios from "axios-hooks";
+import { Loading } from "../../../common/loading.jsx";
+import { RecentlyLikedReviews } from "./recently-liked-reviews.jsx";
+
+const FavoriteFilms = ({ gap, filmCardSize, films }) => {
+  // console.log(films);
+  return (
+    <>
+      <Typography variant={"body1"} textTransform={"uppercase"} color="#fff">
+        favorite films
+      </Typography>
+      <Divider />
+      <Box
+        my={3}
+        gap={gap}
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+        }}
+      >
+        {films?.Films.map((i, idx) => (
+          <FilmCard key={idx} size={filmCardSize} src={i?.Poster_path} link={`/films/${i?.FilmID}`} />
+        ))}
+      </Box>
+    </>
+  );
+};
 
 export const ProfileTab = () => {
+  const { username } = useParams();
+  const [{ data, loading, error }, refetch] = useAxios(`Users/${username}/Profile`);
+
+  if (loading) return <Loading paddingY={10} />;
   return (
     <Box
       display={"flex"}
@@ -25,69 +56,35 @@ export const ProfileTab = () => {
             },
           })}
         >
-          <Typography variant={"body1"} textTransform={"uppercase"} color="#fff">
-            favorite films
-          </Typography>
-          <Divider />
-          <Box display={"flex"} mt={3} gap={3} sx={{ justifyContent: "center" }}>
-            {Array.from({ length: 4 }).map((i, idx) => (
-              <FilmCard key={idx} size={120} />
-            ))}
-          </Box>
+          <FavoriteFilms breakpoints={"md"} gap={3} filmCardSize={120} films={data?.FavouriteFilms} />
         </Box>
-
-        <Box display={"flex"} justifyContent={"space-between"} alignItems={"baseline"}>
-          <Typography variant={"body1"} textTransform={"uppercase"} mt={5} color="#fff">
-            recently liked reviews
-          </Typography>
-        </Box>
-        <Divider />
-        <Box display={"flex"} flexWrap={"wrap"} mt={3} gap={{ xs: 1, sm: 3 }} sx={{ justifyContent: "center" }}>
-          {Array.from({ length: 4 }).map((i, idx) => (
-            <ReviewCard
-              key={idx}
-              size={{ xs: 100, md: 120 }}
-              rating={3.5}
-              username={"bahiep"}
-              link={"/u/bahiep/reviews/324"}
-              avatar={
-                "https://a.ltrbxd.com/resized/avatar/twitter/1/6/4/1/1/5/6/shard/http___pbs.twimg.com_profile_images_1603038301899956226_mcfyp7Bu-0-48-0-48-crop.jpg?v=44bebebad9"
-              }
-            />
-          ))}
-        </Box>
-        <RecentReview />
-        <PopularReview />
+        <RecentlyLikedReviews />
+        <RecentReviews data={data?.ListRecentReview ?? []} username={username} />
+        <PopularReviews data={data?.ListPopularReview ?? []} username={username} />
       </Box>
       <Grid flex={4}>
         <Box
           sx={(theme) => ({
-            [theme.breakpoints.up("md")]: {
+            [theme.breakpoints.not("sm")]: {
               display: "none",
             },
           })}
         >
-          <Typography variant={"body1"} textTransform={"uppercase"} color="#fff">
-            favorite films
-          </Typography>
-          <Divider />
-          <Box display={"flex"} my={3} gap={{ xs: 1, sm: 3, justifyContent: "center" }}>
-            {Array.from({ length: 4 }).map((i, idx) => (
-              <FilmCard key={idx} size={{ xs: 70, sm: 100 }} />
-            ))}
-          </Box>
+          <FavoriteFilms breakpoints={"sm"} gap={3} filmCardSize={100} films={data?.FavouriteFilms} />
         </Box>
-        <CompiledRatings />
-        <ListFollow />
+        <Box
+          sx={(theme) => ({
+            [theme.breakpoints.not("xs")]: {
+              display: "none",
+            },
+          })}
+        >
+          <FavoriteFilms breakpoints={"xs"} gap={1} filmCardSize={76} films={data?.FavouriteFilms} />
+        </Box>
+        <CompiledRatings stats={data?.RateStats} />
+        <ListFollow following={data?.Following?.List ?? []} />
         <WatchList />
-        <RecentList title={"haon1231asdzxcasdasdasdasdasdas"} films={12} />
-        {/*<Box display={"flex"} justifyContent={"space-between"} alignItems={"baseline"}>*/}
-        {/*  <Typography variant={"body1"} textTransform={"uppercase"} mt={5} color="#fff">*/}
-        {/*    activity*/}
-        {/*  </Typography>*/}
-        {/*</Box>*/}
-        {/*<Divider />*/}
-        {/*<Activity />*/}
+        <RecentLists data={data?.ListRecentList} username={username} />
       </Grid>
     </Box>
   );

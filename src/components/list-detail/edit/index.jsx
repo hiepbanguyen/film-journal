@@ -56,7 +56,7 @@ export const EditList = () => {
   };
 
   return (
-    <Container sx={{ color: "#9ab" }}>
+    <Container sx={{ color: "#9ab", mt: 10 }}>
       <Typography variant={"h5"}>Edit List</Typography>
       <Divider sx={{ mb: 3 }} />
       <form>

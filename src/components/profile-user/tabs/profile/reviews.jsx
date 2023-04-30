@@ -2,7 +2,7 @@ import * as React from "react";
 import { Box, Divider, Stack, Typography } from "@mui/material";
 import ReviewPreview from "../../../common/review-preview.jsx";
 
-export const PopularReview = () => {
+export const PopularReviews = ({ data, username }) => {
   return (
     <Box my={5}>
       <Typography variant={"body1"} textTransform={"uppercase"} color={"#fff"}>
@@ -10,20 +10,21 @@ export const PopularReview = () => {
       </Typography>
       <Divider />
       <Stack color={"#9ab"} mt={1}>
-        {Array.from({ length: 2 }).map((i, idx) => (
+        {data.map((i, idx) => (
           <ReviewPreview
             key={idx}
-            title={"A film title"}
-            releasedYear={2022}
-            content={
-              "Lorem Ipsum is simply dummy text of the printing and typesetting industry. It has survived not only five centuries, but also the" +
-              " leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum"
-            }
-            ratings={4}
-            likeCount={10}
-            commentCount={50}
-            reviewDate={new Date()}
             notShowUser={true}
+            title={i.Film?.Title ?? ""}
+            poster={i.Film?.Poster_path ?? ""}
+            filmId={i.Film?.FilmID ?? ""}
+            releasedYear={i.Film?.Release_date ? new Date(i.Film?.Release_date).getFullYear() : ""}
+            content={i.Content ?? ""}
+            ratings={i.Rate ?? 0}
+            likeCount={i.TotalLike ?? 0}
+            commentCount={i.TotalComment ?? 0}
+            spoiler={i.HaveSpoiler ?? 0}
+            reviewDate={i.WatchedDate ? new Date(i.WatchedDate) : ""}
+            link={`/u/${username}/reviews/${i.ReviewID}`}
           />
         ))}
       </Stack>
@@ -31,7 +32,7 @@ export const PopularReview = () => {
   );
 };
 
-export const RecentReview = () => {
+export const RecentReviews = ({ data, username }) => {
   return (
     <Box my={5}>
       <Typography variant={"body1"} textTransform={"uppercase"} color={"#fff"}>
@@ -39,20 +40,21 @@ export const RecentReview = () => {
       </Typography>
       <Divider />
       <Stack color={"#9ab"} mt={1}>
-        {Array.from({ length: 2 }).map((i, idx) => (
+        {data.map((i, idx) => (
           <ReviewPreview
             key={idx}
-            title={"A film title"}
-            releasedYear={2022}
-            content={
-              "Lorem Ipsum is simply dummy text of the printing and typesetting industry. It has survived not only five centuries, but also the" +
-              " leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum"
-            }
-            ratings={4}
-            likeCount={10}
-            commentCount={50}
-            reviewDate={new Date()}
             notShowUser={true}
+            title={i.Film?.Title ?? ""}
+            poster={i.Film?.Poster_path ?? ""}
+            filmId={i.Film?.FilmID ?? ""}
+            releasedYear={i.Film?.Release_date ? new Date(i.Film?.Release_date).getFullYear() : ""}
+            content={i.Content ?? ""}
+            ratings={i.Rate ?? 0}
+            likeCount={i.TotalLike ?? 0}
+            commentCount={i.TotalComment ?? 0}
+            spoiler={i.HaveSpoiler ?? 0}
+            reviewDate={i.WatchedDate ? new Date(i.WatchedDate) : ""}
+            link={`/u/${username}/reviews/${i.ReviewID}`}
           />
         ))}
       </Stack>

@@ -12,7 +12,7 @@ export default function GroupAvatars(props) {
     <Box display={"flex"} alignItems={"center"} sx={{ fontSize: 13 }} my={1.5}>
       {followers.Total >= 2 ? (
         <AvatarGroup
-          max={followers.Total}
+          max={3}
           sx={{
             "& .MuiAvatarGroup-avatar": { height: 30, width: 30, border: "1px solid #456", fontSize: "inherit" },
           }}
@@ -22,11 +22,7 @@ export default function GroupAvatars(props) {
           ))}
         </AvatarGroup>
       ) : (
-        <>
-          {followers.List.map((i, idx) => (
-            <Avatar key={idx} alt={i.FullName} src={i.Avatar} />
-          ))}
-        </>
+        <Avatar key={idx} alt={followers.List[0].FullName} src={followers.List[0].Avatar} />
       )}
       <Typography fontSize={"inherit"} ml={1}>
         {"Followed by "}

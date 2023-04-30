@@ -1,4 +1,14 @@
-import { Box, Checkbox, Container, FormControlLabel, FormGroup, Rating, Stack, Typography } from "@mui/material";
+import {
+  Box,
+  Checkbox,
+  Container,
+  Divider,
+  FormControlLabel,
+  FormGroup,
+  Rating,
+  Stack,
+  Typography,
+} from "@mui/material";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
 import { DateField } from "@mui/x-date-pickers/DateField";
@@ -14,6 +24,8 @@ export const EditReview = () => {
 
   return (
     <Container sx={{ mt: 10, color: "#9ab", px: { sm: 10, md: 20 } }}>
+      <Typography variant={"h5"}>Edit Review</Typography>
+      <Divider />
       <Stack gap={2} py={2}>
         <LocalizationProvider dateAdapter={AdapterMoment}>
           <DateField
@@ -44,10 +56,6 @@ export const EditReview = () => {
           sx={{ "& .MuiInputBase-root": { color: "inherit" } }}
         />
         <Box display={"flex"} flexDirection={{ xs: "column", sm: "row" }} gap={{ sm: 15 }} alignItems={"flex-start"}>
-          {/*<Box display={"flex"} alignItems={"flex-end"} gap={2}>*/}
-          {/*  <TextField label="Tags" variant={"standard"} />*/}
-          {/*  <Button variant={"contained"}>Add</Button>*/}
-          {/*</Box>*/}
           <FormGroup>
             <FormControlLabel control={<Checkbox sx={{ color: "inherit" }} />} label="Contain spoilers" />
           </FormGroup>

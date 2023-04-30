@@ -61,10 +61,6 @@ export default function ReviewDialog(props) {
             placeholder={"Add a review..."}
           />
           <Box display={"flex"} flexDirection={{ xs: "column", sm: "row" }} gap={{ sm: 15 }} alignItems={"flex-start"}>
-            {/*<Box display={"flex"} alignItems={"flex-end"} gap={2}>*/}
-            {/*  <TextField label="Tags" variant={"standard"} />*/}
-            {/*  <Button variant={"contained"}>Add</Button>*/}
-            {/*</Box>*/}
             <FormGroup>
               <FormControlLabel control={<Checkbox />} label="Contain spoilers" />
             </FormGroup>

@@ -31,6 +31,7 @@ export const PopularReviews = () => {
                 ratings={i.Rate ?? 0}
                 likeCount={i.TotalLike ?? 0}
                 commentCount={i.TotalComment ?? 0}
+                spoiler={i.HaveSpoiler ?? 0}
                 reviewDate={i.WatchedDate ? new Date(i.WatchedDate) : ""}
                 link={`/u/${i.User?.UserName}/reviews/${i.ReviewID}`}
               />

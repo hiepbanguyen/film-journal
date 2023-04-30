@@ -11,7 +11,7 @@ import { PageNotExist } from "../common/page-not-exist.jsx";
 const TakeLikedReviews = 10;
 export default function ReviewDetail() {
   const { reviewId } = useParams();
-  const [{ data: detail, loading: detailLoading, error: detailError }] = useAxios(
+  const [{ data: detail, loading: detailLoading, error: detailError }, refetchDetail] = useAxios(
     `Reviews/${reviewId}/detail?limitUser=${TakeLikedReviews}`,
   );
   if (!detailLoading && !detail) return <PageNotExist />;
@@ -20,7 +20,7 @@ export default function ReviewDetail() {
     <Container>
       <Box sx={{ marginTop: 10, mx: { md: 10, lg: 20 } }}>
         {/* Main */}
-        {detailLoading ? <Loading paddingY={15} /> : <ReviewDetailMain data={detail} />}
+        {detailLoading ? <Loading paddingY={15} /> : <ReviewDetailMain data={detail} refetchDetail={refetchDetail} />}
         {/* Comments */}
         <ReviewCommentSection reviewId={reviewId} />
       </Box>

@@ -5,7 +5,7 @@ import Container from "@mui/material/Container";
 import styles from "./profile.module.scss";
 import GroupAvatars from "./avatar-group.jsx";
 import { ProfileStats } from "./profile-stats.jsx";
-import { NavLink, Outlet, useParams } from "react-router-dom";
+import { NavLink, Outlet, useNavigate, useParams } from "react-router-dom";
 import UserStore from "../../store/user.store";
 import { observer } from "mobx-react-lite";
 import useAxios from "axios-hooks";
@@ -15,7 +15,7 @@ import defaultUserBanner from "../../assets/img/default-user-banner.png";
 
 const Root = styled("div")({
   flexGrow: 1,
-  padding: 10,
+  paddingTop: 10,
   marginTop: 50,
 });
 
@@ -25,8 +25,6 @@ const profileTabs = [
   { label: "Watchlist", href: "watchlist" },
   { label: "Lists", href: "lists" },
   { label: "Likes", href: "likes" },
-  // { label: "Tags", href: "tags" },
-  // { label: "Activity", href: "activity" },
   { label: "Following", href: "following" },
   { label: "Followers", href: "followers" },
   { label: "Info and Security", href: "edit-profile" },
@@ -66,6 +64,24 @@ const ProfileNavigation = observer(() => {
   );
 });
 
+const FollowButton = observer(({ username }) => {
+  const navigate = useNavigate();
+
+  const handleFollow = async () => {
+    if (!UserStore.isLoggedIn) {
+      navigate("/sign-in");
+    }
+  };
+  return (
+    <>
+      {UserStore.user?.UserName !== username && (
+        <Button onClick={handleFollow} variant="contained" sx={{ bgcolor: "#456", p: 0, py: 0.5, mt: 0.5 }}>
+          Follow
+        </Button>
+      )}
+    </>
+  );
+});
 const bannerPositionTop = { xs: -30, sm: -50, md: -80, lg: -100 };
 const avatarSize = 80;
 
@@ -119,15 +135,13 @@ const ProfileUser = () => {
           <>
             <Box display={"flex"} flexDirection={{ xs: "column", sm: "row" }}>
               <Box flex={8}>
-                <Box sx={{ display: "flex" }}>
+                <Box sx={{ display: "flex", alignItems: "center" }}>
                   <Avatar sx={{ width: avatarSize, height: avatarSize }} alt="Remy Sharp" src={data.Avatar} />
                   <Box ml={1}>
                     <Typography variant="h5" color="#fff" pt={1}>
                       {data.FullName ?? data.UserName}
                     </Typography>
-                    <Button variant="contained" sx={{ bgcolor: "#456", p: 0, py: 0.5, mt: 0.5 }}>
-                      Follow
-                    </Button>
+                    <FollowButton username={username} />
                   </Box>
                 </Box>
                 <Typography variant={"body2"} color={"#9ab"} pt={1} pr={{ sm: 5, md: 10 }}>
