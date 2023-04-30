@@ -1,6 +1,5 @@
 import React from "react";
 import "./film-detail.scss";
-import CompiledRatings from "../common/compiled-ratings.jsx";
 import { Box, Container, Stack } from "@mui/material";
 import SigninAndShare from "./signin-and-share.jsx";
 import TabsCastNCrew from "./tabs-cast-n-crew.jsx";
@@ -75,7 +74,7 @@ const FilmDetail = () => {
               <TabsCastNCrew />
             </Box>
             <Stack flex={1} pt={2} gap={4} sx={{ mt: 1.2 }}>
-              <CompiledRatings />
+              {/*<CompiledRatings />*/}
               {loggedIn ? <ActionBox /> : <SigninAndShare />}
             </Stack>
           </Box>

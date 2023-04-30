@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Box, Stack } from "@mui/material";
-import SearchForm from "../../../common/search-form";
 import PaginationBase from "../../../common/pagination-base";
 import ReviewPreview from "../../../common/review-preview.jsx";
 
@@ -78,10 +77,10 @@ const data = {
   ],
 };
 
+const TotalPage = 10;
+
 export default function ReviewsTab() {
   const [pageIndex, setPageIndex] = useState(1);
-  const [pageSize, setPageSize] = useState(5);
-  const [totalPage, setTotalPage] = useState(data.totalPage);
 
   const handleChangePage = (newPage) => {
     setPageIndex(newPage);
@@ -89,12 +88,10 @@ export default function ReviewsTab() {
 
   return (
     <Box className="profile-reviews-tab" sx={{ color: "#9ab", marginTop: "48px", paddingBottom: "48px" }}>
-      <Box sx={{ marginBottom: "24px", display: "flex", justifyContent: "center" }}>
-        <SearchForm />
-      </Box>
       <Stack sx={{ mx: { md: 20 } }}>
         {Array.from({ length: 3 }).map((i, idx) => (
           <ReviewPreview
+            key={idx}
             title={"A film title"}
             releasedYear={2022}
             content={
@@ -109,7 +106,7 @@ export default function ReviewsTab() {
           />
         ))}
       </Stack>
-      <PaginationBase totalPage={totalPage} pageIndex={pageIndex} onChange={handleChangePage} />
+      <PaginationBase totalPage={TotalPage} pageIndex={pageIndex} onChange={handleChangePage} />
     </Box>
   );
 }

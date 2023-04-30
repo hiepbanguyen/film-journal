@@ -70,7 +70,7 @@ const NewFromFriends = () => {
         <br />
         {"Here's what your friends have been watching..."}
       </Typography>
-      <Typography mt={5}>NEW FROM FRIENDS</Typography>
+      <Typography mt={5}>NEW REVIEWS FROM FRIENDS</Typography>
       <Divider />
       <Box display={"flex"} flexWrap={"wrap"} justifyContent={"center"} gap={2} mt={3}>
         {Array.from({ length: 8 }).map((i, idx) => (

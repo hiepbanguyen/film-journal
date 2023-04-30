@@ -1,9 +1,10 @@
 import * as React from "react";
-import { Box } from "@mui/material";
+import { Box, Divider, Typography } from "@mui/material";
 import { Link, useParams } from "react-router-dom";
 import FavoriteIcon from "@mui/icons-material/Favorite.js";
 import Grid from "@mui/material/Grid";
 import PaginationBase from "../../../common/pagination-base";
+import SearchForm from "../../../common/search-form.jsx";
 
 export const UserWatchList = (props) => {
   const { username } = useParams();
@@ -218,19 +219,21 @@ export const UserWatchList = (props) => {
         marginTop: "32px",
       }}
     >
+      <Box sx={{ marginBottom: "24px", display: "flex", justifyContent: "center" }}>
+        <SearchForm />
+      </Box>
       <Box
         sx={{
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
-          color: "#9ab",
-          borderBottom: "1px solid #9ab",
-          marginBottom: "24px",
+          color: "#fff",
         }}
       >
-        <Box>Watch List</Box>
+        <Typography textTransform={"uppercase"}>Watch List</Typography>
         <Box>{data.total}</Box>
       </Box>
+      <Divider sx={{ mb: 3 }} />
 
       {data.list.length > 0 ? (
         <Box>
