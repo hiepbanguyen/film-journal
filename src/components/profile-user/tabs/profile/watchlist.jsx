@@ -7,7 +7,7 @@ export const WatchList = ({ data }) => {
   return (
     <Box>
       <Box display={"flex"} justifyContent={"space-between"} alignItems={"baseline"} color={"#fff"}>
-        <Typography variant={"body1"} textTransform={"uppercase"} mt={5}>
+        <Typography variant={"body1"} textTransform={"uppercase"} mt={3}>
           watchlist
         </Typography>
         <Link to={"watchlist"}>
@@ -19,7 +19,7 @@ export const WatchList = ({ data }) => {
       <Divider />
       <Link to={`watchlist`}>
         <Box mt={4} sx={{ display: "flex", justifyContent: "center" }}>
-          <FilmCardsStackedFive posters={data?.List} />
+          {data?.List && <FilmCardsStackedFive posters={data.List} />}
         </Box>
       </Link>
     </Box>

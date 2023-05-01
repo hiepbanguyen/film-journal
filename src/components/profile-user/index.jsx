@@ -16,6 +16,7 @@ import defaultUserBanner from "../../assets/img/default-user-banner.png";
 const Root = styled("div")({
   flexGrow: 1,
   paddingTop: 10,
+  marginBottom: 50,
   marginTop: 50,
 });
 

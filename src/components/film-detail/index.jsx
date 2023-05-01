@@ -9,6 +9,7 @@ import SimilarFilms from "./similar-films.jsx";
 import PosterAndDescription from "./poster-and-description.jsx";
 import ActionBox from "./action-box.jsx";
 import TabsReviews from "./tabs-reviews.jsx";
+import CompiledRatings from "../common/compiled-ratings.jsx";
 
 const film_detail = {
   title: "Avatar: The Way of Water",
@@ -74,7 +75,7 @@ const FilmDetail = () => {
               <TabsCastNCrew />
             </Box>
             <Stack flex={1} pt={2} gap={4} sx={{ mt: 1.2 }}>
-              {/*<CompiledRatings />*/}
+              <CompiledRatings />
               {loggedIn ? <ActionBox /> : <SigninAndShare />}
             </Stack>
           </Box>

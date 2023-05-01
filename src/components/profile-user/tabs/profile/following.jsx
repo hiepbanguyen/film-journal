@@ -2,21 +2,9 @@ import { Avatar, Box, Divider, Typography } from "@mui/material";
 import * as React from "react";
 import { Link } from "react-router-dom";
 
-const Following = {
-  count: 8,
-  list: [
-    { userName: "banana", avatar: "https://picsum.photos/212/212" },
-    { userName: "apple", avatar: "https://picsum.photos/213/213" },
-    { userName: "orange", avatar: "https://picsum.photos/214/212" },
-    { userName: "mango", avatar: "https://picsum.photos/212/215" },
-    { userName: "coconut", avatar: "https://picsum.photos/216/212" },
-    { userName: "grape", avatar: "https://picsum.photos/212/217" },
-  ],
-};
-
 export default function ListFollow({ following }) {
   return (
-    <Box mt={5}>
+    <Box mt={3.8}>
       <Box sx={{ marginBottom: "24px" }}>
         <Box
           sx={{

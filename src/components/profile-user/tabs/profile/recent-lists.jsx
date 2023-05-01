@@ -17,7 +17,7 @@ export const RecentLists = ({ username, data }) => {
         </Link>
       </Box>
       <Divider />
-      {data.map((i, idx) => (
+      {data?.map((i, idx) => (
         <Link key={idx} to={`/u/${username}/lists`}>
           <Box sx={{ display: "flex", justifyContent: "center" }}>
             <Box color={"#fff"} mt={4}>

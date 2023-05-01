@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useEffect } from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -11,74 +12,60 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import baseAPI from "../../apis/baseAPI";
-
-function Copyright(props) {
-  return (
-    <Typography variant="body2" color="text.secondary" align="center" {...props}>
-      {"Copyright © "}
-      <Link to="">Your Website</Link>
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
+import { useSnackbar } from "notistack";
+import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
+import { Copyright } from "../common/layout/footer.jsx";
+import { HeaderHeight } from "../common/layout/header/index.jsx";
+import UserStore from "../../store/user.store.js";
 
 const theme = createTheme();
 
 export default function SignUp() {
   const navigate = useNavigate();
-  const [errorUserName, setErrorUserName] = React.useState(false);
+  const { enqueueSnackbar } = useSnackbar();
+  const [errorUsername, setErrorUsername] = React.useState(false);
   const [errorEmail, setErrorEmail] = React.useState(false);
   const [errorPassword, setErrorPassword] = React.useState(false);
   const [errorMsg, setErrorMsg] = React.useState("");
 
+  useEffect(() => {
+    if (UserStore.isLoggedIn) navigate("/");
+  }, [UserStore.isLoggedIn]);
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    if (!validate(data)) {
-      return;
+    if (validateFields(data)) {
+      baseAPI
+        .postAsync(`Users/signup`, {
+          UserName: data.get("userName"),
+          Email: data.get("email"),
+          Password: data.get("password"),
+        })
+        .then((res) => {
+          if (res) {
+            enqueueSnackbar("Register successfully, please confirm your email to sign in", { variant: "success" });
+            // Chuyển đến trang login
+            navigate("/sign-in");
+          }
+        })
+        .catch((err) => {
+          setErrorMsg(err.response.data.devMsg);
+        });
     }
-
-    baseAPI
-      .postAsync(`Users/signup`, {
-        UserName: data.get("userName"),
-        Email: data.get("email"),
-        Password: data.get("password"),
-      })
-      .then((res) => {
-        if (res) {
-          // Chuyển đến trang login
-          navigate("/sign-in");
-        }
-      })
-      .catch((err) => {
-        setErrorMsg(err.response.data.devMsg);
-      });
   };
 
-  const validate = (data) => {
-    if (!validateEmail(data.get("email"))) {
-      setErrorEmail(true);
-    } else {
-      setErrorEmail(false);
-    }
+  const validateFields = (data) => {
+    const emailAccepted = validateEmail(data.get("email"));
+    const usernameFilled = data.get("userName");
+    const passwordFilled = data.get("password");
+    setErrorEmail(!emailAccepted);
 
-    if (data.get("userName")) {
-      setErrorUserName(false);
-    } else {
-      setErrorUserName(true);
-    }
+    setErrorUsername(!usernameFilled);
 
-    if (data.get("password")) {
-      setErrorPassword(false);
-    } else {
-      setErrorPassword(true);
-    }
+    setErrorPassword(!passwordFilled);
 
-    if (!errorUserName && !errorEmail && !errorPassword) {
-      return true;
-    }
-    return false;
+    return emailAccepted && usernameFilled && passwordFilled;
   };
 
   const validateEmail = (email) => {
@@ -89,15 +76,15 @@ export default function SignUp() {
 
   return (
     <ThemeProvider theme={theme}>
-      <Container component="main" maxWidth="xs" sx={{ background: "#fff" }}>
+      <Container component="main" maxWidth="xs" sx={{ background: "#fff", mt: HeaderHeight / 8 }}>
         <CssBaseline />
         <Box
           sx={{
-            paddingTop: 8,
+            paddingTop: 5,
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
-            height: "100vh",
+            height: "90vh",
           }}
         >
           <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
@@ -107,7 +94,7 @@ export default function SignUp() {
             Sign up
           </Typography>
           <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
-            <Grid container spacing={2}>
+            <Grid container spacing={2} mb={2}>
               <Grid item xs={12} sm={12}>
                 <TextField
                   autoComplete="given-name"
@@ -115,22 +102,22 @@ export default function SignUp() {
                   required
                   fullWidth
                   id="userName"
-                  label="UserName"
+                  label="Username"
                   autoFocus
-                  error={errorUserName}
-                  helperText={errorUserName ? "UserName is required." : ""}
+                  error={errorUsername}
+                  helperText={errorUsername && "Username is required."}
                 />
               </Grid>
               <Grid item xs={12}>
                 <TextField
                   required
-                  error={errorEmail || errorMsg}
+                  error={errorEmail}
                   fullWidth
                   id="email"
                   label="Email"
                   name="email"
                   autoComplete="email"
-                  helperText={errorEmail ? "Email is invalid." : errorMsg}
+                  helperText={errorEmail && "Email is invalid."}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -143,11 +130,19 @@ export default function SignUp() {
                   id="password"
                   autoComplete="new-password"
                   error={errorPassword}
-                  helperText={errorPassword ? "Password is required." : ""}
+                  helperText={errorPassword && "Password is required."}
                 />
               </Grid>
             </Grid>
-            <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
+            {errorMsg && (
+              <Box sx={{ color: "#fc0707", display: "flex", gap: 0.5, alignItems: "center" }}>
+                <ErrorOutlineIcon sx={{ fontSize: 20 }} />
+                <Typography fontSize={13} pt={0.25}>
+                  {errorMsg}
+                </Typography>
+              </Box>
+            )}
+            <Button type="submit" fullWidth variant="contained" sx={{ mt: 1, mb: 2 }}>
               Sign Up
             </Button>
             <Grid container justifyContent="flex-end">
@@ -157,9 +152,11 @@ export default function SignUp() {
                 </Link>
               </Grid>
             </Grid>
+            <Box pt={3} textAlign={"center"}>
+              <Copyright />
+            </Box>
           </Box>
         </Box>
-        <Copyright sx={{ mt: -3 }} />
       </Container>
     </ThemeProvider>
   );

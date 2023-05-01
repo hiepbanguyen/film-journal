@@ -49,7 +49,7 @@ const RatingColumn = (props) => {
           width={"100%"}
           height={`${percent}%`}
           sx={{ background: "#456", borderRadius: "3px 3px 0 0" }}
-        ></Box>
+        />
       </Box>
     </Tooltip>
   );
@@ -57,25 +57,25 @@ const RatingColumn = (props) => {
 
 export default function CompiledRatings({ stats }) {
   const sortedRatings = useMemo(() => {
-    if (stats.List) {
+    if (stats?.List) {
       return stats.List.sort((a, b) => a.Value - b.Value);
     }
-    return [];
-  }, [stats.Total]);
+    return Array.from({ length: 10 });
+  }, [stats?.Total]);
   // console.log(sortedRatings);
   return (
     <Box>
       <Box display={"flex"} justifyContent={"space-between"} alignItems={"baseline"}>
         <Typography fontSize={15}>RATINGS</Typography>
-        <Typography variant={"body2"}>{stats.Total}</Typography>
+        <Typography variant={"body2"}>{stats?.Total ?? 0}</Typography>
       </Box>
       <Divider variant={"fullWidth"} />
-      <Box display={"flex"} justifyContent={"center"} alignItems={"flex-end"} mt={1}>
+      <Box display={"flex"} justifyContent={"center"} alignItems={"flex-end"} mt={3}>
         <Box display={"flex"} alignItems={"baseline"}>
           <StarHalfIcon sx={{ fontSize: 12, mr: 0.5, color: "#00c030" }} />
         </Box>
         {sortedRatings.map((i, idx) => (
-          <RatingColumn key={idx} count={i.Total} rating={i.Value} percent={i.Percent} />
+          <RatingColumn key={idx} count={i?.Total ?? 0} rating={i?.Value ?? 0} percent={i?.Percent ?? 0} />
         ))}
         <Box width={"3px"} />
         <Box display={"flex"} flexDirection={"column"} justifyContent={"flex-end"} gap={1}>
@@ -86,7 +86,7 @@ export default function CompiledRatings({ stats }) {
             fontWeight={600}
             sx={{ textShadow: "0px 0px 20px #fff,0px 0px 20px #614ad3" }}
           >
-            {stats?.RateAverage?.toFixed(1)}
+            {stats?.RateAverage ? stats.RateAverage.toFixed(1) : 0}
           </Typography>
           <Box display={"flex"} alignItems={"baseline"}>
             {Array.from({ length: 5 }).map((i, idx) => (
