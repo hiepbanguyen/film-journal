@@ -7,7 +7,7 @@ export default function GroupAvatars(props) {
   const { followers } = props;
   // console.log(followers);
 
-  if (!followers) return <></>;
+  if (!followers || followers?.Total === 0 || followers?.List?.length === 0) return <></>;
   return (
     <Box display={"flex"} alignItems={"center"} sx={{ fontSize: 13 }} my={1.5}>
       {followers.Total >= 2 ? (
@@ -18,11 +18,11 @@ export default function GroupAvatars(props) {
           }}
         >
           {followers.List.map((i, idx) => (
-            <Avatar key={idx} alt={i.FullName} src={i.Avatar} />
+            <Avatar key={idx} alt={i?.FullName} src={i?.Avatar} />
           ))}
         </AvatarGroup>
       ) : (
-        <Avatar key={idx} alt={followers.List[0].FullName} src={followers.List[0].Avatar} />
+        <Avatar alt={followers.List[0]?.FullName} src={followers.List[0].Avatar} />
       )}
       <Typography fontSize={"inherit"} ml={1}>
         {"Followed by "}

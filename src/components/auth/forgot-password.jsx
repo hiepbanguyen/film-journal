@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useEffect } from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -11,6 +12,8 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import baseAPI from "../../apis/baseAPI";
+import { HeaderHeight } from "../common/layout/header/index.jsx";
+import UserStore from "../../store/user.store.js";
 
 function Copyright(props) {
   return (
@@ -28,6 +31,10 @@ const theme = createTheme();
 export default function ForgotPassword() {
   const navigate = useNavigate();
   const [errorMsg, setErrorMsg] = React.useState("");
+
+  useEffect(() => {
+    if (UserStore.isLoggedIn) navigate("/");
+  }, [UserStore.isLoggedIn]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -62,7 +69,7 @@ export default function ForgotPassword() {
 
   return (
     <ThemeProvider theme={theme}>
-      <Container component="main" maxWidth="xs" sx={{ background: "#fff" }}>
+      <Container component="main" maxWidth="xs" sx={{ background: "#fff", mt: HeaderHeight / 8 }}>
         <CssBaseline />
         <Box
           sx={{
@@ -70,7 +77,7 @@ export default function ForgotPassword() {
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
-            height: "100vh",
+            height: "90vh",
           }}
         >
           <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
@@ -100,7 +107,6 @@ export default function ForgotPassword() {
             </Button>
           </Box>
         </Box>
-        <Copyright sx={{ mt: -3 }} />
       </Container>
     </ThemeProvider>
   );

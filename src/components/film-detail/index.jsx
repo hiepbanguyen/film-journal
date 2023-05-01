@@ -1,6 +1,5 @@
 import React from "react";
 import "./film-detail.scss";
-import CompiledRatings from "../common/compiled-ratings.jsx";
 import { Box, Container, Stack } from "@mui/material";
 import SigninAndShare from "./signin-and-share.jsx";
 import TabsCastNCrew from "./tabs-cast-n-crew.jsx";
@@ -10,6 +9,7 @@ import SimilarFilms from "./similar-films.jsx";
 import PosterAndDescription from "./poster-and-description.jsx";
 import ActionBox from "./action-box.jsx";
 import TabsReviews from "./tabs-reviews.jsx";
+import CompiledRatings from "../common/compiled-ratings.jsx";
 
 const film_detail = {
   title: "Avatar: The Way of Water",
@@ -33,10 +33,10 @@ const FilmDetail = () => {
   // console.log("filmdetail render");
   const loggedIn = true;
   return (
-    <>
+    <Container maxWidth={"lg"}>
       <Box position={"relative"}>
         <Box
-          width={{ xs: "95vw", md: "80vw" }}
+          width={{ xs: "95vw", md: "80vw", lg: "100%" }}
           component="img"
           sx={{
             position: "absolute",
@@ -52,7 +52,7 @@ const FilmDetail = () => {
           src={film_detail.banner}
         />
         <Box
-          width={{ xs: "95vw", md: "80vw" }}
+          width={{ xs: "95vw", md: "80vw", lg: "100%" }}
           sx={{
             position: "absolute",
             top: { md: -50 },
@@ -87,7 +87,7 @@ const FilmDetail = () => {
           </Box>
         </Box>
       </Container>
-    </>
+    </Container>
   );
 };
 export default FilmDetail;

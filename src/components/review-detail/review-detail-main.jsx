@@ -99,7 +99,11 @@ export default function ReviewDetailMain(props) {
         {/* Review */}
         <Box display={"flex"} gap={3}>
           {/* Thumbail - link */}
-          <FilmCard size={{ xs: 100, sm: 140, md: 200 }} src={data.Film?.Poster_path} />
+          <FilmCard
+            size={{ xs: 100, sm: 140, md: 200 }}
+            src={data.Film?.Poster_path}
+            link={data?.Film?.FilmID && `/films/${data?.Film?.FilmID}`}
+          />
           <Box flex={1}>
             {/* Info Review */}
             {/* User */}

@@ -14,6 +14,7 @@ export default function ReviewDetail() {
   const [{ data: detail, loading: detailLoading, error: detailError }, refetchDetail] = useAxios(
     `Reviews/${reviewId}/detail?limitUser=${TakeLikedReviews}`,
   );
+
   if (!detailLoading && !detail) return <PageNotExist />;
 
   return (

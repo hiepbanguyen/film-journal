@@ -2,9 +2,9 @@ import React from "react";
 import { Pagination } from "@mui/material";
 
 export default function PaginationBase({ totalPage, pageIndex, onChange }) {
-  const handleChangePage = async (event, newPage) => {
+  const handleChangePage = (event, newPage) => {
     if (pageIndex === newPage) return;
-    await onChange(newPage);
+    onChange(newPage);
   };
 
   return (
@@ -20,7 +20,8 @@ export default function PaginationBase({ totalPage, pageIndex, onChange }) {
           padding: "8px",
           margin: "0 4px",
           "&:hover": {
-            bgcolor: "#eaeaea17 !important",
+            color: "#fff",
+            bgcolor: "rgba(255,255,255,0.2) !important",
           },
         },
         "& .Mui-selected": {
@@ -29,6 +30,9 @@ export default function PaginationBase({ totalPage, pageIndex, onChange }) {
           "&:hover": {
             bgcolor: "#6f7d8b !important",
           },
+        },
+        "& .MuiPaginationItem-ellipsis": {
+          color: "#9ab",
         },
       }}
     />

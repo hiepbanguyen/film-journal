@@ -38,7 +38,7 @@ export default function Journal() {
             imgSrc={
               "https://a.ltrbxd.com/resized/sm/upload/r1/5i/sx/nn/Twice%20Colonized%20-%20Still%201%20-%20Aaju%20Peter-0-640-0-360-crop-fill.jpg?k=11c75d69bb"
             }
-            link={"/"}
+            link={"cscs"}
           />
         </Container>
       </Box>

@@ -6,6 +6,7 @@ import { styled } from "@mui/system";
 import React from "react";
 import ReviewDialog from "./review-dialog.jsx";
 import AddToListsDialog from "./add-to-lists-dialog.jsx";
+import { useSnackbar } from "notistack";
 
 const CustomButton1 = styled(Button)({
   flexDirection: "column",
@@ -49,6 +50,8 @@ const CustomButton2 = styled(Button)({
 });
 
 export default function ActionBox() {
+  const { enqueueSnackbar } = useSnackbar();
+
   return (
     <Stack
       sx={{ color: "#bcd", background: "#456", borderRadius: 1 }}
@@ -69,7 +72,12 @@ export default function ActionBox() {
           </Typography>
         </CustomButton2>
       </AddToListsDialog>
-      <CustomButton2>
+      <CustomButton2
+        onClick={() => {
+          navigator.clipboard.writeText(window.location.href);
+          enqueueSnackbar("Film link copied", { variant: "success" });
+        }}
+      >
         <Typography fontSize={14} textAlign="center">
           Share
         </Typography>

@@ -9,7 +9,6 @@ import { observer } from "mobx-react-lite";
 
 export const LikeButton = observer(({ likes, type, id, refetchDetail }) => {
   const navigate = useNavigate();
-  const [likeCount, setLikeCount] = React.useState(likes);
   const [isLiked, setIsLiked] = React.useState(false);
   const [{ data: userLiked, loading: userLikedLoading, error: userLikedError }, getUserLiked] = useAxios(
     {
@@ -36,6 +35,10 @@ export const LikeButton = observer(({ likes, type, id, refetchDetail }) => {
   useEffect(() => {
     if (!userLikedLoading) setIsLiked(userLiked);
   }, [userLikedLoading]);
+
+  useEffect(() => {
+    getUserLiked();
+  }, [id]);
 
   const handleLikeButton = async () => {
     if (!UserStore.isLoggedIn) {
@@ -75,7 +78,7 @@ export const LikeButton = observer(({ likes, type, id, refetchDetail }) => {
         )}
       </Button>
       <span>
-        {likeCount} {" likes"}
+        {likes} {" likes"}
       </span>
     </>
   );

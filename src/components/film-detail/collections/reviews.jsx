@@ -1,18 +1,17 @@
-import { Box, Container, Stack, Typography } from "@mui/material";
+import { Box, Container, Divider, Stack, Typography } from "@mui/material";
 import React from "react";
 import NavBar from "./nav-bar.jsx";
 import ReviewFilters from "./filters.jsx";
-import PaginatedList from "../../common/paginated_list.jsx";
 import ReviewPreview from "../../common/review-preview.jsx";
 
 export default function AllFilmReviews() {
   return (
-    <Container sx={{ mt: 10, color: "#9ab" }}>
+    <Container sx={{ mt: 10, color: "#9ab", pb: 5 }}>
       <Box display={"flex"} flexDirection={{ xs: "column", sm: "row" }} gap={5}>
         <Stack gap={5} width={{ sm: 170 }}>
-          <NavBar filmId={1} />
+          <NavBar />
           <ReviewFilters
-            filterValues={["Popularity", "Highest Rating", "Lowest Rating", "Newest", "Earliest"]}
+            filterValues={["Popularity", "Highest Rating", "Lowest Rating", "Most Recent", "Earliest"]}
             showFrom={true}
           />
         </Stack>
@@ -20,7 +19,7 @@ export default function AllFilmReviews() {
           <Typography color={"#fff"} fontStyle={"italic"}>
             There are 200 reviews of <strong>Avatar the Airbender</strong>
           </Typography>
-          <PaginatedList rowsPerPage={10}>
+          <Stack divider={<Divider />}>
             {Array.from({ length: 15 }).map((i, idx) => (
               <React.Fragment key={idx}>
                 <ReviewPreview
@@ -37,10 +36,11 @@ export default function AllFilmReviews() {
                   commentCount={50}
                   reviewDate={new Date()}
                   notShowFilmCard={true}
+                  notShowTitle={true}
                 />
               </React.Fragment>
             ))}
-          </PaginatedList>
+          </Stack>
         </Box>
       </Box>
     </Container>

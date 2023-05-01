@@ -4,7 +4,7 @@ import ReviewPreview from "../../../common/review-preview.jsx";
 
 export const PopularReviews = ({ data, username }) => {
   return (
-    <Box my={5}>
+    <Box my={7}>
       <Typography variant={"body1"} textTransform={"uppercase"} color={"#fff"}>
         popular reviews
       </Typography>

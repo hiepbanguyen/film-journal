@@ -10,14 +10,12 @@ import InstagramIcon from "@mui/icons-material/Instagram";
 import YouTubeIcon from "@mui/icons-material/YouTube";
 import TelegramIcon from "@mui/icons-material/Telegram";
 
-function Copyright() {
+export function Copyright() {
   return (
     <Typography variant="body2" color="#678">
       {"Copyright © "}
       <Link to="">FilmJournal</Link> {new Date().getFullYear()}
       {"."}
-      <br />
-      {"This site is protected by reCAPTCHA and the Google privacy policy and terms of service apply."}
     </Typography>
   );
 }
@@ -54,6 +52,9 @@ export default function Footer() {
             </Box>
           </Box>
           <Copyright />
+          <Typography variant="body2" color="#678">
+            {"This site is protected by reCAPTCHA and the Google privacy policy and terms of service apply."}
+          </Typography>
         </Container>
       </Box>
     </Box>

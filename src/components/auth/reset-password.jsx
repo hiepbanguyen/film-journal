@@ -1,9 +1,10 @@
 import * as React from "react";
+import { useEffect } from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-import { Link, useNavigate, useSearchParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
@@ -11,22 +12,12 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import baseAPI from "../../apis/baseAPI";
-
-function Copyright(props) {
-  return (
-    <Typography variant="body2" color="text.secondary" align="center" {...props}>
-      {"Copyright © "}
-      <Link to="">Your Website</Link>
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
+import { HeaderHeight } from "../common/layout/header/index.jsx";
+import UserStore from "../../store/user.store.js";
 
 const theme = createTheme();
 
 export default function ResetPassword() {
-  const [searchParams, setSearchParams] = useSearchParams();
   const queryParams = new URLSearchParams(window.location.search);
   const email = queryParams.get("email");
   const token = queryParams.get("token");
@@ -69,19 +60,24 @@ export default function ResetPassword() {
       });
   };
 
+  useEffect(() => {
+    if (UserStore.isLoggedIn) navigate("/");
+  }, [UserStore.isLoggedIn]);
+
   return (
     <ThemeProvider theme={theme}>
-      <Container component="main" maxWidth="xs" sx={{ background: "#fff" }}>
+      <Container component="main" maxWidth="xs" sx={{ background: "#fff", mt: HeaderHeight / 8 }}>
+        {" "}
         <CssBaseline />
         <Box
           sx={{
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
-            height: "100vh",
+            height: "90vh",
           }}
         >
-          <Avatar sx={{ mt: 20, bgcolor: "secondary.main" }}>
+          <Avatar sx={{ mt: 10, bgcolor: "secondary.main" }}>
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
@@ -121,7 +117,6 @@ export default function ResetPassword() {
             </Button>
           </Box>
         </Box>
-        <Copyright sx={{ mt: -3 }} />
       </Container>
     </ThemeProvider>
   );

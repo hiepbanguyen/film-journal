@@ -1,10 +1,11 @@
-import { Box, Link, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import Timestamp from "./timestamp.jsx";
+import { Link } from "react-router-dom";
 
 export default function SpotlightArticle(props) {
   const { topic, title, intro, author, date, link, imgSrc } = props;
   return (
-    <Box component={Link} href={link} display={"flex"} flexDirection={{ xs: "column", md: "row" }} gap={5}>
+    <Box component={Link} to={link ?? ""} display={"flex"} flexDirection={{ xs: "column", md: "row" }} gap={5}>
       <Box
         component={"img"}
         src={imgSrc}

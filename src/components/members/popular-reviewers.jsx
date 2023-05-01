@@ -1,69 +1,9 @@
-import { Box, Button, Divider, Grid } from "@mui/material";
-import AddIcon from "@mui/icons-material/Add";
+import { Avatar, Box, Divider, Grid } from "@mui/material";
 import { Link } from "react-router-dom";
-
-const listPopularReviewers = [
-  {
-    userName: "mjcristiano",
-    fullName: "MJ Cristiano",
-    userAvatar: "https://picsum.photos/200/200",
-    filmCount: 127,
-    reviewCount: 342,
-    listTopFilmReview: [
-      { name: "La la land", thumbnail: "https://picsum.photos/200/310", id: 1 },
-      { name: "Avenger End Game", thumbnail: "https://picsum.photos/200/320", id: 2 },
-      { name: "Titanic", thumbnail: "https://picsum.photos/200/330", id: 3 },
-    ],
-  },
-  {
-    userName: "selenagomez",
-    fullName: "Selena Gomez",
-    userAvatar: "https://picsum.photos/250/250",
-    filmCount: 127,
-    reviewCount: 342,
-    listTopFilmReview: [
-      { name: "La la land", thumbnail: "https://picsum.photos/200/340", id: 4 },
-      { name: "Avenger End Game", thumbnail: "https://picsum.photos/200/350", id: 5 },
-      { name: "Titanic", thumbnail: "https://picsum.photos/200/360", id: 6 },
-    ],
-  },
-  {
-    userName: "jutinbb",
-    fullName: "Justin Bieber",
-    userAvatar: "https://picsum.photos/230/230",
-    filmCount: 127,
-    reviewCount: 342,
-    listTopFilmReview: [
-      { name: "La la land", thumbnail: "https://picsum.photos/200/370", id: 7 },
-      { name: "Avenger End Game", thumbnail: "https://picsum.photos/200/380", id: 8 },
-      { name: "Titanic", thumbnail: "https://picsum.photos/200/390", id: 9 },
-    ],
-  },
-  {
-    userName: "mjapple",
-    fullName: "MJ Apple",
-    userAvatar: "https://picsum.photos/210/210",
-    filmCount: 127,
-    reviewCount: 342,
-    listTopFilmReview: [
-      { name: "La la land", thumbnail: "https://picsum.photos/200/301", id: 10 },
-      { name: "Avenger End Game", thumbnail: "https://picsum.photos/200/302", id: 11 },
-      { name: "Titanic", thumbnail: "https://picsum.photos/200/303", id: 12 },
-    ],
-  },
-  {
-    userName: "mjm10",
-    fullName: "MJ Messi",
-    userAvatar: "https://picsum.photos/220/220",
-    filmCount: 127,
-    reviewCount: 342,
-    listTopFilmReview: [
-      { name: "La la land", thumbnail: "https://picsum.photos/200/304", id: 13 },
-      { name: "Avenger End Game", thumbnail: "https://picsum.photos/200/305", id: 14 },
-      { name: "Titanic", thumbnail: "https://picsum.photos/200/306", id: 15 },
-    ],
-  },
-];
+import { FollowButton } from "../common/follow-button.jsx";
+import useAxios from "axios-hooks";
+import { Loading } from "../common/loading";
+import FilmCard from "../common/film-card";
 
 function FeaturedPerson(props) {
   return (
@@ -94,53 +34,34 @@ function FeaturedPerson(props) {
           }}
         >
           <Link
-            to={"/u/" + props.user.userName}
+            to={"/u/" + props?.UserName}
             style={{
               width: "100%",
               height: "100%",
             }}
           >
-            <Box
-              component="img"
+            <Avatar
               sx={{
-                width: "100%",
-                height: "auto",
-                borderRadius: "50%",
-                transition: "0.2s",
-                ":hover": {
-                  border: "1px solid #9ab",
-                },
+                width: { xs: 150, sm: 160 },
+                height: { xs: 150, sm: 160 },
               }}
-              src={props.user.userAvatar}
-            ></Box>
+              src={props?.Avatar}
+            />
           </Link>
-          <Button
+          <Box
             component="span"
             sx={{
               position: "absolute",
-              bottom: "4px",
-              right: "0",
-              backgroundColor: "#567",
-              height: "36px",
-              width: "36px",
-              minWidth: "unset",
-              borderRadius: "50%",
-              color: "#fff",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              transition: "0.2s",
-              ":hover": {
-                backgroundColor: "#9ab",
-              },
+              bottom: { xs: 15, sm: 6 },
+              right: { xs: 15, sm: 6 },
             }}
           >
-            <AddIcon></AddIcon>
-          </Button>
+            <FollowButton followed={!!props?.Followed} targetUsername={props?.UserName} />
+          </Box>
         </Box>
         <Box sx={{ marginBottom: "8px" }}>
           <Link
-            to={"/u/" + props.user.userName}
+            to={"/u/" + props?.UserName}
             style={{
               fontWeight: "600",
               color: "#fff",
@@ -150,7 +71,7 @@ function FeaturedPerson(props) {
               display: "block",
             }}
           >
-            {props.user.fullName}
+            {props?.FullName ?? props?.UserName}
           </Link>
           <Box
             sx={{
@@ -162,7 +83,7 @@ function FeaturedPerson(props) {
               justifyContent: "center",
             }}
           >
-            <Link to={"/u/" + props.user.userName + "/reviews"}>{props.user.reviewCount} films reviewed</Link>
+            <Link to={"/u/" + props?.UserName + "/reviews"}>{props?.Reviews ?? 0} films reviewed</Link>
           </Box>
         </Box>
 
@@ -174,7 +95,7 @@ function FeaturedPerson(props) {
               height: "70px",
             }}
           >
-            {props.user.listTopFilmReview.map((film, idx) => (
+            {(props?.FavouriteFilmList?.slice(0, 3) ?? Array.from({ length: 3 })).map((i, idx) => (
               <Grid
                 key={idx}
                 item
@@ -184,21 +105,7 @@ function FeaturedPerson(props) {
                   overflow: "hidden",
                 }}
               >
-                <Link to={"/films/" + film.id} style={{ width: "100%", height: "100%" }}>
-                  <Box
-                    component="img"
-                    sx={{
-                      height: "100%",
-                      width: "90%",
-                      transition: "0.2s",
-                      borderRadius: "4px",
-                      ":hover": {
-                        border: "1px solid #9ab",
-                      },
-                    }}
-                    src={film.thumbnail}
-                  ></Box>
-                </Link>
+                <FilmCard size={46.5} link={i?.FilmID && "/films/" + i?.FilmID} src={i?.Poster_path} />
               </Grid>
             ))}
           </Grid>
@@ -209,6 +116,16 @@ function FeaturedPerson(props) {
 }
 
 export default function PopularReviewers() {
+  const [{ data, loading, error }] = useAxios({
+    url: `Users/Popular`,
+    method: "POST",
+    data: {
+      pageSize: 5,
+      pageIndex: 1,
+      sort: "Week",
+    },
+  });
+
   return (
     <Box
       sx={{
@@ -231,17 +148,21 @@ export default function PopularReviewers() {
             textTransform: "uppercase",
           }}
         >
-          Popular members this week
+          Popular this week
         </Box>
         <Divider />
       </Box>
-      <Box className="featured-people">
-        <Grid container spacing={0} columns={30}>
-          {listPopularReviewers.map((user, idx) => (
-            <FeaturedPerson key={idx} user={user}></FeaturedPerson>
-          ))}
-        </Grid>
-      </Box>
+      {loading ? (
+        <Loading paddingY={15} />
+      ) : (
+        <Box className="featured-people">
+          <Grid container spacing={0} columns={30}>
+            {data?.Data?.map((i, idx) => (
+              <FeaturedPerson key={idx} {...i} />
+            ))}
+          </Grid>
+        </Box>
+      )}
     </Box>
   );
 }

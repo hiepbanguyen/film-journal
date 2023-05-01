@@ -3,8 +3,8 @@ import { Avatar, Badge, Box, IconButton } from "@mui/material";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import Popover from "@mui/material/Popover";
 import Typography from "@mui/material/Typography";
-import { Link } from "react-router-dom";
-import moment from "moment";
+import { useNavigate } from "react-router-dom";
+import { estimatedTimeElapsed } from "../../../../utils/time.js";
 
 const exampleData = [
   {
@@ -35,7 +35,7 @@ const exampleData = [
     avatar: "https://a.ltrbxd.com/resized/avatar/upload/1/1/9/8/0/4/8/shard/avtr-0-48-0-48-crop.jpg?v=1e09b678c6",
     username: "bahiep",
     content: "commented on your review of Avatar: The Way Of Water",
-    date: new Date(),
+    date: new Date(3424142),
     link: "/u/bahiepng/reviews/sca32",
     seen: false,
   },
@@ -43,7 +43,7 @@ const exampleData = [
     avatar: "https://a.ltrbxd.com/resized/avatar/upload/1/1/9/8/0/4/8/shard/avtr-0-48-0-48-crop.jpg?v=1e09b678c6",
     username: "bahiep",
     content: "commented on your review of Avatar: The Way Of Water",
-    date: new Date(),
+    date: new Date(34433),
     link: "/u/bahiepng/reviews/sca32",
     seen: false,
   },
@@ -58,30 +58,38 @@ const exampleData = [
 ];
 const Notification = (props) => {
   const { avatar, username, content, date, link, seen } = props;
+  const navigate = useNavigate();
+  const handleNotiClick = () => {
+    navigate(link);
+  };
+
   return (
-    <Link to={link}>
-      <Box
-        borderRadius={1}
-        my={1}
-        p={1}
-        sx={{
-          background: seen ? "rgba(255,255,255,0.15)" : "transparent",
-          ":hover": {
-            background: "rgba(255,255,255,0.2)",
-          },
-        }}
-      >
-        <Box display={"flex"} gap={1}>
-          <Avatar src={avatar} alt={"user-avatar"} sx={{ width: 24, height: 24 }} />
-          <Typography fontSize={15}>
-            <strong>{username}</strong> {content}
-          </Typography>
+    <Box
+      onClick={() => {
+        handleNotiClick();
+      }}
+      borderRadius={1}
+      my={1}
+      p={1}
+      sx={{
+        background: seen ? "rgba(255,255,255,0.2)" : "transparent",
+        ":hover": {
+          background: "rgba(255,255,255,0.1)",
+          cursor: "pointer",
+        },
+        color: seen ? "#fff" : "#ccc",
+      }}
+    >
+      <Box display={"flex"} gap={1}>
+        <Box>
+          <Avatar src={avatar} alt={"user-avatar"} sx={{ width: 30, height: 30 }} />
+          <Typography fontSize={12}>{estimatedTimeElapsed(new Date(date))}</Typography>
         </Box>
-        <Typography fontSize={13} textAlign={"right"}>
-          <i>{moment(date).format("HH:MM MMM DD, YYYY")}</i>
+        <Typography fontSize={15}>
+          <strong>{username}</strong> {content}
         </Typography>
       </Box>
-    </Link>
+    </Box>
   );
 };
 

@@ -3,7 +3,9 @@ import React from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import ViewsLikesLists from "../common/views-likes-lists.jsx";
-import { Link } from "react-router-dom";
+import useAxios from "axios-hooks";
+import { Loading } from "../common/loading.jsx";
+import FilmCard from "../common/film-card";
 
 const listPopularFilms = [
   {
@@ -126,30 +128,6 @@ const listPopularFilms = [
     isLiked: false,
     isWatched: false,
   },
-  {
-    id: 16,
-    thumbnail: "https://picsum.photos/202/303",
-    totalLikes: 453645,
-    totalReviews: 567567,
-    isLiked: false,
-    isWatched: true,
-  },
-  {
-    id: 17,
-    thumbnail: "https://picsum.photos/203/302",
-    totalLikes: 567567,
-    totalReviews: 56757,
-    isLiked: false,
-    isWatched: false,
-  },
-  {
-    id: 18,
-    thumbnail: "https://picsum.photos/203/301",
-    totalLikes: 567567,
-    totalReviews: 56757,
-    isLiked: true,
-    isWatched: true,
-  },
 ];
 
 const responsive = {
@@ -171,8 +149,17 @@ const responsive = {
 };
 
 export default function FilmsListPopularFilms() {
+  const [{ data, loading, error }] = useAxios({
+    url: `Films/Popular`,
+    method: "POST",
+    data: {
+      pageSize: 15,
+      pageIndex: 1,
+    },
+  });
+
   return (
-    <Box className="films-list-popular-film" sx={{ marginBottom: "60px" }}>
+    <Box className="films-list-popular-film" sx={{ marginBottom: 5 }}>
       <Box
         sx={{
           marginBottom: "16px",
@@ -182,58 +169,40 @@ export default function FilmsListPopularFilms() {
         <Typography sx={{ textTransform: "uppercase" }}>Popular films this week</Typography>
         <Divider />
       </Box>
-      <Carousel
-        draggable={false}
-        swipeable={true}
-        infinite={true}
-        autoPlay={true}
-        autoPlaySpeed={5000}
-        responsive={responsive}
-      >
-        {listPopularFilms.map((film, idx) => (
-          <Box key={idx}>
-            <Link to={"cssdc"}>
+      {loading ? (
+        <Loading paddingY={10} />
+      ) : (
+        <Carousel
+          draggable={false}
+          swipeable={true}
+          infinite={true}
+          autoPlay={true}
+          autoPlaySpeed={5000}
+          responsive={responsive}
+        >
+          {data?.Data?.map((i, idx) => (
+            <Box key={idx}>
+              <Box p={1}>
+                <FilmCard size={"100%"} src={i?.Poster_path} link={`/films/${i?.FilmID ?? 0}`} alt={"Film Poster"} />
+              </Box>
               <Box
-                key={film.id}
                 sx={{
-                  margin: "0 8px",
-                  borderRadius: "4px",
-                  overflow: "hidden",
-                  aspectRatio: "2/3",
-                  position: "relative",
-                  marginBottom: "8px",
-                  border: "2px solid #9ab",
-                  transition: "0.2s",
-                  ":hover": {
-                    border: "2px solid #00c030",
-                  },
-                  ":hover .btn-action-card-film": {
-                    opacity: "1",
-                  },
+                  display: "flex",
+                  flexWrap: "wrap",
+                  justifyContent: "center",
                 }}
               >
-                <Box
-                  component="img"
-                  src={film.thumbnail}
-                  sx={{
-                    minWidth: "100%",
-                    minHeight: "100%",
-                  }}
-                ></Box>
+                <ViewsLikesLists
+                  views={i?.ReviewsCount ?? 0}
+                  likes={i?.LikesCount ?? 0}
+                  lists={i?.Appears ?? 0}
+                  filmId={i?.FilmID}
+                />
               </Box>
-            </Link>
-            <Box
-              sx={{
-                display: "flex",
-                flexWrap: "wrap",
-                justifyContent: "center",
-              }}
-            >
-              <ViewsLikesLists views={film.totalReviews} likes={film.totalLikes} lists={film.totalLikes} />
             </Box>
-          </Box>
-        ))}
-      </Carousel>
+          ))}
+        </Carousel>
+      )}
     </Box>
   );
 }

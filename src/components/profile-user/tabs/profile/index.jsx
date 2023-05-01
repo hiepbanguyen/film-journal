@@ -58,7 +58,7 @@ export const ProfileTab = () => {
         >
           <FavoriteFilms breakpoints={"md"} gap={3} filmCardSize={120} films={data?.FavouriteFilms} />
         </Box>
-        <RecentlyLikedReviews />
+        <RecentlyLikedReviews data={data?.RecentLikeReview ?? []} />
         <RecentReviews data={data?.ListRecentReview ?? []} username={username} />
         <PopularReviews data={data?.ListPopularReview ?? []} username={username} />
       </Box>
@@ -82,8 +82,8 @@ export const ProfileTab = () => {
           <FavoriteFilms breakpoints={"xs"} gap={1} filmCardSize={76} films={data?.FavouriteFilms} />
         </Box>
         <CompiledRatings stats={data?.RateStats} />
-        <ListFollow following={data?.Following?.List ?? []} />
-        <WatchList />
+        <ListFollow following={data?.Following} />
+        <WatchList data={data?.WatchList} />
         <RecentLists data={data?.ListRecentList} username={username} />
       </Grid>
     </Box>

@@ -8,6 +8,8 @@ import { MostEngaged } from "./most-engaged.jsx";
 import { ListAllTime } from "./all-time-popular.jsx";
 import { Link } from "react-router-dom";
 import { MonthlyPopular } from "./monthly-popular.jsx";
+import { observer } from "mobx-react-lite";
+import UserStore from "../../store/user.store.js";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -18,24 +20,24 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const NewListButton = observer(() => (
+  <Link to={UserStore.isLoggedIn ? "new" : "/sign-in"}>
+    <Button sx={{ color: "#fff", backgroundColor: "#175f70", fontSize: "13px", marginTop: "15px" }} variant="contained">
+      Start your own list
+    </Button>
+  </Link>
+));
+
 const Lists = () => {
-  const [tab, setTab] = React.useState("Collect, curate, and share. Lists are the perfect way to group films.");
   const classes = useStyles();
 
   return (
     <Container maxWidth="lg" sx={{ mt: 10 }}>
       <div className={classes.container}>
         <Typography variant="h5" color="#abc" marginTop="30px">
-          {tab}
+          {"Collect, curate, and share. Lists are the perfect way to group films."}
         </Typography>
-        <Link to={"new"}>
-          <Button
-            sx={{ color: "#fff", backgroundColor: "#175f70", fontSize: "13px", marginTop: "15px" }}
-            variant="contained"
-          >
-            Start your own list
-          </Button>
-        </Link>
+        <NewListButton />
       </div>
       <WeeklyPopular />
       <Grid container spacing={5} color={"#9ab"} my={1}>
