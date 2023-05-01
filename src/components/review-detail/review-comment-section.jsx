@@ -71,7 +71,7 @@ export default function ReviewCommentSection(props) {
       ) : (
         <>
           <Typography textTransform={"uppercase"} fontWeight={"bold"}>
-            {data.Total ?? 0} comments
+            {data?.Total ?? 0} comments
           </Typography>
           <Divider />
           <Box mb={3}>
@@ -79,7 +79,7 @@ export default function ReviewCommentSection(props) {
               <Comment {...i} key={idx} />
             ))}
           </Box>
-          <PaginationBase totalPage={data.TotalPage ?? 1} pageIndex={pageIdx} onChange={handleChangePage} />
+          <PaginationBase totalPage={data?.TotalPage ?? 1} pageIndex={pageIdx} onChange={handleChangePage} />
         </>
       )}
       <Box sx={{ marginBottom: "80px" }}>

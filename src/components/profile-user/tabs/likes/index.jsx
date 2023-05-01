@@ -48,7 +48,7 @@ export default function ProfileLikes() {
   return (
     <Box sx={{ margin: "24px 0", color: "#9ab" }}>
       <Grid container columns={12} columnSpacing={6} rowSpacing={6}>
-        <Grid item xs={12} md={3.5}>
+        <Grid item xs={12} lg={3.5}>
           <Box sx={{ marginBottom: "12px" }}>
             <Box sx={{ display: "flex", justifyContent: "space-between" }}>
               <Box>Films</Box>
@@ -64,13 +64,13 @@ export default function ProfileLikes() {
           </Box>
           <Grid container columns={12} rowSpacing={1}>
             {Array.from({ length: 20 }).map((i, index) => (
-              <Grid key={index} item xs={4} sm={2} md={4}>
-                <FilmCard></FilmCard>
+              <Grid key={index} item xs={4} sm={2} lg={4}>
+                <FilmCard />
               </Grid>
             ))}
           </Grid>
         </Grid>
-        <Grid item xs={12} md={5}>
+        <Grid item xs={12} lg={5}>
           <Box sx={{ marginBottom: "12px" }}>
             <Box sx={{ display: "flex", justifyContent: "space-between" }}>
               <Box>Reviews</Box>
@@ -105,7 +105,7 @@ export default function ProfileLikes() {
             ))}
           </Stack>
         </Grid>
-        <Grid item xs={12} md={3.5}>
+        <Grid item xs={12} lg={3.5}>
           <Box sx={{ marginBottom: "12px" }}>
             <Box sx={{ display: "flex", justifyContent: "space-between" }}>
               <Box>Lists</Box>

@@ -3,8 +3,6 @@ import { Box, Typography } from "@mui/material";
 import PopularReviewers from "./popular-reviewers";
 import { ListReviewers } from "./list-reviewers";
 import MembersAside from "./aside";
-import { observer } from "mobx-react-lite";
-import UserStore from "../../store/user.store.js";
 
 export default function Members() {
   return (
@@ -36,28 +34,22 @@ export default function Members() {
         </Box>
       </Box>
       <PopularReviewers />
-
-      <Box display={"flex"} flexWrap={"wrap"} flexDirection={{ xs: "column", md: "row" }} gap={{ xs: 5, md: 5 }}>
-        <Box flex={3}>
+      <Box display={"flex"} flexWrap={"wrap"} flexDirection={{ xs: "column", md: "row" }} gap={5} mt={5}>
+        <Box flex={2}>
           <Typography textTransform={"uppercase"} textAlign={"center"} fontWeight={"bold"} color={"#fff"} mb={2}>
             Biggest contributers
           </Typography>
           <ListReviewers />
         </Box>
-        <Aside />
+        <Box flex={1}>
+          <Typography textTransform={"uppercase"} textAlign={"center"} fontWeight={"bold"} color={"#fff"} mb={4.5}>
+            Popular this month
+          </Typography>
+          <Box flex={1} display={"flex"} sx={{ justifyContent: "center" }}>
+            <MembersAside />
+          </Box>
+        </Box>
       </Box>
     </Container>
   );
 }
-
-const Aside = observer(() => {
-  return (
-    <>
-      {UserStore.isLoggedIn && (
-        <Box flex={1}>
-          <MembersAside />
-        </Box>
-      )}
-    </>
-  );
-});

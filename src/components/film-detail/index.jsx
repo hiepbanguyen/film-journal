@@ -33,10 +33,10 @@ const FilmDetail = () => {
   // console.log("filmdetail render");
   const loggedIn = true;
   return (
-    <>
+    <Container maxWidth={"lg"}>
       <Box position={"relative"}>
         <Box
-          width={{ xs: "95vw", md: "80vw" }}
+          width={{ xs: "95vw", md: "80vw", lg: "100%" }}
           component="img"
           sx={{
             position: "absolute",
@@ -52,7 +52,7 @@ const FilmDetail = () => {
           src={film_detail.banner}
         />
         <Box
-          width={{ xs: "95vw", md: "80vw" }}
+          width={{ xs: "95vw", md: "80vw", lg: "100%" }}
           sx={{
             position: "absolute",
             top: { md: -50 },
@@ -87,7 +87,7 @@ const FilmDetail = () => {
           </Box>
         </Box>
       </Container>
-    </>
+    </Container>
   );
 };
 export default FilmDetail;

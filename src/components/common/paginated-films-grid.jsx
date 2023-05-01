@@ -6,15 +6,14 @@ import useAxios from "axios-hooks";
 import SearchForm from "./search-form.jsx";
 import { Loading } from "./loading.jsx";
 
-const PageSize = 48;
-export const PaginatedFilmsGrid = ({ fetchUrl, children }) => {
+export const PaginatedFilmsGrid = ({ fetchUrl, children, pageSize }) => {
   const [filters, setFilters] = useState(null);
   const [pageIdx, setPageIdx] = React.useState(1);
   const [{ data, loading, error }, fetchFilms] = useAxios({
     url: fetchUrl,
     method: "POST",
     data: {
-      pageSize: PageSize,
+      pageSize: pageSize ?? 48,
       pageIndex: pageIdx,
       ...filters,
     },

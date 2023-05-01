@@ -1,9 +1,11 @@
-import { Box, Divider } from "@mui/material";
+import { Avatar, Box, Divider } from "@mui/material";
 import * as React from "react";
 import baseAPI from "../../apis/baseApi";
 import Enum from "../../apis/enums/Enum";
 import { Link } from "react-router-dom";
 import UserStore from "../../store/user.store.js";
+import useAxios from "axios-hooks";
+import { Loading } from "../common/loading.jsx";
 
 function ListUser(props) {
   const [list, setList] = React.useState([]);
@@ -82,10 +84,30 @@ function ListUser(props) {
 }
 
 export default function MembersAside() {
+  const [{ data, loading, error }] = useAxios({
+    url: `Users/Popular`,
+    method: "POST",
+    data: {
+      pageSize: 20,
+      pageIndex: 1,
+      sort: "Month",
+    },
+  });
+
   return (
-    <Box>
-      <ListUser isFollowing={true}></ListUser>
-      <ListUser isFollowing={false}></ListUser>
-    </Box>
+    <>
+      {loading ? (
+        <Loading paddingY={10} />
+      ) : (
+        <Box display={"flex"} flexWrap={"wrap"} gap={0.5}>
+          {data?.Data?.map((i, idx) => (
+            <Link key={idx} to={i?.UserName && `/u/${i?.UserName}`}>
+              {" "}
+              <Avatar sx={{ width: 50, height: 50 }} src={i?.Avatar} alt={i?.UserName ?? "user avatar"} />
+            </Link>
+          ))}
+        </Box>
+      )}
+    </>
   );
 }

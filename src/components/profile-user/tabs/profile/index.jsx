@@ -82,7 +82,7 @@ export const ProfileTab = () => {
           <FavoriteFilms breakpoints={"xs"} gap={1} filmCardSize={76} films={data?.FavouriteFilms} />
         </Box>
         <CompiledRatings stats={data?.RateStats} />
-        <ListFollow following={data?.Following?.List ?? []} />
+        <ListFollow following={data?.Following} />
         <WatchList data={data?.WatchList} />
         <RecentLists data={data?.ListRecentList} username={username} />
       </Grid>

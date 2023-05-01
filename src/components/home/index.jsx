@@ -9,12 +9,12 @@ import { PopularLists } from "./popular-lists.jsx";
 import { PopularReviewers } from "./popular-reviewers.jsx";
 import React from "react";
 import { Link } from "react-router-dom";
-import ReviewCard from "../common/review-card.jsx";
 import UserStore from "../../store/user.store.js";
 import { observer } from "mobx-react-lite";
 import { Loading } from "../common/loading.jsx";
 import { RecentJournals } from "./recent-journals.jsx";
 import useAxios from "axios-hooks";
+import ReviewCard from "../common/review-card.jsx";
 
 const WelcomeSection = () => {
   return (
@@ -73,9 +73,11 @@ const PopularFilms = () => {
 };
 
 const NewFromFriends = () => {
+  const [{ data, loading, error }, refetch] = useAxios(`Reviews/NewFromFriend`);
+
   return (
     <Box mt={{ xs: 7, md: 13, lg: 18 }}>
-      <Typography fontSize={{ md: 30, sm: 25, xs: 20 }} textAlign={"center"} fontFamily={"Georgia"} color={"#b0c3d7"}>
+      <Typography fontSize={{ md: 30, sm: 25, xs: 14 }} textAlign={"center"} fontFamily={"Georgia"} color={"#b0c3d7"}>
         {"Welcome back, "}
         <Link to={`/u/${UserStore.user?.UserName}`}>
           <Box component={"span"} sx={{ color: "#fff", ":hover": { textDecoration: "underline" } }}>
@@ -88,20 +90,24 @@ const NewFromFriends = () => {
       </Typography>
       <Typography mt={5}>NEW REVIEWS FROM FRIENDS</Typography>
       <Divider />
-      <Box display={"flex"} flexWrap={"wrap"} justifyContent={"center"} gap={2} mt={3}>
-        {Array.from({ length: 8 }).map((i, idx) => (
-          <ReviewCard
-            key={idx}
-            size={{ xs: 100, md: 120 }}
-            rating={3.5}
-            username={"bahiep"}
-            link={"/u/bahiep/reviews/324"}
-            avatar={
-              "https://a.ltrbxd.com/resized/avatar/twitter/1/6/4/1/1/5/6/shard/http___pbs.twimg.com_profile_images_1603038301899956226_mcfyp7Bu-0-48-0-48-crop.jpg?v=44bebebad9"
-            }
-          />
-        ))}
-      </Box>
+      {loading ? (
+        <Loading paddingY={10} />
+      ) : (
+        <Box display={"flex"} flexWrap={"wrap"} justifyContent={"center"} gap={2} mt={3}>
+          {data?.map((i, idx) => (
+            <ReviewCard
+              key={idx}
+              size={{ xs: 100, md: 120 }}
+              rating={i?.Rate ?? 0}
+              username={i?.User?.UserName}
+              fullname={i?.User?.FullName}
+              link={`/u/${i?.User?.UserName}/reviews/${i?.ReviewID}`}
+              avatar={i?.User?.Avatar}
+              poster={i?.Film?.Poster_path}
+            />
+          ))}
+        </Box>
+      )}
     </Box>
   );
 };
@@ -129,14 +135,13 @@ const Welcome = observer(() => {
 export default function Home() {
   // console.log("render home");
   return (
-    <>
+    <Container maxWidth={"lg"}>
       <Box position={"relative"}>
         <Box
-          width={{ sm: "80vw", xs: "100vw" }}
+          width={{ sm: "80vw", xs: "100vw", lg: "100%" }}
           component="img"
           sx={{
             position: "absolute",
-            top: -10,
             left: 0,
             right: 0,
             marginX: "auto",
@@ -148,10 +153,9 @@ export default function Home() {
           src="https://a.ltrbxd.com/resized/sm/upload/69/2u/4d/eu/xi1DsPSW81udsXfyiAzcdUxhp56-1920-1920-1080-1080-crop-000000.jpg?v=be0e99a9c5"
         />
         <Box
-          width={{ sm: "80vw", xs: "100vw" }}
+          width={{ sm: "80vw", xs: "100vw", lg: "100%" }}
           sx={{
             position: "absolute",
-            top: -10,
             left: 0,
             right: 0,
             marginX: "auto",
@@ -164,7 +168,13 @@ export default function Home() {
         />
       </Box>
       <Container sx={{ mb: 3 }}>
-        <Box mt={{ sm: 30, xs: 20 }} display={"flex"} flexDirection={"column"} justifyContent={"center"} color={"#fff"}>
+        <Box
+          pt={{ xs: 21, sm: 28, md: 32 }}
+          display={"flex"}
+          flexDirection={"column"}
+          justifyContent={"center"}
+          color={"#fff"}
+        >
           <Welcome />
           <JustReviewed />
           <Grid container spacing={{ md: 5 }} sx={{ color: "#9ab" }} pt={3}>
@@ -179,6 +189,6 @@ export default function Home() {
           <RecentJournals />
         </Box>
       </Container>
-    </>
+    </Container>
   );
 }
