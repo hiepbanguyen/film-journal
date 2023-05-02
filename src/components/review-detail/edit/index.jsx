@@ -17,10 +17,22 @@ import TextField from "@mui/material/TextField";
 import FavoriteIcon from "@mui/icons-material/Favorite.js";
 import Button from "@mui/material/Button";
 import * as React from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import UserStore from "../../../store/user.store.js";
+import { observer } from "mobx-react-lite";
 
-export const EditReview = () => {
+export const EditReview = observer(() => {
+  const { username } = useParams();
   const navigate = useNavigate();
+  React.useEffect(() => {
+    if (UserStore.isLoadedFromLocal) {
+      if (!UserStore.isLoggedIn) {
+        navigate("/sign-in");
+      } else if (UserStore.user.UserName !== username) {
+        navigate("/");
+      }
+    }
+  }, [UserStore.isLoggedIn, UserStore.isLoadedFromLocal]);
 
   return (
     <Container sx={{ mt: 10, color: "#9ab", px: { sm: 10, md: 20 } }}>
@@ -90,4 +102,4 @@ export const EditReview = () => {
       </Stack>
     </Container>
   );
-};
+});

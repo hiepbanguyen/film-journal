@@ -204,39 +204,12 @@ export const Information = (props) => {
               },
             }}
           />
-          <Box>
-            <Button
-              onClick={handleCancel}
-              size="medium"
-              variant="contained"
-              sx={{
-                marginRight: "8px",
-                backgroundColor: "#d32f2f !important",
-                color: "#fff !important",
-                ":hover": { backgroundColor: "#d32f2f !important" },
-                "&.Mui-disabled": {
-                  backgroundColor: "#b42626 !important",
-                  color: "#d0d0d0 !important",
-                },
-              }}
-            >
+          <Box my={1} gap={1} display={"flex"} justifyContent={"flex-end"}>
+            <Button onClick={handleCancel} sx={{ color: "#fff", "&:hover": { bgcolor: "rgba(255,255,255,0.2)" } }}>
               Cancel
             </Button>
-            <Button
-              variant="contained"
-              type="submit"
-              size="medium"
-              sx={{
-                backgroundColor: "#2e7d32 !important",
-                color: "#fff !important",
-                ":hover": { backgroundColor: "#2e7d32 !important" },
-                "&.Mui-disabled": {
-                  backgroundColor: "#2a692d !important",
-                  color: "#d0d0d0 !important",
-                },
-              }}
-            >
-              Submit
+            <Button type="submit" variant={"contained"}>
+              Save
             </Button>
           </Box>
         </form>

@@ -22,6 +22,7 @@ export const FollowButton = ({ followed, targetUsername }) => {
     setFollowing(false);
   };
 
+  if (UserStore.isLoggedIn && UserStore.user.UserName === targetUsername) return <></>;
   return (
     <>
       {following ? (

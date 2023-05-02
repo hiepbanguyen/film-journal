@@ -3,15 +3,26 @@ import { Box, Tab, Tabs } from "@mui/material";
 // import Tabs from '@mui/material/Tabs';
 // import Tab from '@mui/material/Tab';
 import { Information } from "./information";
-import { ChangeAvatar } from "./change-avatar";
+import { AvatarAndBanner } from "./avatar-and-banner.jsx";
 import { ChangePassword } from "./change-password";
+import UserStore from "../../../../store/user.store.js";
+import { useNavigate, useParams } from "react-router-dom";
+import { observer } from "mobx-react-lite";
 
-export const UserEditProfile = () => {
+export const UserEditProfile = observer(() => {
   const [tab, setTab] = React.useState(0);
+  const navigate = useNavigate();
+  const { username } = useParams();
 
   const handleChange = (event, newTab) => {
     setTab(newTab);
   };
+
+  React.useEffect(() => {
+    if (!UserStore.isLoggedIn) {
+      navigate("/u/" + username);
+    }
+  }, [UserStore.isLoggedIn]);
 
   return (
     <Box sx={{ display: "flex", flexDirection: "column ", alignItems: "center" }}>
@@ -45,7 +56,7 @@ export const UserEditProfile = () => {
             display: `${tab === 1 ? "block" : "none"}`,
           }}
         >
-          <ChangeAvatar />
+          <AvatarAndBanner />
         </Box>
         <Box
           sx={{
@@ -57,4 +68,4 @@ export const UserEditProfile = () => {
       </Box>
     </Box>
   );
-};
+});

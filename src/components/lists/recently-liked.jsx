@@ -53,8 +53,8 @@ const RecentlyLike = () => {
                 fullname={i.User?.FullName ?? ""}
                 username={i.User?.UserName ?? ""}
                 userAvatar={i.User?.Avatar ?? ""}
-                favoriteCount={i.TotalLike ?? 0}
-                commentCount={i.TotalComment ?? 0}
+                favoriteCount={i.LikesCount ?? 0}
+                commentCount={i.CommentsCount ?? 0}
                 posters={i.List}
                 films={i.Total ?? 0}
                 listLink={`/u/${i.User?.UserName}/lists/${i.ListID}`}

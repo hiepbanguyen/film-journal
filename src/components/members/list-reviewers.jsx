@@ -97,7 +97,7 @@ export const ListReviewers = () => {
                     </Link>
                   </TableCell>
                   <TableCell sx={{ color: "#9ab" }}>
-                    <FollowButton followed={member?.Followed ?? 0} />
+                    <FollowButton followed={member?.Followed ?? 0} targetUsername={member?.UserName} />
                   </TableCell>
                 </TableRow>
               ))}

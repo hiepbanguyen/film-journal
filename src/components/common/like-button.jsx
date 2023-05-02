@@ -24,6 +24,7 @@ export const LikeButton = observer(({ likes, type, id, refetchDetail }) => {
     },
     { manual: true },
   );
+  
   useEffect(() => {
     if (UserStore.isLoggedIn) {
       getUserLiked();

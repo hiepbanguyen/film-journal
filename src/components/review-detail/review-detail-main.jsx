@@ -64,7 +64,7 @@ const ReviewContent = (props) => {
       </Typography>
       {/* Likes */}
       <Box my={1} display={"flex"} alignItems={"center"} fontWeight={600} fontSize={14} gap={1}>
-        <LikeButton likes={data.TotalLike ?? 0} type={"review"} id={data?.ReviewID} refetchDetail={refetchDetail} />
+        <LikeButton likes={data.LikesCount ?? 0} type={"review"} id={data?.ReviewID} refetchDetail={refetchDetail} />
       </Box>
       {/* User like related review */}
       <Box

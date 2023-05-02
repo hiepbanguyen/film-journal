@@ -18,6 +18,8 @@ import ListIcon from "@mui/icons-material/List";
 import CloseIcon from "@mui/icons-material/Close";
 import { useSnackbar } from "notistack";
 import { useNavigate } from "react-router-dom";
+import UserStore from "../../../store/user.store.js";
+import { observer } from "mobx-react-lite";
 
 export const SelectedFilm = (props) => {
   const { thumbnail, title, releasedYear, children } = props;
@@ -48,10 +50,16 @@ export const SelectedFilm = (props) => {
   );
 };
 
-export const NewList = () => {
+export const NewList = observer(() => {
   const [addedFilms, setAddFilms] = React.useState([]);
   const { enqueueSnackbar } = useSnackbar();
   const navigate = useNavigate();
+
+  React.useEffect(() => {
+    if (UserStore.isLoadedFromLocal && !UserStore.isLoggedIn) {
+      navigate("/sign-in");
+    }
+  }, [UserStore.isLoggedIn, UserStore.isLoadedFromLocal]);
 
   const handleAddFilm = (newFilm) => {
     if (addedFilms.find((i) => newFilm.id === i.id)) {
@@ -66,7 +74,7 @@ export const NewList = () => {
   };
 
   return (
-    <Container sx={{ color: "#9ab" }}>
+    <Container sx={{ color: "#9ab", mt: 10 }}>
       <Typography variant={"h5"}>New List</Typography>
       <Divider sx={{ mb: 3 }} />
       <form>
@@ -144,4 +152,4 @@ export const NewList = () => {
       </form>
     </Container>
   );
-};
+});

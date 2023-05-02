@@ -1,6 +1,6 @@
 import React from "react";
 import { useSnackbar } from "notistack";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import {
   Box,
   Button,
@@ -17,6 +17,8 @@ import { SearchFilms } from "../new/search-films.jsx";
 import ListIcon from "@mui/icons-material/List.js";
 import { SelectedFilm } from "../new/index.jsx";
 import CloseIcon from "@mui/icons-material/Close.js";
+import UserStore from "../../../store/user.store.js";
+import { observer } from "mobx-react-lite";
 
 const existedFilms = [
   {
@@ -38,10 +40,20 @@ const existedFilms = [
   },
 ];
 
-export const EditList = () => {
+export const EditList = observer(() => {
   const [addedFilms, setAddFilms] = React.useState(existedFilms);
   const { enqueueSnackbar } = useSnackbar();
+  const { username } = useParams();
   const navigate = useNavigate();
+  React.useEffect(() => {
+    if (UserStore.isLoadedFromLocal) {
+      if (!UserStore.isLoggedIn) {
+        navigate("/sign-in");
+      } else if (UserStore.user.UserName !== username) {
+        navigate("/lists");
+      }
+    }
+  }, [UserStore.isLoggedIn, UserStore.isLoadedFromLocal]);
 
   const handleAddFilm = (newFilm) => {
     if (addedFilms.find((i) => newFilm.id === i.id)) {
@@ -135,4 +147,4 @@ export const EditList = () => {
       </form>
     </Container>
   );
-};
+});

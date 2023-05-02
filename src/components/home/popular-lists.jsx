@@ -39,9 +39,9 @@ export const PopularLists = () => {
       <Typography variant={"body1"} color={"#fff"} textTransform={"uppercase"}>
         popular lists this week
       </Typography>
-      <Divider/>
+      <Divider />
       {loading ? (
-        <Loading paddingY={10}/>
+        <Loading paddingY={10} />
       ) : (
         <Grid container spacing={1}>
           {data.map((i, idx) => (
@@ -51,8 +51,8 @@ export const PopularLists = () => {
                 fullname={i.User?.FullName ?? ""}
                 username={i.User?.UserName ?? ""}
                 userAvatar={i.User?.Avatar ?? ""}
-                favoriteCount={i.TotalLike ?? 0}
-                commentCount={i.TotalComment ?? 0}
+                favoriteCount={i.LikesCount ?? 0}
+                commentCount={i.CommentsCount ?? 0}
                 posters={i.List}
                 listLink={`/u/${i.User?.UserName}/lists/${i.ListID}`}
               />
@@ -78,7 +78,7 @@ export default function ListPreview(props) {
       })}
     >
       <Link to={listLink ?? ""}>
-        <FilmCardsStackedFive posters={posters}/>
+        <FilmCardsStackedFive posters={posters} />
         <Typography variant={"body1"} color={"#fff"} sx={{ ":hover": { color: "#00e8ff" } }} fontWeight={600}>
           {title}
         </Typography>
@@ -93,16 +93,16 @@ export default function ListPreview(props) {
           alignItems={"center"}
           sx={{ ":hover": { color: "#fff" } }}
         >
-          <Avatar sx={{ width: 25, height: 25 }} src={userAvatar}/>
+          <Avatar sx={{ width: 25, height: 25 }} src={userAvatar} />
           <Typography variant={"body2"} ml={0.5} mr={1}>
             {fullname ?? username}
           </Typography>
         </Box>
-        <FavoriteIcon fontSize={"small"}/>
+        <FavoriteIcon fontSize={"small"} />
         <Typography variant={"body2"} ml={0.5} mr={1}>
           {favoriteCount}
         </Typography>
-        <ChatBubbleIcon fontSize={"small"}/>
+        <ChatBubbleIcon fontSize={"small"} />
         <Typography variant={"body2"} ml={0.5}>
           {commentCount}
         </Typography>
