@@ -19,7 +19,7 @@ export const UserEditProfile = observer(() => {
   };
 
   React.useEffect(() => {
-    if (!UserStore.isLoggedIn) {
+    if (UserStore.isLoadedFromLocal && !UserStore.isLoggedIn) {
       navigate("/u/" + username);
     }
   }, [UserStore.isLoggedIn]);
