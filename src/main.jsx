@@ -43,6 +43,7 @@ import { EditReview } from "./components/review-detail/edit/index.jsx";
 import ProfileFollowers from "./components/profile-user/tabs/followers/index.jsx";
 import ProfileFollowing from "./components/profile-user/tabs/following/index.jsx";
 import ProfileLikes from "./components/profile-user/tabs/likes/index.jsx";
+import { AllJournals } from "./components/journal/all/index.jsx";
 
 const axios = Axios.create({
   baseURL: "https://localhost:44358/api/",
@@ -130,6 +131,10 @@ const router = createBrowserRouter([
         element: <Journal />,
       },
       {
+        path: "journals/all",
+        element: <AllJournals />,
+      },
+      {
         path: "journals/:journalId",
         element: <JournalArticle />,
       },
@@ -211,10 +216,6 @@ const router = createBrowserRouter([
             path: "members/:searchParams",
             element: <MemberSearch />,
           },
-          // {
-          //   path: "tags/:searchParams",
-          //   element: <FilmsSearch />,
-          // },
         ],
       },
     ],

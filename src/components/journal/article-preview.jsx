@@ -1,10 +1,11 @@
-import { Box, Link, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import Timestamp from "./timestamp.jsx";
+import { Link } from "react-router-dom";
 
 export default function ArticlePreview(props) {
-  const { title, intro, author, date, link, imgSrc } = props;
+  const { title, intro, author, date, link, imgSrc, small } = props;
   return (
-    <Box component={Link} href={link} gap={1} display={"flex"} flexDirection={"column"} mb={4} px={{ sm: 3 }}>
+    <Box component={Link} to={link} gap={1} display={"flex"} flexDirection={"column"} mb={4} px={{ sm: 3 }}>
       <Box
         component={"img"}
         src={imgSrc}
@@ -23,7 +24,7 @@ export default function ArticlePreview(props) {
         </Typography>
         <Typography
           display={"inline"}
-          variant={"h6"}
+          variant={small ? "body2" : "h6"}
           color={"#456"}
           fontWeight={600}
           sx={{ ":hover": { textDecoration: "underline" } }}
@@ -31,7 +32,8 @@ export default function ArticlePreview(props) {
           {title}
           {"."}
         </Typography>
-        <Typography display={"inline"} color={"#89a"} fontSize={18} fontWeight={500}>
+        <Typography display={"inline"} color={"#89a"} fontSize={small ? 13 : 18} fontWeight={500}>
+          {" "}
           {intro}
         </Typography>
       </Box>
@@ -39,7 +41,7 @@ export default function ArticlePreview(props) {
         letterSpacing={3}
         textTransform={"uppercase"}
         color={"#9ab"}
-        fontSize={12}
+        fontSize={small ? 10 : 12}
         fontWeight={600}
         fontFamily={"Graphik-Regular-Web,sans-serif"}
       >
