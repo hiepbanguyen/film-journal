@@ -64,7 +64,7 @@ export const ListFilmCard = ({ data }) => {
           flexDirection: { xs: "column", sm: "row" },
           alignItems: "center",
           justifyContent: "space-between",
-          padding: "20px" + " 0",
+          padding: "20px 0",
         }}
       >
         <Box
@@ -77,7 +77,7 @@ export const ListFilmCard = ({ data }) => {
         >
           <FilmCardsStackedFive posters={data?.List} />
         </Box>
-        <Box sx={{ width: 1, padding: "0 20px" }}>
+        <Box sx={{ width: 0.6, padding: "0 20px" }}>
           <Box
             component={Link}
             to={data?.ListID ?? ""}
@@ -94,7 +94,17 @@ export const ListFilmCard = ({ data }) => {
               <ChatBubbleIcon sx={{ marginRight: "4px", fontSize: "16px" }} /> {data?.CommentsCount ?? 0}
             </Box>
           </Box>
-          <Box sx={{ fontSize: "16px", lineHeight: "24px", maxHeight: "48px", overflow: "hidden" }}>
+          <Box
+            sx={{
+              fontSize: "16px",
+              lineHeight: "24px",
+              maxHeight: "48px",
+              maxWidth: "100%",
+              overflow: "hidden",
+              whiteSpace: "nowrap",
+              textOverflow: "ellipsis",
+            }}
+          >
             {data?.Description ?? ""}
           </Box>
         </Box>

@@ -48,7 +48,8 @@ function PopularListPreview(props) {
       <Link to={listLink}>
         <FilmCardsStackedFiveBig posters={posters} />
         <Typography variant={"body1"} color={"#fff"} sx={{ ":hover": { color: "#00e8ff" } }} fontWeight={600}>
-          {title}
+          {title.slice(0, 34)}
+          {title.length > 34 && "..."}
         </Typography>
       </Link>
 

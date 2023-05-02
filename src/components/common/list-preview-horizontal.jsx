@@ -37,7 +37,7 @@ export const ListPreviewHorizontal = (props) => {
         </Box>
         <Typography variant={"body2"}>
           {String(description).slice(0, 200)}
-          {"..."}
+          {description.length > 200 && "..."}
         </Typography>
       </Box>
     </Box>

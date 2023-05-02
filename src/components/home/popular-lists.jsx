@@ -65,7 +65,7 @@ export const PopularLists = () => {
 };
 
 export default function ListPreview(props) {
-  const { title, username, fullname, userAvatar, favoriteCount, commentCount, posters, listLink } = props;
+  const { title, username, fullname, userAvatar, favoriteCount, commentCount, posters, listLink, notShowUser } = props;
   return (
     <Box
       mt={2}
@@ -85,19 +85,21 @@ export default function ListPreview(props) {
       </Link>
 
       <Box display={"flex"} gap={0.5} alignItems={"center"} my={1}>
-        <Box
-          component={Link}
-          to={`/u/${username}`}
-          display={"flex"}
-          gap={0.5}
-          alignItems={"center"}
-          sx={{ ":hover": { color: "#fff" } }}
-        >
-          <Avatar sx={{ width: 25, height: 25 }} src={userAvatar} />
-          <Typography variant={"body2"} ml={0.5} mr={1}>
-            {fullname ?? username}
-          </Typography>
-        </Box>
+        {!notShowUser && (
+          <Box
+            component={Link}
+            to={`/u/${username}`}
+            display={"flex"}
+            gap={0.5}
+            alignItems={"center"}
+            sx={{ ":hover": { color: "#fff" } }}
+          >
+            <Avatar sx={{ width: 25, height: 25 }} src={userAvatar} />
+            <Typography variant={"body2"} ml={0.5} mr={1}>
+              {fullname ?? username}
+            </Typography>
+          </Box>
+        )}
         <FavoriteIcon fontSize={"small"} />
         <Typography variant={"body2"} ml={0.5} mr={1}>
           {favoriteCount}

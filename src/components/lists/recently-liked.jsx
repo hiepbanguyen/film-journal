@@ -16,7 +16,8 @@ export const ListPreviewVertical = (props) => {
       </Box>
       <Box width={"100%"}>
         <Typography variant={"body1"} color={"#fff"} sx={{ ":hover": { color: "#00e8ff" } }} fontWeight={600}>
-          {title}
+          {title.slice(0, 34)}
+          {title.length > 34 && "..."}
         </Typography>
         <Box display={"flex"} alignItems={"center"} my={1}>
           <Avatar sx={{ width: 25, height: 25 }} src={userAvatar ?? ""} />
@@ -44,7 +45,7 @@ const RecentlyLike = () => {
       {loading ? (
         <Loading paddingY={10} />
       ) : (
-        <Box display={"flex"} flexDirection={"column"} alignItems={{ xs: "center", lg: "flex-start" }}>
+        <Box display={"flex"} flexDirection={"column"}>
           {data.map((i, idx) => (
             <Box key={idx} my={2}>
               <ListPreviewHorizontal

@@ -29,7 +29,7 @@ const ReviewContent = ({ link, content, likeCount, spoiler }) => {
       ) : (
         <Typography component={Link} to={link ?? ""} fontSize={15} mb={1}>
           {String(content).slice(0, 210)}
-          {"..."}
+          {content.length > 210 && "..."}
         </Typography>
       )}
       <Box

@@ -52,7 +52,6 @@ function Header() {
           "&:hover": {
             background: "rgba(0,0,0,0.7)",
           },
-          zIndex: 9999,
         }}
       >
         <Container maxWidth="lg">
