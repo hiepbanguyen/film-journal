@@ -3,10 +3,10 @@ import { Grid } from "@mui/material";
 import { articles } from "./articles-after-spotlight.jsx";
 import ArticlePreview from "./article-preview.jsx";
 
-export default function FestivalCircuit() {
+export default function News() {
   return (
     <>
-      <JournalDivider topic={"Festival Circuit"} topicDesc={"News, interviews and wrap-ups from our festival crew."} />
+      <JournalDivider topic={"News"} topicDesc={"Keeping up with our latest reports on films and the industry."} />
       <Grid container spacing={2} mt={3} pb={8}>
         {articles.slice(0, 3).map((i, idx) => (
           <Grid item key={idx} xs={12} md={4}>

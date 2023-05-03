@@ -3,7 +3,7 @@ import Timestamp from "./timestamp.jsx";
 import { Link } from "react-router-dom";
 
 export default function ArticlePreview(props) {
-  const { title, intro, author, date, link, imgSrc, small } = props;
+  const { title, intro, author, date, link, imgSrc, small, titleColor } = props;
   return (
     <Box component={Link} to={link} gap={1} display={"flex"} flexDirection={"column"} mb={4} px={{ sm: 3 }}>
       <Box
@@ -25,7 +25,7 @@ export default function ArticlePreview(props) {
         <Typography
           display={"inline"}
           variant={small ? "body2" : "h6"}
-          color={"#456"}
+          color={titleColor ?? "#456"}
           fontWeight={600}
           sx={{ ":hover": { textDecoration: "underline" } }}
         >

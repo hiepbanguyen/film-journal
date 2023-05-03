@@ -4,20 +4,21 @@ import FilmCard from "../common/film-card.jsx";
 import React from "react";
 import { useParams } from "react-router-dom";
 
-function FilmSearchResult(props) {
-  const { title, releasedYear, director, cast } = props;
+export function FilmSearchResult(props) {
+  const { title, releasedYear, director, cast, fontColor } = props;
   return (
     <Box my={2} display={"flex"} alignItems={"center"} gap={2}>
       <FilmCard size={70} />
       <Box>
         <Typography variant={"h5"}>
-          <strong style={{ color: "#fff" }}>{title}</strong> <span style={{ fontSize: 17 }}>{releasedYear}</span>
+          <strong style={{ color: fontColor ?? "#fff" }}>{title}</strong>{" "}
+          <span style={{ fontSize: 17 }}>{releasedYear}</span>
         </Typography>
         <Typography>
-          Directed by: <span style={{ color: "#fff" }}>{director}</span>
+          Directed by: <span style={{ color: fontColor ?? "#fff" }}>{director}</span>
         </Typography>
         <Typography>
-          Cast: <span style={{ color: "#fff" }}>{cast.join(", ")}</span>
+          Cast: <span style={{ color: fontColor ?? "#fff" }}>{cast.join(", ")}</span>
         </Typography>
       </Box>
     </Box>

@@ -19,7 +19,7 @@ export const PopularReviews = ({ data, username }) => {
             filmId={i.Film?.FilmID ?? ""}
             releasedYear={i.Film?.Release_date ? new Date(i.Film?.Release_date).getFullYear() : ""}
             content={i.Content ?? ""}
-            ratings={i.Rate ?? 0}
+            ratings={i.Score ?? 0}
             likeCount={i.LikesCount ?? 0}
             commentCount={i.CommentsCount ?? 0}
             spoiler={i.HaveSpoiler ?? 0}
@@ -49,7 +49,7 @@ export const RecentReviews = ({ data, username }) => {
             filmId={i.Film?.FilmID ?? ""}
             releasedYear={i.Film?.Release_date ? new Date(i.Film?.Release_date).getFullYear() : ""}
             content={i.Content ?? ""}
-            ratings={i.Rate ?? 0}
+            ratings={i.Score ?? 0}
             likeCount={i.LikesCount ?? 0}
             commentCount={i.CommentsCount ?? 0}
             spoiler={i.HaveSpoiler ?? 0}

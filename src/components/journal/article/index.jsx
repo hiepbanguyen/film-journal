@@ -1,27 +1,9 @@
 import React from "react";
-import "./journal-article.scss";
-import TwitterIcon from "@mui/icons-material/Twitter";
-import FacebookOutlinedIcon from "@mui/icons-material/FacebookOutlined";
-import MailOutlineOutlinedIcon from "@mui/icons-material/MailOutlineOutlined";
-import InsertLinkOutlinedIcon from "@mui/icons-material/InsertLinkOutlined";
 import { Avatar, Box, Container, Divider, Grid, Stack, Typography } from "@mui/material";
-import Timestamp from "../journal/timestamp.jsx";
-import { articles } from "../journal/articles-after-spotlight.jsx";
-import ArticlePreview from "../journal/article-preview.jsx";
-
-function ListIconShare() {
-  return (
-    <Box display={"flex"} gap={2} justifyContent={"center"}>
-      <TwitterIcon></TwitterIcon>
-
-      <FacebookOutlinedIcon></FacebookOutlinedIcon>
-
-      <MailOutlineOutlinedIcon></MailOutlineOutlinedIcon>
-
-      <InsertLinkOutlinedIcon></InsertLinkOutlinedIcon>
-    </Box>
-  );
-}
+import Timestamp from "../timestamp.jsx";
+import { articles } from "../articles-after-spotlight.jsx";
+import ArticlePreview from "../article-preview.jsx";
+import { FilmSearchResult } from "../../search/films-search.jsx";
 
 const data = {
   Banner:
@@ -165,12 +147,24 @@ const JournalArticle = () => {
               </React.Fragment>
             ))}
           </Stack>
-          <ListIconShare />
+          <Divider sx={{ mt: 1 }} />
+          <Typography fontSize={18} color={"#082f52"}>
+            Mentioned film
+          </Typography>
+          <Box px={{ sm: 3 }}>
+            <FilmSearchResult
+              title={"A film title"}
+              releasedYear={2022}
+              director={"Sarah Pauley"}
+              cast={["Jim Cameron", "Hong Chau", "Dolly D", "Kerry Mulligan", "Sandra Oh"]}
+              fontColor={"#456"}
+            />
+          </Box>
           <Divider sx={{ mt: 1 }} />
           <Typography fontSize={18} color={"#082f52"}>
             Related articles
           </Typography>
-          <Grid container sx={{ fontFamily: "TiemposTextWeb,Georgia,serif,ColorEmoji" }} mt={5} px={{ xs: 3, sm: 0 }}>
+          <Grid container sx={{ fontFamily: "TiemposTextWeb,Georgia,serif,ColorEmoji" }} mt={5}>
             {articles.slice(2, 5).map((i, idx) => (
               <Grid item key={idx} xs={12} sm={4}>
                 <ArticlePreview

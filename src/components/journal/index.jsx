@@ -2,7 +2,7 @@ import { Box, Container, Divider, Typography } from "@mui/material";
 import SpotlightArticle from "./spotlight-article.jsx";
 import ArticlesAfterSpotlight from "./articles-after-spotlight.jsx";
 import LifeInFilm from "./life-in-film.jsx";
-import FestivalCircuit from "./festival-circuit.jsx";
+import News from "./news.jsx";
 
 export default function Journal() {
   return (
@@ -46,7 +46,7 @@ export default function Journal() {
         <Container>
           <ArticlesAfterSpotlight />
           <LifeInFilm />
-          <FestivalCircuit />
+          <News />
         </Container>
       </Box>
     </Box>

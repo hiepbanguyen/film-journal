@@ -83,7 +83,7 @@ const ReviewContent = (props) => {
             key={index}
             link={`/u/${i?.UserName}/reviews/${i?.ReviewID}`}
             avatar={i.Avatar ?? ""}
-            rating={i.Rate ?? 0}
+            rating={i.Score ?? 0}
           />
         ))}
       </Box>
@@ -182,7 +182,7 @@ export default function ReviewDetailMain(props) {
               >
                 <Rating
                   readOnly
-                  value={data.Rate ?? 0}
+                  value={data.Score ?? 0}
                   sx={{
                     fontSize: {
                       xs: 18,

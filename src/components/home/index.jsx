@@ -98,7 +98,7 @@ const NewFromFriends = () => {
             <ReviewCard
               key={idx}
               size={{ xs: 100, md: 120 }}
-              rating={i?.Rate ?? 0}
+              rating={i?.Score ?? 0}
               username={i?.User?.UserName}
               fullname={i?.User?.FullName}
               link={`/u/${i?.User?.UserName}/reviews/${i?.ReviewID}`}

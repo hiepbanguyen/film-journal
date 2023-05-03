@@ -6,10 +6,7 @@ import ArticlePreview from "./article-preview.jsx";
 export default function LifeInFilm() {
   return (
     <>
-      <JournalDivider
-        topic={"Life in Film"}
-        topicDesc={"Our questionnaire uncovering filmmakers’ screen inspirations."}
-      />
+      <JournalDivider topic={"Reviews"} topicDesc={"Our own professional movie reviews."} />
       <Grid container spacing={2} mt={3} pb={8}>
         {articles.slice(3, 6).map((i, idx) => (
           <Grid item key={idx} xs={12} md={4}>
