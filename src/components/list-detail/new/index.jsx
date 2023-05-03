@@ -3,10 +3,8 @@ import {
   Button,
   Card,
   CardContent,
-  Checkbox,
   Container,
   Divider,
-  FormControlLabel,
   IconButton,
   Stack,
   TextField,
@@ -21,9 +19,7 @@ import { useNavigate } from "react-router-dom";
 import UserStore from "../../../store/user.store.js";
 import { observer } from "mobx-react-lite";
 
-export const SelectedFilm = (props) => {
-  const { thumbnail, title, releasedYear, children } = props;
-
+export const SelectedFilm = ({ film, children }) => {
   return (
     <Card
       sx={{ py: 1, background: "transparent", width: "100%", ":hover": { bgcolor: "rgba(255,255,255,0.1)" } }}
@@ -33,14 +29,15 @@ export const SelectedFilm = (props) => {
         <Box display={"flex"} alignItems={"center"} justifyContent={"space-between"}>
           <Box display={"flex"} alignItems={"center"}>
             <img
-              src={thumbnail}
-              alt={title}
+              src={film?.Poster_path}
+              alt={film?.Title}
               height={52}
               width={35}
               style={{ borderRadius: "2px", border: "1px solid #9ab" }}
             />
             <Typography color={"#9ab"} ml={1}>
-              <strong style={{ color: "#fff" }}>{title}</strong> {releasedYear ?? "2022"}
+              <strong style={{ color: "#fff" }}>{film?.Title}</strong>{" "}
+              {film?.Release_date && new Date(film.Release_date).getFullYear()}
             </Typography>
           </Box>
           {children}
@@ -95,7 +92,7 @@ export const NewList = observer(() => {
                 },
               }}
             />
-            <FormControlLabel control={<Checkbox sx={{ color: "#9ab" }} />} label="Public" />
+            {/*<FormControlLabel control={<Checkbox sx={{ color: "#9ab" }} />} label="Public" />*/}
             <TextField
               autoFocus
               margin="dense"
@@ -108,11 +105,11 @@ export const NewList = observer(() => {
           </Stack>
           <Stack flex={1} gap={2}>
             <SearchFilms handleAddFilm={handleAddFilm} />
-            <Box borderRadius={1} border={"1px solid #9ab"} p={1} height={314}>
+            <Box borderRadius={1} border={"1px solid #9ab"} p={1} height={263.5}>
               {addedFilms.length > 0 ? (
                 <Stack sx={{ height: "100%", overflowY: "auto" }}>
                   {addedFilms.map((i, idx) => (
-                    <SelectedFilm key={idx} {...i}>
+                    <SelectedFilm key={idx} film={i}>
                       <IconButton
                         sx={{
                           color: "#9ab",

@@ -1,7 +1,7 @@
 import { Box, Button, TextField } from "@mui/material";
 import React, { useState } from "react";
 
-export const Information = (props) => {
+export const Information = () => {
   let data = {
     userName: "cristiano07",
     fullName: "Cristiano Ronaldo",

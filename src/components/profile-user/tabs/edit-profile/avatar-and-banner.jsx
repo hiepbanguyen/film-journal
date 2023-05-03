@@ -3,7 +3,7 @@ import { FileStackAPIKey } from "../../../../apis/resources/filestack-api.jsx";
 import { Box, Container, Typography } from "@mui/material";
 import { PickerInline } from "filestack-react";
 
-export const AvatarAndBanner = (props) => {
+export const AvatarAndBanner = () => {
   return (
     <Container maxWidth={"md"}>
       <Box display={"flex"} flexDirection={{ xs: "column", md: "row" }} gap={5} color={"#9ab"}>

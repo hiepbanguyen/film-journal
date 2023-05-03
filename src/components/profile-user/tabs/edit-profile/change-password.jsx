@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Box, Button, Container, Stack, TextField } from "@mui/material";
 
-export const ChangePassword = (props) => {
+export const ChangePassword = () => {
   return (
     <Container maxWidth={"sm"}>
       <form>

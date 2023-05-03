@@ -3,7 +3,7 @@ import { styled } from "@mui/material/styles";
 import { Avatar, Box, Button, Typography } from "@mui/material";
 import Container from "@mui/material/Container";
 import styles from "./profile.module.scss";
-import GroupAvatars from "./avatar-group.jsx";
+import GroupAvatars from "./followed-by.jsx";
 import { ProfileStats } from "./profile-stats.jsx";
 import { NavLink, Outlet, useNavigate, useParams } from "react-router-dom";
 import UserStore from "../../store/user.store";

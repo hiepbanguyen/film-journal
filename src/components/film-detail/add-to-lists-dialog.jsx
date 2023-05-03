@@ -4,7 +4,7 @@ import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
-import { Box, Checkbox, Chip, FormControlLabel, FormGroup, List, ListItem, Typography } from "@mui/material";
+import { Box, Checkbox, FormControlLabel, FormGroup, List, ListItem, Typography } from "@mui/material";
 
 const lists = [
   { title: "My cousin vinny", private: true, filmsCount: 20 },
@@ -59,14 +59,14 @@ export default function AddToListsDialog(props) {
           <List sx={{ maxHeight: 400 }} dense>
             {lists.map((i, idx) => (
               <ListItem key={idx} sx={{ display: "flex", justifyContent: "space-between" }}>
-                <Box display={"flex"} alignItems={"center"}>
+                <Box flex={1} display={"flex"} alignItems={"center"}>
                   <FormGroup>
                     <FormControlLabel
                       control={<Checkbox />}
                       label={i.title}
                       sx={{
                         mr: 1,
-                        maxWidth: 400,
+                        maxWidth: { xs: 270, sm: 470 },
                         "& .MuiFormControlLabel-label": {
                           overflow: "hidden",
                           whiteSpace: "nowrap",
@@ -75,14 +75,14 @@ export default function AddToListsDialog(props) {
                       }}
                     />
                   </FormGroup>
-                  {i.private ? (
-                    <Chip
-                      label={"Private"}
-                      sx={{ height: 25, fontSize: 12, bgcolor: "rgba(0,0,0,0.5)", color: "#fff" }}
-                    />
-                  ) : (
-                    <Chip label={"Public"} sx={{ height: 25, fontSize: 12, bgcolor: "#ffd8a8", color: "#000" }} />
-                  )}
+                  {/*{i.private ? (*/}
+                  {/*  <Chip*/}
+                  {/*    label={"Private"}*/}
+                  {/*    sx={{ height: 25, fontSize: 12, bgcolor: "rgba(0,0,0,0.5)", color: "#fff" }}*/}
+                  {/*  />*/}
+                  {/*) : (*/}
+                  {/*  <Chip label={"Public"} sx={{ height: 25, fontSize: 12, bgcolor: "#ffd8a8", color: "#000" }} />*/}
+                  {/*)}*/}
                 </Box>
                 <Typography>
                   {i.filmsCount}

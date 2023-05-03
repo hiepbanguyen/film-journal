@@ -25,9 +25,7 @@ export default function ReviewDialog(props) {
 
   return (
     <>
-      <Box sx={{ p: 0, width: "100%", height: "100%" }} onClick={handleClickOpen}>
-        {props.children}
-      </Box>
+      <Box onClick={handleClickOpen}>{props.children}</Box>
       <Dialog
         open={open}
         onClose={handleClose}

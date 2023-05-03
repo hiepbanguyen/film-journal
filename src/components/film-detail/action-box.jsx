@@ -24,10 +24,12 @@ const ReViewLikeWatchList = () => {
   const [watchlisted, setWatchlisted] = React.useState(false);
   return (
     <Box display={"flex"} gap={1} justifyContent={"space-evenly"} pl={1}>
-      <CustomButton1 onClick={() => setReviewed(!reviewed)}>
-        <RemoveRedEyeRoundedIcon fontSize={"large"} sx={{ color: reviewed ? "#00c030" : "#bcd" }} />
-        Review
-      </CustomButton1>
+      <ReviewDialog>
+        <CustomButton1>
+          <RemoveRedEyeRoundedIcon fontSize={"large"} sx={{ color: reviewed ? "#00c030" : "#bcd" }} />
+          Review
+        </CustomButton1>
+      </ReviewDialog>
       <CustomButton1 onClick={() => setLiked(!liked)}>
         <FavoriteIcon fontSize={"large"} sx={{ color: liked ? "#ff9010" : "#bcd" }} />
         Like

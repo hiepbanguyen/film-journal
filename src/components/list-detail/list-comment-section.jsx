@@ -21,7 +21,6 @@ export default function ListCommentSection(props) {
       pageSize: PageSize,
       pageIndex: pageIdx,
     },
-    useCache: false,
   });
   const [{}, postComment] = useAxios(
     {
@@ -71,7 +70,7 @@ export default function ListCommentSection(props) {
       ) : (
         <>
           <Typography textTransform={"uppercase"} fontWeight={"bold"}>
-            {data.Total ?? 0} comments
+            {data?.Total ?? 0} comments
           </Typography>
           <Divider />
           <Box mb={3}>
@@ -79,7 +78,7 @@ export default function ListCommentSection(props) {
               <Comment {...i} key={idx} />
             ))}
           </Box>
-          <PaginationBase totalPage={data.TotalPage ?? 0} pageIndex={pageIdx} onChange={handleChangePage} />
+          <PaginationBase totalPage={data?.TotalPage ?? 0} pageIndex={pageIdx} onChange={handleChangePage} />
         </>
       )}
       <Box sx={{ marginBottom: "80px" }}>

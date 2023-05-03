@@ -1,18 +1,7 @@
 import React from "react";
 import { useSnackbar } from "notistack";
 import { useNavigate, useParams } from "react-router-dom";
-import {
-  Box,
-  Button,
-  Checkbox,
-  Container,
-  Divider,
-  FormControlLabel,
-  IconButton,
-  Stack,
-  TextField,
-  Typography,
-} from "@mui/material";
+import { Box, Button, Container, Divider, IconButton, Stack, TextField, Typography } from "@mui/material";
 import { SearchFilms } from "../new/search-films.jsx";
 import ListIcon from "@mui/icons-material/List.js";
 import { SelectedFilm } from "../new/index.jsx";
@@ -90,7 +79,7 @@ export const EditList = observer(() => {
               }}
               defaultValue={"Name of list"}
             />
-            <FormControlLabel control={<Checkbox sx={{ color: "#9ab" }} />} label="Public" />
+            {/*<FormControlLabel control={<Checkbox sx={{ color: "#9ab" }} />} label="Public" />*/}
             <TextField
               margin="dense"
               id="list-desc"
@@ -103,11 +92,11 @@ export const EditList = observer(() => {
           </Stack>
           <Stack flex={1} gap={2}>
             <SearchFilms handleAddFilm={handleAddFilm} />
-            <Box borderRadius={1} border={"1px solid #9ab"} p={1} height={314}>
+            <Box borderRadius={1} border={"1px solid #9ab"} p={1} height={263.5}>
               {addedFilms.length > 0 ? (
                 <Stack sx={{ height: "100%", overflowY: "auto" }}>
                   {addedFilms.map((i, idx) => (
-                    <SelectedFilm key={idx} {...i}>
+                    <SelectedFilm key={idx} film={i}>
                       <IconButton
                         sx={{
                           color: "#9ab",

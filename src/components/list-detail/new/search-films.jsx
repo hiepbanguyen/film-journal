@@ -1,44 +1,9 @@
-import { Card, CardContent, CircularProgress, ClickAwayListener, Typography } from "@mui/material";
+import { Card, CardContent, CircularProgress, ClickAwayListener, debounce, Typography } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import React from "react";
 import { Box } from "@mui/system";
 import SearchIcon from "@mui/icons-material/Search";
-
-const exampleOptions = [
-  {
-    id: 1,
-    thumbnail:
-      "https://a.ltrbxd.com/resized/film-poster/6/8/3/1/9/4/683194-do-revenge-0-70-0-105-crop.jpg?v=19da99b72f",
-    title: "Do Revenge",
-  },
-  {
-    id: 2,
-    thumbnail: "https://a.ltrbxd.com/resized/film-poster/9/9/4/3/1/4/994314-swarm-0-70-0-105-crop.jpg?v=256fc1c484",
-    title: "Swarm",
-  },
-  {
-    id: 3,
-    thumbnail: "https://a.ltrbxd.com/resized/film-poster/9/9/6/9/2/5/996925-beef-0-70-0-105-crop.jpg?v=c7399e5bdb",
-    title: "Beef",
-  },
-  {
-    id: 4,
-    thumbnail: "https://a.ltrbxd.com/resized/sm/upload/91/48/x5/do/sea_beast_xxlg-0-70-0-105-crop.jpg?v=52209df52e",
-    title: "The Sea Beast",
-  },
-  {
-    id: 5,
-    thumbnail:
-      "https://a.ltrbxd.com/resized/film-poster/6/2/9/3/2/0/629320-decision-to-leave-0-70-0-105-crop.jpg?v=30eaeaf481",
-    title: "Decision To Leave",
-  },
-  {
-    id: 6,
-    thumbnail:
-      "https://a.ltrbxd.com/resized/film-poster/4/4/9/4/4/2/449442-bodies-bodies-bodies-0-70-0-105-crop.jpg?v=1dfddd92ac",
-    title: "Bodies Bodies Bodies",
-  },
-];
+import useAxios from "axios-hooks";
 
 const SearchOption = (props) => {
   const { film, handleFilmClick } = props;
@@ -60,10 +25,11 @@ const SearchOption = (props) => {
     >
       <CardContent sx={{ pl: 1, py: 0, ":last-child": { pb: 0 } }}>
         <Box display={"flex"} alignItems={"center"}>
-          <img src={film.thumbnail} alt={film.title} height={45} width={30} style={{ borderRadius: "2px" }} />
+          <img src={film?.Poster_path} alt={film?.Title} height={45} width={30} style={{ borderRadius: "2px" }} />
           <Box ml={1}>
             <Typography color={"#9ab"}>
-              <strong style={{ color: "#fff" }}>{film.title}</strong> {film.releasedYear ?? "2022"}
+              <strong style={{ color: "#fff" }}>{film?.Title}</strong>{" "}
+              {film?.Release_date && new Date(film.Release_date).getFullYear()}
             </Typography>
           </Box>
         </Box>
@@ -77,19 +43,30 @@ export const SearchFilms = (props) => {
   const [searchLoading, setSearchLoading] = React.useState(false);
   const [options, setOptions] = React.useState([]);
   const [openPopper, setOpenPopper] = React.useState(false);
-  // const fetch = React.useCallback(
-  //   debounce((inputValue) => {
-  //     searchProject({ search: inputValue }).then((res) => setOptions(res.data?.getProjects ?? []));
-  //     setSearchLoading(false);
-  //   }, 500),
-  //   [],
-  // );
-  const fetch = (inputValue) => {
-    setOptions(exampleOptions);
-    setOpenPopper(true);
-    // console.log(options);
-    // setSearchLoading(false);
-  };
+  const [, fetchFilms] = useAxios(
+    {
+      url: "Films/Paging",
+      method: "POST",
+    },
+    { manual: true },
+  );
+  const fetch = React.useCallback(
+    debounce((inputValue) => {
+      fetchFilms({
+        data: {
+          pageSize: 10,
+          pageIndex: 1,
+          filmName: inputValue,
+        },
+      }).then((res) => {
+        setOptions(res?.data?.Data ?? []);
+        setOpenPopper(true);
+      });
+      setSearchLoading(false);
+    }, 500),
+    [],
+  );
+
   React.useEffect(() => {
     setSearchLoading(true);
     if (!inputValue) {
@@ -140,15 +117,21 @@ export const SearchFilms = (props) => {
           sx={{ zIndex: 10, bgcolor: "#456", borderRadius: 1, color: "#9ab", mt: 1, width: "100%", p: 1 }}
         >
           <Box
-            sx={{ borderRadius: 1, height: 250, overflowY: "scroll" }}
+            sx={{ borderRadius: 1, maxHeight: 250, overflowY: "auto" }}
             // onClick={() => {
             //   setInputValue("");
             //   setOpenPopper(false);
             // }}
           >
-            {options.map((i, idx) => (
-              <SearchOption key={idx} film={i} handleFilmClick={handleFilmClicked} />
-            ))}
+            {options.length > 0 ? (
+              <>
+                {options.map((i, idx) => (
+                  <SearchOption key={idx} film={i} handleFilmClick={handleFilmClicked} />
+                ))}
+              </>
+            ) : (
+              <Typography color={"#fff"}>No titles matching {inputValue}</Typography>
+            )}
           </Box>
         </Box>
       </ClickAwayListener>
