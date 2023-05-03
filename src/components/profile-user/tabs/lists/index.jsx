@@ -1,9 +1,8 @@
 import * as React from "react";
-import { Box, Button, Divider } from "@mui/material";
+import { Box, Divider } from "@mui/material";
 import { Link, useParams } from "react-router-dom";
 import FavoriteIcon from "@mui/icons-material/Favorite.js";
 import ChatBubbleIcon from "@mui/icons-material/ChatBubble";
-import Grid from "@mui/material/Grid";
 import PaginationBase from "../../../common/pagination-base";
 import { FilmCardsStackedFive } from "../../../home/popular-lists.jsx";
 import useAxios from "axios-hooks";
@@ -20,37 +19,28 @@ export const UserLists = (props) => {
 
   return (
     <Box sx={{ margin: "48px 0", color: "#9ab" }}>
-      <Grid container columns={12} spacing={4}>
-        <Grid item xs={12} lg={8}>
-          <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-            <Box sx={{ textTransform: "uppercase" }}>Lists</Box>
-          </Box>
-          <Divider />
-          {loading ? (
-            <Loading paddingY={10} />
-          ) : (
-            <>
-              <Box>
-                <Box sx={{ marginBottom: "20px" }}>
-                  {data?.Data?.map((i, idx) => (
-                    <ListFilmCard key={idx} data={i} />
-                  ))}
-                </Box>
-                <Box sx={{ display: "flex", justifyContent: "end" }}>
-                  <PaginationBase totalPage={data?.TotalPage ?? 0} pageIndex={pageIndex} onChange={handleChangePage} />
-                </Box>
+      <Box px={{ md: 10, lg: 20 }}>
+        <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+          <Box sx={{ textTransform: "uppercase" }}>Lists</Box>
+        </Box>
+        <Divider />
+        {loading ? (
+          <Loading paddingY={10} />
+        ) : (
+          <>
+            <Box>
+              <Box sx={{ marginBottom: "20px" }}>
+                {data?.Data?.map((i, idx) => (
+                  <ListFilmCard key={idx} data={i} />
+                ))}
               </Box>
-            </>
-          )}
-        </Grid>
-        <Grid item xs={12} lg={4}>
-          <Link to={`/lists/new`}>
-            <Button style={{ marginTop: "20px" }} variant="contained">
-              Add New List
-            </Button>
-          </Link>
-        </Grid>
-      </Grid>
+              <Box sx={{ display: "flex", justifyContent: "end" }}>
+                <PaginationBase totalPage={data?.TotalPage ?? 0} pageIndex={pageIndex} onChange={handleChangePage} />
+              </Box>
+            </Box>
+          </>
+        )}
+      </Box>
     </Box>
   );
 };
