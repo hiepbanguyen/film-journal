@@ -8,6 +8,9 @@ import { SelectedFilm } from "../new/index.jsx";
 import CloseIcon from "@mui/icons-material/Close.js";
 import UserStore from "../../../store/user.store.js";
 import { observer } from "mobx-react-lite";
+import { useForm } from "react-hook-form";
+import useAxios from "axios-hooks";
+import { Loading } from "../../common/loading";
 
 const existedFilms = [
   {
@@ -30,10 +33,28 @@ const existedFilms = [
 ];
 
 export const EditList = observer(() => {
-  const [addedFilms, setAddFilms] = React.useState(existedFilms);
+  const [addedFilms, setAddFilms] = React.useState([]);
   const { enqueueSnackbar } = useSnackbar();
-  const { username } = useParams();
+  const { username, listId } = useParams();
+  const { register, handleSubmit, reset } = useForm();
   const navigate = useNavigate();
+  const [{ data: detail }, listDetail] = useAxios(`Lists/${listId}/Detail`);
+  const [{ data: films, loading: loadFilms }, listFilms] = useAxios({
+    url: `Lists/${listId}/Films`,
+    method: "POST",
+    data: {
+      pageSize: 200,
+      pageIndex: 1,
+    },
+  });
+  const [, editList] = useAxios({ url: "Lists/Edit", method: "POST" }, { manual: true });
+
+  React.useEffect(() => {
+    if (!loadFilms) {
+      setAddFilms(films?.Data ?? []);
+    }
+  }, [loadFilms]);
+
   React.useEffect(() => {
     if (UserStore.isLoadedFromLocal) {
       if (!UserStore.isLoggedIn) {
@@ -45,7 +66,11 @@ export const EditList = observer(() => {
   }, [UserStore.isLoggedIn, UserStore.isLoadedFromLocal]);
 
   const handleAddFilm = (newFilm) => {
-    if (addedFilms.find((i) => newFilm.id === i.id)) {
+    if (addedFilms.length === 200) {
+      enqueueSnackbar("You've reached the limit number of films (200)", { variant: "error" });
+      return;
+    }
+    if (addedFilms.find((i) => newFilm.FilmID === i.FilmID)) {
       enqueueSnackbar("You already added this film to your list", { variant: "error" });
       return;
     }
@@ -53,14 +78,42 @@ export const EditList = observer(() => {
   };
 
   const handleRemoveFilm = (filmId) => {
-    setAddFilms(addedFilms.filter((i) => i.id !== filmId));
+    setAddFilms(addedFilms.filter((i) => i.FilmID !== filmId));
   };
 
+  const handleCancel = () => {
+    reset();
+    navigate(-1);
+  };
+
+  const onSubmit = async (values) => {
+    if (addedFilms.length === 0) {
+      enqueueSnackbar("You haven't added any films to your list", { variant: "error" });
+      return;
+    }
+    try {
+      await editList({
+        data: {
+          ...values,
+          FilmIDs: addedFilms.map((i) => i?.FilmID ?? "").join(","),
+          ListID: listId,
+        },
+      }).then((res) => {
+        if (res?.data) {
+          enqueueSnackbar("Update list successfully", { variant: "success" });
+        }
+      });
+    } catch (e) {
+      enqueueSnackbar(e.response.data.userMsg, { variant: "error" });
+    }
+  };
+
+  if (loadFilms) return <Loading paddingY={10} />;
   return (
     <Container sx={{ color: "#9ab", mt: 10 }}>
       <Typography variant={"h5"}>Edit List</Typography>
       <Divider sx={{ mb: 3 }} />
-      <form>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <Box
           display={"flex"}
           flexDirection={{ xs: "column", sm: "row" }}
@@ -69,25 +122,26 @@ export const EditList = observer(() => {
         >
           <Stack flex={1} gap={1}>
             <TextField
+              required
               label={"Name of list"}
               size={"small"}
+              defaultValue={detail?.ListName}
               sx={{
                 " input,label,fieldset": {
                   borderColor: "#9ab",
                   color: "#9ab",
                 },
               }}
-              defaultValue={"Name of list"}
+              {...register("ListName")}
             />
-            {/*<FormControlLabel control={<Checkbox sx={{ color: "#9ab" }} />} label="Public" />*/}
             <TextField
               margin="dense"
-              id="list-desc"
               fullWidth
               multiline
               rows={10}
+              defaultValue={detail?.Description ?? ""}
               placeholder={"Description"}
-              defaultValue={"This is the description"}
+              {...register("Description")}
             />
           </Stack>
           <Stack flex={1} gap={2}>
@@ -105,7 +159,7 @@ export const EditList = observer(() => {
                             color: "#fd435f",
                           },
                         }}
-                        onClick={() => handleRemoveFilm(i.id)}
+                        onClick={() => handleRemoveFilm(i.FilmID)}
                       >
                         <CloseIcon />
                       </IconButton>
@@ -128,10 +182,12 @@ export const EditList = observer(() => {
           </Stack>
         </Box>
         <Box my={1} gap={1} display={"flex"} justifyContent={"flex-end"}>
-          <Button sx={{ color: "#fff", "&:hover": { bgcolor: "rgba(255,255,255,0.2)" } }} onClick={() => navigate(-1)}>
+          <Button sx={{ color: "#fff", "&:hover": { bgcolor: "rgba(255,255,255,0.2)" } }} onClick={handleCancel}>
             Cancel
           </Button>
-          <Button variant={"contained"}>Save</Button>
+          <Button type={"submit"} variant={"contained"}>
+            Save
+          </Button>
         </Box>
       </form>
     </Container>

@@ -8,7 +8,7 @@ import { FilmCardsStackedFive } from "../../../home/popular-lists.jsx";
 import useAxios from "axios-hooks";
 import { Loading } from "../../../common/loading";
 
-export const UserLists = (props) => {
+export const UserLists = () => {
   const { username } = useParams(); //
   const [pageIndex, setPageIndex] = React.useState(1);
   const [{ data, loading, error }] = useAxios(`Lists/Users?pageSize=5&pageIndex=${pageIndex}&userName=${username}`);
@@ -59,7 +59,7 @@ export const ListFilmCard = ({ data }) => {
       >
         <Box
           component={Link}
-          to={data?.ListID ?? ""}
+          to={`${data?.ListID}`}
           sx={{
             display: "flex",
             position: "relative",
@@ -70,7 +70,7 @@ export const ListFilmCard = ({ data }) => {
         <Box sx={{ width: 0.6, padding: "0 20px" }}>
           <Box
             component={Link}
-            to={data?.ListID ?? ""}
+            to={`${data?.ListID}`}
             sx={{ marginBottom: "8px", fontWeight: "700", fontSize: "20px", color: "#fff" }}
           >
             {data?.ListName ?? ""}

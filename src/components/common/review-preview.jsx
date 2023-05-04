@@ -24,7 +24,7 @@ const ReviewContent = ({ link, content, likeCount, spoiler }) => {
             ":hover": { backgroundColor: "#3b4957", color: "#fff" },
           }}
         >
-          This review may contains spoilers. Click here if you're willing to take the risk
+          This review may contains spoilers. Click here to open!
         </Button>
       ) : (
         <Typography component={Link} to={link ?? ""} fontSize={15} mb={1}>

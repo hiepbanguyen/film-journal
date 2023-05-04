@@ -1,10 +1,15 @@
-import React, { useState } from "react";
+import React from "react";
 import { Box, Stack } from "@mui/material";
 import PaginationBase from "../../../common/pagination-base";
 import ReviewPreview from "../../../common/review-preview.jsx";
+import { useParams } from "react-router-dom";
+import useAxios from "axios-hooks";
+import { Loading } from "../../../common/loading.jsx";
 
 export default function ReviewsTab() {
-  const [pageIndex, setPageIndex] = useState(1);
+  const { username } = useParams(); //
+  const [pageIndex, setPageIndex] = React.useState(1);
+  const [{ data, loading, error }] = useAxios(`Reviews/Users?pageSize=5&pageIndex=${pageIndex}&userName=${username}`);
 
   const handleChangePage = (newPage) => {
     setPageIndex(newPage);
@@ -12,25 +17,32 @@ export default function ReviewsTab() {
 
   return (
     <Box className="profile-reviews-tab" sx={{ color: "#9ab", marginTop: "20px", paddingBottom: "48px" }}>
-      <Stack sx={{ mx: { md: 20 } }}>
-        {Array.from({ length: 5 }).map((i, idx) => (
-          <ReviewPreview
-            key={idx}
-            title={"A film title"}
-            releasedYear={2022}
-            content={
-              "Lorem Ipsum is simply dummy text of the printing and typesetting industry. It has survived not only five centuries, but also the" +
-              " leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum"
-            }
-            ratings={4}
-            likeCount={10}
-            commentCount={50}
-            reviewDate={new Date()}
-            notShowUser={true}
-          />
-        ))}
-      </Stack>
-      <PaginationBase totalPage={20} pageIndex={pageIndex} onChange={handleChangePage} />
+      {loading ? (
+        <Loading paddingY={10} />
+      ) : (
+        <>
+          <Stack sx={{ mx: { md: 20 } }}>
+            {data?.Data?.map((i, idx) => (
+              <ReviewPreview
+                key={idx}
+                title={i.Film?.Title ?? ""}
+                poster={i.Film?.Poster_path ?? ""}
+                filmId={i.Film?.FilmID ?? ""}
+                releasedYear={i.Film?.Release_date ? new Date(i.Film?.Release_date).getFullYear() : ""}
+                content={i.Content ?? ""}
+                ratings={i.Score ?? 0}
+                likeCount={i.LikesCount ?? 0}
+                commentCount={i.CommentsCount ?? 0}
+                spoiler={i.HaveSpoiler ?? 0}
+                reviewDate={i.WatchedDate ? new Date(i.WatchedDate) : ""}
+                link={`/u/${username}/reviews/${i.ReviewID}`}
+                notShowUser={true}
+              />
+            ))}
+          </Stack>
+          <PaginationBase totalPage={data?.TotalPage ?? 0} pageIndex={pageIndex} onChange={handleChangePage} />
+        </>
+      )}
     </Box>
   );
 }

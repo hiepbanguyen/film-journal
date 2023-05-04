@@ -6,7 +6,7 @@ import * as React from "react";
 export default function ReviewCard(props) {
   const { size, rating, username, fullname, avatar, link, poster } = props;
   return (
-    <Box component={Link} to={link}>
+    <Box component={Link} to={link ?? ""}>
       <Box
         sx={{
           borderRadius: 1,

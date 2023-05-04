@@ -18,11 +18,19 @@ import { useSnackbar } from "notistack";
 import { useNavigate } from "react-router-dom";
 import UserStore from "../../../store/user.store.js";
 import { observer } from "mobx-react-lite";
+import { useForm } from "react-hook-form";
+import useAxios from "axios-hooks";
 
 export const SelectedFilm = ({ film, children }) => {
   return (
     <Card
-      sx={{ py: 1, background: "transparent", width: "100%", ":hover": { bgcolor: "rgba(255,255,255,0.1)" } }}
+      sx={{
+        py: 1,
+        background: "transparent",
+        minHeight: 70,
+        width: "100%",
+        ":hover": { bgcolor: "rgba(255,255,255,0.1)" },
+      }}
       elevation={0}
     >
       <CardContent sx={{ pl: 1, py: 0, ":last-child": { pb: 0 } }}>
@@ -48,9 +56,11 @@ export const SelectedFilm = ({ film, children }) => {
 };
 
 export const NewList = observer(() => {
+  const { register, handleSubmit, reset } = useForm();
   const [addedFilms, setAddFilms] = React.useState([]);
   const { enqueueSnackbar } = useSnackbar();
   const navigate = useNavigate();
+  const [, addList] = useAxios({ url: "Lists/Add", method: "POST" }, { manual: true });
 
   React.useEffect(() => {
     if (UserStore.isLoadedFromLocal && !UserStore.isLoggedIn) {
@@ -59,7 +69,11 @@ export const NewList = observer(() => {
   }, [UserStore.isLoggedIn, UserStore.isLoadedFromLocal]);
 
   const handleAddFilm = (newFilm) => {
-    if (addedFilms.find((i) => newFilm.id === i.id)) {
+    if (addedFilms.length === 200) {
+      enqueueSnackbar("You've reached the limit number of films (200)", { variant: "error" });
+      return;
+    }
+    if (addedFilms.find((i) => newFilm.FilmID === i.FilmID)) {
       enqueueSnackbar("You already added this film to your list", { variant: "error" });
       return;
     }
@@ -67,14 +81,40 @@ export const NewList = observer(() => {
   };
 
   const handleRemoveFilm = (filmId) => {
-    setAddFilms(addedFilms.filter((i) => i.id !== filmId));
+    setAddFilms(addedFilms.filter((i) => i.FilmID !== filmId));
+  };
+
+  const handleCancel = () => {
+    reset();
+    navigate(-1);
+  };
+
+  const onSubmit = async (values) => {
+    if (addedFilms.length === 0) {
+      enqueueSnackbar("You haven't added any films to your list", { variant: "error" });
+      return;
+    }
+    try {
+      await addList({
+        data: {
+          ...values,
+          FilmIDs: addedFilms.map((i) => i?.FilmID ?? "").join(","),
+        },
+      }).then((res) => {
+        if (res?.data) {
+          enqueueSnackbar("Create list successfully", { variant: "success" });
+        }
+      });
+    } catch (e) {
+      enqueueSnackbar(e.response.data.userMsg, { variant: "error" });
+    }
   };
 
   return (
     <Container sx={{ color: "#9ab", mt: 10 }}>
       <Typography variant={"h5"}>New List</Typography>
       <Divider sx={{ mb: 3 }} />
-      <form>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <Box
           display={"flex"}
           flexDirection={{ xs: "column", sm: "row" }}
@@ -83,6 +123,7 @@ export const NewList = observer(() => {
         >
           <Stack flex={1} gap={1}>
             <TextField
+              required
               label={"Name of list"}
               size={"small"}
               sx={{
@@ -91,16 +132,16 @@ export const NewList = observer(() => {
                   color: "#9ab",
                 },
               }}
+              {...register("ListName")}
             />
             {/*<FormControlLabel control={<Checkbox sx={{ color: "#9ab" }} />} label="Public" />*/}
             <TextField
-              autoFocus
               margin="dense"
-              id="list-desc"
               fullWidth
               multiline
               rows={10}
               placeholder={"Description"}
+              {...register("Description")}
             />
           </Stack>
           <Stack flex={1} gap={2}>
@@ -118,7 +159,7 @@ export const NewList = observer(() => {
                             color: "#fd435f",
                           },
                         }}
-                        onClick={() => handleRemoveFilm(i.id)}
+                        onClick={() => handleRemoveFilm(i.FilmID)}
                       >
                         <CloseIcon />
                       </IconButton>
@@ -141,10 +182,12 @@ export const NewList = observer(() => {
           </Stack>
         </Box>
         <Box my={1} gap={1} display={"flex"} justifyContent={"flex-end"}>
-          <Button sx={{ color: "#fff", "&:hover": { bgcolor: "rgba(255,255,255,0.2)" } }} onClick={() => navigate(-1)}>
+          <Button sx={{ color: "#fff", "&:hover": { bgcolor: "rgba(255,255,255,0.2)" } }} onClick={handleCancel}>
             Cancel
           </Button>
-          <Button variant={"contained"}>Save</Button>
+          <Button type={"submit"} variant={"contained"}>
+            Save
+          </Button>
         </Box>
       </form>
     </Container>
