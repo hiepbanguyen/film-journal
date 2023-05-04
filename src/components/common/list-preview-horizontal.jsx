@@ -21,7 +21,7 @@ export const ListPreviewHorizontal = (props) => {
         <Box display={"flex"} alignItems={"center"} my={1}>
           <Avatar sx={{ width: 25, height: 25 }} src={userAvatar ?? ""} />
           <Typography variant={"body2"} ml={0.5} mr={1}>
-            {fullname ?? username}
+            {fullname ? fullname : username}
           </Typography>
           <Typography variant={"body2"} ml={0.5} mr={0.8}>
             {`${films}`} films

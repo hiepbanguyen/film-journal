@@ -11,6 +11,8 @@ import { observer } from "mobx-react-lite";
 import { useForm } from "react-hook-form";
 import useAxios from "axios-hooks";
 import { Loading } from "../../common/loading";
+import ConfirmDeleteDialog from "../../common/confirm-delete.jsx";
+import { PageNotExist } from "../../common/page-not-exist";
 
 const existedFilms = [
   {
@@ -108,11 +110,13 @@ export const EditList = observer(() => {
     }
   };
 
-  if (loadFilms) return <Loading paddingY={10} />;
+  if (loadFilms) return <Loading paddingY={10}/>;
+  if (!detail || !films) return <PageNotExist/>
+
   return (
     <Container sx={{ color: "#9ab", mt: 10 }}>
       <Typography variant={"h5"}>Edit List</Typography>
-      <Divider sx={{ mb: 3 }} />
+      <Divider sx={{ mb: 3 }}/>
       <form onSubmit={handleSubmit(onSubmit)}>
         <Box
           display={"flex"}
@@ -145,7 +149,7 @@ export const EditList = observer(() => {
             />
           </Stack>
           <Stack flex={1} gap={2}>
-            <SearchFilms handleAddFilm={handleAddFilm} />
+            <SearchFilms handleAddFilm={handleAddFilm}/>
             <Box borderRadius={1} border={"1px solid #9ab"} p={1} height={263.5}>
               {addedFilms.length > 0 ? (
                 <Stack sx={{ height: "100%", overflowY: "auto" }}>
@@ -161,7 +165,7 @@ export const EditList = observer(() => {
                         }}
                         onClick={() => handleRemoveFilm(i.FilmID)}
                       >
-                        <CloseIcon />
+                        <CloseIcon/>
                       </IconButton>
                     </SelectedFilm>
                   ))}
@@ -175,7 +179,7 @@ export const EditList = observer(() => {
                   alignItems={"center"}
                 >
                   <Typography>Films you added to your list appear here</Typography>
-                  <ListIcon sx={{ fontSize: 60 }} />
+                  <ListIcon sx={{ fontSize: 60 }}/>
                 </Box>
               )}
             </Box>
@@ -185,6 +189,7 @@ export const EditList = observer(() => {
           <Button sx={{ color: "#fff", "&:hover": { bgcolor: "rgba(255,255,255,0.2)" } }} onClick={handleCancel}>
             Cancel
           </Button>
+          <ConfirmDeleteDialog type={"list"} url={`Lists/Delete/${listId}`}/>
           <Button type={"submit"} variant={"contained"}>
             Save
           </Button>

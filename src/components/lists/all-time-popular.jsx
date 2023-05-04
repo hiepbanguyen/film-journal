@@ -56,7 +56,7 @@ const AllTimePopular = (props) => {
       <Box display={"flex"} alignItems={"center"} my={1}>
         <Avatar sx={{ width: 25, height: 25 }} src={userAvatar ?? ""} />
         <Typography variant={"body2"} ml={0.5} mr={1}>
-          Created by {`${fullname ?? username}`}
+          Created by {`${fullname ? fullname : username}`}
         </Typography>
         <Typography variant={"body2"} ml={0.5} mr={1}>
           {`${films}`} films

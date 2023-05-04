@@ -1,9 +1,9 @@
-import { Box, Container, Divider, Stack, Typography } from "@mui/material";
+import { Box, Container, Divider, Stack } from "@mui/material";
 import React from "react";
 import NavBar from "./nav-bar.jsx";
 import ReviewFilters, { fromValues } from "./filters.jsx";
 import ReviewPreview from "../../common/review-preview.jsx";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import useAxios from "axios-hooks";
 import { Loading } from "../../common/loading.jsx";
 import PaginationBase from "../../common/pagination-base.jsx";
@@ -46,9 +46,17 @@ export default function AllFilmReviews() {
             <Loading paddingY={10} />
           ) : (
             <>
-              <Typography color={"#fff"} fontStyle={"italic"}>
-                <b>{data?.Total}</b> review(s) of <strong>Avatar the Airbender</strong>
-              </Typography>
+              <Box color={"#fff"} fontStyle={"italic"}>
+                <b>{data?.Total}</b> {"review(s) of "}
+                <Box
+                  fontWeight={"bold"}
+                  component={Link}
+                  to={`/films/${data?.Film?.FilmID}`}
+                  sx={{ ":hover": { color: "#00e8ff" } }}
+                >
+                  {data?.Film?.Title}
+                </Box>
+              </Box>
               <Stack divider={<Divider />}>
                 {data?.Data?.map((i, idx) => (
                   <ReviewPreview

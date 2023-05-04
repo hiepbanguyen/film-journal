@@ -20,9 +20,10 @@ import * as React from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import UserStore from "../../../store/user.store.js";
 import { observer } from "mobx-react-lite";
+import ConfirmDeleteDialog from "../../common/confirm-delete.jsx";
 
 export const EditReview = observer(() => {
-  const { username } = useParams();
+  const { username, reviewId } = useParams();
   const navigate = useNavigate();
   React.useEffect(() => {
     if (UserStore.isLoadedFromLocal) {
@@ -95,6 +96,7 @@ export const EditReview = observer(() => {
           <Button sx={{ color: "#fff", "&:hover": { bgcolor: "rgba(255,255,255,0.2)" } }} onClick={() => navigate(-1)}>
             Cancel
           </Button>
+          <ConfirmDeleteDialog type={"review"} url={`Lists/Delete/${reviewId}`} />
           <Button type={"submit"} variant={"contained"}>
             Save
           </Button>

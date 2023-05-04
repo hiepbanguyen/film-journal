@@ -1,9 +1,9 @@
-import { Box, Container, Divider, Stack, Typography } from "@mui/material";
+import { Box, Container, Divider, Stack } from "@mui/material";
 import React from "react";
 import NavBar from "./nav-bar.jsx";
 import ReviewFilters, { fromValues } from "./filters.jsx";
 import { ListPreviewHorizontal } from "../../common/list-preview-horizontal.jsx";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import useAxios from "axios-hooks";
 import PaginationBase from "../../common/pagination-base.jsx";
 import { Loading } from "../../common/loading.jsx";
@@ -38,18 +38,27 @@ export default function AllFilmLists() {
     <Container sx={{ mt: 10, color: "#9ab", pb: 5 }}>
       <Box display={"flex"} flexDirection={{ xs: "column", sm: "row" }} gap={3}>
         <Stack gap={3} width={{ sm: 170 }}>
-          <NavBar />
-          <ReviewFilters filterValues={filmListsFilters} showFrom={true} onSubmit={onSubmit} />
+          <NavBar/>
+          <ReviewFilters filterValues={filmListsFilters} showFrom={true} onSubmit={onSubmit}/>
         </Stack>
         <Box flex={1}>
           {loading ? (
-            <Loading paddingY={10} />
+            <Loading paddingY={10}/>
           ) : (
             <>
-              <Typography color={"#fff"} fontStyle={"italic"}>
-                <b>{data?.Total}</b> list(s) that <b>Avatar the Airbender</b> appears in
-              </Typography>
-              <Stack divider={<Divider />}>
+              <Box color={"#fff"} fontStyle={"italic"}>
+                <b>{data?.Total}</b>{" list(s) that "}
+                <Box
+                  fontWeight={"bold"}
+                  component={Link}
+                  to={`/films/${data?.Film?.FilmID}`}
+                  sx={{ ":hover": { color: "#00e8ff" } }}
+                >
+                  {data?.Film?.Title}
+                </Box>
+                {" appears in"}
+              </Box>
+              <Stack divider={<Divider/>}>
                 {data?.Data?.map((i, idx) => (
                   <Box key={idx} my={2}>
                     <ListPreviewHorizontal
@@ -67,7 +76,7 @@ export default function AllFilmLists() {
                   </Box>
                 ))}
               </Stack>
-              <PaginationBase totalPage={data?.TotalPage ?? 0} pageIndex={pageIndex} onChange={handleChangePage} />
+              <PaginationBase totalPage={data?.TotalPage ?? 0} pageIndex={pageIndex} onChange={handleChangePage}/>
             </>
           )}
         </Box>

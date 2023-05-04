@@ -44,27 +44,9 @@ export const UserEditProfile = observer(() => {
         </Tabs>
       </Box>
       <Box sx={{ marginTop: "32px" }}>
-        <Box
-          sx={{
-            display: `${tab === 0 ? "block" : "none"}`,
-          }}
-        >
-          <Information />
-        </Box>
-        <Box
-          sx={{
-            display: `${tab === 1 ? "block" : "none"}`,
-          }}
-        >
-          <AvatarAndBanner />
-        </Box>
-        <Box
-          sx={{
-            display: `${tab === 2 ? "block" : "none"}`,
-          }}
-        >
-          <ChangePassword />
-        </Box>
+        {tab === 0 && <Information />}
+        {tab === 1 && <AvatarAndBanner />}
+        {tab === 2 && <ChangePassword />}
       </Box>
     </Box>
   );

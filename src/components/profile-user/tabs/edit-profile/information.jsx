@@ -1,20 +1,22 @@
 import { Box, Button, TextField } from "@mui/material";
 import React, { useState } from "react";
+import { observer } from "mobx-react-lite";
+import UserStore from "../../../../store/user.store.js";
+import { Loading } from "../../../common/loading";
 
-export const Information = () => {
-  let data = {
-    userName: "cristiano07",
-    fullName: "Cristiano Ronaldo",
-    email: "cris07@gmail.com",
-    dateOfBirth: "2001-10-27",
-    bio: "I'm professional football player! GOAT - the Greatest Of All Times!",
-  };
+export const Information = observer(() => {
+  const data = UserStore.isLoadedFromLocal
+    ? {
+        userName: UserStore.user?.UserName,
+        fullName: UserStore.user?.FullName,
+        email: UserStore.user?.Email,
+        dateOfBirth: UserStore.user?.DateOfBirth,
+        bio: UserStore.user?.Bio,
+      }
+    : null;
   // Khai bao params
   const [userInput, setUserInput] = useState({
-    userName: data.userName || "",
-    fullName: data.fullName || "",
-    dateOfBirth: data.dateOfBirth || "",
-    bio: data.bio || "",
+    ...data,
     errors: {
       userName: "",
       fullName: "",
@@ -49,10 +51,7 @@ export const Information = () => {
   // handle cancel
   const handleCancel = () => {
     setUserInput({
-      userName: data.userName || "",
-      fullName: data.fullName || "",
-      dateOfBirth: data.dateOfBirth || "",
-      bio: data.bio || "",
+      ...data,
       errors: {
         userName: "",
         fullName: "",
@@ -91,6 +90,7 @@ export const Information = () => {
     return isValid;
   };
 
+  if (!UserStore.isLoadedFromLocal) return <Loading paddingY={10} />;
   return (
     <Box
       sx={{
@@ -142,7 +142,7 @@ export const Information = () => {
             }}
           />
           <TextField
-            label="Fullname"
+            label="Full name"
             name="fullName"
             value={userInput.fullName}
             onChange={handleInputChange}
@@ -223,4 +223,4 @@ export const Information = () => {
       </style>
     </Box>
   );
-};
+});

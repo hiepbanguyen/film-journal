@@ -64,7 +64,7 @@ function PopularListPreview(props) {
         >
           <Avatar sx={{ width: 25, height: 25 }} src={userAvatar} />
           <Typography variant={"body2"} ml={0.5} mr={1}>
-            {fullname ?? username}
+            {fullname ? fullname : username}
           </Typography>
         </Box>
         <FavoriteIcon fontSize={"small"} />

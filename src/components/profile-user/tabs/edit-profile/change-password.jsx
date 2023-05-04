@@ -18,7 +18,6 @@ export const ChangePassword = () => {
             fullWidth
             label="Current password"
             type={"password"}
-            name="curr_pass"
             size="small"
             sx={{
               width: "100%",
@@ -35,7 +34,6 @@ export const ChangePassword = () => {
           <TextField
             label="New password"
             type={"password"}
-            name="new_pass"
             size="small"
             helperText={"Minimum 8 charaters"}
             sx={{
@@ -52,7 +50,6 @@ export const ChangePassword = () => {
           />
           <TextField
             label="Confirm new password"
-            name="cf_new_pass"
             type={"password"}
             size="small"
             sx={{

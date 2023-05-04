@@ -12,6 +12,7 @@ import useAxios from "axios-hooks";
 import { PageNotExist } from "../common/page-not-exist.jsx";
 import { Loading } from "../common/loading.jsx";
 import defaultUserBanner from "../../assets/img/default-user-banner.png";
+import { useSnackbar } from "notistack";
 
 const Root = styled("div")({
   flexGrow: 1,
@@ -31,7 +32,7 @@ const profileTabs = [
   { label: "Info and Security", href: "edit-profile" },
 ];
 
-const ProfileNavigation = observer(() => {
+const ProfileNavigation = observer(({ username }) => {
   return (
     <Box
       sx={{
@@ -43,7 +44,10 @@ const ProfileNavigation = observer(() => {
         justifyContent: "center",
       }}
     >
-      {(UserStore.isLoggedIn ? profileTabs : profileTabs.filter((i) => i.href !== "edit-profile")).map((i, idx) => (
+      {(UserStore.isLoggedIn && UserStore.user.UserName === username
+        ? profileTabs
+        : profileTabs.filter((i) => i.href !== "edit-profile")
+      ).map((i, idx) => (
         <NavLink
           className={styles.tabs}
           to={`${i.href}`}
@@ -65,19 +69,28 @@ const ProfileNavigation = observer(() => {
   );
 });
 
-const FollowButton = observer(({ username }) => {
+const FollowButton = observer(({ username, followed }) => {
   const navigate = useNavigate();
+  const [following, setFollowing] = React.useState(followed);
+  const { enqueueSnackbar } = useSnackbar();
 
   const handleFollow = async () => {
     if (!UserStore.isLoggedIn) {
       navigate("/sign-in");
+      return;
     }
+    setFollowing(!following);
+    enqueueSnackbar(following ? "Unfollow successfully" : "Follow successfully", { variant: "success" });
   };
   return (
     <>
       {UserStore.user?.UserName !== username && (
-        <Button onClick={handleFollow} variant="contained" sx={{ bgcolor: "#456", p: 0, py: 0.5, mt: 0.5 }}>
-          Follow
+        <Button
+          onClick={handleFollow}
+          variant="contained"
+          sx={{ bgcolor: following ? "#00c030" : "#456", px: 1, py: 0.5, mt: 0.5 }}
+        >
+          {following ? "Followed" : "Follow"}
         </Button>
       )}
     </>
@@ -143,7 +156,7 @@ const ProfileUser = () => {
                       <Typography variant="h5" color="#fff" pt={1}>
                         {data.FullName ?? data.UserName}
                       </Typography>
-                      <FollowButton username={username} />
+                      <FollowButton username={username} followed={!!data?.IsFollowed} />
                     </Box>
                   </Box>
                   <Typography variant={"body2"} color={"#9ab"} pt={1} pr={{ sm: 5, md: 10 }}>
@@ -157,7 +170,7 @@ const ProfileUser = () => {
               <GroupAvatars followers={data?.Followers} />
             </>
           )}
-          <ProfileNavigation />
+          <ProfileNavigation username={username} />
           <Outlet />
         </Container>
       </Root>

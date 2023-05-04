@@ -103,6 +103,7 @@ export const NewList = observer(() => {
       }).then((res) => {
         if (res?.data) {
           enqueueSnackbar("Create list successfully", { variant: "success" });
+          navigate(`/u/${res?.data?.UserName}/lists/${res?.data?.ListID}`);
         }
       });
     } catch (e) {

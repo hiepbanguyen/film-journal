@@ -11,6 +11,8 @@ import ActionBox from "./action-box.jsx";
 import TabsReviews from "./tabs-reviews.jsx";
 import CompiledRatings from "../common/compiled-ratings.jsx";
 import { useParams } from "react-router-dom";
+import { observer } from "mobx-react-lite";
+import UserStore from "../../store/user.store.js";
 
 const film_detail = {
   title: "Avatar: The Way of Water",
@@ -30,10 +32,11 @@ const film_detail = {
   views: 749000,
 };
 
+const ActionPanel = observer(() => <>{UserStore.isLoggedIn ? <ActionBox /> : <SigninAndShare />}</>);
+
 const FilmDetail = () => {
   const { filmId } = useParams();
-  // console.log("filmdetail render");
-  const loggedIn = true;
+
   return (
     <Container maxWidth={"lg"}>
       <Box position={"relative"}>
@@ -78,7 +81,7 @@ const FilmDetail = () => {
             </Box>
             <Stack flex={1} pt={2} gap={4} sx={{ mt: 1.2 }}>
               <CompiledRatings />
-              {loggedIn ? <ActionBox /> : <SigninAndShare />}
+              <ActionPanel />
             </Stack>
           </Box>
           <Box pb={5}>
