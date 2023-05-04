@@ -10,7 +10,7 @@ export default function MemberSearch() {
   return (
     <>
       <Typography color={"#fff"} fontStyle={"italic"}>
-        Found 15 members matching <strong>'{searchParams}'</strong>:
+        Found 15 member(s) matching <strong>'{searchParams}'</strong>:
       </Typography>
       <PaginatedList rowsPerPage={10}>
         {Array.from({ length: 15 }).map((i, idx) => (

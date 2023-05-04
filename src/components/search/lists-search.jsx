@@ -10,7 +10,7 @@ export default function ListsSearch() {
   return (
     <>
       <Typography color={"#fff"} fontStyle={"italic"}>
-        Found 15 lists matching <strong>'{searchParams}'</strong>:
+        Found 15 list(s) matching <strong>'{searchParams}'</strong>:
       </Typography>
       <PaginatedList rowsPerPage={10}>
         {Array.from({ length: 15 }).map((i, idx) => (

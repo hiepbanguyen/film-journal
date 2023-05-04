@@ -29,7 +29,7 @@ export const PopularReviewers = () => {
               <MemberPreview
                 fullname={i.FullName ?? ""}
                 username={i.UserName ?? ""}
-                followers={i.Follows ?? 0}
+                followers={i.Follower ?? 0}
                 following={i.Following ?? 0}
                 filmsReviewed={i.Reviews ?? 0}
                 avatar={i.Avatar ?? ""}

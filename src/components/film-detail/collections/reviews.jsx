@@ -1,46 +1,80 @@
 import { Box, Container, Divider, Stack, Typography } from "@mui/material";
 import React from "react";
 import NavBar from "./nav-bar.jsx";
-import ReviewFilters from "./filters.jsx";
+import ReviewFilters, { fromValues } from "./filters.jsx";
 import ReviewPreview from "../../common/review-preview.jsx";
+import { useParams } from "react-router-dom";
+import useAxios from "axios-hooks";
+import { Loading } from "../../common/loading.jsx";
+import PaginationBase from "../../common/pagination-base.jsx";
+
+const filmReviewsFilters = ["Popularity", "Highest Rating", "Lowest Rating", "Most Recent", "Earliest"];
 
 export default function AllFilmReviews() {
+  const { filmId } = useParams();
+  const [pageIndex, setPageIndex] = React.useState(1);
+  const [filters, setFilters] = React.useState({ sort: filmReviewsFilters[0], from: fromValues[0] });
+  const [{ data, loading, error }, fetchReviews] = useAxios({
+    url: "Reviews/Paging",
+    method: "POST",
+    data: {
+      id: filmId,
+      pageSize: 10,
+      pageIndex: pageIndex,
+      ...filters,
+    },
+  });
+
+  const handleChangePage = (newPage) => {
+    setPageIndex(newPage);
+  };
+
+  const onSubmit = (values) => {
+    setPageIndex(1);
+    setFilters(values);
+  };
+
   return (
     <Container sx={{ mt: 10, color: "#9ab", pb: 5 }}>
       <Box display={"flex"} flexDirection={{ xs: "column", sm: "row" }} gap={5}>
         <Stack gap={5} width={{ sm: 170 }}>
           <NavBar />
-          <ReviewFilters
-            filterValues={["Popularity", "Highest Rating", "Lowest Rating", "Most Recent", "Earliest"]}
-            showFrom={true}
-          />
+          <ReviewFilters filterValues={filmReviewsFilters} showFrom={true} onSubmit={onSubmit} />
         </Stack>
         <Box flex={1}>
-          <Typography color={"#fff"} fontStyle={"italic"}>
-            There are 200 reviews of <strong>Avatar the Airbender</strong>
-          </Typography>
-          <Stack divider={<Divider />}>
-            {Array.from({ length: 15 }).map((i, idx) => (
-              <React.Fragment key={idx}>
-                <ReviewPreview
-                  title={"A film title"}
-                  releasedYear={2022}
-                  content={
-                    "Lorem Ipsum is simply dummy text of the printing and typesetting industry. It has survived not only five centuries, but also the" +
-                    " leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum"
-                  }
-                  username={"bahiepnguyen"}
-                  fullname={"Nguyen Ba Hiep"}
-                  ratings={4}
-                  likeCount={10}
-                  commentCount={50}
-                  reviewDate={new Date()}
-                  notShowFilmCard={true}
-                  notShowTitle={true}
-                />
-              </React.Fragment>
-            ))}
-          </Stack>
+          {loading ? (
+            <Loading paddingY={10} />
+          ) : (
+            <>
+              <Typography color={"#fff"} fontStyle={"italic"}>
+                <b>{data?.Total}</b> review(s) of <strong>Avatar the Airbender</strong>
+              </Typography>
+              <Stack divider={<Divider />}>
+                {data?.Data?.map((i, idx) => (
+                  <ReviewPreview
+                    key={idx}
+                    title={i.Film?.Title ?? ""}
+                    poster={i.Film?.Poster_path ?? ""}
+                    filmId={i.Film?.FilmID ?? ""}
+                    releasedYear={i.Film?.Release_date ? new Date(i.Film?.Release_date).getFullYear() : ""}
+                    content={i.Content ?? ""}
+                    username={i.User?.UserName ?? ""}
+                    fullname={i.User?.FullName ?? ""}
+                    userAvatar={i.User?.Avatar ?? ""}
+                    ratings={i.Score ?? 0}
+                    likeCount={i.LikesCount ?? 0}
+                    commentCount={i.CommentsCount ?? 0}
+                    spoiler={i.HaveSpoiler ?? 0}
+                    reviewDate={i.WatchedDate ? new Date(i.WatchedDate) : ""}
+                    link={`/u/${i.User?.UserName}/reviews/${i.ReviewID}`}
+                    notShowFilmCard={true}
+                    notShowTitle={true}
+                  />
+                ))}
+              </Stack>
+              <PaginationBase totalPage={data?.TotalPage ?? 0} pageIndex={pageIndex} onChange={handleChangePage} />
+            </>
+          )}
         </Box>
       </Box>
     </Container>

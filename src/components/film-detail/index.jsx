@@ -10,6 +10,7 @@ import PosterAndDescription from "./poster-and-description.jsx";
 import ActionBox from "./action-box.jsx";
 import TabsReviews from "./tabs-reviews.jsx";
 import CompiledRatings from "../common/compiled-ratings.jsx";
+import { useParams } from "react-router-dom";
 
 const film_detail = {
   title: "Avatar: The Way of Water",
@@ -30,6 +31,7 @@ const film_detail = {
 };
 
 const FilmDetail = () => {
+  const { filmId } = useParams();
   // console.log("filmdetail render");
   const loggedIn = true;
   return (
@@ -69,7 +71,7 @@ const FilmDetail = () => {
       </Box>
       <Container className="film_detail_page" sx={{ position: "relative", color: "#fff" }}>
         <Box pt={{ xs: 20, sm: 32, lg: 40 }} gap={5} mx={{ md: 10 }}>
-          <PosterAndDescription {...film_detail} />
+          <PosterAndDescription {...film_detail} filmId={filmId} />
           <Box display={"flex"} flexDirection={{ xs: "column-reverse", sm: "row" }} gap={5}>
             <Box flex={2}>
               <TabsCastNCrew />

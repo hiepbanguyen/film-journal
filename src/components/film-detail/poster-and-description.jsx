@@ -19,7 +19,7 @@ export default function PosterAndDescription(props) {
               },
             })}
           >
-            <ViewsLikesLists views={props.views} likes={props.likes} lists={props.lists} />
+            <ViewsLikesLists views={props.views} likes={props.likes} lists={props.lists} filmId={props.filmId} />
           </Box>
         </Box>
         <Box color={"rgba(255,255,255,0.8)"}>
@@ -67,7 +67,7 @@ export default function PosterAndDescription(props) {
           },
         })}
       >
-        <ViewsLikesLists views={props.views} likes={props.likes} lists={props.lists} />
+        <ViewsLikesLists views={props.views} likes={props.likes} lists={props.lists} filmId={props.filmId} />
       </Box>
     </>
   );
