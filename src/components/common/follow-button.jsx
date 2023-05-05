@@ -11,7 +11,7 @@ import { useSnackbar } from "notistack";
 export const FollowButton = ({ followed, targetUsername, targetUserId }) => {
   const navigate = useNavigate();
   const [following, setFollowing] = React.useState(!!followed);
-  const [{}, followUser] = useAxios({}, { manual: true });
+  const [{}, followUser] = useAxios({ method: "POST" }, { manual: true });
   const { enqueueSnackbar } = useSnackbar();
 
   const handleFollow = () => {

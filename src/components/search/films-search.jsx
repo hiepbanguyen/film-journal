@@ -5,10 +5,10 @@ import React from "react";
 import { useParams } from "react-router-dom";
 
 export function FilmSearchResult(props) {
-  const { title, releasedYear, director, cast, fontColor } = props;
+  const { title, releasedYear, director, cast, poster, link, fontColor } = props;
   return (
     <Box my={2} display={"flex"} alignItems={"center"} gap={2}>
-      <FilmCard size={70} />
+      <FilmCard size={70} src={poster} link={link} />
       <Box>
         <Typography variant={"h5"}>
           <strong style={{ color: fontColor ?? "#fff" }}>{title}</strong>{" "}
@@ -27,6 +27,7 @@ export function FilmSearchResult(props) {
 
 export default function FilmsSearch() {
   const { searchParams } = useParams();
+  // const [{ data, loading }] = useAxios({ url: `Users/film/search/${searchParams}`, method: "POST" });
 
   return (
     <>
@@ -38,6 +39,7 @@ export default function FilmsSearch() {
           <React.Fragment key={idx}>
             <FilmSearchResult
               title={"A film title"}
+              poster={""}
               releasedYear={2022}
               director={"Sarah Pauley"}
               cast={["Jim Cameron", "Hong Chau", "Dolly D", "Kerry Mulligan", "Sandra Oh"]}

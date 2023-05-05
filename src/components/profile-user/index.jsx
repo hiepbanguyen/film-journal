@@ -73,7 +73,7 @@ const FollowButton = observer(({ username, followed, targetUserId }) => {
   const navigate = useNavigate();
   const [following, setFollowing] = React.useState(followed);
   const { enqueueSnackbar } = useSnackbar();
-  const [{}, followUser] = useAxios({}, { manual: true });
+  const [{}, followUser] = useAxios({ method: "POST" }, { manual: true });
 
   const handleFollow = async () => {
     if (!UserStore.isLoggedIn) {
@@ -170,7 +170,7 @@ const ProfileUser = () => {
                     <Avatar sx={{ width: avatarSize, height: avatarSize }} alt="Remy Sharp" src={data.Avatar} />
                     <Box ml={1}>
                       <Typography variant="h5" color="#fff" pt={1}>
-                        {data.FullName ? data.FullName:  data.UserName}
+                        {data.FullName ? data.FullName : data.UserName}
                       </Typography>
                       <FollowButton username={username} followed={!!data?.IsFollowed} targetUserId={data?.UserID} />
                     </Box>
