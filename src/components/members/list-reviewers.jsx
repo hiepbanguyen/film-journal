@@ -14,9 +14,11 @@ import { Link } from "react-router-dom";
 import { FollowButton } from "../common/follow-button.jsx";
 import useAxios from "axios-hooks";
 import { Loading } from "../common/loading.jsx";
+import { observer } from "mobx-react-lite";
+import UserStore from "../../store/user.store.js";
 
-export const ListReviewers = () => {
-  const [{ data, loading, error }] = useAxios({
+export const ListReviewers = observer(() => {
+  const [{ data, loading, error }, refetch] = useAxios({
     url: `Users/Paging`,
     method: "POST",
     data: {
@@ -26,6 +28,9 @@ export const ListReviewers = () => {
       typeUser: Enum.TypeUser.All,
     },
   });
+  React.useEffect(() => {
+    refetch();
+  }, [UserStore.isLoggedIn]);
 
   return (
     <>
@@ -113,4 +118,4 @@ export const ListReviewers = () => {
       )}
     </>
   );
-};
+});

@@ -119,7 +119,7 @@ export default function ReviewPreview(props) {
               <Link to={link ?? ""}>
                 <Box display={"flex"} gap={1} sx={{ pt: 0.25 }}>
                   <EventNoteIcon fontSize={"small"} />
-                  <Typography fontSize={14}>{moment(reviewDate).format("MMM DD, YYYY")}</Typography>
+                  <Typography fontSize={14}>{moment.utc(reviewDate).format("MMM DD, YYYY")}</Typography>
                 </Box>
               </Link>
             )}

@@ -72,8 +72,12 @@ const PopularFilms = () => {
   );
 };
 
-const NewFromFriends = () => {
+const NewFromFriends = observer(() => {
   const [{ data, loading, error }, refetch] = useAxios(`Reviews/NewFromFriend`);
+
+  React.useEffect(() => {
+    refetch();
+  }, [UserStore.user.UserName]);
 
   return (
     <Box mt={{ xs: 7, md: 13, lg: 18 }}>
@@ -110,7 +114,7 @@ const NewFromFriends = () => {
       )}
     </Box>
   );
-};
+});
 
 const Welcome = observer(() => {
   // console.log("is logged in", !!UserStore.token);

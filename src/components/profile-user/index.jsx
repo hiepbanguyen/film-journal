@@ -69,7 +69,7 @@ const ProfileNavigation = observer(({ username }) => {
   );
 });
 
-const FollowButton = observer(({ username, followed, targetUserId }) => {
+const FollowButton = ({ username, followed, targetUserId }) => {
   const navigate = useNavigate();
   const [following, setFollowing] = React.useState(followed);
   const { enqueueSnackbar } = useSnackbar();
@@ -111,15 +111,18 @@ const FollowButton = observer(({ username, followed, targetUserId }) => {
       )}
     </>
   );
-});
+};
 const bannerPositionTop = { xs: -30, sm: -50, md: -80, lg: -100 };
 const avatarSize = 80;
 
-const ProfileUser = () => {
+const ProfileUser = observer(() => {
   const { username } = useParams();
 
   const [{ data, loading, error }, refetch] = useAxios(`Users/${username}/Profile-info`);
   // console.log(data);
+  React.useEffect(() => {
+    refetch();
+  }, [UserStore.isLoggedIn]);
 
   if (!loading && !data) return <PageNotExist />;
 
@@ -192,5 +195,5 @@ const ProfileUser = () => {
       </Root>
     </Container>
   );
-};
+});
 export default ProfileUser;

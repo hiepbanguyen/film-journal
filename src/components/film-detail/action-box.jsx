@@ -18,13 +18,13 @@ const CustomButton1 = styled(Button)({
   },
 });
 
-const ReViewLikeWatchList = () => {
+const ReViewLikeWatchList = ({ filmTitle, releasedYear }) => {
   const [reviewed, setReviewed] = React.useState(false);
   const [liked, setLiked] = React.useState(false);
   const [watchlisted, setWatchlisted] = React.useState(false);
   return (
     <Box display={"flex"} gap={1} justifyContent={"space-evenly"} pl={1}>
-      <ReviewDialog>
+      <ReviewDialog filmTitle={filmTitle} releasedYear={releasedYear}>
         <CustomButton1>
           <RemoveRedEyeRoundedIcon fontSize={"large"} sx={{ color: reviewed ? "#00c030" : "#bcd" }} />
           Review
@@ -51,7 +51,7 @@ const CustomButton2 = styled(Button)({
   },
 });
 
-export default function ActionBox() {
+export default function ActionBox({ filmTitle, releasedYear }) {
   const { enqueueSnackbar } = useSnackbar();
 
   return (
@@ -59,15 +59,15 @@ export default function ActionBox() {
       sx={{ color: "#bcd", background: "#456", borderRadius: 1 }}
       divider={<Divider sx={{ borderColor: "#2c3440" }} />}
     >
-      <ReViewLikeWatchList />
-      <ReviewDialog>
+      <ReViewLikeWatchList filmTitle={filmTitle} releasedYear={releasedYear} />
+      <ReviewDialog filmTitle={filmTitle} releasedYear={releasedYear}>
         <CustomButton2>
           <Typography fontSize={14} textAlign="center">
             Review or log...
           </Typography>
         </CustomButton2>
       </ReviewDialog>
-      <AddToListsDialog>
+      <AddToListsDialog filmTitle={filmTitle} releasedYear={releasedYear}>
         <CustomButton2>
           <Typography fontSize={14} textAlign="center">
             Add to lists...

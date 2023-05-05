@@ -1,4 +1,8 @@
-import { Box, Grid } from "@mui/material";
+import { Box } from "@mui/material";
+import useAxios from "axios-hooks";
+import { Loading } from "../common/loading.jsx";
+import { Link } from "react-router-dom";
+
 const related_films = [
   {
     id: 1,
@@ -23,19 +27,31 @@ const related_films = [
   },
 ];
 
-export default function RelatedFilms() {
+export default function RelatedFilms({ filmId }) {
+  const [{ data, loading }] = useAxios({
+    url: `Films/${filmId}/Related`,
+    method: "POST",
+    data: {
+      pageSize: 8,
+      pageIndex: 1,
+    },
+  });
   return (
     <Box className="related_films">
       <Box className="tag_reviews">
         <p>RELATED FILMS</p>
       </Box>
-      <Box display={"flex"} flexWrap={"wrap"}>
-        {related_films.map((related_film_item, idx) => (
-          <a key={idx} href={related_film_item.url} target="_blank">
-            <img className="image_form" src={related_film_item.image}></img>
-          </a>
-        ))}
-      </Box>
+      {loading ? (
+        <Loading />
+      ) : (
+        <Box display={"flex"} flexWrap={"wrap"}>
+          {data?.Data?.map((i, idx) => (
+            <Link key={idx} to={`/films/${i?.FilmID}`}>
+              <img className="image_form" src={i?.Poster_path}></img>
+            </Link>
+          ))}
+        </Box>
+      )}
     </Box>
   );
 }

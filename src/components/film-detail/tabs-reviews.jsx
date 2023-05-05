@@ -4,64 +4,58 @@ import React from "react";
 import { Link } from "react-router-dom";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import ReviewPreview from "../common/review-preview.jsx";
+import useAxios from "axios-hooks";
+import { Loading } from "../common/loading.jsx";
 
-function PopularReviews() {
-  return (
-    <Stack divider={<Divider />}>
-      {Array.from({ length: 5 }).map((i, idx) => (
-        <React.Fragment key={idx}>
-          <ReviewPreview
-            title={"A film title"}
-            releasedYear={2022}
-            content={
-              "Lorem Ipsum is simply dummy text of the printing and typesetting industry. It has survived not only five centuries, but also the" +
-              " leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum"
-            }
-            username={"bahiepnguyen"}
-            fullname={"Nguyen Ba Hiep"}
-            ratings={4}
-            likeCount={10}
-            commentCount={50}
-            reviewDate={new Date()}
-            notShowFilmCard={true}
-            notShowTitle={true}
-          />
-        </React.Fragment>
-      ))}
-    </Stack>
-  );
-}
+function TabReviews({ filmId, from, sort }) {
+  const [{ data, loading, error }, fetchReviews] = useAxios({
+    url: "Reviews/Paging",
+    method: "POST",
+    data: {
+      id: filmId,
+      pageSize: 5,
+      pageIndex: 1,
+      from: from,
+      sort: sort,
+    },
+  });
 
-function RecentReviews() {
   return (
-    <Stack divider={<Divider />}>
-      {Array.from({ length: 5 }).map((i, idx) => (
-        <React.Fragment key={idx}>
-          <ReviewPreview
-            title={"A film title"}
-            releasedYear={2022}
-            content={
-              "Lorem Ipsum is simply dummy text of the printing and typesetting industry. It has survived not only five centuries, but also the" +
-              " leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum"
-            }
-            username={"bahiepnguyen"}
-            fullname={"Nguyen Ba Hiep"}
-            ratings={4}
-            likeCount={10}
-            commentCount={50}
-            reviewDate={new Date()}
-            notShowFilmCard={true}
-            notShowTitle={true}
-          />
-        </React.Fragment>
-      ))}
-    </Stack>
+    <>
+      {loading ? (
+        <Loading paddingY={10} />
+      ) : (
+        <Stack divider={<Divider />}>
+          {data?.Data?.map((i, idx) => (
+            <ReviewPreview
+              key={idx}
+              title={i.Film?.Title ?? ""}
+              poster={i.Film?.Poster_path ?? ""}
+              filmId={i.Film?.FilmID ?? ""}
+              releasedYear={i.Film?.Release_date ? new Date(i.Film?.Release_date).getFullYear() : ""}
+              content={i.Content ?? ""}
+              username={i.User?.UserName ?? ""}
+              fullname={i.User?.FullName ?? ""}
+              userAvatar={i.User?.Avatar ?? ""}
+              ratings={i.Score ?? 0}
+              likeCount={i.LikesCount ?? 0}
+              commentCount={i.CommentsCount ?? 0}
+              spoiler={i.HaveSpoiler ?? 0}
+              reviewDate={i.WatchedDate ? new Date(i.WatchedDate) : ""}
+              link={`/u/${i.User?.UserName}/reviews/${i.ReviewID}`}
+              notShowFilmCard={true}
+              notShowTitle={true}
+            />
+          ))}
+        </Stack>
+      )}
+    </>
   );
 }
 
 const tabLabels = ["POPULAR", "RECENT", "FRIENDS", "YOURS"];
 
-export default function TabsReviews() {
+export default function TabsReviews({ filmId }) {
   return (
     <Box mt={3} sx={{ color: "#9ab" }}>
       <Tooltip title={"See all reviews"}>
@@ -73,10 +67,10 @@ export default function TabsReviews() {
         </Button>
       </Tooltip>
       <CustomTabs labels={tabLabels} bottom_border_only={true}>
-        <PopularReviews />
-        <RecentReviews />
-        <PopularReviews />
-        <RecentReviews />
+        <TabReviews filmId={filmId} from={"Everyone"} sort={"Popularity"} />
+        <TabReviews filmId={filmId} from={"Everyone"} sort={"Most recent"} />
+        <TabReviews filmId={filmId} from={"Friends"} sort={"Most recent"} />
+        <TabReviews filmId={filmId} from={"You"} sort={"Most recent"} />
       </CustomTabs>
     </Box>
   );

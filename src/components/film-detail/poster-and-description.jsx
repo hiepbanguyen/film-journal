@@ -3,11 +3,21 @@ import ViewsLikesLists from "../common/views-likes-lists.jsx";
 import React from "react";
 
 export default function PosterAndDescription(props) {
+  const directors = React.useMemo(() => {
+    return props?.Crew?.find((i) => i?.[0] === "Directing")?.[1].join(", ");
+  }, [props?.Crew]);
+
   return (
     <>
       <Box display={"flex"} gap={{ xs: 2, sm: 5 }} mb={3}>
         <Box>
-          <Box component={"img"} sx={{ borderRadius: 1 }} src={props.image} alt="" width={{ xs: 100, sm: 240 }} />
+          <Box
+            component={"img"}
+            sx={{ borderRadius: 1 }}
+            src={props?.Poster_path}
+            alt="Film Poster"
+            width={{ xs: 100, sm: 240 }}
+          />
           <Box
             gap={1}
             sx={(theme) => ({
@@ -19,10 +29,15 @@ export default function PosterAndDescription(props) {
               },
             })}
           >
-            <ViewsLikesLists views={props.views} likes={props.likes} lists={props.lists} filmId={props.filmId} />
+            <ViewsLikesLists
+              views={props?.ReviewsCount ?? 0}
+              likes={props?.LikesCount ?? 0}
+              lists={props?.Appears ?? 0}
+              filmId={props.filmId}
+            />
           </Box>
         </Box>
-        <Box color={"rgba(255,255,255,0.8)"}>
+        <Box color={"#a2d1ec"}>
           <Typography
             fontSize={{ xs: 25, sm: 30, md: 40 }}
             lineHeight={1}
@@ -30,30 +45,32 @@ export default function PosterAndDescription(props) {
             fontFamily="TiemposTextWeb,Georgia,serif,ColorEmoji"
             color={"#fff"}
           >
-            {props.title}
+            {props?.Original_title}
           </Typography>
-          <Typography variant={"h6"}>{props.releasedYear}</Typography>
+          <Typography variant={"h6"}>
+            {props?.Release_date ? new Date(props.Release_date).getFullYear() : ""}
+          </Typography>
           <Typography fontSize={15}>
             {"Directed by "}
-            {props.director}
+            <b>{directors}</b>
           </Typography>
           <Typography fontSize={15} pb={1}>
-            {props.runtime} {" minutes"}
+            {props?.Runtime} {" minutes"}
           </Typography>
           <Box className={"crew_people"} display={"flex"} flexWrap={"wrap"} mb={0.5}>
-            {props.genres.map((i, idx) => (
+            {props?.Genres.map((i, idx) => (
               <a key={idx}>{i}</a>
             ))}
           </Box>
           <Box sx={(theme) => ({ color: "#fff", mt: 3, [theme.breakpoints.only("xs")]: { display: "none" } })}>
-            <h3>{props.tagline}</h3>
-            <Typography>{props.description}</Typography>
+            <h3>{props?.Tagline}</h3>
+            <Typography>{props?.Overview}</Typography>
           </Box>
         </Box>
       </Box>
       <Box sx={(theme) => ({ mt: 1, [theme.breakpoints.not("xs")]: { display: "none" } })}>
-        <h3>{props.tagline}</h3>
-        <Typography>{props.description}</Typography>
+        <h3>{props?.Tagline}</h3>
+        <Typography>{props?.Overview}</Typography>
       </Box>
       <Box
         gap={1}
@@ -67,7 +84,12 @@ export default function PosterAndDescription(props) {
           },
         })}
       >
-        <ViewsLikesLists views={props.views} likes={props.likes} lists={props.lists} filmId={props.filmId} />
+        <ViewsLikesLists
+          views={props?.ReviewsCount ?? 0}
+          likes={props?.LikesCount ?? 0}
+          lists={props?.Appears ?? 0}
+          filmId={props.filmId}
+        />
       </Box>
     </>
   );

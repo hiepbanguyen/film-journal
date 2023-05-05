@@ -4,6 +4,9 @@ import { FollowButton } from "../common/follow-button.jsx";
 import useAxios from "axios-hooks";
 import { Loading } from "../common/loading";
 import FilmCard from "../common/film-card";
+import React from "react";
+import UserStore from "../../store/user.store.js";
+import { observer } from "mobx-react-lite";
 
 function FeaturedPerson(props) {
   return (
@@ -115,8 +118,8 @@ function FeaturedPerson(props) {
   );
 }
 
-export default function PopularReviewers() {
-  const [{ data, loading, error }] = useAxios({
+export const PopularReviewers = observer(() => {
+  const [{ data, loading, error }, refetch] = useAxios({
     url: `Users/Popular`,
     method: "POST",
     data: {
@@ -125,6 +128,9 @@ export default function PopularReviewers() {
       sort: "Week",
     },
   });
+  React.useEffect(() => {
+    refetch();
+  }, [UserStore.isLoggedIn]);
 
   return (
     <Box
@@ -165,4 +171,4 @@ export default function PopularReviewers() {
       )}
     </Box>
   );
-}
+});
