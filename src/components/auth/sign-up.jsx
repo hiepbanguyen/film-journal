@@ -64,13 +64,25 @@ export default function SignUp() {
     setErrorEmail("");
     setErrorPassword("");
 
-    const emailAccepted = validateEmail(data.get("email"));
-    if (!emailAccepted) {
-      setErrorEmail("Invalid email!");
+    let emailAccepted = false;
+    if (data.get("email")) {
+      if (validateEmail(data.get("email"))) {
+        emailAccepted = true;
+      } else {
+        setErrorEmail("Invalid email!");
+      }
+    } else {
+      setErrorEmail("Email required!");
     }
 
-    const usernameFilled = data.get("userName");
-    if (!usernameFilled) {
+    let usernameAccepted = false;
+    if (data.get("userName")) {
+      if (validateUsername(data.get("userName"))) {
+        usernameAccepted = true;
+      } else {
+        setErrorUsername("Invalid username, should contain only letters, numbers, underscores and dots");
+      }
+    } else {
       setErrorUsername("Username required!");
     }
 
@@ -85,9 +97,12 @@ export default function SignUp() {
       setErrorPassword("Password required!");
     }
 
-    return emailAccepted && usernameFilled && passwordAccepted;
+    return emailAccepted && usernameAccepted && passwordAccepted;
   };
 
+  const validateUsername = (username) => {
+    return new RegExp(/^[a-zA-Z0-9._]+$/).test(username);
+  };
   const validateEmail = (email) => {
     return email.match(
       /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,

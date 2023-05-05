@@ -166,7 +166,7 @@ export const Information = observer(() => {
             name="dateOfBirth"
             label="Date of birth"
             type="date"
-            value={userInput.dateOfBirth}
+            value={new Date(userInput.dateOfBirth)}
             onChange={handleInputChange}
             InputLabelProps={{ shrink: true }}
             size="small"
