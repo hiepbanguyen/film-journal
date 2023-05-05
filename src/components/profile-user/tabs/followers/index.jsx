@@ -288,7 +288,11 @@ export default function ProfileFollowers() {
                     </Link>
                   </TableCell>
                   <TableCell sx={{ color: "#9ab" }}>
-                    <FollowButton followed={member?.Followed ?? 0} targetUsername={member?.UserName} />
+                    <FollowButton
+                      followed={member?.Followed ?? 0}
+                      targetUsername={member?.UserName}
+                      targetUserId={member?.UserID}
+                    />
                   </TableCell>
                 </TableRow>
               ))}

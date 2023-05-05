@@ -56,7 +56,7 @@ function FeaturedPerson(props) {
               right: { xs: 15, sm: 6 },
             }}
           >
-            <FollowButton followed={!!props?.Followed} targetUsername={props?.UserName} />
+            <FollowButton followed={!!props?.Followed} targetUsername={props?.UserName} targetUserId={props?.UserID} />
           </Box>
         </Box>
         <Box sx={{ marginBottom: "8px" }}>

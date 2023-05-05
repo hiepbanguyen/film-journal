@@ -69,18 +69,34 @@ const ProfileNavigation = observer(({ username }) => {
   );
 });
 
-const FollowButton = observer(({ username, followed }) => {
+const FollowButton = observer(({ username, followed, targetUserId }) => {
   const navigate = useNavigate();
   const [following, setFollowing] = React.useState(followed);
   const { enqueueSnackbar } = useSnackbar();
+  const [{}, followUser] = useAxios({}, { manual: true });
 
   const handleFollow = async () => {
     if (!UserStore.isLoggedIn) {
       navigate("/sign-in");
       return;
     }
-    setFollowing(!following);
-    enqueueSnackbar(following ? "Unfollow successfully" : "Follow successfully", { variant: "success" });
+    if (following) {
+      followUser({ url: `Users/Follow?userID=${targetUserId}&follow=false` })
+        .then((res) => {
+          if (res?.data) setFollowing(false);
+        })
+        .catch((err) => {
+          enqueueSnackbar(err.response.data.userMsg, { variant: "error" });
+        });
+    } else {
+      followUser({ url: `Users/Follow?userID=${targetUserId}&follow=true` })
+        .then((res) => {
+          if (res?.data) setFollowing(true);
+        })
+        .catch((err) => {
+          enqueueSnackbar(err.response.data.userMsg, { variant: "error" });
+        });
+    }
   };
   return (
     <>
@@ -154,13 +170,13 @@ const ProfileUser = () => {
                     <Avatar sx={{ width: avatarSize, height: avatarSize }} alt="Remy Sharp" src={data.Avatar} />
                     <Box ml={1}>
                       <Typography variant="h5" color="#fff" pt={1}>
-                        {data.FullName ?? data.UserName}
+                        {data.FullName ? data.FullName:  data.UserName}
                       </Typography>
-                      <FollowButton username={username} followed={!!data?.IsFollowed} />
+                      <FollowButton username={username} followed={!!data?.IsFollowed} targetUserId={data?.UserID} />
                     </Box>
                   </Box>
                   <Typography variant={"body2"} color={"#9ab"} pt={1} pr={{ sm: 5, md: 10 }}>
-                    {data.Bio}
+                    {data?.Bio}
                   </Typography>
                 </Box>
                 <Box flex={4}>
