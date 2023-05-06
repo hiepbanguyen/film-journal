@@ -14,6 +14,7 @@ import CancelIcon from "@mui/icons-material/Cancel.js";
 import { useSnackbar } from "notistack";
 import { SearchFilms } from "../../../list-detail/new/search-films.jsx";
 import useAxios from "axios-hooks";
+import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline.js";
 
 const FavoriteFilms = ({ films, handleAddFilm, handleDeleteFilms }) => {
   // console.log(films);
@@ -25,7 +26,7 @@ const FavoriteFilms = ({ films, handleAddFilm, handleDeleteFilms }) => {
       <Divider sx={{ mb: 2 }} />
       <SearchFilms handleAddFilm={handleAddFilm} />
       <Box
-        my={3}
+        my={8}
         gap={1}
         sx={{
           display: "flex",
@@ -34,7 +35,7 @@ const FavoriteFilms = ({ films, handleAddFilm, handleDeleteFilms }) => {
       >
         {films.map((i, idx) => (
           <Box key={idx} position={"relative"}>
-            <FilmCard key={idx} size={100} src={i?.Poster_path} link={`/films/${i?.FilmID}`} />
+            <FilmCard key={idx} size={80} src={i?.Poster_path} link={`/films/${i?.FilmID}`} />
             <IconButton
               onClick={() => handleDeleteFilms(i?.FilmID)}
               color={"error"}
@@ -61,10 +62,12 @@ const FavoriteFilms = ({ films, handleAddFilm, handleDeleteFilms }) => {
 };
 
 export const Information = observer(() => {
-  const { register } = useForm();
-  const [, getFavoriteFilms] = useAxios({ url: "Users/FavouriteFilm" }, { manual: true });
+  const { register, handleSubmit, setValue } = useForm();
   const [favoriteFilms, setFavoriteFilms] = React.useState([]);
+  const [error, setError] = React.useState(null);
   const { enqueueSnackbar } = useSnackbar();
+  const [, getFavoriteFilms] = useAxios({ url: "Users/FavouriteFilm" }, { manual: true });
+  const [, updateInfo] = useAxios({}, { manual: true });
 
   useEffect(() => {
     getFavoriteFilms().then((res) => {
@@ -90,52 +93,36 @@ export const Information = observer(() => {
     setFavoriteFilms([...favoriteFilms, newFilm]);
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    console.log(userInput);
-
-    if (validateInput()) {
-      console.log(userInput);
+  const onSubmit = (values) => {
+    if (!validateUsername(values.UserName)) {
+      setError("Invalid username, should contain only letters, numbers, underscores and dots");
+      return;
+    }
+    values.DateOfBirth = moment(`${values.DateOfBirth} 23:59`, "YYYY / MM / DD HH:mm").toDate();
+    if (!validateDateOfBirth(values.DateOfBirth)) {
+      setError("Invalid date of birth");
     }
   };
 
+  const validateUsername = (username) => {
+    return new RegExp(/^[a-zA-Z0-9._]+$/).test(username);
+  };
+
+  const validateDateOfBirth = (date) => {
+    return new Date() > date;
+  };
   //   Validate input
-  const validateInput = () => {
-    let errors = {};
-    let isValid = true;
-
-    if (userInput.userName.trim() === "") {
-      errors.userName = "Username is required";
-      isValid = false;
-    }
-
-    if (userInput.fullName.trim() === "") {
-      errors.fullName = "Full name is required";
-      isValid = false;
-    } else if (!/^[a-zA-Z ]+$/.test(userInput.fullName)) {
-      errors.fullName = "Full name should contain only alphabets and spaces";
-      isValid = false;
-    } else if (/\d/.test(userInput.fullName)) {
-      errors.fullName = "Full name should not contain numbers";
-      isValid = false;
-    }
-
-    setUserInput((prevState) => ({
-      ...prevState,
-      errors: errors,
-    }));
-
-    return isValid;
-  };
 
   if (!UserStore.isLoadedFromLocal) return <Loading paddingY={10} />;
   return (
     <Box>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <Box
           display={"flex"}
-          gap={5}
+          flexWrap={"wrap"}
+          gap={10}
           sx={{
+            justifyContent: "center",
             "textarea, input, label, fieldset": {
               borderColor: "#9ab !important",
               color: "#9ab !important",
@@ -143,7 +130,7 @@ export const Information = observer(() => {
           }}
         >
           <Box
-            maxWidth={500}
+            maxWidth={345}
             sx={{
               ".MuiFormControl-root": {
                 height: "70px",
@@ -180,7 +167,7 @@ export const Information = observer(() => {
             <TextField
               label="Full name"
               name="fullName"
-              defaultValue={UserStore?.user?.UserName}
+              defaultValue={UserStore?.user?.FullName}
               InputLabelProps={{ shrink: true }}
               size="small"
               fullWidth
@@ -200,13 +187,21 @@ export const Information = observer(() => {
                 {...register("DateOfBirth")}
               />
             </LocalizationProvider>
-            <TextField label="Bio" name="bio" value={UserStore.user?.Bio} multiline fullWidth rows={3} />
+            <TextField label="Bio" name="bio" value={UserStore.user?.Bio} multiline fullWidth rows={4} />
           </Box>
           <Box>
             <FavoriteFilms films={favoriteFilms} handleAddFilm={handleAddFilm} handleDeleteFilms={handleDeleteFilms} />
           </Box>
         </Box>
-        <Box mt={8} gap={1} display={"flex"} justifyContent={"center"}>
+        <Box mt={10} gap={1} display={"flex"} flexDirection={"column"} alignItems={"center"}>
+          {error && (
+            <Box sx={{ color: "#fc0707", display: "flex", gap: 0.5, alignItems: "center" }}>
+              <ErrorOutlineIcon sx={{ fontSize: 20 }} />
+              <Typography fontSize={13} pt={0.25}>
+                {error}
+              </Typography>
+            </Box>
+          )}
           <Button type="submit" variant={"contained"}>
             Update info
           </Button>

@@ -27,6 +27,11 @@ class UserStore {
     return this._isLoadedFromLocal;
   }
 
+  updateAvatar(url) {
+    this._user.Avatar = url;
+    StorageHelper.setUser(this._user);
+  }
+
   loadFromLocal() {
     if (typeof window == "undefined") {
       return;

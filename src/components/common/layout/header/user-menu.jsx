@@ -9,6 +9,9 @@ import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
 import LogoutIcon from "@mui/icons-material/Logout";
 import UserStore from "../../../../store/user.store.js";
 import NotiBox from "./noti-box.jsx";
+import { observer } from "mobx-react-lite";
+
+const AvatarBox = observer(() => <Avatar src={UserStore.user?.Avatar} />);
 
 export default function UserMenu() {
   const [anchorElUser, setAnchorElUser] = React.useState(null);
@@ -26,7 +29,7 @@ export default function UserMenu() {
       <NotiBox />
       <Tooltip title="Open settings">
         <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-          <Avatar src={UserStore.user?.Avatar} />
+          <AvatarBox />
         </IconButton>
       </Tooltip>
       <Menu

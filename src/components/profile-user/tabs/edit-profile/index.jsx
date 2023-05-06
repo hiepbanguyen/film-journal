@@ -38,14 +38,14 @@ export const UserEditProfile = observer(() => {
         }}
       >
         <Tabs value={tab} onChange={handleChange} aria-label="basic tabs example">
-          <Tab style={{ fontSize: "12px", color: "#9ab" }} label="Information" />
           <Tab style={{ fontSize: "12px", color: "#9ab" }} label="Avatar & Banner" />
+          <Tab style={{ fontSize: "12px", color: "#9ab" }} label="Information" />
           <Tab style={{ fontSize: "12px", color: "#9ab" }} label="Password" />
         </Tabs>
       </Box>
       <Box sx={{ marginTop: "32px" }}>
-        {tab === 0 && <Information />}
-        {tab === 1 && <AvatarAndBanner />}
+        {tab === 0 && <AvatarAndBanner />}
+        {tab === 1 && <Information />}
         {tab === 2 && <ChangePassword />}
       </Box>
     </Box>

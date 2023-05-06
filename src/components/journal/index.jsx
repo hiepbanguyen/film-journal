@@ -1,7 +1,7 @@
 import { Box, Container, Divider, Typography } from "@mui/material";
 import SpotlightArticle from "./spotlight-article.jsx";
 import ArticlesAfterSpotlight from "./articles-after-spotlight.jsx";
-import LifeInFilm from "./life-in-film.jsx";
+import Reviews from "./reviews.jsx";
 import News from "./news.jsx";
 
 export default function Journal() {
@@ -45,7 +45,7 @@ export default function Journal() {
       <Box sx={{ background: "#fff", color: "#89a", position: "relative" }}>
         <Container>
           <ArticlesAfterSpotlight />
-          <LifeInFilm />
+          <Reviews />
           <News />
         </Container>
       </Box>

@@ -1,6 +1,7 @@
 import { Box, Typography } from "@mui/material";
 import Timestamp from "./timestamp.jsx";
 import { Link } from "react-router-dom";
+import React from "react";
 
 export default function ArticlePreview(props) {
   const { title, intro, author, date, link, imgSrc, small, titleColor } = props;
@@ -34,7 +35,15 @@ export default function ArticlePreview(props) {
         </Typography>
         <Typography display={"inline"} color={"#89a"} fontSize={small ? 13 : 18} fontWeight={500}>
           {" "}
-          {intro}
+          {String(intro).slice(0, 140)}
+          {intro.length > 140 && (
+            <>
+              {"... "}
+              <Box component={"span"} sx={{ ":hover": { color: "#456" } }}>
+                Read more
+              </Box>
+            </>
+          )}
         </Typography>
       </Box>
       <Typography

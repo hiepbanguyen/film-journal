@@ -8,6 +8,7 @@ import UserStore from "../../../../store/user.store.js";
 import { Loading } from "../../../common/loading.jsx";
 import PaginationBase from "../../../common/pagination-base.jsx";
 import FilmCard from "../../../common/film-card.jsx";
+import { useSnackbar } from "notistack";
 
 const DefaultPageSize = 48;
 export const WatchlistFilmsGrid = observer(({ fetchUrl, pageSize, username }) => {
@@ -15,6 +16,8 @@ export const WatchlistFilmsGrid = observer(({ fetchUrl, pageSize, username }) =>
   const [pageIdx, setPageIdx] = React.useState(1);
   const [editing, setEditing] = useState(false);
   const [films, setFilms] = useState([]);
+  const [deletedFilms, setDeletedFilms] = useState([]);
+  const { enqueueSnackbar } = useSnackbar();
 
   const [{ data, loading, error }, fetchFilms] = useAxios({
     url: fetchUrl,
@@ -25,6 +28,13 @@ export const WatchlistFilmsGrid = observer(({ fetchUrl, pageSize, username }) =>
       ...filters,
     },
   });
+  const [, deleteFromWatchlist] = useAxios(
+    {
+      url: `WatchList/Delete`,
+      method: "DELETE",
+    },
+    { manual: true },
+  );
 
   useEffect(() => {
     setFilms(data?.Data ?? []);
@@ -43,11 +53,30 @@ export const WatchlistFilmsGrid = observer(({ fetchUrl, pageSize, username }) =>
   const handleDelete = (id) => {
     if (!id) return;
     setFilms(films.filter((i) => i.FilmID !== id));
+    setDeletedFilms([...deletedFilms, films.find((i) => i.FilmID === id)]);
   };
 
   const handleCancel = () => {
     setEditing(false);
     fetchFilms();
+  };
+
+  const handleSave = () => {
+    deleteFromWatchlist({
+      data: {
+        filmIDs: deletedFilms.map((i) => i.FilmID).join(","),
+      },
+    })
+      .then((res) => {
+        if (res?.data) {
+          enqueueSnackbar("Update watchlist successfully", { variant: "success" });
+          setEditing(false);
+          fetchFilms();
+        }
+      })
+      .catch((e) => {
+        enqueueSnackbar(e.response.data.userMsg, { variant: "error" });
+      });
   };
 
   const onSubmit = (values) => {
@@ -79,8 +108,8 @@ export const WatchlistFilmsGrid = observer(({ fetchUrl, pageSize, username }) =>
                 >
                   Cancel
                 </Button>
-                <Button onClick={() => setEditing(false)} variant={"contained"} color={"success"}>
-                  Add
+                <Button onClick={handleSave} variant={"contained"} color={"success"}>
+                  Save
                 </Button>
               </Box>
             ) : (

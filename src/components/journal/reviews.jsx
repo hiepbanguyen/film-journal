@@ -1,14 +1,14 @@
 import JournalDivider from "./journal-divider.jsx";
 import { Grid } from "@mui/material";
 import ArticlePreview from "./article-preview.jsx";
+import { Loading } from "../common/loading.jsx";
 import useAxios from "axios-hooks";
-import { Loading } from "../common/loading";
 
-export default function News() {
-  const [{ data, loading }] = useAxios("Journals/NewsJournals");
+export default function Reviews() {
+  const [{ data, loading }] = useAxios("Journals/ReviewsJournals");
   return (
     <>
-      <JournalDivider topic={"News"} topicDesc={"Keeping up with our latest reports on films and the industry."} />
+      <JournalDivider topic={"Reviews"} topicDesc={"Our own professional movie reviews."} />
       {loading ? (
         <Loading paddingY={10} />
       ) : (

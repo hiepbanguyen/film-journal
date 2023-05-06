@@ -8,12 +8,26 @@ import { Box, Checkbox, FormControlLabel, FormGroup, List, ListItem, Typography 
 import useAxios from "axios-hooks";
 import UserStore from "../../store/user.store.js";
 import { Loading } from "../common/loading";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import { useSnackbar } from "notistack";
 
 export default function AddToListsDialog({ filmTitle, releasedYear, children }) {
+  const { filmId } = useParams();
+  const { enqueueSnackbar } = useSnackbar();
   const [open, setOpen] = React.useState(false);
   const [{ data, loading }] = useAxios(`Lists/Users?pageSize=9999&pageIndex=1&userName=${UserStore.user.UserName}`);
   const [checkedLists, setCheckLists] = React.useState([]);
+  const [, addToLists] = useAxios(
+    {
+      url: "Films/AddFilmToList",
+      method: "POST",
+      data: {
+        filmID: filmId,
+        listIDs: checkedLists.join(","),
+      },
+    },
+    { manual: true },
+  );
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -34,7 +48,18 @@ export default function AddToListsDialog({ filmTitle, releasedYear, children }) 
   // console.log(checkedLists);
 
   const handleAddToLists = () => {
-    setOpen(false);
+    addToLists()
+      .then((res) => {
+        if (res?.data) {
+          setOpen(false);
+          enqueueSnackbar(`Added ${filmTitle} (${releasedYear}) to lists successfully`, {
+            variant: "success",
+          });
+        }
+      })
+      .catch((err) => {
+        enqueueSnackbar(err.response.data.devMsg, { variant: "error" });
+      });
   };
 
   return (

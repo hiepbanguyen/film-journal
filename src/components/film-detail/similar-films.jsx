@@ -53,7 +53,7 @@ export default function SimilarFilms({ filmId }) {
   return (
     <Box className="related_films">
       <Box className="tag_reviews">
-        <p>RELATED FILMS</p>
+        <p>SIMILAR FILMS</p>
       </Box>
       {loading ? (
         <Loading />
