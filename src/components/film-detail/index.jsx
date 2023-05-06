@@ -136,7 +136,7 @@ const FilmDetail = () => {
               <TabsCastNCrew cast={cachedData?.Cast} crew={cachedData?.Crew} detail={cachedData?.More_detail} />
             </Box>
             <Stack flex={1} pt={2} gap={4} sx={{ mt: 1.2 }}>
-              <CompiledRatings />
+              <CompiledRatings stats={cachedData?.RateStats} />
               <ActionPanel
                 filmTitle={cachedData?.Original_title}
                 releasedYear={cachedData?.Release_date ? new Date(cachedData.Release_date).getFullYear() : ""}

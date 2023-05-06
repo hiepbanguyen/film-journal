@@ -9,7 +9,7 @@ import { Loading } from "../../../common/loading.jsx";
 import PaginationBase from "../../../common/pagination-base.jsx";
 import FilmCard from "../../../common/film-card.jsx";
 
-const DefaultPageSize = 1;
+const DefaultPageSize = 48;
 export const WatchlistFilmsGrid = observer(({ fetchUrl, pageSize, username }) => {
   const [filters, setFilters] = useState(null);
   const [pageIdx, setPageIdx] = React.useState(1);
