@@ -17,6 +17,7 @@ import useAxios from "axios-hooks";
 import { Loading } from "../common/loading.jsx";
 import { formatCompactNumber } from "../../utils/number.js";
 import { PageNotExist } from "../common/page-not-exist";
+import { FilmTrivia } from "./trivia.jsx";
 
 const ActionPanel = observer(({ filmTitle, releasedYear }) => (
   <>{UserStore.isLoggedIn ? <ActionBox filmTitle={filmTitle} releasedYear={releasedYear} /> : <SigninAndShare />}</>
@@ -148,6 +149,7 @@ const FilmDetail = () => {
             <RelatedFilms filmId={filmId} />
             <SimilarFilms filmId={filmId} />
             <MentionedInArticles data={cachedData?.MentionedInArticles} />
+            <FilmTrivia />
           </Box>
         </Box>
       </Container>
