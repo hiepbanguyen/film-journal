@@ -33,25 +33,7 @@ const films = [
   },
 ];
 
-const FavoriteFilms = ({ films }) => {
-  const [favoriteFilms, setFavoriteFilms] = React.useState(films);
-  const { enqueueSnackbar } = useSnackbar();
-
-  const handleDeleteFilms = (filmId) => {
-    setFavoriteFilms(favoriteFilms.filter((i) => i.FilmID !== filmId));
-  };
-
-  const handleAddFilm = (newFilm) => {
-    if (favoriteFilms.length === 4) {
-      enqueueSnackbar("You can only have up to 4 favorite films", { variant: "error" });
-      return;
-    }
-    if (favoriteFilms.find((i) => newFilm.FilmID === i.FilmID)) {
-      enqueueSnackbar("You already added this film to your favorites", { variant: "error" });
-      return;
-    }
-    setFavoriteFilms([...favoriteFilms, newFilm]);
-  };
+const FavoriteFilms = ({ films, handleAddFilm, handleDeleteFilms }) => {
   // console.log(films);
   return (
     <>
@@ -68,7 +50,7 @@ const FavoriteFilms = ({ films }) => {
           justifyContent: "center",
         }}
       >
-        {favoriteFilms.map((i, idx) => (
+        {films.map((i, idx) => (
           <Box key={idx} position={"relative"}>
             <FilmCard key={idx} size={100} src={i?.Poster_path} link={`/films/${i?.FilmID}`} />
             <IconButton
@@ -98,6 +80,24 @@ const FavoriteFilms = ({ films }) => {
 
 export const Information = observer(() => {
   const { register } = useForm();
+  const [favoriteFilms, setFavoriteFilms] = React.useState(films);
+  const { enqueueSnackbar } = useSnackbar();
+  const handleDeleteFilms = (filmId) => {
+    setFavoriteFilms(favoriteFilms.filter((i) => i.FilmID !== filmId));
+  };
+
+  const handleAddFilm = (newFilm) => {
+    if (favoriteFilms.length === 4) {
+      enqueueSnackbar("You can only have up to 4 favorite films", { variant: "error" });
+      return;
+    }
+    if (favoriteFilms.find((i) => newFilm.FilmID === i.FilmID)) {
+      enqueueSnackbar("You already added this film to your favorites", { variant: "error" });
+      return;
+    }
+    setFavoriteFilms([...favoriteFilms, newFilm]);
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log(userInput);
@@ -207,7 +207,7 @@ export const Information = observer(() => {
             <TextField label="Bio" name="bio" value={UserStore.user?.Bio} multiline fullWidth rows={3} />
           </Box>
           <Box>
-            <FavoriteFilms films={films} />
+            <FavoriteFilms films={favoriteFilms} handleAddFilm={handleAddFilm} handleDeleteFilms={handleDeleteFilms} />
           </Box>
         </Box>
         <Box mt={8} gap={1} display={"flex"} justifyContent={"center"}>
