@@ -3,7 +3,7 @@ import CustomTabs from "../common/tabs.jsx";
 import React from "react";
 
 const initialShowCast = 15;
-const initialShowCrew = 3;
+const initialShowCrew = 5;
 
 const Cast = (props) => {
   return (
@@ -36,7 +36,7 @@ const Cast = (props) => {
 const CastTab = ({ data }) => {
   const [showAll, setShowAll] = React.useState(false);
   // console.log(data);
-  if (data.length === 0) return <>N/A</>;
+  if (!data || data.length === 0) return <>N/A</>;
   return (
     <>
       <Box display={"flex"} flexWrap={"wrap"} gap={1} mb={1}>
@@ -85,12 +85,9 @@ const CrewTab = ({ data }) => {
   return (
     <>
       <Box>
-        {data
-          .slice(0, showAll ? data.length : initialShowCrew)
-          .reverse()
-          .map((i, idx) => (
-            <Crew key={idx} data={i} />
-          ))}
+        {data.slice(0, showAll ? data.length : initialShowCrew).map((i, idx) => (
+          <Crew key={idx} data={i} />
+        ))}
       </Box>
       {data.length > initialShowCrew && (
         <Button

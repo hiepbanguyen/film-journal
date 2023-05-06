@@ -6,8 +6,10 @@ import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import ReviewPreview from "../common/review-preview.jsx";
 import useAxios from "axios-hooks";
 import { Loading } from "../common/loading.jsx";
+import { observer } from "mobx-react-lite";
+import UserStore from "../../store/user.store.js";
 
-function TabReviews({ filmId, from, sort }) {
+const TabReviews = observer(({ filmId, from, sort }) => {
   const [{ data, loading, error }, fetchReviews] = useAxios({
     url: "Reviews/Paging",
     method: "POST",
@@ -19,6 +21,14 @@ function TabReviews({ filmId, from, sort }) {
       sort: sort,
     },
   });
+
+  // console.log(from === "You" && "render you reviews");
+
+  React.useEffect(() => {
+    if (from === "Friends" || from === "You") {
+      fetchReviews();
+    }
+  }, [UserStore.user]);
 
   return (
     <>
@@ -51,11 +61,12 @@ function TabReviews({ filmId, from, sort }) {
       )}
     </>
   );
-}
+});
 
-const tabLabels = ["POPULAR", "RECENT", "FRIENDS", "YOURS"];
+const loggedInTabs = ["POPULAR", "RECENT", "FRIENDS", "YOURS"];
+const unLoggedInTabs = ["POPULAR", "RECENT"];
 
-export default function TabsReviews({ filmId }) {
+export const TabsReviews = observer(({ filmId }) => {
   return (
     <Box mt={3} sx={{ color: "#9ab" }}>
       <Tooltip title={"See all reviews"}>
@@ -66,12 +77,12 @@ export default function TabsReviews({ filmId }) {
           <ArrowForwardIosIcon sx={{ fontSize: 16 }} />
         </Button>
       </Tooltip>
-      <CustomTabs labels={tabLabels} bottom_border_only={true}>
+      <CustomTabs labels={UserStore.isLoggedIn ? loggedInTabs : unLoggedInTabs} bottom_border_only={true}>
         <TabReviews filmId={filmId} from={"Everyone"} sort={"Popularity"} />
         <TabReviews filmId={filmId} from={"Everyone"} sort={"Most recent"} />
-        <TabReviews filmId={filmId} from={"Friends"} sort={"Most recent"} />
-        <TabReviews filmId={filmId} from={"You"} sort={"Most recent"} />
+        {UserStore.isLoggedIn && <TabReviews filmId={filmId} from={"Friends"} sort={"Most recent"} />}
+        {UserStore.isLoggedIn && <TabReviews filmId={filmId} from={"You"} sort={"Most recent"} />}
       </CustomTabs>
     </Box>
   );
-}
+});

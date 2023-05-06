@@ -1,5 +1,5 @@
 import { Box, Button, Divider, IconButton, TextField } from "@mui/material";
-import React from "react";
+import React, { useEffect } from "react";
 import { observer } from "mobx-react-lite";
 import UserStore from "../../../../store/user.store.js";
 import { Loading } from "../../../common/loading";
@@ -13,25 +13,7 @@ import FilmCard from "../../../common/film-card.jsx";
 import CancelIcon from "@mui/icons-material/Cancel.js";
 import { useSnackbar } from "notistack";
 import { SearchFilms } from "../../../list-detail/new/search-films.jsx";
-
-const films = [
-  {
-    Poster_path: "https://image.tmdb.org/t/p/w1280/5aOyriWkPec0zUDxmHFP9qMmBaj.jpg",
-    FilmID: 101,
-  },
-  {
-    Poster_path: "https://image.tmdb.org/t/p/w1280/5aOyriWkPec0zUDxmHFP9qMmBaj.jpg",
-    FilmID: 102,
-  },
-  {
-    Poster_path: "https://image.tmdb.org/t/p/w1280/5aOyriWkPec0zUDxmHFP9qMmBaj.jpg",
-    FilmID: 103,
-  },
-  {
-    Poster_path: "https://image.tmdb.org/t/p/w1280/5aOyriWkPec0zUDxmHFP9qMmBaj.jpg",
-    FilmID: 104,
-  },
-];
+import useAxios from "axios-hooks";
 
 const FavoriteFilms = ({ films, handleAddFilm, handleDeleteFilms }) => {
   // console.log(films);
@@ -80,8 +62,18 @@ const FavoriteFilms = ({ films, handleAddFilm, handleDeleteFilms }) => {
 
 export const Information = observer(() => {
   const { register } = useForm();
-  const [favoriteFilms, setFavoriteFilms] = React.useState(films);
+  const [, getFavoriteFilms] = useAxios({ url: "Users/FavouriteFilm" }, { manual: true });
+  const [favoriteFilms, setFavoriteFilms] = React.useState([]);
   const { enqueueSnackbar } = useSnackbar();
+
+  useEffect(() => {
+    getFavoriteFilms().then((res) => {
+      if (res?.data) {
+        setFavoriteFilms(res.data);
+      }
+    });
+  }, []);
+
   const handleDeleteFilms = (filmId) => {
     setFavoriteFilms(favoriteFilms.filter((i) => i.FilmID !== filmId));
   };
@@ -158,6 +150,10 @@ export const Information = observer(() => {
               },
             }}
           >
+            <Typography variant={"body1"} textTransform={"uppercase"} color="#fff">
+              personal info
+            </Typography>
+            <Divider sx={{ mb: 2 }} />
             <TextField
               label="Email"
               name="email"

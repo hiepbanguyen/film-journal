@@ -8,7 +8,7 @@ import RelatedFilms from "./related-films.jsx";
 import SimilarFilms from "./similar-films.jsx";
 import PosterAndDescription from "./poster-and-description.jsx";
 import ActionBox from "./action-box.jsx";
-import TabsReviews from "./tabs-reviews.jsx";
+import { TabsReviews } from "./tabs-reviews.jsx";
 import CompiledRatings from "../common/compiled-ratings.jsx";
 import { useParams } from "react-router-dom";
 import { observer } from "mobx-react-lite";
@@ -37,10 +37,8 @@ const FilmDetail = () => {
         if (i.known_for_department === "Acting") {
           cast.unshift(i);
         } else {
-          crew.set(
-            i.known_for_department,
-            crew.has(i.known_for_department) ? [...crew.get(i.known_for_department), i.name] : [i.name],
-          );
+          const job = i.job === "NULL" ? "Crew" : i.job;
+          crew.set(job, crew.has(job) ? [...crew.get(job), i.name] : [i.name]);
         }
       });
       cached.Cast = cast.map((i) => ({ name: i.name, character: i.character_, avatar: i.poster_path }));
@@ -149,7 +147,7 @@ const FilmDetail = () => {
             <TabsReviews filmId={filmId} />
             <RelatedFilms filmId={filmId} />
             <SimilarFilms filmId={filmId} />
-            <MentionedInArticles />
+            <MentionedInArticles data={cachedData?.MentionedInArticles} />
           </Box>
         </Box>
       </Container>
