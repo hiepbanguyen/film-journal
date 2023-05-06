@@ -46,8 +46,8 @@ const ReViewLikeWatchList = observer(({ filmTitle, releasedYear }) => {
   const [, deleteFromWatchlist] = useAxios(
     {
       url: `WatchList/Delete`,
-      method: "POST",
-      data: { filmIDs: filmId },
+      method: "DELETE",
+      data: { filmIDs: String(filmId) },
     },
     { manual: true },
   );
