@@ -14,26 +14,6 @@ import { Loading } from "../../common/loading";
 import ConfirmDeleteDialog from "../../common/confirm-delete.jsx";
 import { PageNotExist } from "../../common/page-not-exist";
 
-const existedFilms = [
-  {
-    id: 7,
-    thumbnail: "https://a.ltrbxd.com/resized/film-poster/5/4/2/5/5/5/542555-nobody-0-70-0-105-crop.jpg?v=eab2f81e32",
-    title: "Nobody",
-  },
-  {
-    id: 8,
-    thumbnail:
-      "https://a.ltrbxd.com/resized/film-poster/5/0/8/9/9/0/508990-news-of-the-world-0-70-0-105-crop.jpg?v=fb9a55f756",
-    title: "News of the world",
-  },
-  {
-    id: 9,
-    thumbnail:
-      "https://a.ltrbxd.com/resized/film-poster/3/9/5/7/3/1/395731-wonder-woman-1984-0-70-0-105-crop.jpg?v=767573fbcd",
-    title: "Wonder Women",
-  },
-];
-
 export const EditList = observer(() => {
   const [addedFilms, setAddFilms] = React.useState([]);
   const { enqueueSnackbar } = useSnackbar();
@@ -110,13 +90,13 @@ export const EditList = observer(() => {
     }
   };
 
-  if (loadFilms) return <Loading paddingY={10}/>;
-  if (!detail || !films) return <PageNotExist/>
+  if (loadFilms) return <Loading paddingY={10} />;
+  if (!detail || !films) return <PageNotExist />;
 
   return (
     <Container sx={{ color: "#9ab", mt: 10 }}>
       <Typography variant={"h5"}>Edit List</Typography>
-      <Divider sx={{ mb: 3 }}/>
+      <Divider sx={{ mb: 3 }} />
       <form onSubmit={handleSubmit(onSubmit)}>
         <Box
           display={"flex"}
@@ -149,7 +129,7 @@ export const EditList = observer(() => {
             />
           </Stack>
           <Stack flex={1} gap={2}>
-            <SearchFilms handleAddFilm={handleAddFilm}/>
+            <SearchFilms handleAddFilm={handleAddFilm} />
             <Box borderRadius={1} border={"1px solid #9ab"} p={1} height={263.5}>
               {addedFilms.length > 0 ? (
                 <Stack sx={{ height: "100%", overflowY: "auto" }}>
@@ -165,7 +145,7 @@ export const EditList = observer(() => {
                         }}
                         onClick={() => handleRemoveFilm(i.FilmID)}
                       >
-                        <CloseIcon/>
+                        <CloseIcon />
                       </IconButton>
                     </SelectedFilm>
                   ))}
@@ -179,7 +159,7 @@ export const EditList = observer(() => {
                   alignItems={"center"}
                 >
                   <Typography>Films you added to your list appear here</Typography>
-                  <ListIcon sx={{ fontSize: 60 }}/>
+                  <ListIcon sx={{ fontSize: 60 }} />
                 </Box>
               )}
             </Box>
@@ -189,7 +169,7 @@ export const EditList = observer(() => {
           <Button sx={{ color: "#fff", "&:hover": { bgcolor: "rgba(255,255,255,0.2)" } }} onClick={handleCancel}>
             Cancel
           </Button>
-          <ConfirmDeleteDialog type={"list"} url={`Lists/Delete/${listId}`}/>
+          <ConfirmDeleteDialog type={"list"} url={`Lists/Delete/${listId}`} />
           <Button type={"submit"} variant={"contained"}>
             Save
           </Button>

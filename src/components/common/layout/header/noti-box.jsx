@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Avatar, Badge, Box, IconButton } from "@mui/material";
+import { Avatar, Badge, Box, Button, IconButton } from "@mui/material";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import Popover from "@mui/material/Popover";
 import Typography from "@mui/material/Typography";
@@ -156,7 +156,10 @@ export default function NotiBox() {
           },
         })}
       >
-        <h3 style={{ margin: 2 }}>Notification</h3>
+        <Box display={"flex"} flexWrap={"wrap"} justifyContent={"space-between"} alignItems={"center"}>
+          <h3 style={{ margin: 2 }}>Notification</h3>
+          <Button sx={{ ":hover": { bgcolor: "rgba(255,255,255,0.2)" } }}>Mark all as read</Button>
+        </Box>
         {exampleData.map((i, idx) => (
           <Notification key={idx} {...i} />
         ))}

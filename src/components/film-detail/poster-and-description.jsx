@@ -4,7 +4,9 @@ import React from "react";
 
 export default function PosterAndDescription(props) {
   const directors = React.useMemo(() => {
-    return props?.Crew?.find((i) => i?.[0] === "Directing")?.[1].join(", ");
+    return props?.Crew?.find((i) => i?.[0] === "Directing")?.[1]
+      ?.slice(0, 3)
+      .join(", ");
   }, [props?.Crew]);
 
   return (
@@ -45,8 +47,14 @@ export default function PosterAndDescription(props) {
             fontFamily="TiemposTextWeb,Georgia,serif,ColorEmoji"
             color={"#fff"}
           >
-            {props?.Original_title}
+            {props?.Title}
           </Typography>
+          {props?.Original_title && (
+            <Typography variant={"h6"} fontStyle={"italic"}>
+              {"Original title: "}
+              {props?.Original_title}
+            </Typography>
+          )}
           <Typography variant={"h6"}>
             {props?.Release_date ? new Date(props.Release_date).getFullYear() : ""}
           </Typography>
