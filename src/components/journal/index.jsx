@@ -3,8 +3,12 @@ import SpotlightArticle from "./spotlight-article.jsx";
 import ArticlesAfterSpotlight from "./articles-after-spotlight.jsx";
 import Reviews from "./reviews.jsx";
 import News from "./news.jsx";
+import useAxios from "axios-hooks";
+import { Loading } from "../common/loading";
 
 export default function Journal() {
+  const [{ data, loading }] = useAxios("Journals/New");
+
   return (
     <Box sx={{ fontFamily: "TiemposTextWeb,Georgia,serif,ColorEmoji" }}>
       <Box sx={{ background: "#456", color: "#bcd" }}>
@@ -25,26 +29,24 @@ export default function Journal() {
             {/*<SelectTopic />*/}
           </Box>
           <Divider variant={"fullWidth"} sx={{ mb: 5, mt: 2, borderColor: "#bcd" }} />
-          <SpotlightArticle
-            topic={"Interview"}
-            title={"An Appropriate Article Title"}
-            intro={
-              "Lorem Ipsum is simply dummy text of the printing and typesetting" +
-              " industry. Lorem Ipsum has been the industry's standard dummy text" +
-              " remaining essentially unchanged."
-            }
-            author={"Hiep Ba Nguyen"}
-            date={new Date()}
-            imgSrc={
-              "https://a.ltrbxd.com/resized/sm/upload/r1/5i/sx/nn/Twice%20Colonized%20-%20Still%201%20-%20Aaju%20Peter-0-640-0-360-crop-fill.jpg?k=11c75d69bb"
-            }
-            link={"cscs"}
-          />
+          {loading ? (
+            <Loading paddingY={10} />
+          ) : (
+            <SpotlightArticle
+              topic={data?.[0]?.Category}
+              title={data?.[0]?.Title}
+              intro={data?.[0]?.Intro}
+              imgSrc={data?.[0]?.Banner}
+              link={`${data?.[0]?.JournalID}`}
+              date={data?.[0]?.ModifiedDate}
+              author={data?.[0]?.Author ? JSON.parse(data[0].Author.replace("\\", ""))?.name : ""}
+            />
+          )}
         </Container>
       </Box>
       <Box sx={{ background: "#fff", color: "#89a", position: "relative" }}>
         <Container>
-          <ArticlesAfterSpotlight />
+          {loading ? <Loading paddingY={10} /> : <ArticlesAfterSpotlight data={data?.slice(1)} />}
           <Reviews />
           <News />
         </Container>

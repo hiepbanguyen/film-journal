@@ -8,36 +8,6 @@ const data = {
   Data: [
     {
       question: "Who is the first person on the moon?",
-      QuestionID: 3,
-      answers: [
-        {
-          answer: "Barack Obama",
-          Image:
-            "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Official_portrait_of_Barack_Obama.jpg/1200px-Official_portrait_of_Barack_Obama.jpg",
-          RightAnswer: false,
-        },
-        {
-          answer: "Jo Biden",
-          Image:
-            "https://upload.wikimedia.org/wikipedia/commons/thumb/6/68/Joe_Biden_presidential_portrait.jpg/640px-Joe_Biden_presidential_portrait.jpg",
-          RightAnswer: true,
-        },
-        {
-          answer: "Trump",
-          Image:
-            "https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Donald_Trump_official_portrait.jpg/800px-Donald_Trump_official_portrait.jpg",
-          RightAnswer: false,
-        },
-        {
-          answer: "JFK",
-          Image:
-            "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/John_F._Kennedy%2C_White_House_color_photo_portrait.jpg/800px-John_F._Kennedy%2C_White_House_color_photo_portrait.jpg",
-          RightAnswer: false,
-        },
-      ],
-    },
-    {
-      question: "Who is the first person on the moon?",
       QuestionID: 4,
       answers: [
         {
@@ -67,8 +37,8 @@ const data = {
       ],
     },
     {
-      question: "Who is the dumbest president?",
-      QuestionID: 2,
+      QuestionID: 1,
+      question: "Who is the first black president?",
       answers: [
         {
           answer: "Barack Obama",
@@ -97,8 +67,8 @@ const data = {
       ],
     },
     {
-      question: "Who is the first person on the earth?",
       QuestionID: 1,
+      question: "Who is the first person on the moon?",
       answers: [
         {
           answer: "Barack Obama",
@@ -127,10 +97,7 @@ const data = {
       ],
     },
   ],
-  Total: 3,
-  PageSize: 1,
-  PageIndex: 1,
-  TotalPage: 3,
+  Total: 4,
 };
 
 const AnswerBox = ({ right, wrong, data }) => {
@@ -182,16 +149,16 @@ export const FilmTrivia = () => {
         <p>FILM TRIVIA</p>
       </Box>
       <Typography variant={"h6"} my={3}>
-        {data?.Data?.[pageIndex].question}
+        {data?.Data?.[pageIndex - 1].question}
       </Typography>
       <Grid container spacing={2} mb={3}>
-        {data?.Data?.[pageIndex].answers.map((i, idx) => (
+        {data?.Data?.[pageIndex - 1].answers.map((i, idx) => (
           <Grid key={idx} item xs={12} sm={6} onClick={() => handeAnswerClick(idx, pageIndex, i.RightAnswer)}>
             <AnswerBox data={i} right={rightAnswer === idx} wrong={wrongAnswer === idx} />
           </Grid>
         ))}
       </Grid>
-      <PaginationBase totalPage={data?.TotalPage ?? 0} pageIndex={pageIndex} onChange={handleChangePage} />
+      <PaginationBase totalPage={data?.Total ?? 0} pageIndex={pageIndex} onChange={handleChangePage} />
     </Box>
   );
 };

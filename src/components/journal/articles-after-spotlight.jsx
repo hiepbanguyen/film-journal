@@ -131,20 +131,20 @@ export const ArticlePreview = (props) => {
   );
 };
 
-export default function ArticlesAfterSpotlight() {
+export default function ArticlesAfterSpotlight({ data }) {
   return (
     <>
       <Grid container spacing={2} sx={{ position: "relative", top: -60, color: "#456" }}>
-        {articles.map((i, idx) => (
+        {data.map((i, idx) => (
           <Grid item key={idx} xs={12} md={4}>
             <ArticlePreview
-              topic={i.topic}
-              title={i.title}
-              intro={i.intro}
-              imgSrc={i.imgSrc}
-              link={i.link}
-              date={i.date}
-              author={i.author}
+              topic={i?.Category}
+              title={i?.Title}
+              intro={i?.Intro}
+              imgSrc={i?.Banner}
+              link={`${i?.JournalID}`}
+              date={i?.ModifiedDate}
+              author={i?.Author ? JSON.parse(i.Author.replace("\\", ""))?.name : ""}
             />
           </Grid>
         ))}

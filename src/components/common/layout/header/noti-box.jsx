@@ -118,7 +118,7 @@ export default function NotiBox() {
         }}
         onClick={handleClick}
       >
-        <Badge badgeContent={0} color="error">
+        <Badge badgeContent={1} color="error">
           <NotificationsIcon />
         </Badge>
       </IconButton>

@@ -3,11 +3,7 @@ import React, { useEffect } from "react";
 import { observer } from "mobx-react-lite";
 import UserStore from "../../../../store/user.store.js";
 import { Loading } from "../../../common/loading";
-import { DateField } from "@mui/x-date-pickers/DateField";
-import moment from "moment";
 import { useForm } from "react-hook-form";
-import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
-import { LocalizationProvider } from "@mui/x-date-pickers";
 import Typography from "@mui/material/Typography";
 import FilmCard from "../../../common/film-card.jsx";
 import CancelIcon from "@mui/icons-material/Cancel.js";
@@ -26,7 +22,7 @@ const FavoriteFilms = ({ films, handleAddFilm, handleDeleteFilms }) => {
       <Divider sx={{ mb: 2 }} />
       <SearchFilms handleAddFilm={handleAddFilm} />
       <Box
-        my={8}
+        mt={8}
         gap={1}
         sx={{
           display: "flex",
@@ -62,12 +58,24 @@ const FavoriteFilms = ({ films, handleAddFilm, handleDeleteFilms }) => {
 };
 
 export const Information = observer(() => {
-  const { register, handleSubmit, setValue } = useForm();
+  const {
+    formState: { isDirty },
+    register,
+    handleSubmit,
+    setValue,
+  } = useForm({
+    defaultValues: {
+      UserName: UserStore?.user?.UserName,
+      FullName: UserStore?.user?.FullName,
+      Bio: UserStore?.user?.Bio,
+      FavouriteFilmList: UserStore?.user?.FavouriteFilmList,
+    },
+  });
   const [favoriteFilms, setFavoriteFilms] = React.useState([]);
   const [error, setError] = React.useState(null);
   const { enqueueSnackbar } = useSnackbar();
   const [, getFavoriteFilms] = useAxios({ url: "Users/FavouriteFilm" }, { manual: true });
-  const [, updateInfo] = useAxios({}, { manual: true });
+  const [, updateInfo] = useAxios({ url: "Users/ChangeInfo", method: "POST" }, { manual: true });
 
   useEffect(() => {
     getFavoriteFilms().then((res) => {
@@ -91,17 +99,29 @@ export const Information = observer(() => {
       return;
     }
     setFavoriteFilms([...favoriteFilms, newFilm]);
+    setValue("FavouriteFilmList", JSON.stringify([...favoriteFilms, newFilm]), { shouldDirty: true });
   };
 
   const onSubmit = (values) => {
+    // console.log(values);
     if (!validateUsername(values.UserName)) {
       setError("Invalid username, should contain only letters, numbers, underscores and dots");
       return;
     }
-    values.DateOfBirth = moment(`${values.DateOfBirth} 23:59`, "YYYY / MM / DD HH:mm").toDate();
-    if (!validateDateOfBirth(values.DateOfBirth)) {
-      setError("Invalid date of birth");
-    }
+    // values.DateOfBirth = moment(`${values.DateOfBirth} 23:59`, "YYYY / MM / DD HH:mm").toDate();
+    // if (!validateDateOfBirth(values.DateOfBirth)) {
+    //   setError("Invalid date of birth");
+    // }
+    // values.FavouriteFilmList = JSON.stringify(favoriteFilms);
+    updateInfo({ data: values })
+      .then((res) => {
+        if (res?.data) {
+          enqueueSnackbar("Update info successfully", { variant: "success" });
+        }
+      })
+      .catch((e) => {
+        setError(e.response.data.devMsg);
+      });
   };
 
   const validateUsername = (username) => {
@@ -173,21 +193,29 @@ export const Information = observer(() => {
               fullWidth
               {...register("FullName")}
             />
-            <LocalizationProvider dateAdapter={AdapterMoment}>
-              <DateField
-                fullWidth
-                name={"DateOfBirth"}
-                size={"small"}
-                label="Date of birth"
-                defaultValue={moment(new Date(UserStore?.user?.DateOfBirth))}
-                format={"YYYY/MM/DD"}
-                sx={{
-                  "& .MuiFormLabel-root, .MuiInputBase-root": { color: "inherit" },
-                }}
-                {...register("DateOfBirth")}
-              />
-            </LocalizationProvider>
-            <TextField label="Bio" name="bio" value={UserStore.user?.Bio} multiline fullWidth rows={4} />
+            {/*<LocalizationProvider dateAdapter={AdapterMoment}>*/}
+            {/*  <DateField*/}
+            {/*    fullWidth*/}
+            {/*    name={"DateOfBirth"}*/}
+            {/*    size={"small"}*/}
+            {/*    label="Date of birth"*/}
+            {/*    defaultValue={moment(new Date(UserStore?.user?.DateOfBirth))}*/}
+            {/*    format={"YYYY/MM/DD"}*/}
+            {/*    sx={{*/}
+            {/*      "& .MuiFormLabel-root, .MuiInputBase-root": { color: "inherit" },*/}
+            {/*    }}*/}
+            {/*    {...register("DateOfBirth")}*/}
+            {/*  />*/}
+            {/*</LocalizationProvider>*/}
+            <TextField
+              label="Bio"
+              name="bio"
+              defaultValue={UserStore.user?.Bio}
+              multiline
+              fullWidth
+              rows={4}
+              {...register("Bio")}
+            />
           </Box>
           <Box>
             <FavoriteFilms films={favoriteFilms} handleAddFilm={handleAddFilm} handleDeleteFilms={handleDeleteFilms} />
@@ -202,7 +230,14 @@ export const Information = observer(() => {
               </Typography>
             </Box>
           )}
-          <Button type="submit" variant={"contained"}>
+          <Button
+            type="submit"
+            variant={"contained"}
+            disabled={!isDirty}
+            sx={{
+              color: "#fff !important",
+            }}
+          >
             Update info
           </Button>
         </Box>

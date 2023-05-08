@@ -1,11 +1,17 @@
 import { Container, Divider, Grid, Typography } from "@mui/material";
-import { articles } from "../articles-after-spotlight.jsx";
 import ArticlePreview from "../article-preview.jsx";
 import React from "react";
 import PaginationBase from "../../common/pagination-base.jsx";
+import useAxios from "axios-hooks";
+import { Loading } from "../../common/loading.jsx";
 
 export const AllJournals = () => {
   const [pageIdx, setPageIdx] = React.useState(1);
+  const [{ data, loading, error }] = useAxios({
+    url: `Journals/GetPaging?pageSize=12&pageIndex=${pageIdx}`,
+    method: "POST",
+  });
+
   const handleChangePage = (newPage) => {
     setPageIdx(newPage);
     // fetchFilms();
@@ -17,25 +23,31 @@ export const AllJournals = () => {
         All journals
       </Typography>
       <Divider />
-      <Grid container mt={5} px={{ xs: 3, sm: 0 }}>
-        {articles.map((i, idx) => (
-          <Grid item key={idx} xs={12} sm={4} md={3}>
-            <ArticlePreview
-              key={idx}
-              topic={i.topic}
-              title={i.title}
-              intro={i.intro}
-              imgSrc={i.imgSrc}
-              link={i.link}
-              date={i.date}
-              author={i.author}
-              titleColor={"#fff"}
-              small={true}
-            />
+      {loading ? (
+        <Loading paddingY={10} />
+      ) : (
+        <>
+          <Grid container mt={5} px={{ xs: 3, sm: 0 }}>
+            {data?.Data?.map((i, idx) => (
+              <Grid item key={idx} xs={12} sm={4} md={3}>
+                <ArticlePreview
+                  key={idx}
+                  topic={i?.Category}
+                  title={i?.Title}
+                  intro={i?.Intro}
+                  imgSrc={i?.Banner}
+                  link={`/journals/${i?.JournalID}`}
+                  date={i?.ModifiedDate}
+                  author={i?.Author ? JSON.parse(i.Author.replace("\\", ""))?.name : ""}
+                  titleColor={"#fff"}
+                  small={true}
+                />
+              </Grid>
+            ))}
           </Grid>
-        ))}
-      </Grid>
-      <PaginationBase totalPage={2} pageIndex={pageIdx} onChange={handleChangePage} />
+          <PaginationBase totalPage={data?.TotalPage ?? 0} pageIndex={pageIdx} onChange={handleChangePage} />
+        </>
+      )}
     </Container>
   );
 };

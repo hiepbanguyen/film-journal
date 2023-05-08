@@ -19,7 +19,7 @@ export default function Reviews() {
                 title={i?.Title}
                 intro={i?.Intro}
                 imgSrc={i?.Banner}
-                link={`journals/${i?.JournalID}`}
+                link={`${i?.JournalID}`}
                 date={i?.ModifiedDate}
                 author={i?.Author ? JSON.parse(i.Author.replace("\\", ""))?.name : ""}
               />
