@@ -16,12 +16,13 @@ export const ListPreviewVertical = (props) => {
       </Box>
       <Box width={"100%"}>
         <Typography variant={"body1"} color={"#fff"} sx={{ ":hover": { color: "#00e8ff" } }} fontWeight={600}>
-          {title}
+          {title.slice(0, 34)}
+          {title.length > 34 && "..."}
         </Typography>
         <Box display={"flex"} alignItems={"center"} my={1}>
           <Avatar sx={{ width: 25, height: 25 }} src={userAvatar ?? ""} />
           <Typography variant={"body2"} ml={0.5} mr={1}>
-            {fullname ?? username}
+            {fullname ? fullname : username}
           </Typography>
           <Typography variant={"body2"} ml={0.5} mr={0.8}>
             {`${films}`} films
@@ -44,7 +45,7 @@ const RecentlyLike = () => {
       {loading ? (
         <Loading paddingY={10} />
       ) : (
-        <Box display={"flex"} flexDirection={"column"} alignItems={{ xs: "center", lg: "flex-start" }}>
+        <Box display={"flex"} flexDirection={"column"}>
           {data.map((i, idx) => (
             <Box key={idx} my={2}>
               <ListPreviewHorizontal
@@ -53,8 +54,8 @@ const RecentlyLike = () => {
                 fullname={i.User?.FullName ?? ""}
                 username={i.User?.UserName ?? ""}
                 userAvatar={i.User?.Avatar ?? ""}
-                favoriteCount={i.TotalLike ?? 0}
-                commentCount={i.TotalComment ?? 0}
+                favoriteCount={i.LikesCount ?? 0}
+                commentCount={i.CommentsCount ?? 0}
                 posters={i.List}
                 films={i.Total ?? 0}
                 listLink={`/u/${i.User?.UserName}/lists/${i.ListID}`}

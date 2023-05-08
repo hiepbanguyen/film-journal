@@ -4,23 +4,30 @@ import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
-import { Box, Checkbox, Chip, FormControlLabel, FormGroup, List, ListItem, Typography } from "@mui/material";
+import { Box, Checkbox, FormControlLabel, FormGroup, List, ListItem, Typography } from "@mui/material";
+import useAxios from "axios-hooks";
+import UserStore from "../../store/user.store.js";
+import { Loading } from "../common/loading";
+import { Link, useParams } from "react-router-dom";
+import { useSnackbar } from "notistack";
 
-const lists = [
-  { title: "My cousin vinny", private: true, filmsCount: 20 },
-  { title: "My fasfcsf vinny", private: false, filmsCount: 20 },
-  { title: "My fasafsca vinnyMy fasafsca vinnyMy fasafsca vinnyMy fasafsca vinny", private: true, filmsCount: 20 },
-  { title: "My fasfsdcas", private: false, filmsCount: 20 },
-  { title: "fasfdcsadf vinny", private: false, filmsCount: 20 },
-  { title: "rhyrrbgvr vinny", private: true, filmsCount: 20 },
-  { title: "My fasafsca vinny", private: true, filmsCount: 20 },
-  { title: "My fasfsdcas", private: false, filmsCount: 20 },
-  { title: "fasfdcsadf vinny", private: false, filmsCount: 20 },
-  { title: "rhyrrbgvr vinny", private: true, filmsCount: 20 },
-];
-
-export default function AddToListsDialog(props) {
+export default function AddToListsDialog({ filmTitle, releasedYear, children }) {
+  const { filmId } = useParams();
+  const { enqueueSnackbar } = useSnackbar();
   const [open, setOpen] = React.useState(false);
+  const [{ data, loading }] = useAxios(`Lists/Users?pageSize=9999&pageIndex=1&userName=${UserStore.user.UserName}`);
+  const [checkedLists, setCheckLists] = React.useState([]);
+  const [, addToLists] = useAxios(
+    {
+      url: "Films/AddFilmToList",
+      method: "POST",
+      data: {
+        filmID: filmId,
+        listIDs: checkedLists.join(","),
+      },
+    },
+    { manual: true },
+  );
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -30,10 +37,35 @@ export default function AddToListsDialog(props) {
     setOpen(false);
   };
 
+  const handleListChecked = (e, listId) => {
+    if (e.target.checked) {
+      setCheckLists([...checkedLists, listId]);
+    } else {
+      setCheckLists(checkedLists.filter((i) => i !== listId));
+    }
+  };
+
+  // console.log(checkedLists);
+
+  const handleAddToLists = () => {
+    addToLists()
+      .then((res) => {
+        if (res?.data) {
+          setOpen(false);
+          enqueueSnackbar(`Added ${filmTitle} (${releasedYear}) to lists successfully`, {
+            variant: "success",
+          });
+        }
+      })
+      .catch((err) => {
+        enqueueSnackbar(err.response.data.devMsg, { variant: "error" });
+      });
+  };
+
   return (
     <>
       <Box sx={{ p: 0, width: "100%", height: "100%" }} onClick={handleClickOpen}>
-        {props.children}
+        {children}
       </Box>
       <Dialog
         open={open}
@@ -50,56 +82,63 @@ export default function AddToListsDialog(props) {
           },
         })}
       >
-        <DialogTitle sx={{ color: "#000", fontSize: 25 }}>
-          {"Add "}
-          <strong>{"Movie Title"}</strong>
-          {" to lists"}
-        </DialogTitle>
-        <DialogContent sx={{ p: 0 }}>
-          <List sx={{ maxHeight: 400 }} dense>
-            {lists.map((i, idx) => (
-              <ListItem key={idx} sx={{ display: "flex", justifyContent: "space-between" }}>
-                <Box display={"flex"} alignItems={"center"}>
-                  <FormGroup>
-                    <FormControlLabel
-                      control={<Checkbox />}
-                      label={i.title}
-                      sx={{
-                        mr: 1,
-                        maxWidth: 400,
-                        "& .MuiFormControlLabel-label": {
-                          overflow: "hidden",
-                          whiteSpace: "nowrap",
-                          textOverflow: "ellipsis",
-                        },
-                      }}
-                    />
-                  </FormGroup>
-                  {i.private ? (
-                    <Chip
-                      label={"Private"}
-                      sx={{ height: 25, fontSize: 12, bgcolor: "rgba(0,0,0,0.5)", color: "#fff" }}
-                    />
-                  ) : (
-                    <Chip label={"Public"} sx={{ height: 25, fontSize: 12, bgcolor: "#ffd8a8", color: "#000" }} />
-                  )}
+        {loading ? (
+          <Loading paddingY={10} />
+        ) : (
+          <>
+            <DialogTitle sx={{ color: "#000", fontSize: 25 }}>
+              {"Add "}
+              <strong>{`${filmTitle} (${releasedYear})`}</strong>
+              {" to lists"}
+            </DialogTitle>
+            <DialogContent sx={{ p: 0 }}>
+              {data?.Data?.length > 0 ? (
+                <List sx={{ maxHeight: 400 }} dense>
+                  {data?.Data?.map((i, idx) => (
+                    <ListItem key={idx} sx={{ display: "flex", justifyContent: "space-between" }}>
+                      <Box flex={1} display={"flex"} alignItems={"center"}>
+                        <FormGroup>
+                          <FormControlLabel
+                            control={<Checkbox onChange={(e) => handleListChecked(e, i?.ListID)} />}
+                            label={i?.ListName ?? ""}
+                            sx={{
+                              mr: 1,
+                              maxWidth: { xs: 270, sm: 470 },
+                              "& .MuiFormControlLabel-label": {
+                                overflow: "hidden",
+                                whiteSpace: "nowrap",
+                                textOverflow: "ellipsis",
+                              },
+                            }}
+                          />
+                        </FormGroup>
+                      </Box>
+                      <Typography>
+                        {i?.FilmsCount ?? 0}
+                        {" films"}
+                      </Typography>
+                    </ListItem>
+                  ))}
+                </List>
+              ) : (
+                <Box display={"flex"} gap={1} flexDirection={"column"} alignItems={"center"}>
+                  <Typography> You don't have any lists</Typography>
+                  <Link to={"/lists/new"}>
+                    <Button variant={"contained"}>Create a list</Button>
+                  </Link>
                 </Box>
-                <Typography>
-                  {i.filmsCount}
-                  {" films"}
-                </Typography>
-              </ListItem>
-            ))}
-          </List>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose} sx={{ color: "#000", "&:hover": { bgcolor: "rgba(0,0,0,0.1)" } }}>
-            Cancel
-          </Button>
-          <Button onClick={handleClose} variant={"contained"} color={"success"}>
-            Add
-          </Button>
-        </DialogActions>
+              )}
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={handleClose} sx={{ color: "#000", "&:hover": { bgcolor: "rgba(0,0,0,0.1)" } }}>
+                Cancel
+              </Button>
+              <Button onClick={handleAddToLists} variant={"contained"} color={"success"}>
+                Add
+              </Button>
+            </DialogActions>
+          </>
+        )}
       </Dialog>
     </>
   );

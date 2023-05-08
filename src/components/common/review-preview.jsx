@@ -24,12 +24,19 @@ const ReviewContent = ({ link, content, likeCount, spoiler }) => {
             ":hover": { backgroundColor: "#3b4957", color: "#fff" },
           }}
         >
-          This review may contains spoilers. Click here if you're willing to take the risk
+          This review may contains spoilers. Click here to open!
         </Button>
       ) : (
         <Typography component={Link} to={link ?? ""} fontSize={15} mb={1}>
           {String(content).slice(0, 210)}
-          {"..."}
+          {content.length > 210 && (
+            <>
+              {"... "}
+              <Box component={"span"} sx={{ ":hover": { color: "#00e8ff" } }}>
+                See more
+              </Box>
+            </>
+          )}
         </Typography>
       )}
       <Box
@@ -112,7 +119,7 @@ export default function ReviewPreview(props) {
               <Link to={link ?? ""}>
                 <Box display={"flex"} gap={1} sx={{ pt: 0.25 }}>
                   <EventNoteIcon fontSize={"small"} />
-                  <Typography fontSize={14}>{moment(reviewDate).format("MMM DD, YYYY")}</Typography>
+                  <Typography fontSize={14}>{moment.utc(reviewDate).format("MMM DD, YYYY")}</Typography>
                 </Box>
               </Link>
             )}

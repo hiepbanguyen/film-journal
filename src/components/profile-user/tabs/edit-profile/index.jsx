@@ -3,15 +3,26 @@ import { Box, Tab, Tabs } from "@mui/material";
 // import Tabs from '@mui/material/Tabs';
 // import Tab from '@mui/material/Tab';
 import { Information } from "./information";
-import { ChangeAvatar } from "./change-avatar";
+import { AvatarAndBanner } from "./avatar-and-banner.jsx";
 import { ChangePassword } from "./change-password";
+import UserStore from "../../../../store/user.store.js";
+import { useNavigate, useParams } from "react-router-dom";
+import { observer } from "mobx-react-lite";
 
-export const UserEditProfile = () => {
+export const UserEditProfile = observer(() => {
   const [tab, setTab] = React.useState(0);
+  const navigate = useNavigate();
+  const { username } = useParams();
 
   const handleChange = (event, newTab) => {
     setTab(newTab);
   };
+
+  React.useEffect(() => {
+    if (UserStore.isLoadedFromLocal && !UserStore.isLoggedIn) {
+      navigate("/u/" + username);
+    }
+  }, [UserStore.isLoadedFromLocal, UserStore.isLoggedIn]);
 
   return (
     <Box sx={{ display: "flex", flexDirection: "column ", alignItems: "center" }}>
@@ -27,34 +38,16 @@ export const UserEditProfile = () => {
         }}
       >
         <Tabs value={tab} onChange={handleChange} aria-label="basic tabs example">
-          <Tab style={{ fontSize: "12px", color: "#9ab" }} label="Information" />
           <Tab style={{ fontSize: "12px", color: "#9ab" }} label="Avatar & Banner" />
+          <Tab style={{ fontSize: "12px", color: "#9ab" }} label="Information" />
           <Tab style={{ fontSize: "12px", color: "#9ab" }} label="Password" />
         </Tabs>
       </Box>
       <Box sx={{ marginTop: "32px" }}>
-        <Box
-          sx={{
-            display: `${tab === 0 ? "block" : "none"}`,
-          }}
-        >
-          <Information />
-        </Box>
-        <Box
-          sx={{
-            display: `${tab === 1 ? "block" : "none"}`,
-          }}
-        >
-          <ChangeAvatar />
-        </Box>
-        <Box
-          sx={{
-            display: `${tab === 2 ? "block" : "none"}`,
-          }}
-        >
-          <ChangePassword />
-        </Box>
+        {tab === 0 && <AvatarAndBanner />}
+        {tab === 1 && <Information />}
+        {tab === 2 && <ChangePassword />}
       </Box>
     </Box>
   );
-};
+});

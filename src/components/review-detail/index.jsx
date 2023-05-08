@@ -1,19 +1,23 @@
 import Container from "@mui/system/Container";
 import { Box } from "@mui/material";
-import ReviewDetailMain from "./review-detail-main.jsx";
-import ReviewCommentSection from "./review-comment-section.jsx";
 import { useParams } from "react-router-dom";
 import useAxios from "axios-hooks";
 import React from "react";
-import { Loading } from "../common/loading.jsx";
 import { PageNotExist } from "../common/page-not-exist.jsx";
+import ReviewCommentSection from "./review-comment-section.jsx";
+import ReviewDetailMain from "./review-detail-main.jsx";
+import { Loading } from "../common/loading.jsx";
 
 const TakeLikedReviews = 10;
 export default function ReviewDetail() {
   const { reviewId } = useParams();
-  const [{ data: detail, loading: detailLoading, error: detailError }, refetchDetail] = useAxios(
+  const [{ data: detail, loading: detailLoading, error: detailError }, refetch] = useAxios(
     `Reviews/${reviewId}/detail?limitUser=${TakeLikedReviews}`,
   );
+
+  const refetchDetail = () => {
+    refetch();
+  };
 
   if (!detailLoading && !detail) return <PageNotExist />;
 

@@ -1,253 +1,247 @@
-import { Box, Button, TextField } from "@mui/material";
-import React, { useState } from "react";
+import { Box, Button, Divider, IconButton, TextField } from "@mui/material";
+import React, { useEffect } from "react";
+import { observer } from "mobx-react-lite";
+import UserStore from "../../../../store/user.store.js";
+import { Loading } from "../../../common/loading";
+import { useForm } from "react-hook-form";
+import Typography from "@mui/material/Typography";
+import FilmCard from "../../../common/film-card.jsx";
+import CancelIcon from "@mui/icons-material/Cancel.js";
+import { useSnackbar } from "notistack";
+import { SearchFilms } from "../../../list-detail/new/search-films.jsx";
+import useAxios from "axios-hooks";
+import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline.js";
 
-export const Information = (props) => {
-  let data = {
-    userName: "cristiano07",
-    fullName: "Cristiano Ronaldo",
-    email: "cris07@gmail.com",
-    dateOfBirth: "2001-10-27",
-    bio: "I'm professional football player! GOAT - the Greatest Of All Times!",
-  };
-  // Khai bao params
-  const [userInput, setUserInput] = useState({
-    userName: data.userName || "",
-    fullName: data.fullName || "",
-    dateOfBirth: data.dateOfBirth || "",
-    bio: data.bio || "",
-    errors: {
-      userName: "",
-      fullName: "",
-      dateOfBirth: "",
-      bio: "",
-    },
-  });
-
-  //   handle Input change
-  const handleInputChange = (event) => {
-    const { name, value } = event.target;
-    setUserInput((prevState) => ({
-      ...prevState,
-      [name]: value,
-      errors: {
-        ...prevState.errors,
-        [name]: "",
-      },
-    }));
-  };
-
-  //   handle Submit
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    console.log(userInput);
-
-    if (validateInput()) {
-      console.log(userInput);
-    }
-  };
-
-  // handle cancel
-  const handleCancel = () => {
-    setUserInput({
-      userName: data.userName || "",
-      fullName: data.fullName || "",
-      dateOfBirth: data.dateOfBirth || "",
-      bio: data.bio || "",
-      errors: {
-        userName: "",
-        fullName: "",
-        dateOfBirth: "",
-        bio: "",
-      },
-    });
-  };
-
-  //   Validate input
-  const validateInput = () => {
-    let errors = {};
-    let isValid = true;
-
-    if (userInput.userName.trim() === "") {
-      errors.userName = "Username is required";
-      isValid = false;
-    }
-
-    if (userInput.fullName.trim() === "") {
-      errors.fullName = "Full name is required";
-      isValid = false;
-    } else if (!/^[a-zA-Z ]+$/.test(userInput.fullName)) {
-      errors.fullName = "Full name should contain only alphabets and spaces";
-      isValid = false;
-    } else if (/\d/.test(userInput.fullName)) {
-      errors.fullName = "Full name should not contain numbers";
-      isValid = false;
-    }
-
-    setUserInput((prevState) => ({
-      ...prevState,
-      errors: errors,
-    }));
-
-    return isValid;
-  };
-
+const FavoriteFilms = ({ films, handleAddFilm, handleDeleteFilms }) => {
+  // console.log(films);
   return (
-    <Box
-      sx={{
-        ".MuiFormControl-root": {
-          height: "80px",
-        },
-      }}
-    >
-      <Box maxWidth={500}>
-        <form onSubmit={handleSubmit}>
-          <TextField
-            label="Email"
-            name="email"
-            defaultValue={data.email}
-            disabled
-            size="small"
-            sx={{
-              width: "100%",
-              fontSize: { xs: "14px", md: "16px" },
-              " input,label,fieldset": {
-                borderColor: "#9ab !important",
-                color: "#9ab !important",
-              },
-              " fieldset": { bgcolor: "rgba(255,255,255,0.1)" },
-              ".css-1n4twyu-MuiInputBase-input-MuiOutlinedInput-input.Mui-disabled": {
-                "-webkit-text-fill-color": "#9ab",
-              },
-            }}
-          />
-          <TextField
-            label="Username"
-            name="userName"
-            value={userInput.userName}
-            onChange={handleInputChange}
-            InputLabelProps={{ shrink: true, required: true }}
-            error={!!userInput.errors.userName}
-            helperText={userInput.errors.userName}
-            size="small"
-            sx={{
-              width: "100%",
-              fontSize: { xs: "14px", md: "16px" },
-              " input,label,fieldset": {
-                borderColor: "#9ab !important",
-                color: "#9ab !important",
-              },
-              ".css-1n4twyu-MuiInputBase-input-MuiOutlinedInput-input.Mui-disabled": {
-                "-webkit-text-fill-color": "#9ab",
-              },
-            }}
-          />
-          <TextField
-            label="Fullname"
-            name="fullName"
-            value={userInput.fullName}
-            onChange={handleInputChange}
-            InputLabelProps={{ shrink: true }}
-            error={!!userInput.errors.fullName}
-            helperText={userInput.errors.fullName}
-            size="small"
-            sx={{
-              width: "100%",
-              fontSize: { xs: "14px", md: "16px" },
-              " input,label,fieldset": {
-                borderColor: "#9ab !important",
-                color: "#9ab !important",
-              },
-              ".css-1n4twyu-MuiInputBase-input-MuiOutlinedInput-input.Mui-disabled": {
-                "-webkit-text-fill-color": "#9ab",
-              },
-            }}
-          />
-          <TextField
-            name="dateOfBirth"
-            label="Date of birth"
-            type="date"
-            value={userInput.dateOfBirth}
-            onChange={handleInputChange}
-            InputLabelProps={{ shrink: true }}
-            size="small"
-            sx={{
-              width: "100%",
-              fontSize: { xs: "14px", md: "16px" },
-              " input,label,fieldset": {
-                borderColor: "#9ab !important",
-                color: "#9ab !important",
-              },
-              ".css-1n4twyu-MuiInputBase-input-MuiOutlinedInput-input.Mui-disabled": {
-                "-webkit-text-fill-color": "#9ab",
-              },
-            }}
-          />
-          <TextField
-            label="Bio"
-            name="bio"
-            value={userInput.bio}
-            onChange={handleInputChange}
-            //   error={!!userInput.errors.bio}
-            //   helperText={userInput.errors.bio}
-            multiline
-            rows={3}
-            sx={{
-              width: "100%",
-              fontSize: { xs: "14px", md: "16px" },
-              height: "128px !Important",
-              " textarea,label,fieldset": {
-                borderColor: "#9ab !important",
-                color: "#9ab !important",
-              },
-              ".css-1sqnrkk-MuiInputBase-input-MuiOutlinedInput-input.Mui-disabled": {
-                "-webkit-text-fill-color": "#9ab",
-              },
-            }}
-          />
-          <Box>
-            <Button
-              onClick={handleCancel}
-              size="medium"
-              variant="contained"
+    <>
+      <Typography variant={"body1"} textTransform={"uppercase"} color="#fff">
+        favorite films
+      </Typography>
+      <Divider sx={{ mb: 2 }} />
+      <SearchFilms handleAddFilm={handleAddFilm} />
+      <Box
+        mt={8}
+        gap={1}
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+        }}
+      >
+        {films.map((i, idx) => (
+          <Box key={idx} position={"relative"}>
+            <FilmCard key={idx} size={80} src={i?.Poster_path} link={`/films/${i?.FilmID}`} />
+            <IconButton
+              onClick={() => handleDeleteFilms(i?.FilmID)}
+              color={"error"}
               sx={{
-                marginRight: "8px",
-                backgroundColor: "#d32f2f !important",
-                color: "#fff !important",
-                ":hover": { backgroundColor: "#d32f2f !important" },
-                "&.Mui-disabled": {
-                  backgroundColor: "#b42626 !important",
-                  color: "#d0d0d0 !important",
+                position: "absolute",
+                width: 40,
+                left: 8,
+                right: 0,
+                m: "0 auto",
+                top: -20,
+                bgcolor: "rgba(0,0,0,0.4)",
+                ":hover": {
+                  bgcolor: "rgba(255,255,255,0.8)",
                 },
               }}
             >
-              Cancel
-            </Button>
-            <Button
-              variant="contained"
-              type="submit"
-              size="medium"
-              sx={{
-                backgroundColor: "#2e7d32 !important",
-                color: "#fff !important",
-                ":hover": { backgroundColor: "#2e7d32 !important" },
-                "&.Mui-disabled": {
-                  backgroundColor: "#2a692d !important",
-                  color: "#d0d0d0 !important",
-                },
-              }}
-            >
-              Submit
-            </Button>
+              <CancelIcon fontSize={"medium"} />
+            </IconButton>
           </Box>
-        </form>
+        ))}
       </Box>
-      <style>
-        {`
-          input[type="date"]::-webkit-calendar-picker-indicator {
-            filter: invert(0.65);
-          }
-        `}
-      </style>
-    </Box>
+    </>
   );
 };
+
+export const Information = observer(() => {
+  const {
+    formState: { isDirty },
+    register,
+    handleSubmit,
+    setValue,
+  } = useForm({
+    defaultValues: {
+      UserName: UserStore?.user?.UserName,
+      FullName: UserStore?.user?.FullName,
+      Bio: UserStore?.user?.Bio,
+      FavouriteFilmList: UserStore?.user?.FavouriteFilmList,
+    },
+  });
+  const [favoriteFilms, setFavoriteFilms] = React.useState([]);
+  const [error, setError] = React.useState(null);
+  const { enqueueSnackbar } = useSnackbar();
+  const [, getFavoriteFilms] = useAxios({ url: "Users/FavouriteFilm" }, { manual: true });
+  const [, updateInfo] = useAxios({ url: "Users/ChangeInfo", method: "POST" }, { manual: true });
+
+  useEffect(() => {
+    getFavoriteFilms().then((res) => {
+      if (res?.data) {
+        setFavoriteFilms(res.data);
+      }
+    });
+  }, []);
+
+  const handleDeleteFilms = (filmId) => {
+    setFavoriteFilms(favoriteFilms.filter((i) => i.FilmID !== filmId));
+  };
+
+  const handleAddFilm = (newFilm) => {
+    if (favoriteFilms.length === 4) {
+      enqueueSnackbar("You can only have up to 4 favorite films", { variant: "error" });
+      return;
+    }
+    if (favoriteFilms.find((i) => newFilm.FilmID === i.FilmID)) {
+      enqueueSnackbar("You already added this film to your favorites", { variant: "error" });
+      return;
+    }
+    setFavoriteFilms([...favoriteFilms, newFilm]);
+    setValue("FavouriteFilmList", JSON.stringify([...favoriteFilms, newFilm]), { shouldDirty: true });
+  };
+
+  const onSubmit = (values) => {
+    // console.log(values);
+    if (!validateUsername(values.UserName)) {
+      setError("Invalid username, should contain only letters, numbers, underscores and dots");
+      return;
+    }
+    // values.DateOfBirth = moment(`${values.DateOfBirth} 23:59`, "YYYY / MM / DD HH:mm").toDate();
+    // if (!validateDateOfBirth(values.DateOfBirth)) {
+    //   setError("Invalid date of birth");
+    // }
+    // values.FavouriteFilmList = JSON.stringify(favoriteFilms);
+    updateInfo({ data: values })
+      .then((res) => {
+        if (res?.data) {
+          enqueueSnackbar("Update info successfully", { variant: "success" });
+        }
+      })
+      .catch((e) => {
+        setError(e.response.data.devMsg);
+      });
+  };
+
+  const validateUsername = (username) => {
+    return new RegExp(/^[a-zA-Z0-9._]+$/).test(username);
+  };
+
+  const validateDateOfBirth = (date) => {
+    return new Date() > date;
+  };
+  //   Validate input
+
+  if (!UserStore.isLoadedFromLocal) return <Loading paddingY={10} />;
+  return (
+    <Box>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <Box
+          display={"flex"}
+          flexWrap={"wrap"}
+          gap={10}
+          sx={{
+            justifyContent: "center",
+            "textarea, input, label, fieldset": {
+              borderColor: "#9ab !important",
+              color: "#9ab !important",
+            },
+          }}
+        >
+          <Box
+            maxWidth={345}
+            sx={{
+              ".MuiFormControl-root": {
+                height: "70px",
+              },
+            }}
+          >
+            <Typography variant={"body1"} textTransform={"uppercase"} color="#fff">
+              personal info
+            </Typography>
+            <Divider sx={{ mb: 2 }} />
+            <TextField
+              label="Email"
+              name="email"
+              defaultValue={UserStore?.user?.Email}
+              disabled
+              size="small"
+              fullWidth
+              sx={{
+                " fieldset": { bgcolor: "rgba(255,255,255,0.1)" },
+                ".css-1n4twyu-MuiInputBase-input-MuiOutlinedInput-input.Mui-disabled": {
+                  "-webkit-text-fill-color": "#9ab",
+                },
+              }}
+            />
+            <TextField
+              label="Username"
+              name="userName"
+              defaultValue={UserStore?.user?.UserName}
+              InputLabelProps={{ shrink: true, required: true }}
+              size="small"
+              fullWidth
+              {...register("UserName")}
+            />
+            <TextField
+              label="Full name"
+              name="fullName"
+              defaultValue={UserStore?.user?.FullName}
+              InputLabelProps={{ shrink: true }}
+              size="small"
+              fullWidth
+              {...register("FullName")}
+            />
+            {/*<LocalizationProvider dateAdapter={AdapterMoment}>*/}
+            {/*  <DateField*/}
+            {/*    fullWidth*/}
+            {/*    name={"DateOfBirth"}*/}
+            {/*    size={"small"}*/}
+            {/*    label="Date of birth"*/}
+            {/*    defaultValue={moment(new Date(UserStore?.user?.DateOfBirth))}*/}
+            {/*    format={"YYYY/MM/DD"}*/}
+            {/*    sx={{*/}
+            {/*      "& .MuiFormLabel-root, .MuiInputBase-root": { color: "inherit" },*/}
+            {/*    }}*/}
+            {/*    {...register("DateOfBirth")}*/}
+            {/*  />*/}
+            {/*</LocalizationProvider>*/}
+            <TextField
+              label="Bio"
+              name="bio"
+              defaultValue={UserStore.user?.Bio}
+              multiline
+              fullWidth
+              rows={4}
+              {...register("Bio")}
+            />
+          </Box>
+          <Box>
+            <FavoriteFilms films={favoriteFilms} handleAddFilm={handleAddFilm} handleDeleteFilms={handleDeleteFilms} />
+          </Box>
+        </Box>
+        <Box mt={10} gap={1} display={"flex"} flexDirection={"column"} alignItems={"center"}>
+          {error && (
+            <Box sx={{ color: "#fc0707", display: "flex", gap: 0.5, alignItems: "center" }}>
+              <ErrorOutlineIcon sx={{ fontSize: 20 }} />
+              <Typography fontSize={13} pt={0.25}>
+                {error}
+              </Typography>
+            </Box>
+          )}
+          <Button
+            type="submit"
+            variant={"contained"}
+            disabled={!isDirty}
+            sx={{
+              color: "#fff !important",
+            }}
+          >
+            Update info
+          </Button>
+        </Box>
+      </form>
+    </Box>
+  );
+});

@@ -14,9 +14,11 @@ import { Link } from "react-router-dom";
 import { FollowButton } from "../common/follow-button.jsx";
 import useAxios from "axios-hooks";
 import { Loading } from "../common/loading.jsx";
+import { observer } from "mobx-react-lite";
+import UserStore from "../../store/user.store.js";
 
-export const ListReviewers = () => {
-  const [{ data, loading, error }] = useAxios({
+export const ListReviewers = observer(() => {
+  const [{ data, loading, error }, refetch] = useAxios({
     url: `Users/Paging`,
     method: "POST",
     data: {
@@ -26,6 +28,11 @@ export const ListReviewers = () => {
       typeUser: Enum.TypeUser.All,
     },
   });
+  React.useEffect(() => {
+    if (UserStore.isLoadedFromLocal) {
+      refetch();
+    }
+  }, [UserStore.isLoadedFromLocal, UserStore.isLoggedIn]);
 
   return (
     <>
@@ -67,7 +74,9 @@ export const ListReviewers = () => {
                         <Link to={"/u/" + member?.UserName} style={{ color: "#fff", fontWeight: "600" }}>
                           {member?.FullName ?? member?.UserName}
                         </Link>
-                        <Box style={{ display: "block", transition: "0.2s" }}>15 followers, following 200</Box>
+                        <Box style={{ display: "block", transition: "0.2s" }}>
+                          {member?.Following ?? 0} followers, following {member?.Follower ?? 0}
+                        </Box>
                       </Box>
                     </Box>
                   </TableCell>
@@ -97,7 +106,11 @@ export const ListReviewers = () => {
                     </Link>
                   </TableCell>
                   <TableCell sx={{ color: "#9ab" }}>
-                    <FollowButton followed={member?.Followed ?? 0} />
+                    <FollowButton
+                      followed={member?.Followed ?? 0}
+                      targetUsername={member?.UserName}
+                      targetUserId={member?.UserID}
+                    />
                   </TableCell>
                 </TableRow>
               ))}
@@ -107,4 +120,4 @@ export const ListReviewers = () => {
       )}
     </>
   );
-};
+});

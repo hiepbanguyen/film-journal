@@ -1,165 +1,26 @@
 import { Avatar, Box, Button, Typography } from "@mui/material";
 import CustomTabs from "../common/tabs.jsx";
 import React from "react";
-import { formatCompactNumber } from "../../utils/number.js";
 
-const actors = [
-  {
-    img: "https://a.ltrbxd.com/resized/avatar/upload/3/3/7/3/2/5/shard/avtr-0-80-0-80-crop.jpg?v=1d19016187",
-    name: "Sam Worthington",
-    character: "Merlin",
-  },
-  {
-    img: "https://a.ltrbxd.com/resized/avatar/upload/3/3/7/3/2/5/shard/avtr-0-80-0-80-crop.jpg?v=1d19016187",
-    name: "Jamie Flatters",
-    character: "Jemaine Clement",
-  },
-  {
-    img: "https://a.ltrbxd.com/resized/avatar/upload/3/3/7/3/2/5/shard/avtr-0-80-0-80-crop.jpg?v=1d19016187",
-    name: "Brendan Cowell",
-    character: "Edie Falco",
-  },
-  {
-    img: "https://a.ltrbxd.com/resized/avatar/upload/3/3/7/3/2/5/shard/avtr-0-80-0-80-crop.jpg?v=1d19016187",
-    name: "CCH Pounder",
-    character: "Joel David Moore",
-  },
-  {
-    img: "https://a.ltrbxd.com/resized/avatar/upload/3/3/7/3/2/5/shard/avtr-0-80-0-80-crop.jpg?v=1d19016187",
-    name: "Kate Winslet",
-    character: "Cliff Curtis",
-  },
-  {
-    img: "https://a.ltrbxd.com/resized/avatar/upload/3/3/7/3/2/5/shard/avtr-0-80-0-80-crop.jpg?v=1d19016187",
-    name: "Sam Worthington",
-    character: "Stephen Lang",
-  },
-  {
-    img: "https://a.ltrbxd.com/resized/avatar/upload/3/3/7/3/2/5/shard/avtr-0-80-0-80-crop.jpg?v=1d19016187",
-    name: "Sigourney Weaver",
-    character: "Jack Champion",
-  },
-  {
-    img: "https://a.ltrbxd.com/resized/avatar/upload/3/3/7/3/2/5/shard/avtr-0-80-0-80-crop.jpg?v=1d19016187",
-    name: "Zoe Saldaña",
-    character: "Britain Dalton",
-  },
-  {
-    img: "https://a.ltrbxd.com/resized/avatar/upload/3/3/7/3/2/5/shard/avtr-0-80-0-80-crop.jpg?v=1d19016187",
-    name: "Johnny Alexander",
-    character: "Andrew Arrabito",
-  },
-  {
-    img: "https://a.ltrbxd.com/resized/avatar/upload/3/3/7/3/2/5/shard/avtr-0-80-0-80-crop.jpg?v=1d19016187",
-    name: "Zoe Saldaña",
-    character: "Britain Dalton",
-  },
-  {
-    img: "https://a.ltrbxd.com/resized/avatar/upload/3/3/7/3/2/5/shard/avtr-0-80-0-80-crop.jpg?v=1d19016187",
-    name: "Sigourney Weaver",
-    character: "Jack Champion",
-  },
-  {
-    img: "https://a.ltrbxd.com/resized/avatar/upload/3/3/7/3/2/5/shard/avtr-0-80-0-80-crop.jpg?v=1d19016187",
-    name: "Robert Okumu",
-    character: "Alicia Vela-Bailey",
-  },
-  {
-    img: "https://a.ltrbxd.com/resized/avatar/upload/3/3/7/3/2/5/shard/avtr-0-80-0-80-crop.jpg?v=1d19016187",
-    name: "Johnny Alexander",
-    character: "Andrew Arrabito",
-  },
-  {
-    img: "https://a.ltrbxd.com/resized/avatar/upload/3/3/7/3/2/5/shard/avtr-0-80-0-80-crop.jpg?v=1d19016187",
-    name: "Zoe Saldaña",
-    character: "Britain Dalton",
-  },
-  {
-    img: "https://a.ltrbxd.com/resized/avatar/upload/3/3/7/3/2/5/shard/avtr-0-80-0-80-crop.jpg?v=1d19016187",
-    name: "Sigourney Weaver",
-    character: "Jack Champion",
-  },
-  {
-    img: "https://a.ltrbxd.com/resized/avatar/upload/3/3/7/3/2/5/shard/avtr-0-80-0-80-crop.jpg?v=1d19016187",
-    name: "Robert Okumu",
-    character: "Alicia Vela-Bailey",
-  },
-  {
-    img: "https://a.ltrbxd.com/resized/avatar/upload/3/3/7/3/2/5/shard/avtr-0-80-0-80-crop.jpg?v=1d19016187",
-    name: "Johnny Alexander",
-    character: "Andrew Arrabito",
-  },
-  {
-    img: "https://a.ltrbxd.com/resized/avatar/upload/3/3/7/3/2/5/shard/avtr-0-80-0-80-crop.jpg?v=1d19016187",
-    name: "Zoe Saldaña",
-    character: "Britain Dalton",
-  },
-  {
-    img: "https://a.ltrbxd.com/resized/avatar/upload/3/3/7/3/2/5/shard/avtr-0-80-0-80-crop.jpg?v=1d19016187",
-    name: "Sigourney Weaver",
-    character: "Jack Champion",
-  },
-  {
-    img: "https://a.ltrbxd.com/resized/avatar/upload/3/3/7/3/2/5/shard/avtr-0-80-0-80-crop.jpg?v=1d19016187",
-    name: "Robert Okumu",
-    character: "Alicia Vela-Bailey",
-  },
-  {
-    img: "https://a.ltrbxd.com/resized/avatar/upload/3/3/7/3/2/5/shard/avtr-0-80-0-80-crop.jpg?v=1d19016187",
-    name: "Johnny Alexander",
-    character: "Andrew Arrabito",
-  },
-];
-const crews = [
-  {
-    department: "directing",
-    people: ["Jamie Lee", "Ang Lee"],
-  },
-  {
-    department: "writing",
-    people: ["Jamie Lee", "Ang Lee"],
-  },
-  {
-    department: "producing",
-    people: [
-      "Hong Chau",
-      "Stephanie Hsu",
-      "Michelle Yeoh",
-      "Stephanie Hsu",
-      "Michelle Yeoh",
-      "Stephanie Hsu",
-      "Michelle Yeoh",
-    ],
-  },
-  {
-    department: "costume and makeup",
-    people: ["Hong Chau", "Stephanie Hsu", "Michelle Yeoh"],
-  },
-  {
-    department: "stunts",
-    people: ["Hong Chau", "Stephanie Hsu", "Michelle Yeoh"],
-  },
-];
-
-const initialShowCast = 8;
-const initialShowCrew = 3;
+const initialShowCast = 15;
+const initialShowCrew = 5;
 
 const Cast = (props) => {
   return (
     <Box
       component={Button}
       display={"flex"}
-      gap={1}
+      gap={0.5}
       sx={{
         background: "#283038",
         borderRadius: 1,
-        px: 1,
+        p: 0.5,
         "&:hover": {
           background: "#456",
         },
       }}
     >
-      <Avatar src={props.img} sx={{ height: 35, width: 35 }} />
+      <Avatar src={props.avatar} sx={{ height: 35, width: 35 }} />
       <Box>
         <Typography color={"#fff"} fontSize={12} textAlign={"left"}>
           {props.name}
@@ -172,16 +33,18 @@ const Cast = (props) => {
   );
 };
 
-const CastTab = () => {
+const CastTab = ({ data }) => {
   const [showAll, setShowAll] = React.useState(false);
+  // console.log(data);
+  if (!data || data.length === 0) return <>N/A</>;
   return (
     <>
       <Box display={"flex"} flexWrap={"wrap"} gap={1} mb={1}>
-        {actors.slice(0, showAll ? actors.length : initialShowCast).map((i, idx) => (
+        {data?.slice(0, showAll ? data.length : initialShowCast).map((i, idx) => (
           <Cast key={idx} {...i} />
         ))}
       </Box>
-      {actors.length > initialShowCast && (
+      {data?.length > initialShowCast && (
         <Button
           variant={"contained"}
           sx={{
@@ -200,14 +63,14 @@ const CastTab = () => {
   );
 };
 
-const Crew = (props) => {
+const Crew = ({ data }) => {
   return (
     <Box>
       <Typography textTransform={"uppercase"} color={"#789"} fontSize={13}>
-        {props.department}
+        {data[0]}
       </Typography>
       <Box className={"crew_people"} display={"flex"} flexWrap={"wrap"} mb={0.5}>
-        {props.people.map((i, idx) => (
+        {data[1].map((i, idx) => (
           <a key={idx}>{i}</a>
         ))}
       </Box>
@@ -215,16 +78,18 @@ const Crew = (props) => {
   );
 };
 
-const CrewTab = () => {
+const CrewTab = ({ data }) => {
   const [showAll, setShowAll] = React.useState(false);
+  // console.log(data?.[0]?.[0]);
+  if (!data?.[0]?.[0]) return <>N/A</>;
   return (
     <>
       <Box>
-        {crews.slice(0, showAll ? crews.length : initialShowCrew).map((i, idx) => (
-          <Crew key={idx} {...i} />
+        {data.slice(0, showAll ? data.length : initialShowCrew).map((i, idx) => (
+          <Crew key={idx} data={i} />
         ))}
       </Box>
-      {crews.length > initialShowCrew && (
+      {data.length > initialShowCrew && (
         <Button
           variant={"contained"}
           sx={{
@@ -242,25 +107,24 @@ const CrewTab = () => {
     </>
   );
 };
-const DetailsTab = () => {
+const DetailsTab = ({ data }) => {
   return (
     <>
-      <Crew department={"languagues"} people={["English", "Vietnamese"]} />
-      <Crew department={"production countries"} people={["Vietnam"]} />
-      <Crew department={"production companies"} people={["Marvel Studios"]} />
-      <Crew department={"budget"} people={[formatCompactNumber(25000000)]} />
+      {data.map((i, idx) => (
+        <Crew key={idx} data={i} />
+      ))}
     </>
   );
 };
 const tabLabels = ["CAST", "CREW", "MORE DETAILS"];
 
-export default function TabsCastNCrew() {
+export default function TabsCastNCrew({ cast, crew, detail }) {
   return (
     <Box>
       <CustomTabs labels={tabLabels} bottom_border_only={true}>
-        <CastTab />
-        <CrewTab />
-        <DetailsTab />
+        <CastTab data={cast} />
+        <CrewTab data={crew} />
+        <DetailsTab data={detail} />
       </CustomTabs>
     </Box>
   );

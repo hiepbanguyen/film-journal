@@ -15,7 +15,7 @@ import Members from "./components/members/index.jsx";
 import ReviewDetail from "./components/review-detail/index.jsx";
 import ProfileUser from "./components/profile-user/index.jsx";
 import FilmDetail from "./components/film-detail/index.jsx";
-import JournalArticle from "./components/journal-article/index.jsx";
+import JournalArticle from "./components/journal/article/index.jsx";
 import Films from "./components/films/index.jsx";
 import ListDetail from "./components/list-detail/index.jsx";
 import { configure } from "axios-hooks";
@@ -43,6 +43,7 @@ import { EditReview } from "./components/review-detail/edit/index.jsx";
 import ProfileFollowers from "./components/profile-user/tabs/followers/index.jsx";
 import ProfileFollowing from "./components/profile-user/tabs/following/index.jsx";
 import ProfileLikes from "./components/profile-user/tabs/likes/index.jsx";
+import { AllJournals } from "./components/journal/all/index.jsx";
 
 const axios = Axios.create({
   baseURL: "https://localhost:44358/api/",
@@ -130,6 +131,10 @@ const router = createBrowserRouter([
         element: <Journal />,
       },
       {
+        path: "journals/all",
+        element: <AllJournals />,
+      },
+      {
         path: "journals/:journalId",
         element: <JournalArticle />,
       },
@@ -211,10 +216,6 @@ const router = createBrowserRouter([
             path: "members/:searchParams",
             element: <MemberSearch />,
           },
-          // {
-          //   path: "tags/:searchParams",
-          //   element: <FilmsSearch />,
-          // },
         ],
       },
     ],
@@ -222,11 +223,11 @@ const router = createBrowserRouter([
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
-    <ThemeProvider theme={theme}>
-      <NotistackWrapper>
-        <RouterProvider router={router} />
-      </NotistackWrapper>
-    </ThemeProvider>
-  </React.StrictMode>,
+  // <React.StrictMode>
+  <ThemeProvider theme={theme}>
+    <NotistackWrapper>
+      <RouterProvider router={router} />
+    </NotistackWrapper>
+  </ThemeProvider>,
+  // </React.StrictMode>,
 );

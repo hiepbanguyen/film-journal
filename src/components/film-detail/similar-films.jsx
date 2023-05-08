@@ -1,4 +1,7 @@
 import { Box } from "@mui/material";
+import useAxios from "axios-hooks";
+import { Loading } from "../common/loading.jsx";
+import { Link } from "react-router-dom";
 
 const similar_films = [
   {
@@ -38,19 +41,31 @@ const similar_films = [
   },
 ];
 
-export default function SimilarFilms() {
+export default function SimilarFilms({ filmId }) {
+  const [{ data, loading }] = useAxios({
+    url: `Films/${filmId}/Similar`,
+    method: "POST",
+    data: {
+      pageSize: 8,
+      pageIndex: 1,
+    },
+  });
   return (
-    <Box className="similar_films">
+    <Box className="related_films">
       <Box className="tag_reviews">
-        <p>SILIMAR FILMS</p>
+        <p>SIMILAR FILMS</p>
       </Box>
-      <Box display={"flex"} flexWrap={"wrap"}>
-        {similar_films.map((similar_film_item, idx) => (
-          <a key={idx} href={similar_film_item.url} target="_blank">
-            <img className="image_form" src={similar_film_item.image}></img>
-          </a>
-        ))}
-      </Box>
+      {loading ? (
+        <Loading />
+      ) : (
+        <Box display={"flex"} flexWrap={"wrap"}>
+          {data?.Data?.map((i, idx) => (
+            <Link key={idx} to={`/films/${i?.FilmID}`}>
+              <img className="image_form" src={i?.Poster_path}></img>
+            </Link>
+          ))}
+        </Box>
+      )}
     </Box>
   );
 }

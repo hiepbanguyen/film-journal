@@ -24,30 +24,36 @@ export const LikeButton = observer(({ likes, type, id, refetchDetail }) => {
     },
     { manual: true },
   );
+
   useEffect(() => {
-    if (UserStore.isLoggedIn) {
-      getUserLiked();
-    } else {
-      setIsLiked(false);
+    if (UserStore.isLoadedFromLocal) {
+      if (UserStore.isLoggedIn) {
+        getUserLiked();
+      } else {
+        setIsLiked(false);
+      }
     }
-  }, [UserStore.isLoggedIn]);
+  }, [UserStore.isLoadedFromLocal, UserStore.isLoggedIn]);
 
   useEffect(() => {
     if (!userLikedLoading) setIsLiked(userLiked);
   }, [userLikedLoading]);
 
-  useEffect(() => {
-    getUserLiked();
-  }, [id]);
+  // useEffect(() => {
+  //   getUserLiked();
+  // }, [id]);
 
-  const handleLikeButton = async () => {
+  const handleLikeButton = () => {
     if (!UserStore.isLoggedIn) {
       navigate("/sign-in");
       return;
     }
-    await toggleLike();
-    await refetchDetail();
-    setIsLiked(!isLiked);
+    toggleLike().then((res) => {
+      if (res?.data) {
+        refetchDetail();
+        setIsLiked(!isLiked);
+      }
+    });
   };
   return (
     <>

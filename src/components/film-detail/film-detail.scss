@@ -1,265 +1,277 @@
 .film_detail_page {
-    p {
-        margin: 0;
-    }
-    .box_share {
-        width: 100%;
-        background-color: #456;
-        color: #bcd;
-        padding: 8px;
-        text-align: center;
-        font-size: 14px;
-    }
+  p {
+    margin: 0;
+  }
 
-    .crew_people a {
-        text-decoration: none;
-        margin-bottom: 5px;
-        margin-right: 5px;
-        max-width: 100%;
-        background: rgb(40, 48, 56);
-        border-radius: 3px;
-        color: #9ab;
-        padding: 3px 6px;
-        font-size: 13px;
-    }
+  .box_share {
+    width: 100%;
+    background-color: #456;
+    color: #bcd;
+    padding: 8px;
+    text-align: center;
+    font-size: 14px;
+  }
 
-    .crew_people a:hover {
-        color: #fff;
-        cursor: pointer;
-    }
+  .crew_people a {
+    text-decoration: none;
+    margin-bottom: 5px;
+    margin-right: 5px;
+    max-width: 100%;
+    background: rgb(40, 48, 56);
+    border-radius: 3px;
+    color: #9ab;
+    padding: 3px 6px;
+    font-size: 13px;
+  }
 
-
-    .cart_summary {
-        width: 100%;
-        display: flex;
-        background-color: #202830;
-        border-radius: 3px;
-        overflow: hidden;
-    }
-
-    .cart_summary img {
-        box-sizing: border-box;
-        display: flex;
-        flex-direction: row;
-        flex-shrink: 0;
-        min-width: 160px;
-        width: 28.07017544%;
-    }
-
-    .cart_summary_title {
-        font-size: 14px;
-        text-align: center;
-        display: flex;
-        align-items: center;
-        color: #9ab;
-    }
-
-    .cart_summary_title b {
-        color: white;
-    }
-
-    .tag_reviews {
-        display: flex;
-        justify-content: space-between;
-        border-bottom: #456 1px solid;
-        color: #fff;
-        font-size: 14px;
-        margin-bottom: 20px;
-        margin-top: 30px;
-    }
-
-    .review_item {
-        display: flex;
-        padding: 10px;
-        color: #9ab;
-    }
-
-    .rating_green {
-        color: #00e054;
-    }
-
-    .review_item img {
-        display: block;
-        width: 40px;
-        height: 40px;
-        border-radius: 20px;
-    }
-
-    .title_review {
-        flex: 9;
-    }
+  .crew_people a:hover {
+    color: #fff;
+    cursor: pointer;
+  }
 
 
-    .comment {
-        margin: 12px 0;
-    }
+  .cart_summary {
+    width: 100%;
+    display: flex;
+    background-color: #202830;
+    border-radius: 3px;
+    overflow: hidden;
+  }
 
-    .like_link {
-        display: flex;
-        align-items: stretch;
-        font-size: 14px;
-        font-weight: 600;
-    }
+  .cart_summary img {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    flex-shrink: 0;
+    min-width: 160px;
+    width: 28.07017544%;
+  }
 
-    .last_item {
-        border: none !important;
-    }
+  .cart_summary_title {
+    font-size: 14px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    color: #9ab;
+  }
 
-    .film_list, .story {
-        display: flex;
-        padding: 10px 10px 10px 0;
-    }
+  .cart_summary_title b {
+    color: white;
+  }
 
-    .image_form {
-        box-shadow: inset 0 0 1px #def;
-        height: 156px;
-        width: 104px;
-        margin-right: 9px;
-        border-radius: 4px;
-    }
+  .tag_reviews {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: #456 1px solid;
+    color: #fff;
+    font-size: 14px;
+    margin-bottom: 20px;
+    margin-top: 30px;
+  }
 
-    .image_form:hover {
-        border: #00e054 2px solid;
-    }
+  .review_item {
+    display: flex;
+    padding: 10px;
+    color: #9ab;
+  }
 
-    .story_item {
-        position: relative;
-        width: 72px;
-        text-align: center;
-        height: 72px;
-        margin-right: 12px;
-        cursor: pointer;
-    }
+  .rating_green {
+    color: #00e054;
+  }
 
-    .story_item img {
-        width: 72px;
-        height: 100%;
-        border-radius: 72px;
-    }
+  .review_item img {
+    display: block;
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+  }
 
-    .populer_list_item {
-        display: flex;
-        flex-direction: row;
-        padding: 10px 0 16px 0;
-        border-bottom: 1px solid #456;
-        color: #9ab;
-        font-size: 14px;
-    }
+  .title_review {
+    flex: 9;
+  }
 
-    .populer_list_content {
-        padding: 5px 10px;
-    }
 
-    .populer_list_content .img_user {
-        height: 18px;
-        width: 18px;
-        border-radius: 9px;
-    }
-    .watch_panel {
-        width: 230px;
-        color: #9ab;
-    }
+  .comment {
+    margin: 12px 0;
+  }
 
-    .watch_header {
-        align-items: center;
-        background: #242c34;
-        display: flex;
-        padding: 8px 10px 9px;
-        font-size: 13px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        border-top-right-radius: 4px;
-        border-top-left-radius: 4px;
-    }
+  .like_link {
+    display: flex;
+    align-items: stretch;
+    font-size: 14px;
+    font-weight: 600;
+  }
 
-    .watch_header a {
-        text-decoration: none;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
+  .last_item {
+    border: none !important;
+  }
 
-    .watch_header_title {
-        font-weight: 200;
-    }
+  .film_list, .story {
+    display: flex;
+    padding: 10px 10px 10px 0;
+  }
 
-    .services {
-        border: 1px solid #456;
-        padding: 8px;
-        font-size: 12px;
-        display: flex;
-        align-items: center;
-    }
-    .services img {
-        width: 24px;
-        height: 24px;
-        border-radius: 10px;
-    }
+  .image_form {
+    box-shadow: inset 0 0 1px #def;
+    height: 156px;
+    width: 104px;
+    margin-right: 9px;
+    border-radius: 4px;
+  }
 
-    .services_title {
-        margin: 0 8px;
-        text-decoration: none;
-    }
+  .image_form:hover {
+    border: #00e054 1px solid;
+  }
 
-    .services_title:hover {
-        color: #fff;
-    }
+  .story_item {
+    position: relative;
+    width: 72px;
+    text-align: center;
+    height: 72px;
+    margin-right: 12px;
+    cursor: pointer;
+  }
 
-    .services_option {
-        font-size: 10px;
-        padding: 4px;
-        border-radius: 2px;
-        background-color: #283038;
-        text-decoration: none;
-    }
+  .story_item img {
+    width: 72px;
+    height: 100%;
+    border-radius: 72px;
+  }
 
-    .services_option:hover {
-        background-color: #fff;
-    }
+  .populer_list_item {
+    display: flex;
+    flex-direction: row;
+    padding: 10px 0 16px 0;
+    border-bottom: 1px solid #456;
+    color: #9ab;
+    font-size: 14px;
+  }
 
-    .other_message {
-        border-bottom: 1px solid #456;
-        border-left: 1px solid #456;
-        border-right: 1px solid #456;
-        padding: 8px;
-    }
+  .populer_list_content {
+    padding: 5px 10px;
+  }
 
-    .other_message a {
-        text-decoration: none;
-        font-size: 12px;
-    }
+  .populer_list_content .img_user {
+    height: 18px;
+    width: 18px;
+    border-radius: 9px;
+  }
 
-    .other_message .pro {
-        padding: 1px 3px;
-        border-radius: 2px;
-        background-color: #ee7000;
-        color: #fff;
-    }
-    .other_message a:hover {
-        color: #40bcf4;
-    }
+  .watch_panel {
+    width: 230px;
+    color: #9ab;
+  }
 
-    .all_services {
-        padding: 8px;
-        display: flex;
-        justify-content: space-between;
-        font-size: 12px;
-        border-bottom: 1px solid #456;
-        border-left: 1px solid #456;
-        border-right: 1px solid #456;
-        border-bottom-left-radius: 4px;
-        border-bottom-right-radius: 4px;
-    }
-    .all_services a {
-        text-decoration: none;
-    }
+  .watch_header {
+    align-items: center;
+    background: #242c34;
+    display: flex;
+    padding: 8px 10px 9px;
+    font-size: 13px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top-right-radius: 4px;
+    border-top-left-radius: 4px;
+  }
 
-    .all_services > .all {
-        color: #40bcf4;
-    }
+  .watch_header a {
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 
-    .justwatch:hover {
-        color: #f7ce3c;
-    }
+  .watch_header_title {
+    font-weight: 200;
+  }
+
+  .services {
+    border: 1px solid #456;
+    padding: 8px;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+  }
+
+  .services img {
+    width: 24px;
+    height: 24px;
+    border-radius: 10px;
+  }
+
+  .services_title {
+    margin: 0 8px;
+    text-decoration: none;
+  }
+
+  .services_title:hover {
+    color: #fff;
+  }
+
+  .services_option {
+    font-size: 10px;
+    padding: 4px;
+    border-radius: 2px;
+    background-color: #283038;
+    text-decoration: none;
+  }
+
+  .services_option:hover {
+    background-color: #fff;
+  }
+
+  .other_message {
+    border-bottom: 1px solid #456;
+    border-left: 1px solid #456;
+    border-right: 1px solid #456;
+    padding: 8px;
+  }
+
+  .other_message a {
+    text-decoration: none;
+    font-size: 12px;
+  }
+
+  .other_message .pro {
+    padding: 1px 3px;
+    border-radius: 2px;
+    background-color: #ee7000;
+    color: #fff;
+  }
+
+  .other_message a:hover {
+    color: #40bcf4;
+  }
+
+  .all_services {
+    padding: 8px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    border-bottom: 1px solid #456;
+    border-left: 1px solid #456;
+    border-right: 1px solid #456;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+  }
+
+  .all_services a {
+    text-decoration: none;
+  }
+
+  .all_services > .all {
+    color: #40bcf4;
+  }
+
+  .justwatch:hover {
+    color: #f7ce3c;
+  }
 }
+
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+

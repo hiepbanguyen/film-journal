@@ -11,37 +11,41 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import baseAPI from "../../apis/baseAPI";
 import { useSnackbar } from "notistack";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
 import { Copyright } from "../common/layout/footer.jsx";
 import { HeaderHeight } from "../common/layout/header/index.jsx";
 import UserStore from "../../store/user.store.js";
+import useAxios from "axios-hooks";
+import CircularProgress from "@mui/material/CircularProgress";
 
 const theme = createTheme();
 
 export default function SignUp() {
   const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar();
-  const [errorUsername, setErrorUsername] = React.useState(false);
-  const [errorEmail, setErrorEmail] = React.useState(false);
-  const [errorPassword, setErrorPassword] = React.useState(false);
+  const [errorUsername, setErrorUsername] = React.useState("");
+  const [errorEmail, setErrorEmail] = React.useState("");
+  const [errorPassword, setErrorPassword] = React.useState("");
   const [errorMsg, setErrorMsg] = React.useState("");
+  const [{ loading }, signUp] = useAxios({ url: "Users/signup", method: "POST" }, { manual: true });
 
   useEffect(() => {
-    if (UserStore.isLoggedIn) navigate("/");
-  }, [UserStore.isLoggedIn]);
+    if (UserStore.isLoadedFromLocal && UserStore.isLoggedIn) navigate("/");
+  }, [UserStore.isLoadedFromLocal, UserStore.isLoggedIn]);
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
+
     if (validateFields(data)) {
-      baseAPI
-        .postAsync(`Users/signup`, {
+      await signUp({
+        data: {
           UserName: data.get("userName"),
           Email: data.get("email"),
           Password: data.get("password"),
-        })
+        },
+      })
         .then((res) => {
           if (res) {
             enqueueSnackbar("Register successfully, please confirm your email to sign in", { variant: "success" });
@@ -56,22 +60,57 @@ export default function SignUp() {
   };
 
   const validateFields = (data) => {
-    const emailAccepted = validateEmail(data.get("email"));
-    const usernameFilled = data.get("userName");
-    const passwordFilled = data.get("password");
-    setErrorEmail(!emailAccepted);
+    setErrorUsername("");
+    setErrorEmail("");
+    setErrorPassword("");
 
-    setErrorUsername(!usernameFilled);
+    let emailAccepted = false;
+    if (data.get("email")) {
+      if (validateEmail(data.get("email"))) {
+        emailAccepted = true;
+      } else {
+        setErrorEmail("Invalid email!");
+      }
+    } else {
+      setErrorEmail("Email required!");
+    }
 
-    setErrorPassword(!passwordFilled);
+    let usernameAccepted = false;
+    if (data.get("userName")) {
+      if (validateUsername(data.get("userName"))) {
+        usernameAccepted = true;
+      } else {
+        setErrorUsername("Invalid username, should contain only letters, numbers, underscores and dots");
+      }
+    } else {
+      setErrorUsername("Username required!");
+    }
 
-    return emailAccepted && usernameFilled && passwordFilled;
+    let passwordAccepted = false;
+    if (data.get("password")) {
+      if (validatePassword(data.get("password"))) {
+        passwordAccepted = true;
+      } else {
+        setErrorPassword("Password must be at least 8 characters");
+      }
+    } else {
+      setErrorPassword("Password required!");
+    }
+
+    return emailAccepted && usernameAccepted && passwordAccepted;
   };
 
+  const validateUsername = (username) => {
+    return new RegExp(/^[a-zA-Z0-9._]+$/).test(username);
+  };
   const validateEmail = (email) => {
     return email.match(
       /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
     );
+  };
+
+  const validatePassword = (pass) => {
+    return pass.length >= 8;
   };
 
   return (
@@ -104,20 +143,20 @@ export default function SignUp() {
                   id="userName"
                   label="Username"
                   autoFocus
-                  error={errorUsername}
-                  helperText={errorUsername && "Username is required."}
+                  error={!!errorUsername}
+                  helperText={errorUsername}
                 />
               </Grid>
               <Grid item xs={12}>
                 <TextField
                   required
-                  error={errorEmail}
                   fullWidth
                   id="email"
                   label="Email"
                   name="email"
                   autoComplete="email"
-                  helperText={errorEmail && "Email is invalid."}
+                  error={!!errorEmail}
+                  helperText={errorEmail}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -129,8 +168,8 @@ export default function SignUp() {
                   type="password"
                   id="password"
                   autoComplete="new-password"
-                  error={errorPassword}
-                  helperText={errorPassword && "Password is required."}
+                  error={!!errorPassword}
+                  helperText={errorPassword}
                 />
               </Grid>
             </Grid>
@@ -144,6 +183,7 @@ export default function SignUp() {
             )}
             <Button type="submit" fullWidth variant="contained" sx={{ mt: 1, mb: 2 }}>
               Sign Up
+              {loading && <CircularProgress size={20} sx={{ position: "absolute", left: "61%", color: "#fff" }} />}
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>

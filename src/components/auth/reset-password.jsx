@@ -61,8 +61,8 @@ export default function ResetPassword() {
   };
 
   useEffect(() => {
-    if (UserStore.isLoggedIn) navigate("/");
-  }, [UserStore.isLoggedIn]);
+    if (UserStore.isLoadedFromLocal && UserStore.isLoggedIn) navigate("/");
+  }, [UserStore.isLoadedFromLocal, UserStore.isLoggedIn]);
 
   return (
     <ThemeProvider theme={theme}>

@@ -1,5 +1,5 @@
 import { Box, Button, Divider, Grid, Typography } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import PaginationBase from "../common/pagination-base.jsx";
 import useAxios from "axios-hooks";
 import { Loading } from "../common/loading.jsx";
@@ -21,7 +21,6 @@ export default function ReviewCommentSection(props) {
       pageSize: PageSize,
       pageIndex: pageIdx,
     },
-    useCache: false,
   });
   const [{}, postComment] = useAxios(
     {
@@ -31,14 +30,14 @@ export default function ReviewCommentSection(props) {
     { manual: true },
   );
 
-  useEffect(() => {
+  React.useEffect(() => {
     // if (data) console.log(data);
     if (!loading) {
       setComments(data?.Data ?? []);
     }
   }, [loading]);
 
-  useEffect(() => {
+  React.useEffect(() => {
     refetchComments();
   }, [pageIdx, reviewId]);
 

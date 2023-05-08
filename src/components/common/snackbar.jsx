@@ -4,7 +4,7 @@ const MAX_SNACK = 3;
 const AUTO_HIDE_DURATION = 3000;
 const POSITION = {
   vertical: "top",
-  horizontal: "right",
+  horizontal: "left",
 };
 
 export default function NotistackWrapper({ children }) {

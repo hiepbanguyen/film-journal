@@ -14,7 +14,7 @@ export default function SearchPage() {
   const { searchParams } = useParams();
 
   return (
-    <Container sx={{ mt: 10, color: "#9ab" }}>
+    <Container sx={{ my: 10, color: "#9ab" }}>
       <Grid container spacing={{ xs: 2, sm: 5 }}>
         <Grid item xs={12} sm={4}>
           <Typography variant={"h6"} mb={1} color={"#fff"} fontWeight={600}>

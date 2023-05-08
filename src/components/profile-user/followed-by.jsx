@@ -27,8 +27,8 @@ export default function GroupAvatars(props) {
       <Typography fontSize={"inherit"} ml={1}>
         {"Followed by "}
         {followers.Total <= 3
-          ? followers.List.map((i) => i.FullName ?? i.UserName).join(", ")
-          : followers.List.map((i) => i.FullName ?? i.UserName).join(", ") + " and more"}
+          ? followers.List.map((i) => i.Fullname ?? i.UserName).join(", ")
+          : followers.List.map((i) => i.Fullname ?? i.UserName).join(", ") + " and more"}
       </Typography>
     </Box>
   );

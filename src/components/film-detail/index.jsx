@@ -8,30 +8,92 @@ import RelatedFilms from "./related-films.jsx";
 import SimilarFilms from "./similar-films.jsx";
 import PosterAndDescription from "./poster-and-description.jsx";
 import ActionBox from "./action-box.jsx";
-import TabsReviews from "./tabs-reviews.jsx";
+import { TabsReviews } from "./tabs-reviews.jsx";
 import CompiledRatings from "../common/compiled-ratings.jsx";
+import { useParams } from "react-router-dom";
+import { observer } from "mobx-react-lite";
+import UserStore from "../../store/user.store.js";
+import useAxios from "axios-hooks";
+import { Loading } from "../common/loading.jsx";
+import { formatCompactNumber } from "../../utils/number.js";
+import { PageNotExist } from "../common/page-not-exist";
+import { FilmTrivia } from "./trivia.jsx";
 
-const film_detail = {
-  title: "Avatar: The Way of Water",
-  releasedYear: "2022",
-  runtime: "190",
-  director: "James Cameron",
-  description:
-    "Set more than a decade after the events of the first film, learn the story of the Sully family (Jake, Neytiri, and their kids), the trouble that follows them, the lengths they go to keep each other safe, the battles they fight to stay alive, and the tragedies they endure",
-  tagline: "Return to Pandora.",
-  genres: ["Drama", "Action", "Fantasy"],
-  image:
-    "https://a.ltrbxd.com/resized/film-poster/6/3/0/5/8/63058-avatar-the-way-of-water-0-230-0-345-crop.jpg?v=37a1014065",
-  banner:
-    "https://a.ltrbxd.com/resized/sm/upload/rv/ns/3w/jz/679F452B-D31A-4793-838D-F374A7C34D98-1200-1200-675-675-crop-000000.jpg?v=704ba56f3d",
-  likes: 256000,
-  lists: 139000,
-  views: 749000,
-};
+const ActionPanel = observer(({ filmTitle, releasedYear }) => (
+  <>{UserStore.isLoggedIn ? <ActionBox filmTitle={filmTitle} releasedYear={releasedYear} /> : <SigninAndShare />}</>
+));
 
 const FilmDetail = () => {
-  // console.log("filmdetail render");
-  const loggedIn = true;
+  const { filmId } = useParams();
+  const [{ data, loading }] = useAxios(`Films/${filmId}/Detail`);
+  const cachedData = React.useMemo(() => {
+    if (!data) return;
+    const cached = { ...data };
+    const more_detail = [];
+    if (data?.Credits) {
+      const cast = [];
+      const crew = new Map();
+      const credits = JSON.parse(String(data.Credits).replace("\\", ""));
+      credits.forEach((i) => {
+        if (i.known_for_department === "Acting") {
+          cast.unshift(i);
+        } else {
+          const job = i.job === "NULL" ? "Crew" : i.job;
+          crew.set(job, crew.has(job) ? [...crew.get(job), i.name] : [i.name]);
+        }
+      });
+      cached.Cast = cast.map((i) => ({ name: i.name, character: i.character_, avatar: i.poster_path }));
+      cached.Crew = Array.from(crew);
+      delete cached.Credits;
+    }
+    if (data?.Genres) {
+      const genres = JSON.parse(data.Genres.replace("\\", ""));
+      delete cached.Genres;
+      cached.Genres = genres.map((i) => i.name);
+    }
+    if (data?.Status) {
+      more_detail.push(["Status", [data.Status]]);
+      delete cached.Status;
+    }
+    if (data?.Trailer) {
+      more_detail.push(["Trailer", [data.Trailer]]);
+      delete cached.Trailer;
+    }
+    if (data?.Homepage) {
+      more_detail.push(["Homepage", [data.Homepage]]);
+      delete cached.Homepage;
+    }
+    if (data?.Budget) {
+      more_detail.push(["Budget", [`${formatCompactNumber(Number(data.Budget))} USD`]]);
+      delete cached.Budget;
+    }
+    if (data?.Revenue) {
+      more_detail.push(["Revenue", [`${formatCompactNumber(Number(data.Revenue))} USD`]]);
+      delete cached.Revenue;
+    }
+    if (data?.Production_companies) {
+      const productionCompanies = JSON.parse(data.Production_companies.replace("\\", ""));
+      more_detail.push(["Production companies", [...productionCompanies.slice(0, 5).map((i) => i.name)]]);
+      delete cached.Production_companies;
+    }
+    if (data?.Production_countries) {
+      const productionCountries = JSON.parse(data.Production_countries.replace("\\", ""));
+      more_detail.push(["Production countries", [...productionCountries.slice(0, 5).map((i) => i.name)]]);
+      delete cached.Production_countries;
+    }
+    if (data?.Spoken_languages) {
+      const spokenLanguages = JSON.parse(data.Spoken_languages.replace("\\", ""));
+      more_detail.push(["Spoken languages", [...spokenLanguages.slice(0, 5).map((i) => i.english_name)]]);
+      delete cached.Spoken_languages;
+    }
+    cached.More_detail = more_detail;
+    // console.log(cached);
+    return cached;
+  }, [filmId, loading]);
+  // console.log(cachedData);
+
+  if (loading) return <Loading paddingY={15} />;
+  if (!loading && !data) return <PageNotExist />;
   return (
     <Container maxWidth={"lg"}>
       <Box position={"relative"}>
@@ -49,7 +111,7 @@ const FilmDetail = () => {
             zIndex: -2,
           }}
           alt="The house from the offer."
-          src={film_detail.banner}
+          src={data?.Backdrop_path}
         />
         <Box
           width={{ xs: "95vw", md: "80vw", lg: "100%" }}
@@ -69,21 +131,25 @@ const FilmDetail = () => {
       </Box>
       <Container className="film_detail_page" sx={{ position: "relative", color: "#fff" }}>
         <Box pt={{ xs: 20, sm: 32, lg: 40 }} gap={5} mx={{ md: 10 }}>
-          <PosterAndDescription {...film_detail} />
+          <PosterAndDescription {...cachedData} filmId={filmId} />
           <Box display={"flex"} flexDirection={{ xs: "column-reverse", sm: "row" }} gap={5}>
             <Box flex={2}>
-              <TabsCastNCrew />
+              <TabsCastNCrew cast={cachedData?.Cast} crew={cachedData?.Crew} detail={cachedData?.More_detail} />
             </Box>
             <Stack flex={1} pt={2} gap={4} sx={{ mt: 1.2 }}>
-              <CompiledRatings />
-              {loggedIn ? <ActionBox /> : <SigninAndShare />}
+              <CompiledRatings stats={cachedData?.RateStats} />
+              <ActionPanel
+                filmTitle={cachedData?.Original_title}
+                releasedYear={cachedData?.Release_date ? new Date(cachedData.Release_date).getFullYear() : ""}
+              />
             </Stack>
           </Box>
           <Box pb={5}>
-            <TabsReviews />
-            <RelatedFilms />
-            <SimilarFilms />
-            <MentionedInArticles />
+            <TabsReviews filmId={filmId} />
+            <RelatedFilms filmId={filmId} />
+            <SimilarFilms filmId={filmId} />
+            <MentionedInArticles data={cachedData?.MentionedInArticles} />
+            <FilmTrivia />
           </Box>
         </Box>
       </Container>

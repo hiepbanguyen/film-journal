@@ -5,8 +5,8 @@ import React from "react";
 import { EditButton } from "../common/edit-button.jsx";
 import { Link } from "react-router-dom";
 import moment from "moment";
-import { LikeButton } from "../common/like-button.jsx";
 import { estimatedTimeElapsed } from "../../utils/time.js";
+import { LikeButton } from "../common/like-button.jsx";
 
 function LikedReview(props) {
   const { link, rating, avatar } = props;
@@ -64,7 +64,7 @@ const ReviewContent = (props) => {
       </Typography>
       {/* Likes */}
       <Box my={1} display={"flex"} alignItems={"center"} fontWeight={600} fontSize={14} gap={1}>
-        <LikeButton likes={data.TotalLike ?? 0} type={"review"} id={data?.ReviewID} refetchDetail={refetchDetail} />
+        <LikeButton likes={data.LikesCount ?? 0} type={"review"} id={data?.ReviewID} refetchDetail={refetchDetail} />
       </Box>
       {/* User like related review */}
       <Box
@@ -83,7 +83,7 @@ const ReviewContent = (props) => {
             key={index}
             link={`/u/${i?.UserName}/reviews/${i?.ReviewID}`}
             avatar={i.Avatar ?? ""}
-            rating={i.Rate ?? 0}
+            rating={i.Score ?? 0}
           />
         ))}
       </Box>
@@ -182,7 +182,7 @@ export default function ReviewDetailMain(props) {
               >
                 <Rating
                   readOnly
-                  value={data.Rate ?? 0}
+                  value={data.Score ?? 0}
                   sx={{
                     fontSize: {
                       xs: 18,

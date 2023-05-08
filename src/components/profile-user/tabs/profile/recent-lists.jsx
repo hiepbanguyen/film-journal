@@ -33,7 +33,7 @@ export const RecentLists = ({ username, data }) => {
               <Typography fontSize={14} fontWeight={"bold"}>
                 {i?.Total ?? 0} films
               </Typography>
-              <Typography>{i?.Title ?? ""}</Typography>
+              <Typography>{i?.Title?.length > 34 ? i.Title.slice(0, 34) + "..." : i.Title}</Typography>
             </Box>
           </Box>
         </Link>

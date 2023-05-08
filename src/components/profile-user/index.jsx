@@ -3,7 +3,7 @@ import { styled } from "@mui/material/styles";
 import { Avatar, Box, Button, Typography } from "@mui/material";
 import Container from "@mui/material/Container";
 import styles from "./profile.module.scss";
-import GroupAvatars from "./avatar-group.jsx";
+import GroupAvatars from "./followed-by.jsx";
 import { ProfileStats } from "./profile-stats.jsx";
 import { NavLink, Outlet, useNavigate, useParams } from "react-router-dom";
 import UserStore from "../../store/user.store";
@@ -12,6 +12,7 @@ import useAxios from "axios-hooks";
 import { PageNotExist } from "../common/page-not-exist.jsx";
 import { Loading } from "../common/loading.jsx";
 import defaultUserBanner from "../../assets/img/default-user-banner.png";
+import { useSnackbar } from "notistack";
 
 const Root = styled("div")({
   flexGrow: 1,
@@ -31,7 +32,7 @@ const profileTabs = [
   { label: "Info and Security", href: "edit-profile" },
 ];
 
-const ProfileNavigation = observer(() => {
+const ProfileNavigation = observer(({ username }) => {
   return (
     <Box
       sx={{
@@ -43,7 +44,10 @@ const ProfileNavigation = observer(() => {
         justifyContent: "center",
       }}
     >
-      {(UserStore.isLoggedIn ? profileTabs : profileTabs.filter((i) => i.href !== "edit-profile")).map((i, idx) => (
+      {(UserStore.isLoggedIn && UserStore.user.UserName === username
+        ? profileTabs
+        : profileTabs.filter((i) => i.href !== "edit-profile")
+      ).map((i, idx) => (
         <NavLink
           className={styles.tabs}
           to={`${i.href}`}
@@ -65,32 +69,62 @@ const ProfileNavigation = observer(() => {
   );
 });
 
-const FollowButton = observer(({ username }) => {
+const FollowButton = ({ username, followed, targetUserId }) => {
   const navigate = useNavigate();
+  const [following, setFollowing] = React.useState(followed);
+  const { enqueueSnackbar } = useSnackbar();
+  const [{}, followUser] = useAxios({ method: "POST" }, { manual: true });
 
   const handleFollow = async () => {
     if (!UserStore.isLoggedIn) {
       navigate("/sign-in");
+      return;
+    }
+    if (following) {
+      followUser({ url: `Users/Follow?userID=${targetUserId}&follow=false` })
+        .then((res) => {
+          if (res?.data) setFollowing(false);
+        })
+        .catch((err) => {
+          enqueueSnackbar(err.response.data.userMsg, { variant: "error" });
+        });
+    } else {
+      followUser({ url: `Users/Follow?userID=${targetUserId}&follow=true` })
+        .then((res) => {
+          if (res?.data) setFollowing(true);
+        })
+        .catch((err) => {
+          enqueueSnackbar(err.response.data.userMsg, { variant: "error" });
+        });
     }
   };
   return (
     <>
       {UserStore.user?.UserName !== username && (
-        <Button onClick={handleFollow} variant="contained" sx={{ bgcolor: "#456", p: 0, py: 0.5, mt: 0.5 }}>
-          Follow
+        <Button
+          onClick={handleFollow}
+          variant="contained"
+          sx={{ bgcolor: following ? "#00c030" : "#456", px: 1, py: 0.5, mt: 0.5 }}
+        >
+          {following ? "Followed" : "Follow"}
         </Button>
       )}
     </>
   );
-});
+};
 const bannerPositionTop = { xs: -30, sm: -50, md: -80, lg: -100 };
 const avatarSize = 80;
 
-const ProfileUser = () => {
+const ProfileUser = observer(() => {
   const { username } = useParams();
 
   const [{ data, loading, error }, refetch] = useAxios(`Users/${username}/Profile-info`);
   // console.log(data);
+  React.useEffect(() => {
+    if (UserStore.isLoadedFromLocal) {
+      refetch();
+    }
+  }, [UserStore.isLoggedIn, UserStore.isLoadedFromLocal]);
 
   if (!loading && !data) return <PageNotExist />;
 
@@ -141,13 +175,13 @@ const ProfileUser = () => {
                     <Avatar sx={{ width: avatarSize, height: avatarSize }} alt="Remy Sharp" src={data.Avatar} />
                     <Box ml={1}>
                       <Typography variant="h5" color="#fff" pt={1}>
-                        {data.FullName ?? data.UserName}
+                        {data.FullName ? data.FullName : data.UserName}
                       </Typography>
-                      <FollowButton username={username} />
+                      <FollowButton username={username} followed={!!data?.IsFollowed} targetUserId={data?.UserID} />
                     </Box>
                   </Box>
                   <Typography variant={"body2"} color={"#9ab"} pt={1} pr={{ sm: 5, md: 10 }}>
-                    {data.Bio}
+                    {data?.Bio}
                   </Typography>
                 </Box>
                 <Box flex={4}>
@@ -157,11 +191,11 @@ const ProfileUser = () => {
               <GroupAvatars followers={data?.Followers} />
             </>
           )}
-          <ProfileNavigation />
+          <ProfileNavigation username={username} />
           <Outlet />
         </Container>
       </Root>
     </Container>
   );
-};
+});
 export default ProfileUser;

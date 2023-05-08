@@ -39,9 +39,9 @@ export const PopularLists = () => {
       <Typography variant={"body1"} color={"#fff"} textTransform={"uppercase"}>
         popular lists this week
       </Typography>
-      <Divider/>
+      <Divider />
       {loading ? (
-        <Loading paddingY={10}/>
+        <Loading paddingY={10} />
       ) : (
         <Grid container spacing={1}>
           {data.map((i, idx) => (
@@ -51,8 +51,8 @@ export const PopularLists = () => {
                 fullname={i.User?.FullName ?? ""}
                 username={i.User?.UserName ?? ""}
                 userAvatar={i.User?.Avatar ?? ""}
-                favoriteCount={i.TotalLike ?? 0}
-                commentCount={i.TotalComment ?? 0}
+                favoriteCount={i.LikesCount ?? 0}
+                commentCount={i.CommentsCount ?? 0}
                 posters={i.List}
                 listLink={`/u/${i.User?.UserName}/lists/${i.ListID}`}
               />
@@ -65,7 +65,7 @@ export const PopularLists = () => {
 };
 
 export default function ListPreview(props) {
-  const { title, username, fullname, userAvatar, favoriteCount, commentCount, posters, listLink } = props;
+  const { title, username, fullname, userAvatar, favoriteCount, commentCount, posters, listLink, notShowUser } = props;
   return (
     <Box
       mt={2}
@@ -78,31 +78,33 @@ export default function ListPreview(props) {
       })}
     >
       <Link to={listLink ?? ""}>
-        <FilmCardsStackedFive posters={posters}/>
+        <FilmCardsStackedFive posters={posters} />
         <Typography variant={"body1"} color={"#fff"} sx={{ ":hover": { color: "#00e8ff" } }} fontWeight={600}>
           {title}
         </Typography>
       </Link>
 
       <Box display={"flex"} gap={0.5} alignItems={"center"} my={1}>
-        <Box
-          component={Link}
-          to={`/u/${username}`}
-          display={"flex"}
-          gap={0.5}
-          alignItems={"center"}
-          sx={{ ":hover": { color: "#fff" } }}
-        >
-          <Avatar sx={{ width: 25, height: 25 }} src={userAvatar}/>
-          <Typography variant={"body2"} ml={0.5} mr={1}>
-            {fullname ?? username}
-          </Typography>
-        </Box>
-        <FavoriteIcon fontSize={"small"}/>
+        {!notShowUser && (
+          <Box
+            component={Link}
+            to={`/u/${username}`}
+            display={"flex"}
+            gap={0.5}
+            alignItems={"center"}
+            sx={{ ":hover": { color: "#fff" } }}
+          >
+            <Avatar sx={{ width: 25, height: 25 }} src={userAvatar} />
+            <Typography variant={"body2"} ml={0.5} mr={1}>
+              {fullname ? fullname : username}
+            </Typography>
+          </Box>
+        )}
+        <FavoriteIcon fontSize={"small"} />
         <Typography variant={"body2"} ml={0.5} mr={1}>
           {favoriteCount}
         </Typography>
-        <ChatBubbleIcon fontSize={"small"}/>
+        <ChatBubbleIcon fontSize={"small"} />
         <Typography variant={"body2"} ml={0.5}>
           {commentCount}
         </Typography>

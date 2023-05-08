@@ -5,23 +5,40 @@ import AddIcon from "@mui/icons-material/Add.js";
 import * as React from "react";
 import { useNavigate } from "react-router-dom";
 import UserStore from "../../store/user.store.js";
+import useAxios from "axios-hooks";
+import { useSnackbar } from "notistack";
 
-export const FollowButton = ({ followed, targetUsername }) => {
+export const FollowButton = ({ followed, targetUsername, targetUserId }) => {
   const navigate = useNavigate();
   const [following, setFollowing] = React.useState(!!followed);
+  const [{}, followUser] = useAxios({ method: "POST" }, { manual: true });
+  const { enqueueSnackbar } = useSnackbar();
 
   const handleFollow = () => {
     if (!UserStore.isLoggedIn) {
       navigate("/sign-in");
       return;
     }
-    setFollowing(true);
+    followUser({ url: `Users/Follow?userID=${targetUserId}&follow=true` })
+      .then((res) => {
+        if (res?.data) setFollowing(true);
+      })
+      .catch((err) => {
+        enqueueSnackbar(err.response.data.userMsg, { variant: "error" });
+      });
   };
 
   const handleUnfollow = () => {
-    setFollowing(false);
+    followUser({ url: `Users/Follow?userID=${targetUserId}&follow=false` })
+      .then((res) => {
+        if (res?.data) setFollowing(false);
+      })
+      .catch((err) => {
+        enqueueSnackbar(err.response.data.userMsg, { variant: "error" });
+      });
   };
 
+  if (UserStore.isLoggedIn && UserStore.user.UserName === targetUsername) return <></>;
   return (
     <>
       {following ? (

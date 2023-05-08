@@ -1,10 +1,9 @@
-import { Box, Typography } from "@mui/material";
 import moment from "moment";
 
-export default function Timestamp(props) {
+export default function Timestamp({ noSeparator, date }) {
   return (
     <>
-      {!props.noSeparator ? <span style={{ marginInline: 10 }}>|</span> : <></>}
+      {!noSeparator ? <span style={{ marginInline: 10 }}>|</span> : <></>}
       <span
         style={{
           fontFamily: "Segoe UI, Courier, Times New Roman",
@@ -12,7 +11,7 @@ export default function Timestamp(props) {
           fontWeight: 350,
         }}
       >
-        {moment(props.date).format("DD MMM YYYY")}
+        {moment(date).format("DD MMM YYYY")}
       </span>
     </>
   );

@@ -6,6 +6,7 @@ import useAxios from "axios-hooks";
 import SearchForm from "./search-form.jsx";
 import { Loading } from "./loading.jsx";
 
+const DefaultPageSize = 48;
 export const PaginatedFilmsGrid = ({ fetchUrl, children, pageSize }) => {
   const [filters, setFilters] = useState(null);
   const [pageIdx, setPageIdx] = React.useState(1);
@@ -13,7 +14,7 @@ export const PaginatedFilmsGrid = ({ fetchUrl, children, pageSize }) => {
     url: fetchUrl,
     method: "POST",
     data: {
-      pageSize: pageSize ?? 48,
+      pageSize: pageSize ?? DefaultPageSize,
       pageIndex: pageIdx,
       ...filters,
     },
@@ -26,18 +27,18 @@ export const PaginatedFilmsGrid = ({ fetchUrl, children, pageSize }) => {
   const onSubmit = (values) => {
     setPageIdx(1);
     setFilters(values);
-    fetchFilms({
-      data: {
-        pageSize: PageSize,
-        pageIndex: pageIdx,
-        ...filters,
-      },
-    });
+    // fetchFilms({
+    //   data: {
+    //     pageSize: pageSize ?? DefaultPageSize,
+    //     pageIndex: pageIdx,
+    //     ...filters,
+    //   },
+    // });
   };
 
   const handleChangePage = (newPage) => {
     setPageIdx(newPage);
-    fetchFilms();
+    // fetchFilms();
   };
 
   return (

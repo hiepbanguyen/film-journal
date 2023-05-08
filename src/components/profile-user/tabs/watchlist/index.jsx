@@ -1,9 +1,9 @@
 import * as React from "react";
-import { Box, Divider, Typography } from "@mui/material";
+import { Box } from "@mui/material";
 import { useParams } from "react-router-dom";
-import { PaginatedFilmsGrid } from "../../../common/paginated-films-grid.jsx";
+import { WatchlistFilmsGrid } from "./films-grid.jsx";
 
-export const UserWatchList = (props) => {
+export const UserWatchList = () => {
   const { username } = useParams();
   return (
     <Box
@@ -11,12 +11,7 @@ export const UserWatchList = (props) => {
         marginTop: "32px",
       }}
     >
-      <PaginatedFilmsGrid fetchUrl={`Users/${username}/Profile/Watchlist`}>
-        <Typography textTransform={"uppercase"} mt={3}>
-          Watch List
-        </Typography>
-        <Divider />
-      </PaginatedFilmsGrid>
+      <WatchlistFilmsGrid fetchUrl={`Users/${username}/Profile/Watchlist`} username={username} />
     </Box>
   );
 };

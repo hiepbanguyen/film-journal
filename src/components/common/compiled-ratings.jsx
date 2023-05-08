@@ -3,23 +3,6 @@ import StarHalfIcon from "@mui/icons-material/StarHalf";
 import StarIcon from "@mui/icons-material/Star.js";
 import { useMemo } from "react";
 
-const compiledRatings = {
-  each: {
-    1: 10,
-    2: 0,
-    3: 15,
-    4: 342,
-    5: 100,
-    6: 203,
-    7: 121,
-    8: 500,
-    9: 22,
-    10: 11,
-  },
-  total: 1000,
-  avg: 3.9,
-};
-
 const RatingColumnMaxHeight = 100;
 
 const RatingColumn = (props) => {

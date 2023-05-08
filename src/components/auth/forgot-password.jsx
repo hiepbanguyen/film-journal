@@ -33,8 +33,8 @@ export default function ForgotPassword() {
   const [errorMsg, setErrorMsg] = React.useState("");
 
   useEffect(() => {
-    if (UserStore.isLoggedIn) navigate("/");
-  }, [UserStore.isLoggedIn]);
+    if (UserStore.isLoadedFromLocal && UserStore.isLoggedIn) navigate("/");
+  }, [UserStore.isLoadedFromLocal, UserStore.isLoggedIn]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
