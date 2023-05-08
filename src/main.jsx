@@ -223,11 +223,11 @@ const router = createBrowserRouter([
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
-    <ThemeProvider theme={theme}>
-      <NotistackWrapper>
-        <RouterProvider router={router} />
-      </NotistackWrapper>
-    </ThemeProvider>
-  </React.StrictMode>,
+  // <React.StrictMode>
+  <ThemeProvider theme={theme}>
+    <NotistackWrapper>
+      <RouterProvider router={router} />
+    </NotistackWrapper>
+  </ThemeProvider>,
+  // </React.StrictMode>,
 );

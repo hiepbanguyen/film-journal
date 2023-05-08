@@ -5,62 +5,21 @@ import Popover from "@mui/material/Popover";
 import Typography from "@mui/material/Typography";
 import { useNavigate } from "react-router-dom";
 import { estimatedTimeElapsed } from "../../../../utils/time.js";
+import useAxios from "axios-hooks";
+import { Loading } from "../../loading.jsx";
+import UserStore from "../../../../store/user.store.js";
 
-const exampleData = [
-  {
-    avatar: "https://a.ltrbxd.com/resized/avatar/upload/1/1/9/8/0/4/8/shard/avtr-0-48-0-48-crop.jpg?v=1e09b678c6",
-    username: "bahiep",
-    content: "liked your review of Avatar: The Way Of Water",
-    date: new Date(),
-    link: "/u/bahiepng/reviews/sca32",
-    seen: true,
-  },
-  {
-    avatar: "https://a.ltrbxd.com/resized/avatar/upload/1/1/9/8/0/4/8/shard/avtr-0-48-0-48-crop.jpg?v=1e09b678c6",
-    username: "bahiep",
-    content: "liked your review of Avatar: The Way Of Water",
-    date: new Date(),
-    link: "/u/bahiepng/reviews/sca32",
-    seen: true,
-  },
-  {
-    avatar: "https://a.ltrbxd.com/resized/avatar/upload/1/1/9/8/0/4/8/shard/avtr-0-48-0-48-crop.jpg?v=1e09b678c6",
-    username: "bahiep",
-    content: "liked your review of Avatar: The Way Of Water",
-    date: new Date(),
-    link: "/u/bahiepng/reviews/sca32",
-    seen: false,
-  },
-  {
-    avatar: "https://a.ltrbxd.com/resized/avatar/upload/1/1/9/8/0/4/8/shard/avtr-0-48-0-48-crop.jpg?v=1e09b678c6",
-    username: "bahiep",
-    content: "commented on your review of Avatar: The Way Of Water",
-    date: new Date(3424142),
-    link: "/u/bahiepng/reviews/sca32",
-    seen: false,
-  },
-  {
-    avatar: "https://a.ltrbxd.com/resized/avatar/upload/1/1/9/8/0/4/8/shard/avtr-0-48-0-48-crop.jpg?v=1e09b678c6",
-    username: "bahiep",
-    content: "commented on your review of Avatar: The Way Of Water",
-    date: new Date(34433),
-    link: "/u/bahiepng/reviews/sca32",
-    seen: false,
-  },
-  {
-    avatar: "https://a.ltrbxd.com/resized/avatar/upload/1/1/9/8/0/4/8/shard/avtr-0-48-0-48-crop.jpg?v=1e09b678c6",
-    username: "bahiep",
-    content: "commented on your review of Avatar: The Way Of Water",
-    date: new Date(),
-    link: "/u/bahiepng/reviews/sca32",
-    seen: true,
-  },
-];
 const Notification = (props) => {
-  const { avatar, username, content, date, link, seen } = props;
+  const { notiId, avatar, fullname, username, content, date, link, seen, refetchAllNotis } = props;
+  const [, markNotiSeen] = useAxios({ url: `Notification/${notiId}/MarkAsSeen`, method: "PUT" }, { manual: true });
   const navigate = useNavigate();
   const handleNotiClick = () => {
-    navigate(link);
+    markNotiSeen().then((res) => {
+      if (res?.data) {
+        navigate(link);
+        refetchAllNotis();
+      }
+    });
   };
 
   return (
@@ -72,21 +31,23 @@ const Notification = (props) => {
       my={1}
       p={1}
       sx={{
-        background: seen ? "rgba(255,255,255,0.2)" : "transparent",
+        background: !seen ? "rgba(255,255,255,0.2)" : "transparent",
         ":hover": {
           background: "rgba(255,255,255,0.1)",
           cursor: "pointer",
         },
-        color: seen ? "#fff" : "#ccc",
+        color: !seen ? "#fff" : "#ccc",
       }}
     >
       <Box display={"flex"} gap={1}>
         <Box>
           <Avatar src={avatar} alt={"user-avatar"} sx={{ width: 30, height: 30 }} />
-          <Typography fontSize={12}>{estimatedTimeElapsed(new Date(date))}</Typography>
+          <Typography fontSize={12} textAlign={"center"}>
+            {estimatedTimeElapsed(new Date(date))}
+          </Typography>
         </Box>
         <Typography fontSize={15}>
-          <strong>{username}</strong> {content}
+          <strong>{fullname ? fullname : username}</strong> {content}
         </Typography>
       </Box>
     </Box>
@@ -95,9 +56,48 @@ const Notification = (props) => {
 
 export default function NotiBox() {
   const [anchorEl, setAnchorEl] = React.useState(null);
+  // const [dataPerPage, setDataPerPage] = React.useState([]);
+  const [pageIndex, setPageIndex] = React.useState(1);
+  const [{ data, loading, error }, refetch] = useAxios({
+    url: "Notification/GetAll",
+    method: "POST",
+    data: {
+      pageSize: 9999,
+      pageIndex: 1,
+    },
+  });
+  const [, markAllNotiSeen] = useAxios({ url: `Notification/-1/MarkAsSeen`, method: "PUT" }, { manual: true });
+
+  React.useEffect(() => {
+    // if (data?.Data) {
+    //   setDataPerPage([...dataPerPage, ...data.Data]);
+    // }
+    //fetch notifications every 60 seconds
+    if (UserStore.isLoadedFromLocal && UserStore.isLoggedIn) {
+      refetch();
+      const interval = setInterval(() => {
+        refetch();
+      }, 60000);
+      return () => {
+        clearInterval(interval);
+      };
+    }
+  }, [UserStore.isLoadedFromLocal, UserStore.isLoggedIn]);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
+  };
+
+  const markAllNotiButton = () => {
+    markAllNotiSeen().then((res) => {
+      if (res?.data) {
+        refetch();
+      }
+    });
+  };
+
+  const refetchAllNotis = () => {
+    refetch();
   };
 
   const handleClose = () => {
@@ -118,7 +118,7 @@ export default function NotiBox() {
         }}
         onClick={handleClick}
       >
-        <Badge badgeContent={1} color="error">
+        <Badge badgeContent={data?.TotalUnseen} color="error">
           <NotificationsIcon />
         </Badge>
       </IconButton>
@@ -158,11 +158,31 @@ export default function NotiBox() {
       >
         <Box display={"flex"} flexWrap={"wrap"} justifyContent={"space-between"} alignItems={"center"}>
           <h3 style={{ margin: 2 }}>Notification</h3>
-          <Button sx={{ ":hover": { bgcolor: "rgba(255,255,255,0.2)" } }}>Mark all as read</Button>
+          <Button onClick={markAllNotiButton} sx={{ ":hover": { bgcolor: "rgba(255,255,255,0.2)" } }}>
+            Mark all as read
+          </Button>
         </Box>
-        {exampleData.map((i, idx) => (
-          <Notification key={idx} {...i} />
-        ))}
+        {loading ? (
+          <Loading paddingY={10} />
+        ) : (
+          <>
+            {data?.Data?.map((i, idx) => (
+              <Notification
+                key={idx}
+                avatar={i?.Sender?.Avatar}
+                username={i?.Sender?.UserName}
+                fullname={i?.Sender?.FullName}
+                notiId={i?.NotificationID}
+                content={i?.Content}
+                date={i?.Date}
+                link={i?.Link}
+                seen={i?.Seen}
+                refetchAllNotis={refetchAllNotis}
+              />
+            ))}
+            {pageIndex < data?.TotalPage && <Button onClick={() => setPageIndex(pageIndex + 1)}>Load more...</Button>}
+          </>
+        )}
       </Popover>
     </>
   );

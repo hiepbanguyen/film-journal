@@ -31,8 +31,8 @@ export default function SignUp() {
   const [{ loading }, signUp] = useAxios({ url: "Users/signup", method: "POST" }, { manual: true });
 
   useEffect(() => {
-    if (UserStore.isLoggedIn) navigate("/");
-  }, [UserStore.isLoggedIn]);
+    if (UserStore.isLoadedFromLocal && UserStore.isLoggedIn) navigate("/");
+  }, [UserStore.isLoadedFromLocal, UserStore.isLoggedIn]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();

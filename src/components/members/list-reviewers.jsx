@@ -29,8 +29,10 @@ export const ListReviewers = observer(() => {
     },
   });
   React.useEffect(() => {
-    refetch();
-  }, [UserStore.isLoggedIn]);
+    if (UserStore.isLoadedFromLocal) {
+      refetch();
+    }
+  }, [UserStore.isLoadedFromLocal, UserStore.isLoggedIn]);
 
   return (
     <>

@@ -22,7 +22,7 @@ export const UserEditProfile = observer(() => {
     if (UserStore.isLoadedFromLocal && !UserStore.isLoggedIn) {
       navigate("/u/" + username);
     }
-  }, [UserStore.isLoggedIn]);
+  }, [UserStore.isLoadedFromLocal, UserStore.isLoggedIn]);
 
   return (
     <Box sx={{ display: "flex", flexDirection: "column ", alignItems: "center" }}>

@@ -5,8 +5,8 @@ import React from "react";
 import { EditButton } from "../common/edit-button.jsx";
 import { Link } from "react-router-dom";
 import moment from "moment";
-import { LikeButton } from "../common/like-button.jsx";
 import { estimatedTimeElapsed } from "../../utils/time.js";
+import { LikeButton } from "../common/like-button.jsx";
 
 function LikedReview(props) {
   const { link, rating, avatar } = props;

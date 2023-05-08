@@ -53,15 +53,17 @@ const ReViewLikeWatchList = observer(({ filmTitle, releasedYear }) => {
   );
 
   useEffect(() => {
-    getUserStatus().then((res) => {
-      if (res?.data) {
-        const data = res?.data;
-        setReviewed(data?.Reviewed);
-        setLiked(data?.Liked);
-        setWatchlisted(data?.Watchlisted);
-      }
-    });
-  }, [UserStore.isLoggedIn]);
+    if (UserStore.isLoadedFromLocal) {
+      getUserStatus().then((res) => {
+        if (res?.data) {
+          const data = res?.data;
+          setReviewed(data?.Reviewed);
+          setLiked(data?.Liked);
+          setWatchlisted(data?.Watchlisted);
+        }
+      });
+    }
+  }, [UserStore.isLoadedFromLocal, UserStore.isLoggedIn]);
 
   const handleLikeFilm = () => {
     toggleLike().then((res) => {

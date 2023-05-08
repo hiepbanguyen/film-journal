@@ -37,7 +37,7 @@ const data = {
       ],
     },
     {
-      QuestionID: 1,
+      QuestionID: 2,
       question: "Who is the first black president?",
       answers: [
         {
@@ -97,7 +97,7 @@ const data = {
       ],
     },
   ],
-  Total: 4,
+  Total: 3,
 };
 
 const AnswerBox = ({ right, wrong, data }) => {

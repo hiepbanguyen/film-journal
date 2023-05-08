@@ -121,8 +121,10 @@ const ProfileUser = observer(() => {
   const [{ data, loading, error }, refetch] = useAxios(`Users/${username}/Profile-info`);
   // console.log(data);
   React.useEffect(() => {
-    refetch();
-  }, [UserStore.isLoggedIn]);
+    if (UserStore.isLoadedFromLocal) {
+      refetch();
+    }
+  }, [UserStore.isLoggedIn, UserStore.isLoadedFromLocal]);
 
   if (!loading && !data) return <PageNotExist />;
 
