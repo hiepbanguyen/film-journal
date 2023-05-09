@@ -4,33 +4,23 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import baseAPI from "../../apis/baseAPI";
 import { HeaderHeight } from "../common/layout/header/index.jsx";
 import UserStore from "../../store/user.store.js";
-
-function Copyright(props) {
-  return (
-    <Typography variant="body2" color="text.secondary" align="center" {...props}>
-      {"Copyright © "}
-      <Link to="">Your Website</Link>
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
+import useAxios from "axios-hooks";
 
 const theme = createTheme();
 
 export default function ForgotPassword() {
   const navigate = useNavigate();
   const [errorMsg, setErrorMsg] = React.useState("");
+  const [, fetch] = useAxios({ url: "Users/ForgotPassword" }, { manual: true });
 
   useEffect(() => {
     if (UserStore.isLoadedFromLocal && UserStore.isLoggedIn) navigate("/");
@@ -45,12 +35,11 @@ export default function ForgotPassword() {
     } else {
       setErrorMsg("");
     }
-    baseAPI
-      .getAsync(`Users/ForgotPassword`, {
-        params: {
-          email: data.get("email"),
-        },
-      })
+    fetch({
+      params: {
+        email: data.get("email"),
+      },
+    })
       .then((res) => {
         if (res) {
           navigate("/sign-in");

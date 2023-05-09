@@ -13,11 +13,11 @@ import Grid from "@mui/material/Grid";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import baseAPI from "../../apis/baseApi";
 import UserStore from "../../store/user.store.js";
 import { Copyright } from "../common/layout/footer.jsx";
 import { HeaderHeight } from "../common/layout/header/index.jsx";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline.js";
+import useAxios from "axios-hooks";
 
 const theme = createTheme();
 
@@ -28,6 +28,7 @@ export default function SignInSide() {
   const [errorEmail, setErrorEmail] = React.useState(false);
   const [errorPassword, setErrorPassword] = React.useState(false);
   const [errorMsg, setErrorMsg] = React.useState("");
+  const [, fetch] = useAxios({ url: "Users/login" }, { manual: true });
 
   useEffect(() => {
     if (UserStore.isLoggedIn) navigate("/");
@@ -41,13 +42,12 @@ export default function SignInSide() {
       return;
     }
 
-    baseAPI
-      .getAsync(`Users/login`, {
-        params: {
-          email: data.get("email"),
-          password: data.get("password"),
-        },
-      })
+    fetch({
+      params: {
+        email: data.get("email"),
+        password: data.get("password"),
+      },
+    })
       .then((res) => {
         if (res) {
           // set the user information in localStorage

@@ -5,10 +5,10 @@ import GridViewIcon from "@mui/icons-material/GridView";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import PaginationBase from "../../../common/pagination-base";
 import useAxios from "axios-hooks";
-import Enum from "../../../../apis/enums/Enum.js";
 import { Loading } from "../../../common/loading.jsx";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye.js";
 import { FollowButton } from "../../../common/follow-button.jsx";
+import { Enum } from "../../../members/list-reviewers.jsx";
 
 export default function ProfileFollowers() {
   const { username } = useParams();

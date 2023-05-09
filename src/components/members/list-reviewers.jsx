@@ -9,13 +9,24 @@ import TableRow from "@mui/material/TableRow";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import GridViewIcon from "@mui/icons-material/GridView";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import Enum from "../../apis/enums/Enum";
 import { Link } from "react-router-dom";
 import { FollowButton } from "../common/follow-button.jsx";
 import useAxios from "axios-hooks";
 import { Loading } from "../common/loading.jsx";
 import { observer } from "mobx-react-lite";
 import UserStore from "../../store/user.store.js";
+
+export const Enum = Object.freeze({
+  TypeUser: {
+    All: 0,
+    // Người mình đang theo dõi
+    Following: 1,
+    // Người đang theo dõi mình
+    Follower: 2,
+    // Người bị block
+    Blocked: 3,
+  },
+});
 
 export const ListReviewers = observer(() => {
   const [{ data, loading, error }, refetch] = useAxios({
