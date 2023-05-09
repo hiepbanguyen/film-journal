@@ -119,20 +119,6 @@ export default function ReviewDialog({ filmTitle, releasedYear, children }) {
                   <Typography>Rating</Typography>
                   <Rating size={"large"} onChange={onRatingChanged} />
                 </Box>
-                {/*<Box>*/}
-                {/*  <Typography>Like</Typography>*/}
-                {/*  <FavoriteIcon*/}
-                {/*    onClick={() => setLikedFilm(!likedFilm)}*/}
-                {/*    sx={{*/}
-                {/*      fontSize: 30,*/}
-                {/*      color: !likedFilm ? "#bcd" : "rgba(255, 89, 89, 1)",*/}
-                {/*      "& :hover": {*/}
-                {/*        cursor: "pointer",*/}
-                {/*        color: !likedFilm && "rgba(255, 89, 89, 0.7)",*/}
-                {/*      },*/}
-                {/*    }}*/}
-                {/*  />*/}
-                {/*</Box>*/}
               </Box>
             </Box>
             {error && (

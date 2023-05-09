@@ -149,7 +149,7 @@ const FilmDetail = () => {
             <RelatedFilms filmId={filmId} />
             <SimilarFilms filmId={filmId} />
             <MentionedInArticles data={cachedData?.MentionedInArticles} />
-            <FilmTrivia />
+            <FilmTrivia filmId={filmId} />
           </Box>
         </Box>
       </Container>

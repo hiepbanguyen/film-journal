@@ -1,4 +1,3 @@
-// import GroupWorkIcon from "@mui/icons-material/GroupWork";
 import Typography from "@mui/material/Typography";
 import { Box } from "@mui/material";
 import { Link } from "react-router-dom";
