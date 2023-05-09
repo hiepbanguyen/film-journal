@@ -3,102 +3,9 @@ import React from "react";
 import PaginationBase from "../common/pagination-base.jsx";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import CancelOutlinedIcon from "@mui/icons-material/CancelOutlined";
+import useAxios from "axios-hooks";
+import { Loading } from "../common/loading.jsx";
 
-const data = {
-  Data: [
-    {
-      question: "Who is the first person on the moon?",
-      QuestionID: 4,
-      answers: [
-        {
-          answer: "Barack Obama",
-          Image:
-            "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Official_portrait_of_Barack_Obama.jpg/1200px-Official_portrait_of_Barack_Obama.jpg",
-          RightAnswer: false,
-        },
-        {
-          answer: "Jo Biden",
-          Image:
-            "https://upload.wikimedia.org/wikipedia/commons/thumb/6/68/Joe_Biden_presidential_portrait.jpg/640px-Joe_Biden_presidential_portrait.jpg",
-          RightAnswer: true,
-        },
-        {
-          answer: "Trump",
-          Image:
-            "https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Donald_Trump_official_portrait.jpg/800px-Donald_Trump_official_portrait.jpg",
-          RightAnswer: false,
-        },
-        {
-          answer: "JFK",
-          Image:
-            "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/John_F._Kennedy%2C_White_House_color_photo_portrait.jpg/800px-John_F._Kennedy%2C_White_House_color_photo_portrait.jpg",
-          RightAnswer: false,
-        },
-      ],
-    },
-    {
-      QuestionID: 2,
-      question: "Who is the first black president?",
-      answers: [
-        {
-          answer: "Barack Obama",
-          Image:
-            "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Official_portrait_of_Barack_Obama.jpg/1200px-Official_portrait_of_Barack_Obama.jpg",
-          RightAnswer: false,
-        },
-        {
-          answer: "Jo Biden",
-          Image:
-            "https://upload.wikimedia.org/wikipedia/commons/thumb/6/68/Joe_Biden_presidential_portrait.jpg/640px-Joe_Biden_presidential_portrait.jpg",
-          RightAnswer: false,
-        },
-        {
-          answer: "Trump",
-          Image:
-            "https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Donald_Trump_official_portrait.jpg/800px-Donald_Trump_official_portrait.jpg",
-          RightAnswer: true,
-        },
-        {
-          answer: "JFK",
-          Image:
-            "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/John_F._Kennedy%2C_White_House_color_photo_portrait.jpg/800px-John_F._Kennedy%2C_White_House_color_photo_portrait.jpg",
-          RightAnswer: false,
-        },
-      ],
-    },
-    {
-      QuestionID: 1,
-      question: "Who is the first person on the moon?",
-      answers: [
-        {
-          answer: "Barack Obama",
-          Image:
-            "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Official_portrait_of_Barack_Obama.jpg/1200px-Official_portrait_of_Barack_Obama.jpg",
-          RightAnswer: false,
-        },
-        {
-          answer: "Jo Biden",
-          Image:
-            "https://upload.wikimedia.org/wikipedia/commons/thumb/6/68/Joe_Biden_presidential_portrait.jpg/640px-Joe_Biden_presidential_portrait.jpg",
-          RightAnswer: false,
-        },
-        {
-          answer: "Trump",
-          Image:
-            "https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Donald_Trump_official_portrait.jpg/800px-Donald_Trump_official_portrait.jpg",
-          RightAnswer: false,
-        },
-        {
-          answer: "JFK",
-          Image:
-            "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/John_F._Kennedy%2C_White_House_color_photo_portrait.jpg/800px-John_F._Kennedy%2C_White_House_color_photo_portrait.jpg",
-          RightAnswer: true,
-        },
-      ],
-    },
-  ],
-  Total: 3,
-};
 
 const AnswerBox = ({ right, wrong, data }) => {
   return (
@@ -121,12 +28,15 @@ const AnswerBox = ({ right, wrong, data }) => {
           <Typography>{data.answer}</Typography>
         </CardContent>
       </Box>
-      <CardMedia component="img" sx={{ width: 100, height: 150 }} image={data.Image} alt={data.answer} />
+      {data.Image && (
+        <CardMedia component="img" sx={{ width: 100, height: 150 }} image={data.Image} alt={data.answer} />
+      )}
     </Card>
   );
 };
 
-export const FilmTrivia = () => {
+export const FilmTrivia = ({ filmId }) => {
+  const [{ data, loading }] = useAxios(`Question/QuestionsAndAnswers?FilmID=${filmId}`);
   const [pageIndex, setPageIndex] = React.useState(1);
   const [rightAnswer, setRightAnswer] = React.useState(null);
   const [wrongAnswer, setWrongAnswer] = React.useState(null);
@@ -134,7 +44,7 @@ export const FilmTrivia = () => {
     if (!right) {
       setWrongAnswer(answerIdx);
     }
-    setRightAnswer(data.Data?.[questionIdx].answers.findIndex((i) => i.RightAnswer));
+    setRightAnswer(data.Data?.[questionIdx - 1].answers.findIndex((i) => i.RightAnswer));
   };
 
   const handleChangePage = (newPage) => {
@@ -143,6 +53,7 @@ export const FilmTrivia = () => {
     setWrongAnswer(null);
   };
 
+  if (loading) return <Loading paddingY={10} />;
   return (
     <Box className="related_films" mb={5}>
       <Box className="tag_reviews">
