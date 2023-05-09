@@ -1,11 +1,12 @@
 import * as React from "react";
-import { FileStackAPIKey } from "../../../../apis/resources/filestack-api.jsx";
 import { Box, Container, Typography } from "@mui/material";
 import { PickerInline } from "filestack-react";
 import useAxios from "axios-hooks";
 import { useSnackbar } from "notistack";
 import UserStore from "../../../../store/user.store.js";
 import { useNavigate } from "react-router-dom";
+
+export const FileStackAPIKey = "AFyVhwzYRUi9IoHvEGC9Tz";
 
 export const AvatarAndBanner = () => {
   const [, update] = useAxios({ method: "POST" }, { manual: true });

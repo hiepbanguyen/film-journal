@@ -11,9 +11,9 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import baseAPI from "../../apis/baseAPI";
 import { HeaderHeight } from "../common/layout/header/index.jsx";
 import UserStore from "../../store/user.store.js";
+import useAxios from "axios-hooks";
 
 const theme = createTheme();
 
@@ -25,6 +25,7 @@ export default function ResetPassword() {
   const [errorPassword, setErrorPassword] = React.useState("");
   const [errorConfirmPassword, setErrorConfirmPassword] = React.useState("");
   const [error, setError] = React.useState("");
+  const [, fetch] = useAxios({ url: "Users/ResetPassword" }, { manual: true });
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -42,14 +43,13 @@ export default function ResetPassword() {
       return;
     }
 
-    baseAPI
-      .getAsync(`Users/ResetPassword`, {
-        params: {
-          token: token,
-          pass: data.get("new-password"),
-          confirmPass: data.get("confirm-password"),
-        },
-      })
+    fetch({
+      params: {
+        token: token,
+        pass: data.get("new-password"),
+        confirmPass: data.get("confirm-password"),
+      },
+    })
       .then((res) => {
         if (res) {
           navigate(`/sign-in?email=${email}`);

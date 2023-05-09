@@ -1,14 +1,17 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import baseAPI from "../../apis/baseAPI";
+import useAxios from "axios-hooks";
+import { useSnackbar } from "notistack";
 
 export default function ActiveUser() {
   const queryParams = new URLSearchParams(window.location.search);
   const email = queryParams.get("email");
   const navigate = useNavigate();
+  const { enqueueSnackbar } = useSnackbar();
+  const [, fetch] = useAxios({ url: `Users/Active?email=${email}`, method: "POST" }, { manual: true });
+
   useEffect(() => {
-    baseAPI
-      .postAsync(`Users/Active?email=${email}`)
+    fetch()
       .then((res) => {
         if (res) {
           // Chuyển đến trang login
@@ -16,7 +19,7 @@ export default function ActiveUser() {
         }
       })
       .catch((err) => {
-        console.error(err);
+        enqueueSnackbar(err.response.data.userMsg, { variant: "error" });
       });
   }, []);
 }
