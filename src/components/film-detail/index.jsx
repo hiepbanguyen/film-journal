@@ -33,7 +33,7 @@ const FilmDetail = () => {
     if (data?.Credits) {
       const cast = [];
       const crew = new Map();
-      const credits = JSON.parse(String(data.Credits).replace("\\", ""));
+      const credits = JSON.parse(String(data.Credits));
       credits.forEach((i) => {
         if (i.known_for_department === "Acting") {
           cast.unshift(i);
