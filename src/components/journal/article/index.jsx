@@ -95,7 +95,7 @@ const JournalArticle = () => {
                         <Box
                           component={"img"}
                           pb={0.5}
-                          src={i.pic}
+                          src={i.pic.src}
                           sx={{
                             borderRadius: 1,
                             maxWidth: 700,
