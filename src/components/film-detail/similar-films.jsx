@@ -13,8 +13,14 @@ export default function SimilarFilms({ filmId }) {
       pageIndex: 1,
     },
   });
+  var display = "ok";
+  if(data?.Total == 0){
+    display = "none";
+  } else {
+    display = "block";
+  };
   return (
-    <Box className="related_films">
+    <Box className="related_films" display={display}>
       <Box className="tag_reviews">
         <p>SIMILAR FILMS</p>
       </Box>
