@@ -3,8 +3,14 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 export default function MentionedInArticles({ data }) {
+  var display = "ok";
+  if(data.length == 0){
+    display = "none";
+  } else {
+    display = "block";
+  };
   return (
-    <Box>
+    <Box display={display}>
       <Box className="tag_reviews">
         <p style={{ textTransform: "uppercase" }}>Mentioned in articles</p>
       </Box>
