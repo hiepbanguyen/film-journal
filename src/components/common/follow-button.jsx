@@ -106,7 +106,6 @@ export const FollowButton = ({ followed, targetUsername, targetUserId }) => {
                 backgroundColor: "#8e99a4",
               },
             }}
-            onClick={() => followingMember(member)}
           ></AddIcon>
         </Button>
       )}

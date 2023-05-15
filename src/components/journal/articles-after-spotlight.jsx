@@ -3,7 +3,6 @@ import Timestamp from "./timestamp.jsx";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import { Link } from "react-router-dom";
 
-
 export const ArticlePreview = (props) => {
   const { topic, title, intro, author, date, link, imgSrc, bgColor } = props;
   return (
@@ -81,7 +80,7 @@ export default function ArticlesAfterSpotlight({ data }) {
               imgSrc={i?.Banner}
               link={`${i?.JournalID}`}
               date={i?.ModifiedDate}
-              author={i?.Author ? JSON.parse(i.Author.replace("\\", ""))?.name : ""}
+              author={i?.Author ? JSON.parse(i.Author)?.name : ""}
             />
           </Grid>
         ))}

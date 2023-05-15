@@ -21,7 +21,7 @@ export default function News() {
                 imgSrc={i?.Banner}
                 link={`${i?.JournalID}`}
                 date={i?.ModifiedDate}
-                author={i?.Author ? JSON.parse(i.Author.replace("\\", ""))?.name : ""}
+                author={i?.Author ? JSON.parse(i.Author)?.name : ""}
               />
             </Grid>
           ))}

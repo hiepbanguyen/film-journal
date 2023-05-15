@@ -37,7 +37,7 @@ export default function FilmsSearch() {
   const { searchParams } = useParams();
   const [pageIndex, setPageIndex] = React.useState(1);
   const [{ data, loading }] = useAxios({
-    url: `Users/film/search/${searchParams.replace("%", " ")}`,
+    url: `Users/film/search/${searchParams.replaceAll("%", " ")}`,
     method: "POST",
     data: {
       pageSize: 10,

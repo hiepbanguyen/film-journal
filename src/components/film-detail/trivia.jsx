@@ -6,7 +6,6 @@ import CancelOutlinedIcon from "@mui/icons-material/CancelOutlined";
 import useAxios from "axios-hooks";
 import { Loading } from "../common/loading.jsx";
 
-
 const AnswerBox = ({ right, wrong, data }) => {
   return (
     <Card
@@ -60,10 +59,10 @@ export const FilmTrivia = ({ filmId }) => {
         <p>FILM TRIVIA</p>
       </Box>
       <Typography variant={"h6"} my={3}>
-        {data?.Data?.[pageIndex - 1].question}
+        {data?.Data?.[pageIndex - 1]?.question}
       </Typography>
       <Grid container spacing={2} mb={3}>
-        {data?.Data?.[pageIndex - 1].answers.map((i, idx) => (
+        {data?.Data?.[pageIndex - 1]?.answers.map((i, idx) => (
           <Grid key={idx} item xs={12} sm={6} onClick={() => handeAnswerClick(idx, pageIndex, i.RightAnswer)}>
             <AnswerBox data={i} right={rightAnswer === idx} wrong={wrongAnswer === idx} />
           </Grid>

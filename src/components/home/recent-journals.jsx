@@ -31,7 +31,7 @@ export const RecentJournals = () => {
                   imgSrc={i?.Banner}
                   link={`/journals/${i?.JournalID}`}
                   date={i?.ModifiedDate}
-                  author={i?.Author ? JSON.parse(i.Author.replace("\\", ""))?.name : ""}
+                  author={i?.Author ? JSON.parse(i.Author)?.name : ""}
                   titleColor={"#fff"}
                   small={true}
                 />
