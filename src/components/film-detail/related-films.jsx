@@ -3,7 +3,6 @@ import useAxios from "axios-hooks";
 import { Loading } from "../common/loading.jsx";
 import { Link } from "react-router-dom";
 
-
 export default function RelatedFilms({ filmId }) {
   const [{ data, loading }] = useAxios({
     url: `Films/${filmId}/Related`,
@@ -13,14 +12,10 @@ export default function RelatedFilms({ filmId }) {
       pageIndex: 1,
     },
   });
-  var display = "ok";
-  if(data?.Total == 0){
-    display = "none";
-  } else {
-    display = "block";
-  };
+
+  if (data?.Total === 0) return <></>;
   return (
-    <Box className="related_films" display={display}>
+    <Box className="related_films">
       <Box className="tag_reviews">
         <p>RELATED FILMS</p>
       </Box>
