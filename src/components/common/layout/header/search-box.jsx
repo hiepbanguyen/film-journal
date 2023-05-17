@@ -48,7 +48,7 @@ export default function SearchBox() {
     const searchParams = e.target.value.replaceAll(/\s+/g, " ").trim();
     if (e.key === "Enter" && !!searchParams) {
       e.preventDefault();
-      e.target.value = "";
+      // e.target.value = "";
       navigate(`/search/films/${searchParams}`);
     }
   };
