@@ -28,7 +28,7 @@ export default function SignInSide() {
   const [errorEmail, setErrorEmail] = React.useState(false);
   const [errorPassword, setErrorPassword] = React.useState(false);
   const [errorMsg, setErrorMsg] = React.useState("");
-  const [, fetch] = useAxios({ url: "Users/login" }, { manual: true });
+  const [, fetch] = useAxios({ url: "Users/login",method: "POST" }, { manual: true });
 
   useEffect(() => {
     if (UserStore.isLoggedIn) navigate("/");
@@ -43,7 +43,7 @@ export default function SignInSide() {
     }
 
     fetch({
-      params: {
+      data: {
         email: data.get("email"),
         password: data.get("password"),
       },
