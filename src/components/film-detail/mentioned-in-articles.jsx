@@ -14,16 +14,21 @@ export default function MentionedInArticles({ data }) {
           data.map((i, idx) => (
             <Box
               mb={2}
+              minHeight={80}
               component={Link}
               to={`/journals/${i?.JournalID}`}
               key={idx}
               sx={{ display: "flex", bgcolor: "#2c3440", borderRadius: 1 }}
             >
               <Box
+                sx={(theme) => ({
+                  height: 120,
+                  borderRadius: "4px 0 0 4px",
+                  [theme.breakpoints.only("xs")]: { display: "none" },
+                })}
                 component={"img"}
                 src={i?.Banner}
                 alt="Article banner"
-                sx={{ height: 120, borderRadius: "4px 0 0 4px" }}
               />
               <Box className="cart_summary_title" p={1}>
                 <p>
