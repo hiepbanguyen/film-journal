@@ -7,7 +7,6 @@ import useAxios from "axios-hooks";
 import { Loading } from "../common/loading.jsx";
 import FilmCard from "../common/film-card";
 
-
 const responsive = {
   medium: {
     breakpoint: { max: 3000, min: 900 },
@@ -50,36 +49,45 @@ export default function FilmsListPopularFilms() {
       {loading ? (
         <Loading paddingY={10} />
       ) : (
-        <Carousel
-          draggable={false}
-          swipeable={true}
-          infinite={true}
-          autoPlay={true}
-          autoPlaySpeed={5000}
-          responsive={responsive}
-        >
-          {data?.Data?.map((i, idx) => (
-            <Box key={idx}>
-              <Box p={1}>
-                <FilmCard size={"100%"} src={i?.Poster_path} link={`/films/${i?.FilmID ?? 0}`} alt={"Film Poster"} />
-              </Box>
-              <Box
-                sx={{
-                  display: "flex",
-                  flexWrap: "wrap",
-                  justifyContent: "center",
-                }}
-              >
-                <ViewsLikesLists
-                  views={i?.ReviewsCount ?? 0}
-                  likes={i?.LikesCount ?? 0}
-                  lists={i?.Appears ?? 0}
-                  filmId={i?.FilmID}
-                />
-              </Box>
-            </Box>
-          ))}
-        </Carousel>
+        <>
+          {data?.Data?.length > 0 && (
+            <Carousel
+              draggable={false}
+              swipeable={true}
+              infinite={true}
+              autoPlay={true}
+              autoPlaySpeed={5000}
+              responsive={responsive}
+            >
+              {data?.Data?.map((i, idx) => (
+                <Box key={idx}>
+                  <Box p={1}>
+                    <FilmCard
+                      size={"100%"}
+                      src={i?.Poster_path}
+                      link={`/films/${i?.FilmID ?? 0}`}
+                      alt={"Film Poster"}
+                    />
+                  </Box>
+                  <Box
+                    sx={{
+                      display: "flex",
+                      flexWrap: "wrap",
+                      justifyContent: "center",
+                    }}
+                  >
+                    <ViewsLikesLists
+                      views={i?.ReviewsCount ?? 0}
+                      likes={i?.LikesCount ?? 0}
+                      lists={i?.Appears ?? 0}
+                      filmId={i?.FilmID}
+                    />
+                  </Box>
+                </Box>
+              ))}
+            </Carousel>
+          )}
+        </>
       )}
     </Box>
   );
