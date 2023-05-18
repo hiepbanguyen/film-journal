@@ -69,7 +69,9 @@ export default function ProfileFollowers() {
                         <Link to={"/u/" + member?.UserName} style={{ color: "#fff", fontWeight: "600" }}>
                           {member?.FullName ?? member?.UserName}
                         </Link>
-                        <Box style={{ display: "block", transition: "0.2s" }}>15 followers, following 200</Box>
+                        <Box style={{ display: "block", transition: "0.2s" }}>
+                          {member?.Following ?? 0} followers, following {member?.Follower ?? 0}
+                        </Box>
                       </Box>
                     </Box>
                   </TableCell>
