@@ -11,7 +11,7 @@ import FilmCard from "../../../common/film-card.jsx";
 import { useSnackbar } from "notistack";
 
 const DefaultPageSize = 48;
-export const WatchlistFilmsGrid = observer(({ fetchUrl, pageSize, username }) => {
+export const WatchlistFilmsGrid = observer(({ username }) => {
   const [filters, setFilters] = useState(null);
   const [pageIdx, setPageIdx] = React.useState(1);
   const [editing, setEditing] = useState(false);
@@ -19,11 +19,13 @@ export const WatchlistFilmsGrid = observer(({ fetchUrl, pageSize, username }) =>
   const [deletedFilms, setDeletedFilms] = useState([]);
   const { enqueueSnackbar } = useSnackbar();
 
+  // console.log("rerender");
+
   const [{ data, loading, error }, fetchFilms] = useAxios({
-    url: fetchUrl,
+    url: `Users/${username}/Profile/Watchlist`,
     method: "POST",
     data: {
-      pageSize: pageSize ?? DefaultPageSize,
+      pageSize: DefaultPageSize,
       pageIndex: pageIdx,
       ...filters,
     },
@@ -37,7 +39,9 @@ export const WatchlistFilmsGrid = observer(({ fetchUrl, pageSize, username }) =>
   );
 
   useEffect(() => {
-    setFilms(data?.Data ?? []);
+    if (data?.Data) {
+      setFilms(data.Data);
+    }
   }, [loading]);
 
   const handleEditClicked = () => {
@@ -82,11 +86,12 @@ export const WatchlistFilmsGrid = observer(({ fetchUrl, pageSize, username }) =>
   const onSubmit = (values) => {
     setPageIdx(1);
     setFilters(values);
+    // fetchFilms();
   };
 
   const handleChangePage = (newPage) => {
     setPageIdx(newPage);
-    fetchFilms();
+    // fetchFilms();
   };
 
   return (
@@ -125,7 +130,7 @@ export const WatchlistFilmsGrid = observer(({ fetchUrl, pageSize, username }) =>
         <Loading paddingY={10} />
       ) : (
         <>
-          {data?.Data.length > 0 && (
+          {films.length > 0 && (
             <Box mb={10}>
               <Grid container spacing={1} columns={24} my={3}>
                 {films.map((i, idx) => (
