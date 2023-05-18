@@ -69,6 +69,9 @@ const ReViewLikeWatchList = observer(({ filmTitle, releasedYear }) => {
     toggleLike().then((res) => {
       if (res?.data) {
         setLiked(!liked);
+        enqueueSnackbar(`${liked ? "Unliked" : "Liked"} film. Reload to see updated likes count.`, {
+          variant: "success",
+        });
       }
     });
   };
