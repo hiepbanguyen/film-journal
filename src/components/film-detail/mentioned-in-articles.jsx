@@ -13,6 +13,7 @@ export default function MentionedInArticles({ data }) {
         {data?.length > 0 &&
           data.map((i, idx) => (
             <Box
+              mb={1}
               component={Link}
               to={`/journals/${i?.JournalID}`}
               key={idx}
