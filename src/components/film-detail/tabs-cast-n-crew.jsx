@@ -36,12 +36,18 @@ const Cast = (props) => {
 
 const CastTab = ({ data }) => {
   const [showAll, setShowAll] = React.useState(false);
+  const reversedData = React.useMemo(() => Array.from(data ?? []).reverse(), [data]);
   // console.log(data);
+
+  const displayData = React.useMemo(
+    () => reversedData.slice(0, showAll ? data.length : initialShowCast),
+    [showAll, data],
+  );
   if (!data || data.length === 0) return <>N/A</>;
   return (
     <>
       <Box display={"flex"} flexWrap={"wrap"} gap={1} mb={1}>
-        {data?.slice(0, showAll ? data.length : initialShowCast).map((i, idx) => (
+        {displayData.map((i, idx) => (
           <Cast key={idx} {...i} />
         ))}
       </Box>
@@ -82,11 +88,13 @@ const Crew = ({ data }) => {
 const CrewTab = ({ data }) => {
   const [showAll, setShowAll] = React.useState(false);
   // console.log(data?.[0]?.[0]);
+  const displayData = React.useMemo(() => data.slice(0, showAll ? data.length : initialShowCrew), [showAll, data]);
+
   if (!data?.[0]?.[0]) return <>N/A</>;
   return (
     <>
       <Box>
-        {data.slice(0, showAll ? data.length : initialShowCrew).map((i, idx) => (
+        {displayData.map((i, idx) => (
           <Crew key={idx} data={i} />
         ))}
       </Box>
