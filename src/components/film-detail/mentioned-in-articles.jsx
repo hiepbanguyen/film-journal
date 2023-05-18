@@ -9,11 +9,11 @@ export default function MentionedInArticles({ data }) {
       <Box className="tag_reviews">
         <p style={{ textTransform: "uppercase" }}>Mentioned in articles</p>
       </Box>
-      <Box mt={5}>
+      <Box mt={2}>
         {data?.length > 0 &&
           data.map((i, idx) => (
             <Box
-              mb={1}
+              mb={2}
               component={Link}
               to={`/journals/${i?.JournalID}`}
               key={idx}
