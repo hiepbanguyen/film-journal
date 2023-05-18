@@ -10,7 +10,7 @@ export default function MemberSearch() {
   const { searchParams } = useParams();
   const [pageIndex, setPageIndex] = React.useState(1);
   const [{ data, loading }] = useAxios({
-    url: `Users/member/search/${searchParams.replace("%", " ")}`,
+    url: `Users/member/search/${searchParams.replaceAll("%", " ")}`,
     method: "POST",
     data: {
       pageSize: 15,

@@ -10,7 +10,7 @@ export default function ReviewsSearch() {
   const { searchParams } = useParams();
   const [pageIndex, setPageIndex] = React.useState(1);
   const [{ data, loading }] = useAxios({
-    url: `Users/review/search/${searchParams.replace("%", " ")}`,
+    url: `Users/review/search/${searchParams.replaceAll("%", " ")}`,
     method: "POST",
     data: {
       pageSize: 10,

@@ -19,7 +19,7 @@ export const JustReviewed = () => {
               Just Reviewed...
             </Typography>
             <Typography variant={"body2"} mt={5}>
-              {data.TotalReview ?? 0} films watched
+              {data?.TotalReview ?? 0} films watched
             </Typography>
           </Box>
           <Divider />

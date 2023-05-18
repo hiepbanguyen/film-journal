@@ -18,7 +18,7 @@ const JournalArticle = () => {
     url: `Journals/GetMentionedFilm?JournalID=${journalId}`,
     method: "POST",
   });
-  const author = data?.Author && JSON.parse(data.Author.replace("\\", ""));
+  const author = data?.Author && JSON.parse(data.Author);
 
   if (loading) return <Loading paddingY={10} />;
   return (
@@ -83,7 +83,7 @@ const JournalArticle = () => {
           </Typography>
           <Stack gap={3} my={4}>
             {data?.Content &&
-              JSON.parse(data.Content.replace("\\", ""))?.map((i, idx) => (
+              JSON.parse(data.Content)?.map((i, idx) => (
                 <React.Fragment key={idx}>
                   {i.type === "text" ? (
                     <Typography variant={"body1"} color={"#1b3552"}>
@@ -97,13 +97,12 @@ const JournalArticle = () => {
                           pb={0.5}
                           src={i.pic.src}
                           sx={{
-                            borderRadius: 1,
                             maxWidth: 700,
                             width: "80%",
                             aspectRatio: 7 / 4,
                           }}
                         />
-                        {i.caption}
+                        {i.pic.caption}
                       </Box>
                     </>
                   )}
@@ -140,7 +139,7 @@ const JournalArticle = () => {
                   imgSrc={i?.Banner}
                   link={`/journals/${i?.JournalID}`}
                   date={i?.ModifiedDate}
-                  author={i?.Author ? JSON.parse(i.Author.replace("\\", ""))?.name : ""}
+                  author={i?.Author ? JSON.parse(i.Author)?.name : ""}
                   titleColor={"#202830"}
                   small={true}
                 />

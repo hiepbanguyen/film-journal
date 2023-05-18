@@ -47,7 +47,7 @@ const FilmDetail = () => {
       delete cached.Credits;
     }
     if (data?.Genres) {
-      const genres = JSON.parse(data.Genres.replace("\\", ""));
+      const genres = JSON.parse(data.Genres);
       delete cached.Genres;
       cached.Genres = genres.map((i) => i.name);
     }
@@ -72,17 +72,17 @@ const FilmDetail = () => {
       delete cached.Revenue;
     }
     if (data?.Production_companies) {
-      const productionCompanies = JSON.parse(data.Production_companies.replace("\\", ""));
+      const productionCompanies = JSON.parse(data.Production_companies);
       more_detail.push(["Production companies", [...productionCompanies.slice(0, 5).map((i) => i.name)]]);
       delete cached.Production_companies;
     }
     if (data?.Production_countries) {
-      const productionCountries = JSON.parse(data.Production_countries.replace("\\", ""));
+      const productionCountries = JSON.parse(data.Production_countries);
       more_detail.push(["Production countries", [...productionCountries.slice(0, 5).map((i) => i.name)]]);
       delete cached.Production_countries;
     }
     if (data?.Spoken_languages) {
-      const spokenLanguages = JSON.parse(data.Spoken_languages.replace("\\", ""));
+      const spokenLanguages = JSON.parse(data.Spoken_languages);
       more_detail.push(["Spoken languages", [...spokenLanguages.slice(0, 5).map((i) => i.english_name)]]);
       delete cached.Spoken_languages;
     }

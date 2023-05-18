@@ -39,7 +39,7 @@ export default function Journal() {
               imgSrc={data?.[0]?.Banner}
               link={`${data?.[0]?.JournalID}`}
               date={data?.[0]?.ModifiedDate}
-              author={data?.[0]?.Author ? JSON.parse(data[0].Author.replace("\\", ""))?.name : ""}
+              author={data?.[0]?.Author ? JSON.parse(data[0].Author)?.name : ""}
             />
           )}
         </Container>

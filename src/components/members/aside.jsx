@@ -20,10 +20,9 @@ export default function MembersAside() {
       {loading ? (
         <Loading paddingY={10} />
       ) : (
-        <Box display={"flex"} flexWrap={"wrap"} gap={0.5}>
+        <Box display={"flex"} flexWrap={"wrap"} sx={{ justifyContent: "center" }} gap={0.5}>
           {data?.Data?.map((i, idx) => (
             <Link key={idx} to={i?.UserName && `/u/${i?.UserName}`}>
-              {" "}
               <Avatar sx={{ width: 50, height: 50 }} src={i?.Avatar} alt={i?.UserName ?? "user avatar"} />
             </Link>
           ))}

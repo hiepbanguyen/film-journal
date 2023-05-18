@@ -16,6 +16,7 @@ const Cast = (props) => {
         borderRadius: 1,
         p: 0.5,
         "&:hover": {
+          cursor: "default",
           background: "#456",
         },
       }}
