@@ -4,9 +4,11 @@ import React from "react";
 
 export default function PosterAndDescription(props) {
   const directors = React.useMemo(() => {
-    return props?.Crew?.find((i) => i?.[0] === "Director")?.[1]
-      ?.slice(0, 3)
-      .join(", ");
+    return (
+      props?.Crew?.find((i) => i?.[0] === "Director")?.[1]
+        ?.slice(0, 3)
+        .join(", ") ?? "N/A"
+    );
   }, [props?.Crew]);
 
   return (

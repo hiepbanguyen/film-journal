@@ -63,7 +63,14 @@ export const FilmTrivia = ({ filmId }) => {
       </Typography>
       <Grid container spacing={2} mb={3}>
         {data?.Data?.[pageIndex - 1]?.answers.map((i, idx) => (
-          <Grid key={idx} item xs={12} sm={6} onClick={() => handeAnswerClick(idx, pageIndex, i.RightAnswer)}>
+          <Grid
+            key={idx}
+            sx={{ display: "flex", "& .MuiPaper-root": { width: "100%" } }}
+            item
+            xs={12}
+            sm={6}
+            onClick={() => handeAnswerClick(idx, pageIndex, i.RightAnswer)}
+          >
             <AnswerBox data={i} right={rightAnswer === idx} wrong={wrongAnswer === idx} />
           </Grid>
         ))}

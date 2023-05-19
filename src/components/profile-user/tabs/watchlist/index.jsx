@@ -11,7 +11,7 @@ export const UserWatchList = () => {
         marginTop: "32px",
       }}
     >
-      <WatchlistFilmsGrid fetchUrl={`Users/${username}/Profile/Watchlist`} username={username} />
+      <WatchlistFilmsGrid username={username} />
     </Box>
   );
 };

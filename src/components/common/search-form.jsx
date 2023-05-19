@@ -56,7 +56,7 @@ export default function SearchForm({ onSubmit }) {
   const [genre, setGenre] = useState("");
   const [filmName, setFilmName] = useState("");
 
-  // Function Hanle value
+  // Function Handle value
   const handleYearChange = (event) => {
     setValue("year", event.target.value);
     setYear(event.target.value);
