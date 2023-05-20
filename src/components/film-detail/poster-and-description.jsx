@@ -5,9 +5,9 @@ import React from "react";
 export default function PosterAndDescription(props) {
   const directors = React.useMemo(() => {
     return (
-      props?.Crew?.find((i) => i?.[0] === "Director")?.[1]
+      props?.Crew?.find((i) => i?.[0] === "Director" || i?.[0] === "Writer" || i?.[0] === "Producer" || i?.[0] === "Second Assistant Director" || i?.[0] === "Script Supervisor")?.[1]
         ?.slice(0, 3)
-        .join(", ") ?? "N/A"
+        .join(", ") ?? "Various directors"
     );
   }, [props?.Crew]);
 
