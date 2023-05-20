@@ -30,6 +30,7 @@ const TabReviews = observer(({ filmId, from, sort }) => {
     }
   }, [UserStore.user]);
 
+  if (data?.Data?.length === 0) return <Typography textAlign={"center"}>No reviews</Typography>;
   return (
     <>
       {loading ? (

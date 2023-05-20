@@ -1,7 +1,8 @@
-import { Box } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import useAxios from "axios-hooks";
 import { Loading } from "../common/loading.jsx";
 import { Link } from "react-router-dom";
+import React from "react";
 
 export default function SimilarFilms({ filmId }) {
   const [{ data, loading }] = useAxios({
@@ -13,12 +14,12 @@ export default function SimilarFilms({ filmId }) {
     },
   });
 
-  if (data?.Total === 0) return <></>;
   return (
     <Box className="related_films">
       <Box className="tag_reviews">
         <p>SIMILAR FILMS</p>
       </Box>
+      {data?.Total === 0 && <Typography textAlign={"center"}>No similar films</Typography>}
       {loading ? (
         <Loading />
       ) : (

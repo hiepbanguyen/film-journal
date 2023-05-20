@@ -14,10 +14,11 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { HeaderHeight } from "../common/layout/header/index.jsx";
 import UserStore from "../../store/user.store.js";
 import useAxios from "axios-hooks";
+import { observer } from "mobx-react-lite";
 
 const theme = createTheme();
 
-export default function ResetPassword() {
+export const ResetPassword = observer(() => {
   const queryParams = new URLSearchParams(window.location.search);
   const email = queryParams.get("email");
   const token = queryParams.get("token");
@@ -26,6 +27,12 @@ export default function ResetPassword() {
   const [errorConfirmPassword, setErrorConfirmPassword] = React.useState("");
   const [error, setError] = React.useState("");
   const [, fetch] = useAxios({ url: "Users/ResetPassword" }, { manual: true });
+
+  useEffect(() => {
+    if (UserStore.isLoggedIn) {
+      navigate("/");
+    }
+  }, [UserStore.isLoggedIn]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -60,10 +67,6 @@ export default function ResetPassword() {
       });
   };
 
-  useEffect(() => {
-    if (UserStore.isLoadedFromLocal && UserStore.isLoggedIn) navigate("/");
-  }, [UserStore.isLoadedFromLocal, UserStore.isLoggedIn]);
-
   return (
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs" sx={{ background: "#fff", mt: HeaderHeight / 8 }}>
@@ -87,7 +90,7 @@ export default function ResetPassword() {
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <TextField
-                  error={errorPassword || error}
+                  error={!!errorPassword}
                   required
                   fullWidth
                   id="new-password"
@@ -100,7 +103,7 @@ export default function ResetPassword() {
               </Grid>
               <Grid item xs={12}>
                 <TextField
-                  error={errorPassword || error}
+                  error={!!errorPassword}
                   required
                   fullWidth
                   name="confirm-password"
@@ -120,4 +123,4 @@ export default function ResetPassword() {
       </Container>
     </ThemeProvider>
   );
-}
+});
