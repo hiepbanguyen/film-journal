@@ -14,17 +14,20 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { HeaderHeight } from "../common/layout/header/index.jsx";
 import UserStore from "../../store/user.store.js";
 import useAxios from "axios-hooks";
+import { observer } from "mobx-react-lite";
 
 const theme = createTheme();
 
-export default function ForgotPassword() {
+export const ForgotPassword = observer(() => {
   const navigate = useNavigate();
   const [errorMsg, setErrorMsg] = React.useState("");
   const [, fetch] = useAxios({ url: "Users/ForgotPassword" }, { manual: true });
 
   useEffect(() => {
-    if (UserStore.isLoadedFromLocal && UserStore.isLoggedIn) navigate("/");
-  }, [UserStore.isLoadedFromLocal, UserStore.isLoggedIn]);
+    if (UserStore.isLoggedIn) {
+      navigate("/");
+    }
+  }, [UserStore.isLoggedIn]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -79,7 +82,7 @@ export default function ForgotPassword() {
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <TextField
-                  error={errorMsg}
+                  error={!!errorMsg}
                   required
                   fullWidth
                   id="email"
@@ -99,4 +102,4 @@ export default function ForgotPassword() {
       </Container>
     </ThemeProvider>
   );
-}
+});

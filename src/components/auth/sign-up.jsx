@@ -18,10 +18,11 @@ import { HeaderHeight } from "../common/layout/header/index.jsx";
 import UserStore from "../../store/user.store.js";
 import useAxios from "axios-hooks";
 import CircularProgress from "@mui/material/CircularProgress";
+import { observer } from "mobx-react-lite";
 
 const theme = createTheme();
 
-export default function SignUp() {
+export const SignUp = observer(() => {
   const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar();
   const [errorUsername, setErrorUsername] = React.useState("");
@@ -31,8 +32,10 @@ export default function SignUp() {
   const [{ loading }, signUp] = useAxios({ url: "Users/signup", method: "POST" }, { manual: true });
 
   useEffect(() => {
-    if (UserStore.isLoadedFromLocal && UserStore.isLoggedIn) navigate("/");
-  }, [UserStore.isLoadedFromLocal, UserStore.isLoggedIn]);
+    if (UserStore.isLoggedIn) {
+      navigate("/");
+    }
+  }, [UserStore.isLoggedIn]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -200,4 +203,4 @@ export default function SignUp() {
       </Container>
     </ThemeProvider>
   );
-}
+});

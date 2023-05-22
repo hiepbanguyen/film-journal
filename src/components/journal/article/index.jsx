@@ -114,6 +114,7 @@ const JournalArticle = () => {
             Mentioned film
           </Typography>
           <Box px={{ sm: 3 }}>
+            {!mentionedFilm && <Typography textAlign={"center"}>No mentioned film</Typography>}
             <FilmSearchResult
               title={mentionedFilm?.Title}
               poster={mentionedFilm?.Poster_Path}
@@ -129,6 +130,7 @@ const JournalArticle = () => {
             Related articles
           </Typography>
           <Grid container sx={{ fontFamily: "TiemposTextWeb,Georgia,serif,ColorEmoji" }} mt={5}>
+            {relatedArticles?.length === 0 && <Typography textAlign={"center"}>No related articles</Typography>}
             {relatedArticles?.map((i, idx) => (
               <Grid item key={idx} xs={12} sm={4}>
                 <ArticlePreview

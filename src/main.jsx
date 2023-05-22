@@ -3,8 +3,8 @@ import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import ErrorPage from "./components/common/error-page.jsx";
 import ActiveUser from "./components/auth/active-user.jsx";
-import ResetPassword from "./components/auth/reset-password.jsx";
-import ForgotPassword from "./components/auth/forgot-password";
+import { ResetPassword } from "./components/auth/reset-password.jsx";
+import { ForgotPassword } from "./components/auth/forgot-password";
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "./theme/index.js";
 import Root from "./components/common/layout/root.jsx";
@@ -21,8 +21,8 @@ import ListDetail from "./components/list-detail/index.jsx";
 import { configure } from "axios-hooks";
 import LRU from "lru-cache";
 import Axios from "axios";
-import SignInSide from "./components/auth/sign-in.jsx";
-import SignUp from "./components/auth/sign-up.jsx";
+import { SignIn } from "./components/auth/sign-in.jsx";
+import { SignUp } from "./components/auth/sign-up.jsx";
 import { ProfileTab } from "./components/profile-user/tabs/profile";
 import SearchPage from "./components/search";
 import FilmsSearch from "./components/search/films-search.jsx";
@@ -85,7 +85,7 @@ const router = createBrowserRouter([
       },
       {
         path: "sign-in",
-        element: <SignInSide />,
+        element: <SignIn />,
       },
       {
         path: "reset-password",

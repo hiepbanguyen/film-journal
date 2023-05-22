@@ -44,6 +44,8 @@ export default function ReviewsSearch() {
                 likeCount={i.LikesCount ?? 0}
                 commentCount={i.CommentsCount ?? 0}
                 spoiler={i.HaveSpoiler ?? 0}
+                userAvatar = {i?.User?.Avatar ?? null}
+                username = {i?.User?.UserName ?? ""}
                 reviewDate={i.WatchedDate ? new Date(i.WatchedDate) : ""}
                 link={`/u/${i?.User?.UserName}/reviews/${i.ReviewID}`}
               />

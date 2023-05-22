@@ -18,20 +18,23 @@ import { Copyright } from "../common/layout/footer.jsx";
 import { HeaderHeight } from "../common/layout/header/index.jsx";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline.js";
 import useAxios from "axios-hooks";
+import { observer } from "mobx-react-lite";
 
 const theme = createTheme();
 
-export default function SignInSide() {
+export const SignIn = observer(() => {
   const navigate = useNavigate();
   const queryParams = new URLSearchParams(window.location.search);
   let email = queryParams.get("email");
   const [errorEmail, setErrorEmail] = React.useState(false);
   const [errorPassword, setErrorPassword] = React.useState(false);
   const [errorMsg, setErrorMsg] = React.useState("");
-  const [, fetch] = useAxios({ url: "Users/login",method: "POST" }, { manual: true });
+  const [, fetch] = useAxios({ url: "Users/login", method: "POST" }, { manual: true });
 
   useEffect(() => {
-    if (UserStore.isLoggedIn) navigate("/");
+    if (UserStore.isLoggedIn) {
+      navigate("/");
+    }
   }, [UserStore.isLoggedIn]);
 
   const handleSubmit = (event) => {
@@ -76,10 +79,7 @@ export default function SignInSide() {
       setErrorPassword(true);
     }
 
-    if (!errorEmail && !errorPassword) {
-      return true;
-    }
-    return false;
+    return !errorEmail && !errorPassword;
   };
 
   const validateEmail = (email) => {
@@ -181,4 +181,4 @@ export default function SignInSide() {
       </Grid>
     </ThemeProvider>
   );
-}
+});

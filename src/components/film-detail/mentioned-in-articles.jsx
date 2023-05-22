@@ -1,15 +1,15 @@
-import { Box } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import React from "react";
 import { Link } from "react-router-dom";
 
 export default function MentionedInArticles({ data }) {
-  if (data?.length === 0) return <></>;
   return (
     <Box>
       <Box className="tag_reviews">
         <p style={{ textTransform: "uppercase" }}>Mentioned in articles</p>
       </Box>
       <Box mt={2}>
+        {data?.length === 0 && <Typography textAlign={"center"}>No articles</Typography>}
         {data?.length > 0 &&
           data.map((i, idx) => (
             <Box

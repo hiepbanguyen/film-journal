@@ -1,14 +1,15 @@
-export function estimatedTimeElapsed(date = new Date()) {
-  let dateNow = new Date();
-  if (date > dateNow) date = dateNow;
+export function estimatedTimeElapsed(date) {
+  const dateNow = Date.now();
+  let _date = new Date(date.toString() + "Z").getTime(); // server time is utc
+  if (_date > dateNow) _date = dateNow;
 
-  let years = Math.floor((dateNow - date) / (365 * 24 * 60 * 60 * 1000));
+  const years = Math.floor((dateNow - _date) / (365 * 24 * 60 * 60 * 1000));
   if (years > 0) return years + "y";
-  let days = Math.floor((dateNow - date) / (24 * 60 * 60 * 1000));
+  const days = Math.floor((dateNow - _date) / (24 * 60 * 60 * 1000));
   if (days > 0) return days + "d";
-  let hours = Math.floor((dateNow - date) / (60 * 60 * 1000));
+  const hours = Math.floor((dateNow - _date) / (60 * 60 * 1000));
   if (hours > 0) return hours + "h";
-  let minutes = Math.floor((dateNow - date) / (60 * 1000));
+  const minutes = Math.floor((dateNow - _date) / (60 * 1000));
   if (minutes > 0) return minutes + "m";
   else return "now";
 }
