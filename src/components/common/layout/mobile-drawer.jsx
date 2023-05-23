@@ -40,7 +40,13 @@ export default function MobileDrawer(props) {
         }}
       >
         <Stack mt={2} gap={1} sx={{ width: 280, color: "#fff" }}>
-          <Logo />
+          <Box
+            onClick={() => {
+              setOpenDrawer(false);
+            }}
+          >
+            <Logo />
+          </Box>
           <Stack divider={<Divider variant={"middle"} sx={{ borderColor: "#9ab" }} />} mt={1}>
             {pages.map((i, idx) => (
               <React.Fragment key={idx}>

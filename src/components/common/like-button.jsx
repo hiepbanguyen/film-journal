@@ -7,6 +7,7 @@ import UserStore from "../../store/user.store.js";
 import { useNavigate } from "react-router-dom";
 import { observer } from "mobx-react-lite";
 
+//TODO: reload like
 export const LikeButton = observer(({ likes, type, id, refetchDetail }) => {
   const navigate = useNavigate();
   const [isLiked, setIsLiked] = React.useState(false);

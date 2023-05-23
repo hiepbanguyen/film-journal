@@ -33,5 +33,6 @@ export const AnimatedUnderlineBox = styled(Box, {
   ...(open && {
     //@ts-ignore
     color: "#fff",
+    fontWeight: "bold",
   }),
 }));
