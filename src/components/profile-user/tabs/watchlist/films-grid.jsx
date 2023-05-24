@@ -21,15 +21,18 @@ export const WatchlistFilmsGrid = observer(({ username }) => {
 
   // console.log("rerender");
 
-  const [{ data, loading, error }, fetchFilms] = useAxios({
-    url: `Users/${username}/Profile/Watchlist`,
-    method: "POST",
-    data: {
-      pageSize: DefaultPageSize,
-      pageIndex: pageIdx,
-      ...filters,
+  const [{ data, loading, error }, fetchFilms] = useAxios(
+    {
+      url: `Users/${username}/Profile/Watchlist`,
+      method: "POST",
+      data: {
+        pageSize: DefaultPageSize,
+        pageIndex: pageIdx,
+        ...filters,
+      },
     },
-  });
+    { useCache: false },
+  );
   const [, deleteFromWatchlist] = useAxios(
     {
       url: `WatchList/Delete`,
@@ -85,6 +88,7 @@ export const WatchlistFilmsGrid = observer(({ username }) => {
 
   const onSubmit = (values) => {
     setPageIdx(1);
+    // console.log("values", values);
     setFilters(values);
     // fetchFilms();
   };

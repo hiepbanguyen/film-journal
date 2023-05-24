@@ -19,6 +19,7 @@ import { HeaderHeight } from "../common/layout/header/index.jsx";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline.js";
 import useAxios from "axios-hooks";
 import { observer } from "mobx-react-lite";
+import CircularProgress from "@mui/material/CircularProgress";
 
 const theme = createTheme();
 
@@ -29,7 +30,7 @@ export const SignIn = observer(() => {
   const [errorEmail, setErrorEmail] = React.useState(false);
   const [errorPassword, setErrorPassword] = React.useState(false);
   const [errorMsg, setErrorMsg] = React.useState("");
-  const [, fetch] = useAxios({ url: "Users/login", method: "POST" }, { manual: true });
+  const [{ loading }, fetch] = useAxios({ url: "Users/login", method: "POST" }, { manual: true });
 
   useEffect(() => {
     if (UserStore.isLoggedIn) {
@@ -159,6 +160,7 @@ export const SignIn = observer(() => {
               )}
               <Button type="submit" fullWidth variant="contained" sx={{ mt: 1, mb: 2 }}>
                 Sign In
+                {loading && <CircularProgress size={20} sx={{ position: "absolute", left: "61%", color: "#fff" }} />}
               </Button>
               <Grid container>
                 <Grid item xs={6}>

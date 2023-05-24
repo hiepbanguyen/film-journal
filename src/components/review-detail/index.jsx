@@ -12,12 +12,15 @@ const TakeLikedReviews = 10;
 export default function ReviewDetail() {
   const { reviewId } = useParams();
   const [{ data: detail, loading: detailLoading, error: detailError }, refetch] = useAxios(
-    `Reviews/${reviewId}/detail?limitUser=${TakeLikedReviews}`,
+    {
+      url: `Reviews/${reviewId}/detail?limitUser=${TakeLikedReviews}`,
+    },
+    { useCache: false },
   );
 
-  const refetchDetail = () => {
-    refetch();
-  };
+  // const refetchDetail = () => {
+  //   refetch();
+  // };
 
   if (!detailLoading && !detail) return <PageNotExist />;
 
@@ -25,7 +28,7 @@ export default function ReviewDetail() {
     <Container>
       <Box sx={{ marginTop: 10, mx: { md: 10, lg: 20 } }}>
         {/* Main */}
-        {detailLoading ? <Loading paddingY={15} /> : <ReviewDetailMain data={detail} refetchDetail={refetchDetail} />}
+        {detailLoading ? <Loading paddingY={15} /> : <ReviewDetailMain data={detail} />}
         {/* Comments */}
         <ReviewCommentSection reviewId={reviewId} />
       </Box>

@@ -3,30 +3,17 @@ import { Avatar, Badge, Box, Button, IconButton } from "@mui/material";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import Popover from "@mui/material/Popover";
 import Typography from "@mui/material/Typography";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { estimatedTimeElapsed } from "../../../../utils/time.js";
 import useAxios from "axios-hooks";
 import { Loading } from "../../loading.jsx";
 import UserStore from "../../../../store/user.store.js";
 
 const Notification = (props) => {
-  const { notiId, avatar, fullname, username, content, date, link, seen, refetchAllNotis } = props;
-  const [, markNotiSeen] = useAxios({ url: `Notification/${notiId}/MarkAsSeen`, method: "PUT" }, { manual: true });
-  const navigate = useNavigate();
-  const handleNotiClick = () => {
-    markNotiSeen().then((res) => {
-      if (res?.data) {
-        navigate(link);
-        refetchAllNotis();
-      }
-    });
-  };
+  const { avatar, fullname, username, content, date, seen } = props;
 
   return (
     <Box
-      onClick={() => {
-        handleNotiClick();
-      }}
       borderRadius={1}
       my={1}
       p={1}
@@ -67,6 +54,7 @@ export default function NotiBox() {
     },
   });
   const [, markAllNotiSeen] = useAxios({ url: `Notification/-1/MarkAsSeen`, method: "PUT" }, { manual: true });
+  const [, markNotiSeen] = useAxios({ method: "PUT" }, { manual: true });
 
   React.useEffect(() => {
     // if (data?.Data) {
@@ -96,8 +84,13 @@ export default function NotiBox() {
     });
   };
 
-  const refetchAllNotis = () => {
-    refetch();
+  const handleNotiClick = (notiId) => {
+    handleClose();
+    markNotiSeen({ url: `Notification/${notiId}/MarkAsSeen` }).then((res) => {
+      if (res?.data) {
+        refetch();
+      }
+    });
   };
 
   const handleClose = () => {
@@ -167,18 +160,18 @@ export default function NotiBox() {
         ) : (
           <>
             {data?.Data?.map((i, idx) => (
-              <Notification
-                key={idx}
-                avatar={i?.Sender?.Avatar}
-                username={i?.Sender?.UserName}
-                fullname={i?.Sender?.FullName}
-                notiId={i?.NotificationID}
-                content={i?.Content}
-                date={i?.Date}
-                link={i?.Link}
-                seen={i?.Seen}
-                refetchAllNotis={refetchAllNotis}
-              />
+              <Box key={idx} component={Link} to={i?.Link ?? ""} onClick={() => handleNotiClick(i?.NotificationID)}>
+                <Notification
+                  key={idx}
+                  avatar={i?.Sender?.Avatar}
+                  username={i?.Sender?.UserName}
+                  fullname={i?.Sender?.FullName}
+                  notiId={i?.NotificationID}
+                  content={i?.Content}
+                  date={i?.Date}
+                  seen={i?.Seen}
+                />
+              </Box>
             ))}
             {pageIndex < data?.TotalPage && <Button onClick={() => setPageIndex(pageIndex + 1)}>Load more...</Button>}
           </>

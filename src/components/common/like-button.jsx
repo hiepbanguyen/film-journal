@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Button } from "@mui/material";
 import FavoriteIcon from "@mui/icons-material/Favorite.js";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder.js";
@@ -7,14 +7,17 @@ import UserStore from "../../store/user.store.js";
 import { useNavigate } from "react-router-dom";
 import { observer } from "mobx-react-lite";
 
-export const LikeButton = observer(({ likes, type, id, refetchDetail }) => {
+//TODO: reload like
+export const LikeButton = observer(({ likes, type, id }) => {
   const navigate = useNavigate();
   const [isLiked, setIsLiked] = React.useState(false);
+  const [likesCount, setLikesCount] = React.useState(likes);
   const [{ data: userLiked, loading: userLikedLoading, error: userLikedError }, getUserLiked] = useAxios(
     {
       url: `Users/${id}/check?type=${type}`,
+      method: "GET",
     },
-    { manual: true },
+    { manual: true, useCache: false },
   );
 
   const [, toggleLike] = useAxios(
@@ -25,34 +28,35 @@ export const LikeButton = observer(({ likes, type, id, refetchDetail }) => {
     { manual: true },
   );
 
-  useEffect(() => {
-    if (UserStore.isLoadedFromLocal) {
-      if (UserStore.isLoggedIn) {
-        getUserLiked();
-      } else {
-        setIsLiked(false);
-      }
+  // console.log("likescount", likes);
+  React.useEffect(() => {
+    if (UserStore.isLoggedIn) {
+      // console.log("logged in");
+      getUserLiked()
+        .then((res) => {
+          if (res?.data !== undefined) {
+            setIsLiked(res.data);
+          }
+        })
+        .catch((e) => {
+          setIsLiked(false);
+        });
+    } else {
+      setIsLiked(false);
     }
-  }, [UserStore.isLoadedFromLocal, UserStore.isLoggedIn]);
-
-  useEffect(() => {
-    if (!userLikedLoading) setIsLiked(userLiked);
-  }, [userLikedLoading]);
-
-  // useEffect(() => {
-  //   getUserLiked();
-  // }, [id]);
+    // }
+  }, [UserStore.isLoggedIn, id]);
 
   const handleLikeButton = () => {
     if (!UserStore.isLoggedIn) {
       navigate("/sign-in");
       return;
     }
-    toggleLike().then((res) => {
-      if (res?.data) {
-        refetchDetail();
-        setIsLiked(!isLiked);
-      }
+    setLikesCount(likesCount + (isLiked ? -1 : 1));
+    setIsLiked(!isLiked);
+    toggleLike().catch((e) => {
+      setLikesCount(likesCount + (isLiked ? -1 : 1));
+      setIsLiked(!isLiked);
     });
   };
   return (
@@ -84,7 +88,7 @@ export const LikeButton = observer(({ likes, type, id, refetchDetail }) => {
         )}
       </Button>
       <span>
-        {likes} {" likes"}
+        {likesCount} {" likes"}
       </span>
     </>
   );

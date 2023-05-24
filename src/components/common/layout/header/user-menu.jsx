@@ -61,7 +61,7 @@ export default function UserMenu() {
         onClose={handleCloseUserMenu}
       >
         <Link to={`/u/${UserStore.user?.UserName}`}>
-          <MenuItem>
+          <MenuItem onClick={handleCloseUserMenu}>
             <ListItemIcon sx={{ color: "inherit" }}>
               <PersonOutlineIcon fontSize="small" />
             </ListItemIcon>
