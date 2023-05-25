@@ -32,6 +32,13 @@ class UserStore {
     StorageHelper.setUser(this._user);
   }
 
+  updateInfo(username, fullname, bio) {
+    if (username) this._user.UserName = username;
+    if (fullname) this._user.FullName = fullname;
+    if (bio) this._user.Bio = bio;
+    StorageHelper.setUser(this._user);
+  }
+
   loadFromLocal() {
     if (typeof window == "undefined") {
       return;
