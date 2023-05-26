@@ -11,6 +11,7 @@ import { useSnackbar } from "notistack";
 import { SearchFilms } from "../../../list-detail/new/search-films.jsx";
 import useAxios from "axios-hooks";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline.js";
+import { useNavigate } from "react-router-dom";
 
 const FavoriteFilms = ({ films, handleAddFilm, handleDeleteFilms }) => {
   // console.log(films);
@@ -71,6 +72,7 @@ export const Information = observer(() => {
       FavouriteFilmList: UserStore?.user?.FavouriteFilmList,
     },
   });
+  const navigate = useNavigate();
   const [favoriteFilms, setFavoriteFilms] = React.useState([]);
   const [error, setError] = React.useState(null);
   const { enqueueSnackbar } = useSnackbar();
@@ -112,10 +114,15 @@ export const Information = observer(() => {
     // if (!validateDateOfBirth(values.DateOfBirth)) {
     //   setError("Invalid date of birth");
     // }
-    // values.FavouriteFilmList = JSON.stringify(favoriteFilms);
+    values.FavouriteFilmList = JSON.stringify(favoriteFilms);
     updateInfo({ data: values })
       .then((res) => {
         if (res?.data) {
+          const oldUserName = UserStore?.user?.UserName;
+          UserStore.updateInfo(values.UserName, values.FullName, values.Bio);
+          if (values.UserName !== oldUserName) {
+            navigate(`/u/${values.UserName}/edit-profile`);
+          }
           enqueueSnackbar("Update info successfully", { variant: "success" });
         }
       })
