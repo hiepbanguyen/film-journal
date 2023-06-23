@@ -6,7 +6,7 @@ import { useSnackbar } from "notistack";
 import UserStore from "../../../../store/user.store.js";
 import { useNavigate } from "react-router-dom";
 
-export const FileStackAPIKey = "AFyVhwzYRUi9IoHvEGC9Tz";
+export const FileStackAPIKey = import.meta.env.VITE_FILESTACK_KEY;
 
 export const AvatarAndBanner = () => {
   const [, update] = useAxios({ method: "POST" }, { manual: true });
