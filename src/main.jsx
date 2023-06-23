@@ -46,8 +46,7 @@ import ProfileLikes from "./components/profile-user/tabs/likes/index.jsx";
 import { AllJournals } from "./components/journal/all/index.jsx";
 
 const axios = Axios.create({
-  // baseURL: "https://localhost:44358/api/",
-  baseURL: "https://webfilmbackend-production.up.railway.app/api/",
+  baseURL: import.meta.env.VITE_API_ENDPOINT,
 });
 const cache = new LRU({ max: 10 });
 configure({ axios, cache });
